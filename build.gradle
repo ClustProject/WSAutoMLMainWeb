@@ -24,3 +24,36 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+def frontendDir = "$projectDir/frontend"
+
+sourceSets {
+	main {
+		resources {
+			srcDirs = ["$projectDir/src/main/resources"]
+		}
+	}
+}
+
+task installFrontend(type: Exec) {
+	workingDir "$frontendDir"
+
+	commandLine 'npm', 'install'
+}
+
+task buildFrontend(type: Exec) {
+	workingDir "$frontendDir"
+
+	commandLine "npm", "run-script", "build"
+}
+
+task copyFrontendBuildFiles(type: Copy) {
+	from "$frontendDir/build"
+	into "$buildDir/resources/main/static"
+}
+
+tasks.bootJar {
+	dependsOn "installFrontend"
+	dependsOn "buildFrontend"
+	dependsOn "copyFrontendBuildFiles"
+}
