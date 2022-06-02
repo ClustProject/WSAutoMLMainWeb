@@ -27,14 +27,6 @@ tasks.named('test') {
 
 def frontendDir = "$projectDir/frontend"
 
-sourceSets {
-	main {
-		resources {
-			srcDirs = ["$projectDir/src/main/resources"]
-		}
-	}
-}
-
 task installFrontend(type: Exec) {
 	workingDir "$frontendDir"
 
