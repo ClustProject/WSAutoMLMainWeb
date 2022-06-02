@@ -11,9 +11,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(App.class)
+@WebMvcTest(HelloController.class)
 @AutoConfigureMockMvc
-class AppTest {
+class HelloControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -21,7 +21,7 @@ class AppTest {
     @Test
     void hello() throws Exception {
         ResultActions action = mockMvc.perform(
-                get("/")
+                get("/hello")
         );
 
         action
