@@ -22,7 +22,7 @@ jobs:
       - name: Gradle 초기화 및 빌드
         run: |
           ./gradlew clean 
-          ./gradlew build --exclude-task test
+          ./gradlew build --exclude-task test --info
       - name: Gradle 테스트
         run: |
           ./gradlew test
