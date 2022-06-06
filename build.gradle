@@ -28,7 +28,7 @@ node {
 	// The Node.js project directory location
 	// This is where the package.json file and node_modules directory are located
 	// By default it is at the root of the current project
-	nodeProjectDir = file("${project.projectDir}")
+	nodeProjectDir = file("${project.projectDir}/frontend")
 
 	// Whether the plugin automatically should add the proxy configuration to npm and yarn commands
 	// according the proxy configuration defined for Gradle
@@ -60,16 +60,12 @@ tasks.named('test') {
 
 def frontendDir = "$projectDir/frontend"
 
-task installFrontend(type: Exec) {
-	workingDir "$frontendDir"
-
-	commandLine 'npm', 'install'
+task installFrontend(type: NpmTask) {
+	args = ["install"]
 }
 
-task buildFrontend(type: Exec) {
-	workingDir "$frontendDir"
-
-	commandLine "npm", "run-script", "build"
+task buildFrontend(type: NpmTask) {
+	args = ["run", "build"]
 }
 
 task copyFrontendBuildFiles(type: Copy) {
