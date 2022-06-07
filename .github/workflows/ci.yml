@@ -23,42 +23,31 @@ jobs:
         run: |
           ./gradlew clean 
           ./gradlew build --exclude-task test --info
-      - name: 빌드 결과물 업로드
-        uses: actions/upload-artifact@master
-        with:
-          name: gradle-build
-          path: build
       - name: Gradle 테스트
         run: |
           ./gradlew test
-
-  docker:
-    needs: gradle
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - uses: actions/checkout@v3
       - name: ECR 로그인
+#        if: github.ref == 'refs/heads/main'
+        id: ecr-login
         uses: jwalton/gh-ecr-login@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
-      - name: 빌드 결과물 다운로드
-        uses: actions/download-artifact@master
-        with:
-          name: gradle-build
-          path: build
       - name: Docker 이미지 빌드
-        run: |
-          ./gradlew build
-          docker build --tag app:${{ github.sha }} .
+#        if: github.ref == 'refs/heads/main'
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          tags: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web
       - name: ECR 업로드
+#        if: github.ref == 'refs/heads/main'
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
           direction: push
-          local-image: app:${{ github.sha }}
-          image: app:${{ github.sha }}, app:latest
+          local-image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web
+          image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:${{ github.sha }},
+            ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:latest
