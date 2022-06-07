@@ -26,22 +26,3 @@ jobs:
       - name: Gradle 테스트
         run: |
           ./gradlew test
-      - name: ECR 로그인
-        id: ecr
-        uses: jwalton/gh-ecr-login@v1
-        with:
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: ap-northeast-2
-      - name: Docker 이미지 빌드
-        run: docker build --tag app:${{ github.sha }} .
-      - name: ECR 업로드
-        id: ecr
-        uses: jwalton/gh-ecr-push@v1
-        with:
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: ap-northeast-2
-          direction: push
-          local-image: app:${{ github.sha }}
-          image: app:${{ github.sha }}, app:latest
