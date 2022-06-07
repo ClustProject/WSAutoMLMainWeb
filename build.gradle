@@ -60,21 +60,19 @@ tasks.named('test') {
 
 def frontendDir = "$projectDir/frontend"
 
-task installFrontend(type: NpmTask) {
-	args = ["install"]
-}
-
 task buildFrontend(type: NpmTask) {
+	dependsOn "npmInstall"
+
 	args = ["run", "build"]
 }
 
 task copyFrontendBuildFiles(type: Copy) {
+	dependsOn "buildFrontend"
+
 	from "$frontendDir/build"
 	into "$buildDir/resources/main/static"
 }
 
 tasks.bootJar {
-	dependsOn "installFrontend"
-	dependsOn "buildFrontend"
 	dependsOn "copyFrontendBuildFiles"
 }
