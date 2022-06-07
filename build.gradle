@@ -5,13 +5,6 @@ plugins {
 	id "com.github.node-gradle.node" version "3.3.0"
 }
 
-node {
-	download = true
-	version = "16.14.0"
-	npmVersion = "8.3.1"
-	nodeProjectDir = file("${project.projectDir}/frontend")
-}
-
 group = 'kr.or.automl'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
@@ -35,19 +28,24 @@ tasks.named('test') {
 
 def frontendDir = "$projectDir/frontend"
 
-task buildFrontend(type: NpmTask) {
-	dependsOn "npmInstall"
+node {
+	download = true
+	version = "16.14.0"
+	npmVersion = "8.3.1"
+	nodeProjectDir = file("${frontendDir}")
+}
 
+task buildFrontend(type: NpmTask) {
 	args = ["run", "build"]
 }
 
 task copyFrontendBuildFiles(type: Copy) {
-	dependsOn "buildFrontend"
-
 	from "$frontendDir/build"
 	into "$buildDir/resources/main/static"
 }
 
-tasks.bootJar {
-	dependsOn "copyFrontendBuildFiles"
+task setUpFrontEnd(type: GradleBuild) {
+	tasks = ["npmInstall", "buildFrontend", "copyFrontendBuildFiles"]
 }
+
+bootJar.dependsOn("setUpFrontEnd")
