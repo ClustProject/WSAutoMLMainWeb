@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "com.github.node-gradle.node" version "3.3.0"
 }
 
 group = 'kr.or.automl'
@@ -27,16 +28,15 @@ tasks.named('test') {
 
 def frontendDir = "$projectDir/frontend"
 
-task installFrontend(type: Exec) {
-	workingDir "$frontendDir"
-
-	commandLine 'npm', 'install'
+node {
+	download = true
+	version = "16.14.0"
+	npmVersion = "8.3.1"
+	nodeProjectDir = file("${frontendDir}")
 }
 
-task buildFrontend(type: Exec) {
-	workingDir "$frontendDir"
-
-	commandLine "npm", "run-script", "build"
+task npmBuild(type: NpmTask) {
+	args = ["run", "build"]
 }
 
 task copyFrontendBuildFiles(type: Copy) {
@@ -44,8 +44,8 @@ task copyFrontendBuildFiles(type: Copy) {
 	into "$buildDir/resources/main/static"
 }
 
-tasks.bootJar {
-	dependsOn "installFrontend"
-	dependsOn "buildFrontend"
-	dependsOn "copyFrontendBuildFiles"
+task setUpFrontEnd(type: GradleBuild) {
+	tasks = ["npmInstall", "npmBuild", "copyFrontendBuildFiles"]
 }
+
+bootJar.dependsOn("setUpFrontEnd")
