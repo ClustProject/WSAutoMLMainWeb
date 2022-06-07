@@ -32,6 +32,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: gradle
     steps:
+      - uses: actions/checkout@v3
       - name: ECR 로그인
         id: ecr-login
         uses: jwalton/gh-ecr-login@v1
