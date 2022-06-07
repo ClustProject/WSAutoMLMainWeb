@@ -56,4 +56,4 @@ jobs:
           region: ap-northeast-2
           direction: push
           local-image: app
-          image: app:latest, app:${GITHUB_SHA::7}
+          image: automl-main-web:latest, automl-main-web:${GITHUB_SHA::7}
