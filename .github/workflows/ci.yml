@@ -30,7 +30,7 @@ jobs:
   docker:
     needs: gradle
     runs-on: ubuntu-latest
-    if: github.ref == refs/head/main
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
       - name: ECR 로그인
