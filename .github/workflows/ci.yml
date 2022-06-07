@@ -56,5 +56,4 @@ jobs:
           region: ap-northeast-2
           direction: push
           local-image: app
-          image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:${{ github.sha }},
-            ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:latest
+          image: app:latest, app:${GITHUB_SHA::7}
