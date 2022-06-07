@@ -23,11 +23,11 @@ jobs:
         run: |
           ./gradlew clean 
           ./gradlew build --exclude-task test --info
-      - name: 빌드 결과물 업로드
+      - name: 워크스페이스 업로드
         uses: actions/upload-artifact@master
         with:
-          name: gradle-build
-          path: build
+          name: workspace
+          path: ${{ github.workspace }}
       - name: Gradle 테스트
         run: |
           ./gradlew test
@@ -35,7 +35,7 @@ jobs:
   docker:
     needs: gradle
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+#    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
       - name: ECR 로그인
@@ -45,11 +45,11 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
-      - name: 빌드 결과물 다운로드
+      - name: 워크스페이스 다운로드
         uses: actions/download-artifact@master
         with:
-          name: gradle-build
-          path: build
+          name: workspace
+          path: ${{ github.workspace }}
       - name: Docker 이미지 빌드
         uses: docker/build-push-action@v3
         with:
