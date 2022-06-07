@@ -26,8 +26,13 @@ jobs:
       - name: Gradle 테스트
         run: |
           ./gradlew test
+
+  docker:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: gradle
+    steps:
       - name: ECR 로그인
-#        if: github.ref == 'refs/heads/main'
         id: ecr-login
         uses: jwalton/gh-ecr-login@v1
         with:
@@ -35,19 +40,15 @@ jobs:
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
       - name: Docker 이미지 빌드
-#        if: github.ref == 'refs/heads/main'
-        uses: docker/build-push-action@v3
-        with:
-          push: false
-          tags: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web
+        run: |
+          ./gradlew bootBuildImage --imageName=app
       - name: ECR 업로드
-#        if: github.ref == 'refs/heads/main'
         uses: jwalton/gh-ecr-push@v1
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
           direction: push
-          local-image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web
+          local-image: app
           image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:${{ github.sha }},
             ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:latest
