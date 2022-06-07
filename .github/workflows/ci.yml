@@ -40,7 +40,6 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ap-northeast-2
-      - uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -57,5 +56,4 @@ jobs:
           region: ap-northeast-2
           direction: push
           local-image: app
-          image: ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:${{ github.sha }},
-            ${{ steps.ecr-login.outputs.account }}.dkr.ecr.ap-northeast-2.amazonaws.com/automl-main-web:latest
+          image: app:latest, app:${GITHUB_SHA::7}
