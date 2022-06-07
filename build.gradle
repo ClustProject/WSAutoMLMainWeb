@@ -6,35 +6,10 @@ plugins {
 }
 
 node {
-	// Whether to download and install a specific Node.js version or not
-	// If false, it will use the globally installed Node.js
-	// If true, it will download node using above parameters
-	// Note that npm is bundled with Node.js
 	download = true
-
 	version = "16.14.0"
 	npmVersion = "8.3.1"
-	distBaseUrl = "https://nodejs.org/dist"
-	// The npm command executed by the npmInstall task
-	// By default it is install but it can be changed to ci
-	npmInstallCommand = "install"
-
-	// The directory where Node.js is unpacked (when download is true)
-	workDir = file("${project.projectDir}/.gradle/nodejs")
-
-	// The directory where npm is installed (when a specific version is defined)
-	npmWorkDir = file("${project.projectDir}/.gradle/npm")
-
-	// The Node.js project directory location
-	// This is where the package.json file and node_modules directory are located
-	// By default it is at the root of the current project
 	nodeProjectDir = file("${project.projectDir}/frontend")
-
-	// Whether the plugin automatically should add the proxy configuration to npm and yarn commands
-	// according the proxy configuration defined for Gradle
-	// Disable this option if you want to configure the proxy for npm or yarn on your own
-	// (in the .npmrc file for instance)
-	nodeProxySettings = ProxySettings.SMART
 }
 
 group = 'kr.or.automl'
