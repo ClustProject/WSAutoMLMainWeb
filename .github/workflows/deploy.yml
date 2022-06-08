@@ -1,36 +1,12 @@
-name: ci
+name: deploy
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  gradle:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'corretto'
-      - name: Gradle 권한 부여
-        run: |
-          chmod +x ./gradlew
-      - name: Gradle 초기화 및 빌드
-        run: |
-          ./gradlew clean 
-          ./gradlew build --exclude-task test --info
-      - name: Gradle 테스트
-        run: |
-          ./gradlew test
-
   docker:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs: gradle
     steps:
       - uses: actions/checkout@v3
       - name: ECR 로그인
