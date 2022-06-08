@@ -29,7 +29,7 @@ jobs:
       - name: Gradle 빌드
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build --exclude-task test --scan
+          arguments: build --exclude-task test --scan --no-daemon
       - name: Gradle 테스트
         uses: gradle/gradle-build-action@v2
         with:
