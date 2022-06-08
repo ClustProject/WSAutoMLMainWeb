@@ -14,6 +14,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
+          cache: gradle
       - name: Gradle 권한 부여
         run: |
           chmod +x ./gradlew
