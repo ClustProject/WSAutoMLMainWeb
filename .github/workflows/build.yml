@@ -17,6 +17,10 @@ jobs:
       - name: Gradle 권한 부여
         run: |
           chmod +x ./gradlew
+      - name: Node 설치
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
       - name: Gradle 초기화 및 빌드
         run: |
           ./gradlew clean 
