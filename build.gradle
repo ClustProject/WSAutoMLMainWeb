@@ -31,7 +31,6 @@ def frontendDir = "$projectDir/frontend"
 node {
 	download = false
 	version = "16.14.0"
-	npmVersion = "8.3.1"
 	nodeProjectDir = file("${frontendDir}")
 }
 
