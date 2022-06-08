@@ -14,13 +14,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
+          cache: gradle
       - name: Gradle 권한 부여
         run: |
           chmod +x ./gradlew
-      - name: Gradle 초기화 및 빌드
+      - name: Node 설치
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - name: Gradle 초기화
         run: |
           ./gradlew clean 
-          ./gradlew build --exclude-task test --info
+      - name: Gradle 빌드
+        run: |
+          ./gradlew build --exclude-task test
       - name: Gradle 테스트
         run: |
           ./gradlew test
