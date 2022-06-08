@@ -24,10 +24,10 @@ jobs:
           node-version: 16.14.0
       - name: Gradle 초기화
         run: |
-          ./gradlew clean 
+          ./gradlew clean
       - name: Gradle 빌드
         run: |
-          ./gradlew build --exclude-task test
+          ./gradlew build --exclude-task test --scan --no-daemon
       - name: Gradle 테스트
         run: |
           ./gradlew test
