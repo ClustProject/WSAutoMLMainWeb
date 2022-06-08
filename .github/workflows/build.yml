@@ -21,9 +21,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.14.0
-      - name: Gradle 초기화 및 빌드
+      - name: Gradle 초기화
         run: |
           ./gradlew clean 
+      - name: Gradle 빌드
+        run: |
           ./gradlew build --exclude-task test --info
       - name: Gradle 테스트
         run: |
