@@ -23,14 +23,11 @@ jobs:
         with:
           node-version: 16.14.0
       - name: Gradle 초기화
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: clean
+        run: |
+          ./gradlew clean
       - name: Gradle 빌드
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build --exclude-task test --scan --no-daemon
+        run: |
+          ./gradlew build --exclude-task test --scan --no-daemon
       - name: Gradle 테스트
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
+        run: |
+          ./gradlew test
