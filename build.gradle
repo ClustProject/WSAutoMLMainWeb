@@ -1,8 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.7'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-	id "com.github.node-gradle.node" version "3.3.0"
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id "com.github.node-gradle.node" version "3.3.0"
 }
 
 group = 'kr.or.automl'
@@ -10,42 +10,44 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	implementation 'org.springframework.security:spring-security-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.security:spring-security-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-devtools'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 def frontendDir = "$projectDir/frontend"
 
 node {
-	download = false
-	version = "16.14.0"
-	nodeProjectDir = file("${frontendDir}")
+    download = false
+    version = "16.14.0"
+    nodeProjectDir = file("${frontendDir}")
 }
 
 task npmBuild(type: NpmTask) {
-	args = ["run", "build"]
+    args = ["run", "build"]
 }
 
 task copyFrontendBuildFiles(type: Copy) {
-	from "$frontendDir/build"
-	into "$buildDir/resources/main/static"
+    from "$frontendDir/build"
+    into "$buildDir/resources/main/static"
 }
 
 task setUpFrontEnd(type: GradleBuild) {
-	tasks = ["npmInstall", "npmBuild", "copyFrontendBuildFiles"]
+    tasks = ["npmInstall", "npmBuild", "copyFrontendBuildFiles"]
 }
 
 bootJar.dependsOn("setUpFrontEnd")
