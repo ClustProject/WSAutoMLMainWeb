@@ -1,28 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import './App.css';
+import React from 'react'
 
-function App() {
-  const [message, setMessage] = useState([]);
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
 
-  useEffect(() => {
-    fetch("hello")
-      .then((response) => {
-        return response.text();
-      })
-      .then((data) => {
-        setMessage(data);
-      });
-  });
-
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          {message}
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
