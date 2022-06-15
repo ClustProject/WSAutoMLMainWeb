@@ -1,0 +1,16 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  profiles:
+    include: oauth
+  datasource:
+    url: jdbc:h2:~/data/local/automl
+    driver-class-name: org.h2.Driver
+    username:
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
