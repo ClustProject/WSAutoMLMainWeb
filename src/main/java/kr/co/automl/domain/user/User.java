@@ -30,4 +30,13 @@ public class User {
     public SessionUser toSessionUser() {
         return new SessionUser(name, imageUrl, email);
     }
+
+    /**
+     * 권한 이름을 리턴합니다.
+     *
+     * @return 권한 이름
+     */
+    public String getRoleName() {
+        return this.role.getName();
+    }
 }
