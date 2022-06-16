@@ -2,14 +2,13 @@ package kr.co.automl.infra;
 
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
+//@Repository
 public class InMemoryUserRepository implements UserRepository {
     private static final Map<Long, User> map = new ConcurrentHashMap<>();
 

@@ -1,18 +1,32 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @EqualsAndHashCode
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
-    private final String name;
-    private final String imageUrl;
-    private final String email;
-    private final Role role;
+
+    @Id
+    @GeneratedValue
     private Long id;
+    private String name;
+    private String imageUrl;
+    private String email;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @Builder
     User(String name, String imageUrl, String email, Role role) {
