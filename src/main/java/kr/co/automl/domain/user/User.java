@@ -2,7 +2,11 @@ package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 
+import java.util.Objects;
+
+@EqualsAndHashCode
 public class User {
     private final String name;
     private final String imageUrl;
@@ -29,6 +33,10 @@ public class User {
 
     public SessionUser toSessionUser() {
         return new SessionUser(name, imageUrl, email);
+    }
+
+    public boolean matchEmail(String email) {
+        return Objects.equals(this.email, email);
     }
 
     /**
