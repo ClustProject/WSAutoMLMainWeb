@@ -35,6 +35,10 @@ public class User {
         return new SessionUser(name, imageUrl, email);
     }
 
+    public boolean matchEmail(User user) {
+        return user.matchEmail(this.email);
+    }
+
     public boolean matchEmail(String email) {
         return Objects.equals(this.email, email);
     }

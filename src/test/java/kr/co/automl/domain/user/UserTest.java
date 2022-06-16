@@ -29,6 +29,36 @@ public class UserTest {
     class matchEmail_메서드는 {
 
         @Nested
+        class 일치하는_이메일의_유저가_주어진경우 {
+
+            @Test
+            void true를_리턴한다() {
+                User user = createWithEmail("jypark1@wise.co.kr");
+                User matchEmailUser = createWithEmail("jypark1@wise.co.kr");
+
+                boolean actual = user.matchEmail(matchEmailUser);
+
+                assertThat(actual).isTrue();
+            }
+
+        }
+
+        @Nested
+        class 일치하지않는_이메일의_유저가_주어진경우 {
+
+            @Test
+            void false를_리턴한다() {
+                User user = createWithEmail("jypark1@wise.co.kr");
+                User notMatchEmailUser = createWithEmail("xxx");
+
+                boolean actual = user.matchEmail(notMatchEmailUser);
+
+                assertThat(actual).isFalse();
+            }
+
+        }
+
+        @Nested
         class 일치하는_이메일이_주어진경우 {
 
             @Test

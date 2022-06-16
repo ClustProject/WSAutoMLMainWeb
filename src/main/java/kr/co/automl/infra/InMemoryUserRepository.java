@@ -15,20 +15,34 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        Collection<User> users = map.values();
-
-        return users.stream()
+        return users().stream()
                 .filter(user -> user.matchEmail(email))
                 .findFirst();
     }
 
     @Override
     public User save(User user) {
-        long id = IdGenerator.generateId();
+        if (existEmail(user)) {
+            remove(user);
+        }
 
+        long id = IdGenerator.generateId();
         map.put(id, user);
 
         return user;
+    }
+
+    private void remove(User user) {
+        users().remove(user);
+    }
+
+    private boolean existEmail(User user) {
+        return users().stream()
+                .anyMatch(user::matchEmail);
+    }
+
+    private Collection<User> users() {
+        return map.values();
     }
 
     private static class IdGenerator {
