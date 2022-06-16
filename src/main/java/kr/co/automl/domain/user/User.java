@@ -1,6 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.global.config.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -36,12 +37,20 @@ public class User {
         this.role = role;
     }
 
-    public static User ofDefaultRole(String name, String imageUrl, String email) {
+    public static User of(OAuthAttributes oAuthAttributes) {
+        return ofDefaultRole(
+                oAuthAttributes.name(),
+                oAuthAttributes.imageUrl(),
+                oAuthAttributes.email()
+        );
+    }
+
+    static User ofDefaultRole(String name, String imageUrl, String email) {
         return User.builder()
                 .name(name)
                 .imageUrl(imageUrl)
                 .email(email)
-                .role(Role.USER)
+                .role(Role.DEFAULT)
                 .build();
     }
 

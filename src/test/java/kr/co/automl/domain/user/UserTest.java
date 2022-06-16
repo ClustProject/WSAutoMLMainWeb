@@ -1,6 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.global.config.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,45 @@ public class UserTest {
                 .build();
     }
 
+    @Nested
+    class of_메서드는 {
+
+        @Nested
+        class OAuthAttributes가_주어지면 {
+
+            @Test
+            void 기본권한이_설정되어_변환된_유저를_리턴한다() {
+                OAuthAttributes oAuthAttributes = new OAuthAttributes("name", "imageUrl", "email");
+
+                User user = User.of(oAuthAttributes);
+
+                assertThat(user).isEqualTo(User.builder()
+                        .name("name")
+                        .imageUrl("imageUrl")
+                        .email("email")
+                        .role(Role.USER)
+                        .build()
+                );
+            }
+        }
+    }
+
+    @Nested
+    class ofDefaultRole_메서드는 {
+
+        @Test
+        void 기본권한이_설정되어_변환된_유저를_리턴한다() {
+            User user = User.ofDefaultRole("name", "imageUrl", "email");
+
+            assertThat(user).isEqualTo(User.builder()
+                    .name("name")
+                    .imageUrl("imageUrl")
+                    .email("email")
+                    .role(Role.USER)
+                    .build()
+            );
+        }
+    }
 
     @Test
     void toSessionUser() {

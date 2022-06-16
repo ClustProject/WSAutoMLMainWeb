@@ -3,6 +3,8 @@ package kr.co.automl.domain.user;
 public enum Role {
     USER, MANAGER, ADMIN;
 
+    public static final Role DEFAULT = USER;
+
     private static final String SPRING_SECURITY_ROLE_NAME_PREFIX = "ROLE_";
 
     /**

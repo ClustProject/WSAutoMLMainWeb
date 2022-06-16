@@ -2,6 +2,7 @@ package kr.co.automl.global.config;
 
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
+import kr.co.automl.global.config.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -46,13 +47,19 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     }
 
     private User saveOrUpdateUser(Map<String, Object> attributes) {
+        OAuthAttributes oAuthAttributes = createOAuthAttributes(attributes);
+
+        User user = userRepository.findByEmail(oAuthAttributes.email())
+                .orElse(User.of(oAuthAttributes));
+
+        return userRepository.save(user);
+    }
+
+    private OAuthAttributes createOAuthAttributes(Map<String, Object> attributes) {
         String name = (String) attributes.get("name");
         String imageUrl = (String) attributes.get("picture");
         String email = (String) attributes.get("email");
 
-        User user = userRepository.findByEmail(email)
-                .orElse(User.ofDefaultRole(name, imageUrl, email));
-
-        return userRepository.save(user);
+        return new OAuthAttributes(name, imageUrl, email);
     }
 }
