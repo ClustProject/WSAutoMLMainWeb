@@ -7,12 +7,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final AuthenticationSuccessHandler loginSuccessRedirector;
     private final OAuth2UserService<OAuth2UserRequest, OAuth2User> customOAuth2UserService;
 
     @Override
@@ -28,6 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .successHandler(loginSuccessRedirector);
+                .defaultSuccessUrl("/dashboard");
     }
 }
