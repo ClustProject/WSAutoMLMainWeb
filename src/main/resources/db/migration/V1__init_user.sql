@@ -9,3 +9,7 @@ CREATE TABLE USER
     ROLE      VARCHAR(255),
     PRIMARY KEY (ID)
 );
+
+INSERT INTO USER (ID, EMAIL, IMAGE_URL, NAME, ROLE)
+VALUES (1, 'jypark1@wise.co.kr',
+        'https://lh3.googleusercontent.com/a-/AOh14GjMvoKxDjxLEbZ3GLRyRUhLCEyavH5LpbxsZ971=s96-c', '박주영', 'ADMIN')
