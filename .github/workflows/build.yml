@@ -8,32 +8,26 @@ jobs:
   gradle:
     runs-on: ubuntu-latest
     steps:
-      #      - uses: actions/checkout@v3
-      #      - name: Set up JDK 17
-      #        uses: actions/setup-java@v3
-      #        with:
-      #          java-version: '17'
-      #          distribution: 'corretto'
-      #          cache: gradle
-      #      - name: Gradle 권한 부여
-      #        run: |
-      #          chmod +x ./gradlew
-      #      - name: Node 설치
-      #        uses: actions/setup-node@v3
-      #        with:
-      #          node-version: 16.14.0
-      #      - name: Gradle 초기화
-      #        run: |
-      #          ./gradlew clean
-      #      - name: Gradle 빌드
-      #        run: |
-      #          ./gradlew build --exclude-task test --scan --no-daemon
-      #      - name: Gradle 테스트
-      #        run: |
-      #          ./gradlew test
-      - name: AWS CLI 설치
-        uses: unfor19/install-aws-cli-action@master
-      - name: AWS 버전 테스트
-        run: aws --version
-      - name: AWS ECS 명령어 테스트
-        run: aws ecs help
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          cache: gradle
+      - name: Gradle 권한 부여
+        run: |
+          chmod +x ./gradlew
+      - name: Node 설치
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+      - name: Gradle 초기화
+        run: |
+          ./gradlew clean
+      - name: Gradle 빌드
+        run: |
+          ./gradlew build --exclude-task test --scan --no-daemon
+      - name: Gradle 테스트
+        run: |
+          ./gradlew test

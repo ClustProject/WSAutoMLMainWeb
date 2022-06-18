@@ -33,3 +33,17 @@ jobs:
           direction: push
           local-image: app
           image: automl-main-web:latest, automl-main-web:${GITHUB_SHA::7}
+
+  ecs:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: AWS CLI 설치
+        uses: unfor19/install-aws-cli-action@master
+      - name: ECS 배포
+        run:
+          aws ecs update-service \
+          --cluster automl-cluster \
+          --service automl-service \
+          --task-definition automl-main-web-task-definition:10 \
+          --force-new-deployment
