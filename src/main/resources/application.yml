@@ -14,3 +14,5 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+  flyway:
+    enabled: true # 생략 가능하나 직관적 명시를 위해 추가
