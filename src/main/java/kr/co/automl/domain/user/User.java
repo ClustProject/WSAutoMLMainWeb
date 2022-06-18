@@ -75,4 +75,12 @@ public class User {
     public String getRoleName() {
         return this.role.getName();
     }
+
+    public User update(OAuthAttributes oAuthAttributes) {
+        this.name = oAuthAttributes.name();
+        this.imageUrl = oAuthAttributes.imageUrl();
+        this.email = oAuthAttributes.email();
+
+        return this;
+    }
 }
