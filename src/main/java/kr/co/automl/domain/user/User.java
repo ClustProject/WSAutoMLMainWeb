@@ -1,14 +1,34 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.global.config.dto.OAuthAttributes;
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Objects;
+
+@EqualsAndHashCode
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
-    private final String name;
-    private final String imageUrl;
-    private final String email;
-    private final Role role;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
+    private String imageUrl;
+    private String email;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @Builder
     User(String name, String imageUrl, String email, Role role) {
@@ -18,16 +38,41 @@ public class User {
         this.role = role;
     }
 
-    public static User ofDefaultRole(String name, String imageUrl, String email) {
+    public static User of(OAuthAttributes oAuthAttributes) {
+        return ofDefaultRole(
+                oAuthAttributes.name(),
+                oAuthAttributes.imageUrl(),
+                oAuthAttributes.email()
+        );
+    }
+
+    static User ofDefaultRole(String name, String imageUrl, String email) {
         return User.builder()
                 .name(name)
                 .imageUrl(imageUrl)
                 .email(email)
-                .role(Role.USER)
+                .role(Role.DEFAULT)
                 .build();
     }
 
     public SessionUser toSessionUser() {
         return new SessionUser(name, imageUrl, email);
+    }
+
+    public boolean matchEmail(User user) {
+        return user.matchEmail(this.email);
+    }
+
+    public boolean matchEmail(String email) {
+        return Objects.equals(this.email, email);
+    }
+
+    /**
+     * 권한 이름을 리턴합니다.
+     *
+     * @return 권한 이름
+     */
+    public String getRoleName() {
+        return this.role.getName();
     }
 }
