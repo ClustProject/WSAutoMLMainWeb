@@ -5,9 +5,14 @@ import kr.co.automl.global.config.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static kr.co.automl.domain.user.User.ofDefaultRole;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UserTest {
+    public static User create(String name, String imageUrl, String email) {
+        return ofDefaultRole(name, imageUrl, email);
+    }
+
     public static User createWithEmail(String email) {
         return User.builder()
                 .email(email)
@@ -42,7 +47,7 @@ public class UserTest {
 
         @Test
         void 기본권한이_설정되어_변환된_유저를_리턴한다() {
-            User user = User.ofDefaultRole("name", "imageUrl", "email");
+            User user = create("name", "imageUrl", "email");
 
             assertThat(user).isEqualTo(User.builder()
                     .name("name")
@@ -56,12 +61,12 @@ public class UserTest {
 
     @Test
     void toSessionUser() {
-        User user = User.ofDefaultRole("name", "imageUrl", "jypark1@wise.co.kr");
+        User user = create("name", "imageUrl", "email");
 
         SessionUser sessionUser = user.toSessionUser();
 
         assertThat(sessionUser).isEqualTo(
-                new SessionUser("name", "imageUrl", "jypark1@wise.co.kr")
+                new SessionUser("name", "imageUrl", "email")
         );
     }
 
@@ -121,6 +126,30 @@ public class UserTest {
                 boolean actual = user.matchEmail("xxx");
 
                 assertThat(actual).isFalse();
+            }
+        }
+    }
+
+    @Nested
+    class update_메서드는 {
+
+        @Nested
+        class OAuthAttributes가_주어지면 {
+
+            @Test
+            void 변경된_정보를_리턴한다() {
+                User user = create("name", "imageUrl", "email");
+                OAuthAttributes oAuthAttributes = new OAuthAttributes("OAuthName", "OAuthImageUrl", "OAuthEmail");
+
+                User updatedUser = user.update(oAuthAttributes);
+
+                assertThat(updatedUser).isEqualTo(User.builder()
+                        .name("OAuthName")
+                        .imageUrl("OAuthImageUrl")
+                        .email("OAuthEmail")
+                        .role(Role.USER)
+                        .build()
+                );
             }
         }
     }
