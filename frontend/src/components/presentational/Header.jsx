@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -9,29 +9,17 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import IconButton from "@mui/material/IconButton";
 import {Avatar} from "@mui/material";
-
-/**
- * 하드코딩된 유저 정보.
- *
- * 유저 정보를 받아 실제 유저 정보에 맞춰서 넣어줘야 한다.
- */
-function HardCodedUserInfo() {
-  return <>
-    <Grid item>
-      <Typography color="inherit">
-        박주영
-      </Typography>
-    </Grid>
-    <Grid item>
-      <IconButton color="inherit" sx={{p: 1.5}}>
-        <Avatar src="/static/images/avatar/2.jpg" alt="My Avatar"/>
-      </IconButton>
-    </Grid>
-  </>;
-}
+import axios from "axios";
 
 function Header(props) {
+  const [userInfo, setUserInfo] = useState({});
   const [tabIndex, setTabIndex] = useState(0);
+
+  useEffect(() => {
+    axios.get("data/user-info.json")
+      .then(response => response.data)
+      .then(userInfo => setUserInfo(userInfo));
+  }, [])
 
   return (
     <>
@@ -44,8 +32,16 @@ function Header(props) {
               </Typography>
             </Grid>
             <Grid item xs/>
-
-            {/*<HardCodedUserInfo/>*/}
+            <Grid item>
+              <Typography color="inherit">
+                {userInfo.name}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <IconButton color="inherit" sx={{p: 1.5}}>
+                <Avatar src={userInfo.imageUrl} alt={userInfo.name + "Avatar"}/>
+              </IconButton>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
