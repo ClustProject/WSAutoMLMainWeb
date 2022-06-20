@@ -25,9 +25,9 @@ jobs:
       - name: Gradle 초기화
         run: |
           ./gradlew clean
-      - name: Gradle 빌드
-        run: |
-          ./gradlew build --exclude-task test --scan --no-daemon
       - name: Gradle 테스트
         run: |
           ./gradlew test
+      - name: Gradle 빌드
+        run: |
+          ./gradlew build --exclude-task test --scan --no-daemon
