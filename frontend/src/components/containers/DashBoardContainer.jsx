@@ -1,8 +1,8 @@
 import React from 'react'
-import Paperbase from "../presentational/dashboard/Paperbase";
+import DashBoardContent from "../presentational/dashboard/DashBoardContent";
 
 export default function DashBoardContainer() {
   return (
-    <Paperbase page="dashboard"/>
+    <DashBoardContent />
   )
 }

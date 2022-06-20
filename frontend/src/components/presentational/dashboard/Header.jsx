@@ -9,7 +9,11 @@ import Tab from '@mui/material/Tab';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-function Header(props) {
+import {useLocation} from 'react-router-dom';
+
+function Header() {
+  const location = useLocation();
+
   return (
     <React.Fragment>
       <AppBar color="primary" position="sticky" elevation={0}>
@@ -18,7 +22,7 @@ function Header(props) {
 
             <Grid item>
               <Typography color="inherit">
-                {props.page}
+                {location.pathname}
               </Typography>
             </Grid>
             <Grid sx={{display: {sm: 'none', xs: 'block'}}} item>

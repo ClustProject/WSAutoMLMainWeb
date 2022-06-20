@@ -3,7 +3,6 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Navigator from './Navigator';
-import Content from './Content';
 import Header from './Header';
 
 let theme = createTheme({
@@ -166,9 +165,10 @@ export default function Paperbase(props) {
           />
         </Box>
         <Box sx={{flex: 1, display: 'flex', flexDirection: 'column'}}>
-          <Header page={props.page}/>
+          {/* TODO: 헤더랑 같이 옮겨서 이름을 같이 바꿔야 함*/}
+          <Header/>
           <Box component="main" sx={{flex: 1, py: 6, px: 4, bgcolor: '#eaeff1'}}>
-            <Content page={props.page}/>
+            {props.children}
           </Box>
         </Box>
       </Box>
