@@ -3,24 +3,16 @@ import React from 'react'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import DashBoardPage from "./pages/DashBoardPage";
-import Paperbase from "./components/presentational/dashboard/Paperbase";
-
-function DataPage() {
-  return null;
-}
-
-function UserPage() {
-  return null;
-}
+import Paperbase from "./components/presentational/Paperbase";
+import NotFound from "./error/NotFound";
 
 function PageTemplate() {
   return (
     <Paperbase>
-      {/* Paperbase에서 props.chiled으로 들어간다. */}
       <Routes>
+        {/* Paperbase에서 props.children으로 들어간다. */}
         <Route path="/dashboard" element={<DashBoardPage/>}/>
-        <Route path="/data" element={<DataPage/>}/>
-        <Route path="/user" element={<UserPage/>}/>
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Paperbase>
   );
