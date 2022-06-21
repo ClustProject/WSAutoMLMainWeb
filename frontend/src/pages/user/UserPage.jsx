@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom";
 import UserRoleManagementPage from "./UserRoleManagementPage";
+import NotFound from "../../error/NotFound";
 
 const DOCUMENT_TITLE = "AutoML - 유저";
 
@@ -19,6 +20,7 @@ export default function UserPage() {
           mainTitle={MAIN_TITLE}
           tabNames={TAB_NAMES}
         />}/>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   )
 }
