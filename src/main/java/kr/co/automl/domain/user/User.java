@@ -1,6 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.dto.UserInfo;
 import kr.co.automl.global.config.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -58,7 +59,7 @@ public class User {
     }
 
     public SessionUser toSessionUser() {
-        return new SessionUser(name, imageUrl, email);
+        return new SessionUser(name, imageUrl, email, role);
     }
 
     public boolean matchEmail(User user) {
@@ -84,5 +85,9 @@ public class User {
         this.email = oAuthAttributes.email();
 
         return this;
+    }
+
+    public UserInfo toUserInfo() {
+        return new UserInfo(name, imageUrl, role);
     }
 }
