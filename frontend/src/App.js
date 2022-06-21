@@ -6,6 +6,7 @@ import DashBoardPage from "./pages/DashBoardPage";
 import Paperbase from "./components/presentational/Paperbase";
 import NotFound from "./error/NotFound";
 import MetaDataPage from "./pages/metadata/MetaDataPage";
+import UserPage from "./pages/user/UserPage";
 
 function PageTemplate() {
   return (
@@ -14,6 +15,7 @@ function PageTemplate() {
         {/* Paperbase에서 props.children으로 들어간다. */}
         <Route path="/dashboard" element={<DashBoardPage/>}/>
         <Route path="/metadata/*" element={<MetaDataPage/>}/>
+        <Route path="/user/*" element={<UserPage/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </Paperbase>
