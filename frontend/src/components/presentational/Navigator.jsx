@@ -13,15 +13,15 @@ import PersonIcon from '@mui/icons-material/Person';
 
 const categories = [
   {
-    id: '메인',
+    id: '메타데이터',
     children: [
-      {id: '데이터', icon: <DnsRoundedIcon/>},
+      {id: '관리', icon: <DnsRoundedIcon/>},
     ],
   },
   {
-    id: '기타',
+    id: '유저',
     children: [
-      {id: '유저', icon: <PersonIcon/>},
+      {id: '권한 관리', icon: <PersonIcon/>},
     ],
   },
 ];
