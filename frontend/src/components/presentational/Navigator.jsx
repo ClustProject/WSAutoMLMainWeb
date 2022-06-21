@@ -66,16 +66,16 @@ export default function Navigator(props) {
 
         {categories.map(({id, icon, link, children}) => (
           <Box key={id} sx={{bgcolor: '#101F33'}}>
-            {link ?
+            {children ?
+              <ListItem sx={{py: 2, px: 3}}>
+                <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
+              </ListItem>
+              :
               <ListItem disablePadding sx={{marginTop: '15px'}}>
                 <ListItemButton href={link} sx={item}>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText>{id}</ListItemText>
                 </ListItemButton>
-              </ListItem>
-              :
-              <ListItem sx={{py: 2, px: 3}}>
-                <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
               </ListItem>
             }
 
