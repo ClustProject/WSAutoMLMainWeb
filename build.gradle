@@ -29,6 +29,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     implementation 'org.flywaydb:flyway-core'
 
+    implementation 'org.springframework.session:spring-session-jdbc'
+
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }

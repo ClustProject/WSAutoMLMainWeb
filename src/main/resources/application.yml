@@ -24,6 +24,9 @@ spring:
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
 
+  session:
+    store-type: jdbc
+
 logging:
   level:
     org.hibernate.SQL: debug
