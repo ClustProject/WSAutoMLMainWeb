@@ -9,19 +9,32 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
-import PersonIcon from '@mui/icons-material/Person';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const categories = [
   {
+    id: '대시보드',
+    icon: <HomeIcon/>,
+    link: '/dashboard'
+  },
+  {
     id: '메타데이터',
     children: [
-      {id: '관리', icon: <DnsRoundedIcon/>},
+      {
+        id: '관리',
+        icon: <DnsRoundedIcon/>,
+        link: '/metadata/management'
+      },
     ],
   },
   {
     id: '유저',
     children: [
-      {id: '권한 관리', icon: <PersonIcon/>},
+      {
+        id: '권한 관리',
+        icon: <ManageAccountsIcon/>,
+        link: '/user/role-management'
+      },
     ],
   },
 ];
@@ -50,25 +63,31 @@ export default function Navigator(props) {
         <ListItem sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}>
           AutoML
         </ListItem>
-        <ListItem sx={{...item, ...itemCategory}}>
-          <ListItemIcon>
-            <HomeIcon/>
-          </ListItemIcon>
-          <ListItemText>대시보드</ListItemText>
-        </ListItem>
-        {categories.map(({id, children}) => (
+
+        {categories.map(({id, icon, link, children}) => (
           <Box key={id} sx={{bgcolor: '#101F33'}}>
-            <ListItem sx={{py: 2, px: 3}}>
-              <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
-            </ListItem>
-            {children.map(({id: childId, icon, active}) => (
-              <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
+            {link ?
+              <ListItem disablePadding sx={{marginTop: '15px'}}>
+                <ListItemButton href={link} sx={item}>
                   <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText>{childId}</ListItemText>
+                  <ListItemText>{id}</ListItemText>
                 </ListItemButton>
               </ListItem>
-            ))}
+              :
+              <ListItem sx={{py: 2, px: 3}}>
+                <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
+              </ListItem>
+            }
+
+            {children &&
+              children.map(({id: childId, icon, link, active}) => (
+                <ListItem disablePadding key={childId}>
+                  <ListItemButton href={link} selected={active} sx={item}>
+                    <ListItemIcon>{icon}</ListItemIcon>
+                    <ListItemText>{childId}</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
 
             <Divider sx={{mt: 2}}/>
           </Box>
