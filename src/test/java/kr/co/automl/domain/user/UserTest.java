@@ -59,15 +59,20 @@ public class UserTest {
         }
     }
 
-    @Test
-    void toSessionUser() {
-        User user = create("name", "imageUrl", "email");
+    @Nested
+    class toSessionUser_메서드는 {
 
-        SessionUser sessionUser = user.toSessionUser();
+        @Test
+        void 변환된_세션유저를_리턴한다() {
+            User user = create("name", "imageUrl", "email");
 
-        assertThat(sessionUser).isEqualTo(
-                new SessionUser("name", "imageUrl", "email")
-        );
+            SessionUser sessionUser = user.toSessionUser();
+
+            assertThat(sessionUser).isEqualTo(
+                    new SessionUser("name", "imageUrl", "email", Role.USER)
+            );
+        }
+
     }
 
     @Nested

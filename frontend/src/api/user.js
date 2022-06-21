@@ -1,7 +1,6 @@
-const mockUserInfo = {
-  "name": "박주영"
-}
+import axios from 'axios';
 
 export async function getUserInfo() {
-  return Promise.resolve(mockUserInfo);
+  return axios.get("/user/info")
+    .then(response => response.data)
 }
