@@ -149,7 +149,7 @@ theme = {
 
 const drawerWidth = 256;
 
-export default function Paperbase(props) {
+export default function PaperBase(props) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{display: 'flex', minHeight: '100vh'}}>
