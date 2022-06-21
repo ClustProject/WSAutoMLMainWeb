@@ -45,13 +45,15 @@ function Header(props) {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0}}>
-        <Tabs value={tabIndex} textColor="inherit">
-          {props.tabNames.map((name, index) =>
-            <Tab label={name} onClick={() => setTabIndex(index)}/>
-          )}
-        </Tabs>
-      </AppBar>
+      {props.tabNames &&
+        <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0}}>
+          <Tabs value={tabIndex} textColor="inherit">
+            {props.tabNames.map((name, index) =>
+              <Tab label={name} onClick={() => setTabIndex(index)}/>
+            )}
+          </Tabs>
+        </AppBar>
+      }
     </>
   );
 }
