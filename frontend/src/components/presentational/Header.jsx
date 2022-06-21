@@ -9,17 +9,15 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import IconButton from "@mui/material/IconButton";
 import {Avatar} from "@mui/material";
-
-const mockUserInfo = {
-  "name": "박주영"
-}
+import {getUserInfo} from "../../api/user";
 
 function Header(props) {
   const [userInfo, setUserInfo] = useState({});
   const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
-    setUserInfo(mockUserInfo);
+    getUserInfo()
+      .then(userInfo => setUserInfo(userInfo));
   }, [])
 
   return (
