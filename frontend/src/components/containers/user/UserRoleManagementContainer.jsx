@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "../../presentational/Header";
 import MainBox from "../MainBox";
-import ToDoContent from "../../presentational/dashboard/ToDoContent";
+import ToDoContent from "../../presentational/ToDoContent";
 
 export default function UserRoleManagementContainer(props) {
   const {mainTitle, tabNames} = props;

@@ -2,7 +2,7 @@ import React from 'react'
 
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import DashBoardPage from "./pages/DashBoardPage";
+import DashBoardPage from "./pages/dashboard/DashBoardPage";
 import Paperbase from "./components/presentational/Paperbase";
 import NotFound from "./error/NotFound";
 import MetaDataPage from "./pages/metadata/MetaDataPage";
