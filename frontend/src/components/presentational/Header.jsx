@@ -9,15 +9,14 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import IconButton from "@mui/material/IconButton";
 import {Avatar} from "@mui/material";
-import axios from "axios";
+import {getUserInfo} from "../../api/user";
 
 function Header(props) {
   const [userInfo, setUserInfo] = useState({});
   const [tabIndex, setTabIndex] = useState(0);
 
   useEffect(() => {
-    axios.get("data/user-info.json")
-      .then(response => response.data)
+    getUserInfo()
       .then(userInfo => setUserInfo(userInfo));
   }, [])
 

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import DashBoardContainer from '../components/containers/DashBoardContainer'
+import DashBoardContainer from '../../components/containers/dashboard/DashBoardContainer'
 
 const TITLE = "AutoML - 대시보드";
 
