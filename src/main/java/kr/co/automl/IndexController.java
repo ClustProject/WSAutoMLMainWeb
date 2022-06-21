@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-    @GetMapping("/dashboard")
-    public String dashboard() {
-        return "index.html";
+    @GetMapping(value = {
+            "/dashboard",
+            "/metadata/**",
+            "/user/**"
+    })
+    public String getIndex() {
+        return "/index.html";
     }
 
 }

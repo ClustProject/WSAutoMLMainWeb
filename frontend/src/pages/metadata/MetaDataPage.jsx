@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom";
 import MetaDataManagementPage from "./MetaDataManagementPage";
+import NotFound from "../../error/NotFound";
 
 const DOCUMENT_TITLE = "AutoML - 메타데이터";
 
@@ -19,6 +20,7 @@ export default function MetaDataPage() {
           mainTitle={MAIN_TITLE}
           tabNames={TAB_NAMES}
         />}/>
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   )
 }
