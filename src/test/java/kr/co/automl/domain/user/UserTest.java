@@ -1,7 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
-import kr.co.automl.global.config.dto.OAuthAttributes;
+import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

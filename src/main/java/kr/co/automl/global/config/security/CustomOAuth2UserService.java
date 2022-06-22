@@ -1,8 +1,8 @@
-package kr.co.automl.global.config;
+package kr.co.automl.global.config.security;
 
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
-import kr.co.automl.global.config.dto.OAuthAttributes;
+import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;

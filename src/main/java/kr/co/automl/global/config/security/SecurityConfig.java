@@ -1,4 +1,4 @@
-package kr.co.automl.global.config;
+package kr.co.automl.global.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
