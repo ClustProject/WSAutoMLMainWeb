@@ -1,4 +1,4 @@
-package kr.co.automl.global.config.dto;
+package kr.co.automl.global.config.security.dto;
 
 public record OAuthAttributes(
         String name,

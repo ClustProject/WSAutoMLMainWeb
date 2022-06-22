@@ -2,7 +2,7 @@ package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserInfo;
-import kr.co.automl.global.config.dto.OAuthAttributes;
+import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

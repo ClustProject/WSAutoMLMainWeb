@@ -1,4 +1,4 @@
-package kr.co.automl.global.config;
+package kr.co.automl.global.config.web;
 
 import kr.co.automl.domain.user.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
