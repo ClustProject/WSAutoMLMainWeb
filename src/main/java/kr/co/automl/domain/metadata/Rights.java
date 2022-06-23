@@ -8,25 +8,25 @@ import java.util.Objects;
 /**
  * 권한
  */
-public enum Right {
+public enum Rights {
     CLUST(Constants.CLUST_RIGHT),
     ALL(Constants.ALL_RIGHT);
 
-    private final String right;
+    private final String rights;
 
-    Right(String right) {
-        this.right = right;
+    Rights(String rights) {
+        this.rights = rights;
     }
 
-    public static Right ofString(String rightsString) {
+    public static Rights ofString(String rightsString) {
         return Arrays.stream(values())
                 .filter(it -> it.match(rightsString))
                 .findFirst()
                 .orElseThrow(CannotFindMatchRightsException::new);
     }
 
-    public boolean match(String rightString) {
-        return Objects.equals(this.right, rightString);
+    public boolean match(String rightsString) {
+        return Objects.equals(this.rights, rightsString);
     }
 
     private static class Constants {

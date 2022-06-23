@@ -8,12 +8,12 @@ import java.util.List;
  * 라이센스
  */
 public enum License {
-    CLUST(List.of(Right.CLUST, Right.ALL)),
-    PUBLIC(List.of(Right.ALL));
+    CLUST(List.of(Rights.CLUST, Rights.ALL)),
+    PUBLIC(List.of(Rights.ALL));
 
-    private final List<Right> rights;
+    private final List<Rights> rights;
 
-    License(List<Right> rights) {
+    License(List<Rights> rights) {
         this.rights = rights;
     }
 
@@ -39,6 +39,6 @@ public enum License {
 
     boolean contains(String rightString) {
         return this.rights.stream()
-                .anyMatch(right -> right.match(rightString));
+                .anyMatch(rights -> rights.match(rightString));
     }
 }

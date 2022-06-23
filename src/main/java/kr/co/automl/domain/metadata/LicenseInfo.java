@@ -2,18 +2,18 @@ package kr.co.automl.domain.metadata;
 
 public record LicenseInfo(
         License license,
-        Right right
+        Rights rights
 ) {
 
-    public LicenseInfo(String licenseName, String right) {
+    public LicenseInfo(String licenseName, String rightsString) {
         this(
-                License.of(licenseName, right),
-                Right.ofString(right)
+                License.of(licenseName, rightsString),
+                Rights.ofString(rightsString)
         );
     }
 
-    public LicenseInfo(License license, Right right) {
+    public LicenseInfo(License license, Rights rights) {
         this.license = license;
-        this.right = right;
+        this.rights = rights;
     }
 }
