@@ -12,8 +12,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LicenseTest {
 
-    private static final String CLUST_STRING = "This data is © CLUST Consortium 2021. Its duplication is restricted to the personal use within the Consortium, funding agency and project reviewers";
-
     @Nested
     class of_메서드는 {
 
@@ -48,7 +46,7 @@ class LicenseTest {
 
             @Test
             void 라이센스를_리턴한다() {
-                assertThat(License.of("CLUST", CLUST_STRING))
+                assertThat(License.of("CLUST", "CLUST Consortium"))
                         .isEqualTo(License.CLUST);
                 assertThat(License.of("PUBLIC", "All"))
                         .isEqualTo(License.PUBLIC);
@@ -64,7 +62,7 @@ class LicenseTest {
 
             @Test
             void true를_리턴한다() {
-                assertThat(License.CLUST.contains(CLUST_STRING)).isTrue();
+                assertThat(License.CLUST.contains("CLUST Consortium")).isTrue();
                 assertThat(License.CLUST.contains("All")).isTrue();
                 assertThat(License.PUBLIC.contains("All")).isTrue();
             }

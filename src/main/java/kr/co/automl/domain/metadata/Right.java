@@ -30,7 +30,7 @@ public enum Right {
     }
 
     private static class Constants {
-        public static final String CLUST_RIGHT = "This data is © CLUST Consortium 2021. Its duplication is restricted to the personal use within the Consortium, funding agency and project reviewers";
+        public static final String CLUST_RIGHT = "CLUST Consortium";
         public static final String ALL_RIGHT = "All";
     }
 }
