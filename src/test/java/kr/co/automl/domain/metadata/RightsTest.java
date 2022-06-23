@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 class RightsTest {
 
     @Nested
-    class matchRights_메서드는 {
+    class match_메서드는 {
 
         @Nested
         class 일치하는_문자열이_주어진경우 {
