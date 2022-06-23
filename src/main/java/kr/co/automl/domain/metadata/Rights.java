@@ -25,6 +25,12 @@ public enum Rights {
                 .orElseThrow(CannotFindMatchRightsException::new);
     }
 
+    /**
+     * 권한 이름이 일치할경우 true, 아닐경우 false를 리턴합니다.
+     *
+     * @param rightsString 권한 이름
+     * @return 권한 이름이 일치할경우 true, 아닐경우 false
+     */
     public boolean match(String rightsString) {
         return Objects.equals(this.rights, rightsString);
     }
