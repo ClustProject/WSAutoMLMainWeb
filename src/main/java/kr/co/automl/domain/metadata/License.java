@@ -2,19 +2,20 @@ package kr.co.automl.domain.metadata;
 
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchRightsException;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 라이센스
  */
 public enum License {
-    CLUST(List.of(Rights.CLUST, Rights.ALL)),
-    PUBLIC(List.of(Rights.ALL));
+    CLUST(Rights.CLUST, Rights.ALL),
+    PUBLIC(Rights.ALL);
 
     private final List<Rights> rightsList;
 
-    License(List<Rights> rightsList) {
-        this.rightsList = rightsList;
+    License(Rights... rights) {
+        this.rightsList = Arrays.asList(rights);
     }
 
     public static License of(String licenseName, String rightsString) {
