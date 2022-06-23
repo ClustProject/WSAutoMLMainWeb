@@ -8,10 +8,10 @@ import java.util.Objects;
 public record ContactPoint(
         /* 이름 */
         String name,
-        /* 이메일 */
-        String email,
         /* 전화번호 */
-        String phoneNumber
+        String phoneNumber,
+        /* 이메일 */
+        String email
 ) {
 
     public boolean matchName(String name) {
