@@ -17,9 +17,9 @@ public enum License {
         this.rights = rights;
     }
 
-    public static License of(String licenseName, String rights) {
+    public static License of(String licenseName, String rightsString) {
         License license = License.valueOf(License.class, licenseName);
-        validateRightsInLicense(rights, license);
+        validateRightsInLicense(rightsString, license);
 
         return license;
     }
@@ -29,7 +29,7 @@ public enum License {
      * @param rightString 권한 문자열
      * @param license 라이센스
      *
-     * @throws
+     * @throws CannotFindMatchRightsException 일치하는 권한을 찾지 못할 경우
      */
     private static void validateRightsInLicense(String rightString, License license) {
         if (!license.contains(rightString)) {

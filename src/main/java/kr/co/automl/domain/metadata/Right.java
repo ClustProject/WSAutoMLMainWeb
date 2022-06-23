@@ -18,9 +18,9 @@ public enum Right {
         this.right = right;
     }
 
-    public static Right ofString(String rightString) {
+    public static Right ofString(String rightsString) {
         return Arrays.stream(values())
-                .filter(it -> it.match(rightString))
+                .filter(it -> it.match(rightsString))
                 .findFirst()
                 .orElseThrow(CannotFindMatchRightsException::new);
     }
