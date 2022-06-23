@@ -18,7 +18,7 @@ public enum License {
     }
 
     public static License of(String licenseName, String rightsString) {
-        License license = License.valueOf(License.class, licenseName);
+        License license = valueOf(licenseName);
         validateRightsInLicense(rightsString, license);
 
         return license;
