@@ -1,5 +1,7 @@
 package kr.co.automl.domain.metadata;
 
+import java.util.Objects;
+
 /**
  * 연락처
  */
@@ -11,4 +13,8 @@ public record ContactPoint(
         /* 전화번호 */
         String phoneNumber
 ) {
+
+    public boolean matchName(String name) {
+        return Objects.equals(this.name, name);
+    }
 }
