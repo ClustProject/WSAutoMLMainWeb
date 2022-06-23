@@ -6,8 +6,8 @@ package kr.co.automl.domain.metadata;
 public record Organization(
         /* 제공기관 */
         String publisher,
-        /* 컨소기관 */
-        String creator,
+        /* 생성자 */
+        Creator creator,
         /* 연락처 */
         ContactPoint contactPoint
 ) {
