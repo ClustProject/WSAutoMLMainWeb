@@ -13,7 +13,7 @@ class RightsTest {
     class match_메서드는 {
 
         @Nested
-        class 일치하는_문자열이_주어진경우 {
+        class 일치하는_권한_이름이_주어진경우 {
 
             @Test
             void true를_리턴한다() {
@@ -24,7 +24,7 @@ class RightsTest {
         }
 
         @Nested
-        class 일치하지_않는_문자열이_주어진경우 {
+        class 일치하지_않는_권한_이름이_주어진경우 {
 
             @Test
             void false를_리턴한다() {
@@ -39,7 +39,7 @@ class RightsTest {
     class ofString_메서드는 {
 
         @Nested
-        class 존재하는_권한_문자열이_주어질경우 {
+        class 존재하는_권한_이름이_주어질경우 {
 
             @Test
             void 변환된_권한을_리턴한다() {
@@ -49,7 +49,7 @@ class RightsTest {
         }
 
         @Nested
-        class 존재하지_않는_권한_문자열이_주어질경우 {
+        class 존재하지_않는_권한_이름이_주어질경우 {
 
             @Test
             void CannotFindMatchRightsException을_던진다() {
