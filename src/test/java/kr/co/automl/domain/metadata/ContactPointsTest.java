@@ -13,6 +13,74 @@ class ContactPointsTest {
             ContactPointTest.CONTACT_POINT2
     );
 
+    @Nested
+    class ofWiseITech {
+
+        @Test
+        void 위세아이텍_연락처_목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofWiseITech();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("김정연", "01089745295", "jykim@wise.co.kr"),
+                    new ContactPoint("박주영", "01022983409", "jypark1@wise.co.kr"),
+                    new ContactPoint("최태동", "01055854925", "tdchoi@wise.co.kr")
+            ));
+        }
+    }
+
+    @Nested
+    class ofKeti {
+
+        @Test
+        void 케티_연락처목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofKeti();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("문재원", "01098827975", "jaewonoon@gmail.com"),
+                    new ContactPoint("오승택", "01048457047", "stoh.keti@gmail.com")
+            ));
+        }
+    }
+
+    @Nested
+    class ofKWeather {
+
+        @Test
+        void 케이웨더_연락처목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofKWeather();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("이인혜", "01085720607", "sakuai0720@gmail.com")
+            ));
+        }
+    }
+
+    @Nested
+    class ofKwangwoonUniversity {
+
+        @Test
+        void 광운대_연락처목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofKwangWoonUniversity();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("김대현", "01050518275", "swslooser@gmail.com")
+            ));
+        }
+    }
+
+    @Nested
+    class ofKoreaUniversity {
+
+        @Test
+        void 고려대_연락처목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofKoreaUniversity();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("이정호", "01065788486", "ljhz123@koreaac.kr"),
+                    new ContactPoint("이지윤", "01055095963", "jiyoonlee@koreaac.kr")
+            ));
+        }
+    }
 
     @Nested
     class findByName {
