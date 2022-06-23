@@ -11,14 +11,14 @@ public enum License {
     CLUST(List.of(Rights.CLUST, Rights.ALL)),
     PUBLIC(List.of(Rights.ALL));
 
-    private final List<Rights> rights;
+    private final List<Rights> rightsList;
 
-    License(List<Rights> rights) {
-        this.rights = rights;
+    License(List<Rights> rightsList) {
+        this.rightsList = rightsList;
     }
 
     public static License of(String licenseName, String rightsString) {
-        License license = License.valueOf(License.class, licenseName);
+        License license = valueOf(licenseName);
         validateRightsInLicense(rightsString, license);
 
         return license;
@@ -38,7 +38,7 @@ public enum License {
     }
 
     boolean contains(String rightString) {
-        return this.rights.stream()
+        return this.rightsList.stream()
                 .anyMatch(rights -> rights.match(rightString));
     }
 }
