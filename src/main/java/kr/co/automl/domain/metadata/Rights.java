@@ -9,8 +9,8 @@ import java.util.Objects;
  * 권한
  */
 public enum Rights {
-    CLUST(Constants.CLUST_RIGHT),
-    ALL(Constants.ALL_RIGHT);
+    CLUST("CLUST Consortium"),
+    ALL("All");
 
     private final String rights;
 
@@ -27,10 +27,5 @@ public enum Rights {
 
     public boolean match(String rightsString) {
         return Objects.equals(this.rights, rightsString);
-    }
-
-    private static class Constants {
-        public static final String CLUST_RIGHT = "CLUST Consortium";
-        public static final String ALL_RIGHT = "All";
     }
 }
