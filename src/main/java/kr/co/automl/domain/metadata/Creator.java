@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata;
 
 /**
- * 컨소 기관
+ * 생성자
  */
 public enum Creator {
     WISE_I_TECH("위세아이텍"),
