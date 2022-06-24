@@ -1,10 +1,12 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -16,9 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-@EqualsAndHashCode
 @Entity
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter(value = AccessLevel.PACKAGE)
 public class User {
 
     @Id
@@ -88,5 +91,19 @@ public class User {
         this.email = oAuthAttributes.email();
 
         return this;
+    }
+
+    /**
+     * 권한을 변경합니다. 어드민 권한으로는 변경할 수 없습니다.
+     * @param role 변경할 권한
+     *
+     * @throws CannotChangeAdminRoleException 어드민 권한이 주어진경우
+     */
+    public void changeRoleTo(Role role) {
+        if (role.isAdmin()) {
+            throw new CannotChangeAdminRoleException();
+        }
+
+        this.role = role;
     }
 }

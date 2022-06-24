@@ -1,12 +1,16 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static kr.co.automl.domain.user.User.ofDefaultRole;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserTest {
     public static User create(String name, String imageUrl, String email) {
@@ -157,5 +161,42 @@ public class UserTest {
                 );
             }
         }
+    }
+
+    @Nested
+    class changeRoleTo_메서드는 {
+
+        @Nested
+        class 어드민이_아닌_권한이_주어질경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Role.class,
+                    mode = EnumSource.Mode.EXCLUDE,
+                    names = {"ADMIN"}
+            )
+            void 주어진_권한으로_변경한다(Role role) {
+                User user = create("name", "imageUrl", "email");
+                assertThat(user.getRole()).isEqualTo(Role.USER);
+
+                user.changeRoleTo(role);
+
+                assertThat(user.getRole()).isEqualTo(role);
+            }
+        }
+
+        @Nested
+        class 어드민_권한이_주어질경우 {
+
+            @Test
+            void CannotChangeAdminRoleException을_던진다() {
+                User user = create("name", "imageUrl", "email");
+
+                assertThatThrownBy(() -> user.changeRoleTo(Role.ADMIN))
+                        .isInstanceOf(CannotChangeAdminRoleException.class)
+                        .hasMessage("어드민 권한으로는 변경할 수 없습니다.");
+            }
+        }
+
     }
 }
