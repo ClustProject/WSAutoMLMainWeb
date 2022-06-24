@@ -1,10 +1,12 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -16,15 +18,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-@EqualsAndHashCode
 @Entity
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter(value = AccessLevel.PACKAGE)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private long id;
     private String name;
     private String imageUrl;
     private String email;
@@ -33,7 +36,8 @@ public class User {
     private Role role;
 
     @Builder
-    User(String name, String imageUrl, String email, Role role) {
+    User(long id, String name, String imageUrl, String email, Role role) {
+        this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.email = email;
@@ -55,6 +59,10 @@ public class User {
                 .email(email)
                 .role(Role.DEFAULT)
                 .build();
+    }
+
+    public long id() {
+        return this.id;
     }
 
     public SessionUser toSessionUser() {
@@ -86,4 +94,17 @@ public class User {
         return this;
     }
 
+    /**
+     * 권한을 변경합니다. 어드민 권한으로는 변경할 수 없습니다.
+     * @param role 변경할 권한
+     *
+     * @throws CannotChangeAdminRoleException 어드민 권한이 주어진경우
+     */
+    public void changeRoleTo(Role role) {
+        if (role.isAdmin()) {
+            throw new CannotChangeAdminRoleException();
+        }
+
+        this.role = role;
+    }
 }

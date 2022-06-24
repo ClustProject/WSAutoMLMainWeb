@@ -17,4 +17,8 @@ public enum Role {
     public String getName() {
         return SPRING_SECURITY_ROLE_NAME_PREFIX + this;
     }
+
+    public boolean isAdmin() {
+        return this == ADMIN;
+    }
 }
