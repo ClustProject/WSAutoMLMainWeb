@@ -1,4 +1,4 @@
-package kr.co.automl;
+package kr.co.automl.global.utils.web;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class IndexControllerTest {
+class FrontendUrlRequestHandlerTest {
 
     @Autowired
     private MockMvc mockMvc;
