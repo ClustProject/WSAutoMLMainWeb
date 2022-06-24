@@ -1,4 +1,4 @@
-package kr.co.automl.domain.user.controller;
+package kr.co.automl.domain.user.api;
 
 import kr.co.automl.domain.user.Role;
 import kr.co.automl.domain.user.dto.SessionUser;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+class UserInfoApiTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -74,7 +74,7 @@ class UserControllerTest {
             @Test
             @WithMockUser(roles = {"MANAGER", "ADMIN"})
             void status_200을_응답하고_유저정보를_리턴한다() throws Exception {
-                mockMvc = MockMvcBuilders.standaloneSetup(new UserController())
+                mockMvc = MockMvcBuilders.standaloneSetup(new UserInfoApi())
                         .setCustomArgumentResolvers(new MockLoginUserArgumentResolver(new MockHttpSession()))
                         .build();
 
