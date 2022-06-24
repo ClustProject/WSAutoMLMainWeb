@@ -1,11 +1,11 @@
-package kr.co.automl;
+package kr.co.automl.global.utils.web;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class IndexController {
+public class FrontendUrlRequestHandler {
 
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     @GetMapping(value = {
@@ -13,7 +13,7 @@ public class IndexController {
             "/metadata/**",
             "/user/**"
     })
-    public String getIndex() {
+    public String returnToIndexHtml() {
         return "/index.html";
     }
 
