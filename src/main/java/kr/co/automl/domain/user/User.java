@@ -24,7 +24,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long id;
+    private long id;
     private String name;
     private String imageUrl;
     private String email;
@@ -57,6 +57,10 @@ public class User {
                 .build();
     }
 
+    public long id() {
+        return this.id;
+    }
+
     public SessionUser toSessionUser() {
         return new SessionUser(name, imageUrl, email, role);
     }
@@ -85,5 +89,4 @@ public class User {
 
         return this;
     }
-
 }

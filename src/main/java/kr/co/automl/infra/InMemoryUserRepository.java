@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-//@Repository
 public class InMemoryUserRepository implements UserRepository {
     private static final Map<Long, User> map = new ConcurrentHashMap<>();
 
@@ -29,6 +28,11 @@ public class InMemoryUserRepository implements UserRepository {
         map.put(id, user);
 
         return user;
+    }
+
+    @Override
+    public void deleteAll() {
+        map.clear();
     }
 
     private void remove(User user) {
