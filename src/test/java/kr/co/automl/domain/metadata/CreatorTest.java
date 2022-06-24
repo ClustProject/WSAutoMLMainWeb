@@ -56,7 +56,7 @@ class CreatorTest {
                     "광운대",
                     "고려대"
             })
-            void 찾은_생성자를_리턴한다(String name) {
+            void 찾은_생성기관을_리턴한다(String name) {
                 assertThat(Creator.ofName(name)).isInstanceOf(Creator.class);
             }
         }
@@ -68,7 +68,7 @@ class CreatorTest {
             void CannotFindMatchCreatorException을_던진다() {
                 assertThatThrownBy(() -> Creator.ofName("xxx"))
                         .isInstanceOf(CannotFindMatchCreatorException.class)
-                        .hasMessage("생성자를 찾을 수 없습니다. 이름을 확인해주세요.");
+                        .hasMessage("생성 기관을 찾을 수 없습니다. 이름을 확인해주세요.");
             }
         }
     }

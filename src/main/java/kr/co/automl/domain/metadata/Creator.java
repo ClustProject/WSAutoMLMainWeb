@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 생성자
+ * 생성 기관
  */
 public enum Creator {
     WISE_I_TECH("위세아이텍", ContactPoints.ofWiseITech()),
@@ -24,11 +24,11 @@ public enum Creator {
     }
 
     /**
-     * 이름으로 찾은 생성자를 리턴합니다.
-     * @param name 찾을 생성자 이름
-     * @return 찾은 생성자
+     * 이름으로 찾은 생성 기관을 리턴합니다.
+     * @param name 찾을 생성 기관 이름
+     * @return 찾은 생성 기관
      *
-     * @throws CannotFindMatchCreatorException 이름으로 생성자를 찾지 못한 경우
+     * @throws CannotFindMatchCreatorException 이름으로 생성 기관을 찾지 못한 경우
      */
     public static Creator ofName(String name) {
         return Arrays.stream(values())
