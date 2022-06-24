@@ -1,7 +1,6 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
-import kr.co.automl.domain.user.dto.UserInfo;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -87,7 +86,4 @@ public class User {
         return this;
     }
 
-    public UserInfo toUserInfo() {
-        return new UserInfo(name, imageUrl, role);
-    }
 }
