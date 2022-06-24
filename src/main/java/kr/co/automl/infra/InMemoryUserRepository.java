@@ -24,7 +24,7 @@ public class InMemoryUserRepository implements UserRepository {
             remove(user);
         }
 
-        long id = IdGenerator.generateId();
+        long id = user.id();
         map.put(id, user);
 
         return user;
@@ -33,6 +33,13 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public void deleteAll() {
         map.clear();
+    }
+
+    @Override
+    public Optional<User> findById(long userId) {
+        User user = map.get(userId);
+
+        return Optional.ofNullable(user);
     }
 
     private void remove(User user) {
@@ -46,19 +53,5 @@ public class InMemoryUserRepository implements UserRepository {
 
     private Collection<User> users() {
         return map.values();
-    }
-
-    private static class IdGenerator {
-        private static long id = 0L;
-
-        public static long generateId() {
-            increaseId();
-
-            return id;
-        }
-
-        private static synchronized void increaseId() {
-            id++;
-        }
     }
 }

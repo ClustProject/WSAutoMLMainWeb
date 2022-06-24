@@ -8,4 +8,6 @@ public interface UserRepository {
     User save(User user);
 
     void deleteAll();
+
+    Optional<User> findById(long userId);
 }

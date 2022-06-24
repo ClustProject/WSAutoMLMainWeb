@@ -23,6 +23,16 @@ public class UserTest {
                 .build();
     }
 
+    public static User create() {
+        return create("name", "imageUrl", "email");
+    }
+
+    public static User createWithId(long id) {
+        return User.builder()
+                .id(id)
+                .build();
+    }
+
     @Nested
     class of_메서드는 {
 
@@ -176,7 +186,7 @@ public class UserTest {
                     names = {"ADMIN"}
             )
             void 주어진_권한으로_변경한다(Role role) {
-                User user = create("name", "imageUrl", "email");
+                User user = create();
                 assertThat(user.getRole()).isEqualTo(Role.USER);
 
                 user.changeRoleTo(role);
@@ -190,7 +200,7 @@ public class UserTest {
 
             @Test
             void CannotChangeAdminRoleException을_던진다() {
-                User user = create("name", "imageUrl", "email");
+                User user = create();
 
                 assertThatThrownBy(() -> user.changeRoleTo(Role.ADMIN))
                         .isInstanceOf(CannotChangeAdminRoleException.class)

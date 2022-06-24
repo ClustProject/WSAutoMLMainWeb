@@ -36,7 +36,8 @@ public class User {
     private Role role;
 
     @Builder
-    User(String name, String imageUrl, String email, Role role) {
+    User(long id, String name, String imageUrl, String email, Role role) {
+        this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
         this.email = email;
