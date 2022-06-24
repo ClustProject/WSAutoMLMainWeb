@@ -13,7 +13,8 @@ public enum Creator {
     KETI("KETI", ContactPoints.ofKeti()),
     K_WEATHER("케이웨더(주)", ContactPoints.ofKWeather()),
     KWANGWOON_UNIVERSITY("광운대", ContactPoints.ofKwangWoonUniversity()),
-    KOREA_UNIVERSITY("고려대", ContactPoints.ofKoreaUniversity());
+    KOREA_UNIVERSITY("고려대", ContactPoints.ofKoreaUniversity()),
+    DALIWORKS("달리웍스(주)", ContactPoints.ofDaliWorks());
 
     private final String name;
     private final ContactPoints contactPoints;

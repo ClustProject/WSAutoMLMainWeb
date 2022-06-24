@@ -48,6 +48,12 @@ public class ContactPoints {
         );
     }
 
+    public static ContactPoints ofDaliWorks() {
+        return new ContactPoints(
+                new ContactPoint("이순호", "01044230033", "soonho.lee@daliworks.net")
+        );
+    }
+
     public ContactPoint findByName(String name) {
         return this.contactPoints.stream()
                 .filter(it -> it.matchName(name))

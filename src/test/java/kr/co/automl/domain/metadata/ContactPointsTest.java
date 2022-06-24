@@ -83,6 +83,19 @@ class ContactPointsTest {
     }
 
     @Nested
+    class ofDaliWorks {
+
+        @Test
+        void 달리웍스_연락처목록_리턴() {
+            ContactPoints contactPoints = ContactPoints.ofDaliWorks();
+
+            assertThat(contactPoints).isEqualTo(new ContactPoints(
+                    new ContactPoint("이순호", "01044230033", "soonho.lee@daliworks.net")
+            ));
+        }
+    }
+
+    @Nested
     class findByName {
 
         @Nested
