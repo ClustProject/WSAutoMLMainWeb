@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static kr.co.automl.domain.user.dto.ChangeUserRoleRequestTest.CHANGE_USER_ROLE_REQUEST1;
 import static kr.co.automl.domain.user.dto.ChangeUserRoleRequestTest.createWithId;
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -36,9 +36,9 @@ class UserRoleApiTest {
     UserRepository userRepository;
 
     @Nested
-    @DisplayName("POST /user/role 요청은")
-    class post_user_role_요청은 {
-        MockHttpServletRequestBuilder request = post("/user/role")
+    @DisplayName("PUT /user/role 요청은")
+    class put_user_role_요청은 {
+        MockHttpServletRequestBuilder request = put("/user/role")
                 .contentType(MediaType.APPLICATION_JSON);
 
         @Nested
