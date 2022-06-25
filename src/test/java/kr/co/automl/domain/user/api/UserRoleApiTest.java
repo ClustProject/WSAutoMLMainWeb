@@ -3,7 +3,6 @@ package kr.co.automl.domain.user.api;
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
 import kr.co.automl.domain.user.UserTest;
-import kr.co.automl.domain.user.dto.ChangeUserRoleRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -19,7 +18,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.transaction.annotation.Transactional;
 
 import static kr.co.automl.domain.user.dto.ChangeUserRoleRequestTest.CHANGE_USER_ROLE_REQUEST1;
-import static kr.co.automl.domain.user.dto.ChangeUserRoleRequestTest.createWithId;
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,13 +28,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserRoleApiTest {
 
     @Autowired
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Nested
-    @DisplayName("PUT /user/role 요청은")
+    @DisplayName("PUT /user/{userId}/role 요청은")
     class put_user_role_요청은 {
         MockHttpServletRequestBuilder request = put("/user/role")
                 .contentType(MediaType.APPLICATION_JSON);
@@ -48,7 +46,9 @@ class UserRoleApiTest {
             @Test
             void status_403을_리턴한다() throws Exception {
                 ResultActions action = mockMvc.perform(
-                        request.content(convert(CHANGE_USER_ROLE_REQUEST1))
+                        put("/user/1/role")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convert(CHANGE_USER_ROLE_REQUEST1))
                 );
 
                 action
@@ -68,7 +68,9 @@ class UserRoleApiTest {
             @WithMockUser(roles = {"ADMIN"})
             void status_400을_응답한다() throws Exception {
                 ResultActions action = mockMvc.perform(
-                        request.content(convert(CHANGE_USER_ROLE_REQUEST1))
+                        put(String.format("/user/1/role"))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convert(CHANGE_USER_ROLE_REQUEST1))
                 );
 
                 action
@@ -89,10 +91,10 @@ class UserRoleApiTest {
             @Test
             @WithMockUser(roles = {"ADMIN"})
             void status_200을_응답한다() throws Exception {
-                ChangeUserRoleRequest changeUserRoleRequest = createWithId(savedUser.id());
-
                 ResultActions action = mockMvc.perform(
-                        request.content(convert(changeUserRoleRequest))
+                        put(String.format("/user/%s/role", savedUser.id()))
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(convert(CHANGE_USER_ROLE_REQUEST1))
                 );
 
                 action
