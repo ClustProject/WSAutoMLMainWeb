@@ -51,7 +51,8 @@ class UserApiTest {
                 ResultActions action = mockMvc.perform(request);
 
                 action
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isForbidden())
+                        .andDo(document("get-user-with-not-admin"));
             }
         }
 
@@ -75,7 +76,7 @@ class UserApiTest {
                 action
                         .andExpect(status().isOk())
                         .andExpect(content().string(convert(List.of(savedUser.toResponse()))))
-                        .andDo(document("user"));
+                        .andDo(document("get-user"));
             }
         }
     }

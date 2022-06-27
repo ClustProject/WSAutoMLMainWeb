@@ -2,7 +2,7 @@
 
 ### API
 
-- [user](api/user.adoc)
+- [유저 목록 조회](api/get-user.adoc)
 
 ### CI
 
