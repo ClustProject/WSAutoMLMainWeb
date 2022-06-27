@@ -3,6 +3,7 @@ package kr.co.automl.domain.user.api;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,9 @@ public class UserApi {
     private final UserService userService;
 
     @GetMapping
-    public List<UserResponse> users() {
-        return userService.getUsers();
+    public List<UserResponse> users(
+            Pageable pageable
+    ) {
+        return userService.getUsers(pageable);
     }
 }

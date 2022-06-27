@@ -2,6 +2,9 @@ package kr.co.automl.infra;
 
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,10 +24,6 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        if (existEmail(user)) {
-            remove(user);
-        }
-
         long id = user.getId();
         map.put(id, user);
 
@@ -44,20 +43,18 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public List<User> findAll() {
+    public Page<User> findAll(Pageable pageable) {
         Collection<User> values = map.values();
-
-        return values.stream()
+        List<User> users = values.stream()
                 .toList();
-    }
 
-    private void remove(User user) {
-        users().remove(user);
-    }
+        int pageNumber = pageable.getPageNumber();
+        int pageSize = pageable.getPageSize();
 
-    private boolean existEmail(User user) {
-        return users().stream()
-                .anyMatch(user::matchEmail);
+        int start = pageNumber * pageSize;
+        int last = Math.min((1 + pageNumber) * pageSize, users.size());
+
+        return new PageImpl<>(users.subList(start, last), pageable, users.size());
     }
 
     private Collection<User> users() {
