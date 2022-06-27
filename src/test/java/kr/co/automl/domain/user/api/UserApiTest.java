@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -19,12 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
 @Transactional
 class UserApiTest {
 
@@ -71,7 +74,8 @@ class UserApiTest {
 
                 action
                         .andExpect(status().isOk())
-                        .andExpect(content().string(convert(List.of(savedUser.toResponse()))));
+                        .andExpect(content().string(convert(List.of(savedUser.toResponse()))))
+                        .andDo(document("user"));
             }
         }
     }

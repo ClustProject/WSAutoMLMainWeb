@@ -1,0 +1,5 @@
+== `GET /user` - 유저 목록 조회
+
+include::{snippets}/user/http-request.adoc[]
+
+include::{snippets}/user/http-response.adoc[]
