@@ -108,9 +108,9 @@ export default function UserRoleManagementContent() {
       <DialogContent>
         <Box component="form" sx={{display: 'flex', flexWrap: 'wrap'}}>
           <FormControl sx={{m: 1, minWidth: 200}}>
-            <InputLabel id="demo-dialog-select-label">권한</InputLabel>
+            <InputLabel id="권한 선택 라벨">권한</InputLabel>
             <Select
-              labelId="demo-dialog-select-label"
+              labelId="권한 선택 라벨"
               value={role}
               onChange={event => setRole(event.target.value)}
               input={<OutlinedInput label="변경할 권한 선택"/>}
