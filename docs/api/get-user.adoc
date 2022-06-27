@@ -1,13 +1,11 @@
 == `GET /user` - 유저 목록 조회
 
-=== 어드민이 아닌 유저의 요청
+=== 어드민이 아닌 유저의 요청과 응답
 
 include::{snippets}/get-user-with-not-admin/http-request.adoc[]
-
 include::{snippets}/get-user-with-not-admin/http-response.adoc[]
 
-=== 어드민 유저의 요청
+=== 어드민 유저의 요청과 응답
 
 include::{snippets}/get-user/http-request.adoc[]
-
 include::{snippets}/get-user/http-response.adoc[]
