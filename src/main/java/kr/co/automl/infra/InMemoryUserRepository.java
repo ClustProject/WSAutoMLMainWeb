@@ -52,7 +52,11 @@ public class InMemoryUserRepository implements UserRepository {
         int pageSize = pageable.getPageSize();
 
         int start = pageNumber * pageSize;
-        int last = Math.min((1 + pageNumber) * pageSize, users.size());
+        int last = (1 + pageNumber) * pageSize;
+
+        if (last > users.size()) {
+            last = users.size();
+        }
 
         return new PageImpl<>(users.subList(start, last), pageable, users.size());
     }
