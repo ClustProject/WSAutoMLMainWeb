@@ -5,16 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-@PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
 public class FrontendUrlRequestHandler {
 
     @GetMapping(value = {
             "/dashboard",
             "/metadata/**",
-            "/user/**"
     })
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public String returnToIndexHtml() {
         return "/index.html";
     }
 
+    @GetMapping(value = {
+            "/user/**"
+    })
+    @PreAuthorize("hasRole('ADMIN')")
+    public String returnToIndexHtmlOnlyAdmin() {
+        return "/index.html";
+    }
 }

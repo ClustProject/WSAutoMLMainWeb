@@ -3,6 +3,7 @@
 ### API
 
 - [유저 목록 조회](api/get-user.adoc)
+- [유저 권한 변경 요청](api/put-user-role.adoc)
 
 ### CI
 

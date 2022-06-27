@@ -1,5 +1,9 @@
 package kr.co.automl.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import java.util.Objects;
+
 public enum Role {
     USER, MANAGER, ADMIN;
 
@@ -21,4 +25,16 @@ public enum Role {
     public boolean isAdmin() {
         return this == ADMIN;
     }
+
+    @JsonCreator
+    public static Role getNameByValue(String value) {
+        for (Role role : Role.values()) {
+            if (Objects.equals(role.toString(), value)) {
+                return role;
+            }
+        }
+
+        return null;
+    }
+
 }

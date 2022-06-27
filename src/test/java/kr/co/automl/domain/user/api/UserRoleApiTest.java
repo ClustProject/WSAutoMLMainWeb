@@ -8,22 +8,24 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
 import static kr.co.automl.domain.user.dto.ChangeUserRoleRequestTest.CHANGE_USER_ROLE_REQUEST1;
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureRestDocs
 @Transactional
 class UserRoleApiTest {
 
@@ -36,8 +38,6 @@ class UserRoleApiTest {
     @Nested
     @DisplayName("PUT /user/{userId}/role 요청은")
     class put_user_role_요청은 {
-        MockHttpServletRequestBuilder request = put("/user/role")
-                .contentType(MediaType.APPLICATION_JSON);
 
         @Nested
         @WithMockUser(roles = {"USER", "MANAGER"})
@@ -52,7 +52,8 @@ class UserRoleApiTest {
                 );
 
                 action
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isForbidden())
+                        .andDo(document("put-user-role-with-not-admin"));
             }
         }
 
@@ -74,7 +75,8 @@ class UserRoleApiTest {
                 );
 
                 action
-                        .andExpect(status().isBadRequest());
+                        .andExpect(status().isBadRequest())
+                        .andDo(document("put-user-role-with-not-exist-id"));
             }
         }
 
@@ -98,7 +100,8 @@ class UserRoleApiTest {
                 );
 
                 action
-                        .andExpect(status().isOk());
+                        .andExpect(status().isOk())
+                        .andDo(document("put-user-role-with-exist-id"));
             }
         }
     }

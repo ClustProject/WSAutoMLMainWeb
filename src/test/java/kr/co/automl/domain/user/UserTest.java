@@ -2,6 +2,7 @@ package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserResponse;
+import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
@@ -31,6 +32,7 @@ public class UserTest {
     public static User createWithId(long id) {
         return User.builder()
                 .id(id)
+                .role(Role.USER)
                 .build();
     }
 
@@ -209,6 +211,25 @@ public class UserTest {
             }
         }
 
+        @Nested
+        class 이미_어드민_유저일경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Role.class,
+                    mode = EnumSource.Mode.EXCLUDE,
+                    names = {"ADMIN"}
+            )
+            void AlreadyAdminRoleException을_던진다(Role role) {
+                User adminUser = User.builder()
+                        .role(Role.ADMIN)
+                        .build();
+
+                assertThatThrownBy(() -> adminUser.changeRoleTo(role))
+                        .isInstanceOf(AlreadyAdminRoleException.class)
+                        .hasMessage("이미 어드민 권한을 가진 유저입니다.");
+            }
+        }
     }
 
     @Nested

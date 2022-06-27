@@ -1,0 +1,17 @@
+== `PUT /user/{id}/role` 유저 권한 변경 요청
+
+=== 어드민이 아닌 유저의 요청과 응답
+
+include::{snippets}/put-user-role-with-not-admin/http-request.adoc[]
+include::{snippets}/put-user-role-with-not-admin/http-response.adoc[]
+
+=== 존재하지 않는 유저에 대한 요청과 응답
+
+include::{snippets}/put-user-role-with-not-exist-id/http-request.adoc[]
+include::{snippets}/put-user-role-with-not-exist-id/http-response.adoc[]
+
+=== 존재하는 유저에 대한 요청과 응답
+
+include::{snippets}/put-user-role-with-exist-id/http-request.adoc[]
+include::{snippets}/put-user-role-with-exist-id/http-response.adoc[]
+
