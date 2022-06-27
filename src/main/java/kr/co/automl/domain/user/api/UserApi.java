@@ -1,6 +1,8 @@
 package kr.co.automl.domain.user.api;
 
 import kr.co.automl.domain.user.dto.UserResponse;
+import kr.co.automl.domain.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @PreAuthorize("hasRole('ADMIN')")
+@RequiredArgsConstructor
 public class UserApi {
+    private final UserService userService;
 
     @GetMapping
     public List<UserResponse> users() {
-        // TODO: 2022/06/27 구현 필요!
-        return null;
+        return userService.getUsers();
     }
 }

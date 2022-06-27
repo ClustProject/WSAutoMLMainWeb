@@ -4,6 +4,7 @@ import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,6 +41,14 @@ public class InMemoryUserRepository implements UserRepository {
         User user = map.get(userId);
 
         return Optional.ofNullable(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        Collection<User> values = map.values();
+
+        return values.stream()
+                .toList();
     }
 
     private void remove(User user) {
