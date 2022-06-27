@@ -1,6 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
@@ -208,5 +209,18 @@ public class UserTest {
             }
         }
 
+    }
+
+    @Nested
+    class toResponse {
+
+        @Test
+        void 변환된_응답_리턴() {
+            User user = create();
+
+            UserResponse userResponse = user.toResponse();
+
+            assertThat(userResponse).isEqualTo(new UserResponse(0L, "name", "email", Role.USER));
+        }
     }
 }

@@ -92,7 +92,7 @@ class UserRoleApiTest {
             @WithMockUser(roles = {"ADMIN"})
             void status_200을_응답한다() throws Exception {
                 ResultActions action = mockMvc.perform(
-                        put(String.format("/user/%s/role", savedUser.id()))
+                        put(String.format("/user/%s/role", savedUser.getId()))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(convert(CHANGE_USER_ROLE_REQUEST1))
                 );

@@ -1,6 +1,7 @@
 package kr.co.automl.domain.user;
 
 import kr.co.automl.domain.user.dto.SessionUser;
+import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
@@ -21,7 +22,7 @@ import java.util.Objects;
 @Entity
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter(value = AccessLevel.PACKAGE)
+@Getter
 public class User {
 
     @Id
@@ -59,10 +60,6 @@ public class User {
                 .email(email)
                 .role(Role.DEFAULT)
                 .build();
-    }
-
-    public long id() {
-        return this.id;
     }
 
     public SessionUser toSessionUser() {
@@ -106,5 +103,9 @@ public class User {
         }
 
         this.role = role;
+    }
+
+    public UserResponse toResponse() {
+        return new UserResponse(id, name, email, role);
     }
 }

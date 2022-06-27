@@ -24,7 +24,7 @@ public class InMemoryUserRepository implements UserRepository {
             remove(user);
         }
 
-        long id = user.id();
+        long id = user.getId();
         map.put(id, user);
 
         return user;
