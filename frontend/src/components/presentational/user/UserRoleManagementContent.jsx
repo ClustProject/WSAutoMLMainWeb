@@ -45,7 +45,7 @@ const reload = () => {
   window.location.reload();
 }
 
-export default function UserGrid() {
+export default function UserRoleManagementContent() {
   const [users, setUsers] = useState([]);
   const [userIds, setUserIds] = useState([]);
   const [role, setRole] = useState(EMPTY_STRING);
