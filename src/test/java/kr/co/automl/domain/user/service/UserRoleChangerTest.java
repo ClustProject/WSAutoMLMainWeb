@@ -36,7 +36,7 @@ class UserRoleChangerTest {
                 User user = UserTest.createWithId(1L);
                 userRepository.save(user);
 
-                this.existUserId = user.id();
+                this.existUserId = user.getId();
             }
 
             @Test

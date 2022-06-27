@@ -7,3 +7,6 @@ spring:
             scope: profile, email
             client-id: test
             client-secret: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
