@@ -39,10 +39,16 @@ const columns = [
   },
 ];
 
+const EMPTY_STRING = "";
+
+const reload = () => {
+  window.location.reload();
+}
+
 export default function UserGrid() {
   const [users, setUsers] = useState([]);
-  const [ids, setIds] = useState([]);
-  const [role, setRole] = useState('');
+  const [userIds, setUserIds] = useState([]);
+  const [role, setRole] = useState(EMPTY_STRING);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -51,6 +57,11 @@ export default function UserGrid() {
   }, []);
 
   const openDialog = () => {
+    if (userIds.length === 0) {
+      alert("유저를 먼저 선택해주세요");
+      return;
+    }
+
     setDialogOpen(true);
   }
 
@@ -59,14 +70,18 @@ export default function UserGrid() {
   }
 
   const changeUsersRole = () => {
-    putUsersRole(ids, role)
-      .then(value => {
+    if (role === EMPTY_STRING) {
+      return;
+    }
+
+    putUsersRole(userIds, role)
+      .then(_ => {
         alert("변경 완료되었습니다.")
-        window.location.reload();
+        reload();
       })
       .catch(err => {
         alert(`에러가 발생했습니다: ${err.message}`);
-        window.location.reload();
+        reload();
       });
   }
 
@@ -80,7 +95,7 @@ export default function UserGrid() {
         checkboxSelection
         disableSelectionOnClick
         onSelectionModelChange={(ids) => {
-          setIds(ids);
+          setUserIds(ids);
         }}
       />
       <Button onClick={() => openDialog()}>
@@ -96,13 +111,12 @@ export default function UserGrid() {
             <InputLabel id="demo-dialog-select-label">권한</InputLabel>
             <Select
               labelId="demo-dialog-select-label"
-              id="demo-dialog-select"
               value={role}
               onChange={event => setRole(event.target.value)}
               input={<OutlinedInput label="변경할 권한 선택"/>}
             >
-              <MenuItem value="">
-                <em>None</em>
+              <MenuItem value={EMPTY_STRING}>
+                <em>권한 선택</em>
               </MenuItem>
               <MenuItem value={"USER"}>USER</MenuItem>
               <MenuItem value={"MANAGER"}>MANAGER</MenuItem>
