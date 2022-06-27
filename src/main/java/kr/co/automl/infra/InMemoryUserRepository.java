@@ -44,8 +44,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public Page<User> findAll(Pageable pageable) {
-        Collection<User> values = map.values();
-        List<User> users = values.stream()
+        List<User> users = users().stream()
                 .toList();
 
         int pageNumber = pageable.getPageNumber();
