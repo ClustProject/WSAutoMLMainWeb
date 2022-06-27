@@ -1,5 +1,6 @@
 package kr.co.automl.global.utils.web;
 
+import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotFindUserException;
 import kr.co.automl.global.utils.web.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class GlobalControllerAdvice {
 
     @ExceptionHandler({
-            CannotFindUserException.class
+            CannotFindUserException.class,
+            AlreadyAdminRoleException.class
     })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse responseBadRequestAndReturnErrorResponse(

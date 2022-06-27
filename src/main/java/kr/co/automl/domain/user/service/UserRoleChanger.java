@@ -29,7 +29,5 @@ public class UserRoleChanger {
                 .orElseThrow(() -> new CannotFindUserException(userId));
 
         user.changeRoleTo(role);
-
-        userRepository.save(user);
     }
 }
