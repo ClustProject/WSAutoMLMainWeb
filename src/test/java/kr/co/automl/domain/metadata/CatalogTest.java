@@ -1,6 +1,7 @@
 package kr.co.automl.domain.metadata;
 
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCatalogException;
+import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,6 +44,35 @@ class CatalogTest {
                 assertThatThrownBy(() -> Catalog.ofName("xxx"))
                         .isInstanceOf(CannotFindMatchCatalogException.class)
                         .hasMessage("일치하는 카탈로그를 찾을 수 없습니다: xxx");
+            }
+        }
+    }
+
+    @Nested
+    class findThemeByName_메서드는 {
+
+        @Nested
+        class 존재하는_주제이름이_주어질경우 {
+
+            @Test
+            void 찾은_주제를_리턴한다() {
+                Catalog catalog = Catalog.CITY;
+                Theme theme = catalog.findThemeByName("방문객");
+
+                assertThat(theme).isEqualTo(Theme.VISITOR);
+            }
+        }
+
+        @Nested
+        class 존재하지않는_주제이름이_주어질경우 {
+
+            @Test
+            void CannotFindMatchThemeException을_던진다() {
+                Catalog catalog = Catalog.CITY;
+
+                assertThatThrownBy(() -> catalog.findThemeByName("xxx"))
+                        .isInstanceOf(CannotFindMatchThemeException.class)
+                        .hasMessage("일치하는 주제를 찾을 수 없습니다: xxx");
             }
         }
     }

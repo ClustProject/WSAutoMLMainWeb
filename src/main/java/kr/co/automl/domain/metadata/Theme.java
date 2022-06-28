@@ -55,7 +55,7 @@ public enum Theme {
      * @param name 이름
      * @return 이름이 일치할경우 true, 아닐경우 false
      */
-    private boolean matchName(String name) {
+    boolean matchName(String name) {
         return Objects.equals(this.name, name);
     }
 }
