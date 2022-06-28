@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.distribution;
 
 import java.util.Arrays;
 import java.util.Objects;
