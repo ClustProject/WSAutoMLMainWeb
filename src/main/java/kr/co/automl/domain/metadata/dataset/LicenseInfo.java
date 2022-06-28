@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
 public record LicenseInfo(
         License license,

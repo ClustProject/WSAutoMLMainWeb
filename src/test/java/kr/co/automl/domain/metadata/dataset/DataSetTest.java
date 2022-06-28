@@ -1,8 +1,5 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.LicenseInfo;
-import kr.co.automl.domain.metadata.Organization;
-import kr.co.automl.domain.metadata.Type;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

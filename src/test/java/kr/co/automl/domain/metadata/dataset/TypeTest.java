@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchTypeException;
 import org.junit.jupiter.api.Nested;

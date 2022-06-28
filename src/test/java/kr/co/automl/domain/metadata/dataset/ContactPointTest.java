@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

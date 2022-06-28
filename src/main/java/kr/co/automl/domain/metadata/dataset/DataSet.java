@@ -1,9 +1,6 @@
 package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.BaseTimeEntity;
-import kr.co.automl.domain.metadata.LicenseInfo;
-import kr.co.automl.domain.metadata.Organization;
-import kr.co.automl.domain.metadata.Type;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode

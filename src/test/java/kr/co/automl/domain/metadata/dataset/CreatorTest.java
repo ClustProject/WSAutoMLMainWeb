@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchContactNameException;
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCreatorException;
