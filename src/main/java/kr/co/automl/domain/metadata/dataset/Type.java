@@ -1,6 +1,6 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchTypeException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchTypeException;
 
 import java.util.Arrays;
 import java.util.Objects;

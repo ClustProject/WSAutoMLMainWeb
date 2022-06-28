@@ -1,6 +1,6 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchRightsException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

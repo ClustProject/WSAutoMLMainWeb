@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchContactNameException;
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCreatorException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchContactNameException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchCreatorException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

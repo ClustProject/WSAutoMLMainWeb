@@ -1,6 +1,6 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchContactNameException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchContactNameException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
