@@ -1,6 +1,6 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCreatorException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchCreatorException;
 
 import java.util.Arrays;
 import java.util.Objects;

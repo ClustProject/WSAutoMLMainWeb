@@ -1,6 +1,6 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchRightsException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 class LicenseTest {
+
+    @Nested
+    class ofㅜ므 {
+
+    }
 
     @Nested
     class of_메서드는 {

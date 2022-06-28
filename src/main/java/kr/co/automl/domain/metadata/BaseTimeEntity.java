@@ -1,12 +1,11 @@
 package kr.co.automl.domain.metadata;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 시간 객체
  */
-public record BaseTimeEntity(
-        LocalDateTime createdDate,
-        LocalDateTime lastUpdatedDate
-) {
+public abstract class BaseTimeEntity {
+    private LocalDate createdDate;
+    private LocalDate lastModifiedDate;
 }

@@ -1,6 +1,6 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.domain.metadata.dataset.exceptions.CannotFindMatchRightsException;
 
 import java.util.Arrays;
 import java.util.List;
