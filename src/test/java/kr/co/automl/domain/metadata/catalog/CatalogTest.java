@@ -1,14 +1,7 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.catalog;
 
-import kr.co.automl.domain.metadata.catalog.Catalog;
-import kr.co.automl.domain.metadata.catalog.Theme;
-<<<<<<< HEAD
 import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchCatalogException;
 import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
-=======
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCatalogException;
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeException;
->>>>>>> f1e4607e9cda6fa36ea33129d0dd4971357c4114
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
