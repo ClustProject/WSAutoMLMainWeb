@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.exceptions;
+package kr.co.automl.domain.metadata.dataset.exceptions;
 
 public class CannotFindMatchCreatorException extends RuntimeException {
 
