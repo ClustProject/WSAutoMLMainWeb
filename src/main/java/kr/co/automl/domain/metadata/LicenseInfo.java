@@ -5,15 +5,10 @@ public record LicenseInfo(
         Rights rights
 ) {
 
-    public LicenseInfo(String licenseName, String rightsString) {
-        this(
-                License.of(licenseName, rightsString),
-                Rights.ofString(rightsString)
-        );
-    }
+    public static LicenseInfo of(String licenseName, String rightsName) {
+        License license = License.of(licenseName, rightsName);
+        Rights rights = Rights.ofString(rightsName);
 
-    public LicenseInfo(License license, Rights rights) {
-        this.license = license;
-        this.rights = rights;
+        return new LicenseInfo(license, rights);
     }
 }

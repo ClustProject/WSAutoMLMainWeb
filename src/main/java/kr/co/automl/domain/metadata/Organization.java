@@ -8,4 +8,11 @@ public record Organization(
         Creator creator,
         ContactPoint contactPoint
 ) {
+
+    public static Organization of(String publisher, String creatorName, String contactPointName) {
+        Creator creator = Creator.ofName(creatorName);
+        ContactPoint contactPoint = creator.findContactBy(contactPointName);
+
+        return new Organization(publisher, creator, contactPoint);
+    }
 }
