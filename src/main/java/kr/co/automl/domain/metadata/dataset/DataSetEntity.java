@@ -4,7 +4,7 @@ import kr.co.automl.domain.metadata.BaseTimeEntity;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class DataSet extends BaseTimeEntity {
+public class DataSetEntity extends BaseTimeEntity {
 
     private long id;
 
@@ -15,7 +15,7 @@ public class DataSet extends BaseTimeEntity {
     private LicenseInfo licenseInfo;
     private String description;
 
-    public static DataSet create(
+    public static DataSetEntity create(
             String title,
             String publisher,
             String creatorName,
@@ -32,10 +32,10 @@ public class DataSet extends BaseTimeEntity {
 
         LicenseInfo licenseInfo = LicenseInfo.of(licenseName, rightsName);
 
-        return new DataSet(title, organization, type, keyword, licenseInfo, description);
+        return new DataSetEntity(title, organization, type, keyword, licenseInfo, description);
     }
 
-    DataSet(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
+    DataSetEntity(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
         this.title = title;
         this.organization = organization;
         this.type = type;

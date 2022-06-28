@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DataSetTest {
+class DataSetEntityTest {
 
     @Test
     void create() {
-        DataSet dataSet = DataSet.create(
+        DataSetEntity dataSet = DataSetEntity.create(
                 "데이터셋 이름",
                 "위세아이텍",
                 "위세아이텍",
@@ -21,7 +21,7 @@ class DataSetTest {
         );
 
         assertThat(dataSet).isEqualTo(
-                new DataSet(
+                new DataSetEntity(
                         "데이터셋 이름",
                         Organization.of("위세아이텍",
                                 "위세아이텍",
