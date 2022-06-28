@@ -32,11 +32,18 @@ public enum Theme {
         this.name = name;
     }
 
-    public static Theme of(String name) {
+    /**
+     * 이름으로 찾은 주제를 찾아 리턴합니다.
+     * @param name 찾을 주제 이름
+     * @return 찾은 주제
+     *
+     * @throws CannotFindMatchThemeException 이름으로 주제를 찾지 못한 경우
+     */
+    public static Theme ofName(String name) {
         return Arrays.stream(values())
-                .filter(it -> it.matchName(name))
+                .filter(theme -> theme.matchName(name))
                 .findFirst()
-                .orElseThrow(CannotFindMatchThemeException::new);
+                .orElseThrow(() -> new CannotFindMatchThemeException(name));
     }
 
     /**
@@ -44,7 +51,7 @@ public enum Theme {
      * @param name 이름
      * @return 이름이 일치할경우 true, 아닐경우 false
      */
-    boolean matchName(String name) {
+    private boolean matchName(String name) {
         return Objects.equals(this.name, name);
     }
 }
