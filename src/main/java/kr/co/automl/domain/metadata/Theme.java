@@ -1,6 +1,6 @@
 package kr.co.automl.domain.metadata;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeTaxonomyException;
+import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeException;
 import lombok.AccessLevel;
 import lombok.Getter;
 
@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * 주제 분류
+ * 주제
  */
 @Getter(AccessLevel.PACKAGE)
-public enum ThemeTaxonomy {
+public enum Theme {
 
     FARM_SITUATION("농장 상황"),
     FACTORY_MOTOR("공장모터"),
@@ -28,15 +28,15 @@ public enum ThemeTaxonomy {
 
     private final String name;
 
-    ThemeTaxonomy(String name) {
+    Theme(String name) {
         this.name = name;
     }
 
-    public static ThemeTaxonomy of(String name) {
+    public static Theme of(String name) {
         return Arrays.stream(values())
                 .filter(it -> it.matchName(name))
                 .findFirst()
-                .orElseThrow(CannotFindMatchThemeTaxonomyException::new);
+                .orElseThrow(CannotFindMatchThemeException::new);
     }
 
     /**
