@@ -19,18 +19,21 @@ class ThemeTest {
 
             @ParameterizedTest
             @ValueSource(strings = {
-                    "농장 상황",
+                    "공기질",
+                    "농장 환경",
                     "공장모터",
                     "건설장비",
-                    "작업자 체온",
+                    "작업자",
                     "음성",
                     "움직임",
-                    "맥파",
+                    "생체 데이터",
                     "활동영상",
                     "태양광",
+                    "전력",
                     "실외대기",
                     "방문객",
-                    "국내교통"
+                    "교통",
+                    "캘린더"
             })
             void 찾은_주제를_리턴한다(String existName) {
                 assertThat(Theme.ofName(existName))
