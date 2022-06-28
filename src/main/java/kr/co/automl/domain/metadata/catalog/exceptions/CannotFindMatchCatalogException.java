@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.exceptions;
+package kr.co.automl.domain.metadata.catalog.exceptions;
 
 public class CannotFindMatchCatalogException extends RuntimeException {
 

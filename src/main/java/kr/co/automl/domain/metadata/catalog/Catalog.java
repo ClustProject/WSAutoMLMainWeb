@@ -1,7 +1,7 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.catalog;
 
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCatalogException;
-import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchCatalogException;
+import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
 
 import java.util.Arrays;
 import java.util.Objects;
