@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata;
+package kr.co.automl.domain.metadata.catalog;
 
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchCatalogException;
 import kr.co.automl.domain.metadata.exceptions.CannotFindMatchThemeException;
