@@ -10,8 +10,6 @@ import java.util.Objects;
 public record ContactPoint(
         /* 이름 */
         String name,
-        /* 전화번호 */
-        String phoneNumber,
         /* 이메일 */
         String email
 ) {
