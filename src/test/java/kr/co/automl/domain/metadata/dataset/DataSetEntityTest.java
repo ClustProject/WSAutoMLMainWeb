@@ -2,6 +2,7 @@ package kr.co.automl.domain.metadata.dataset;
 
 import org.junit.jupiter.api.Test;
 
+import static kr.co.automl.domain.metadata.dataset.OrganizationTest.ORGANIZATION1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DataSetEntityTest {
@@ -22,9 +23,7 @@ class DataSetEntityTest {
 
         assertThat(dataSet).isEqualTo(DataSetEntity.builder()
                 .title("데이터셋 이름")
-                .organization(Organization.of("위세아이텍",
-                        "위세아이텍",
-                        "박주영"))
+                .organization(ORGANIZATION1)
                 .type(Type.ofName("이미지"))
                 .keyword("키워드1, 키워드2, 키워드1")
                 .licenseInfo(LicenseInfo.of("CLUST", "All"))
