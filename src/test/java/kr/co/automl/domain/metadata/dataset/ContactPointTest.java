@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ContactPointTest {
+public class ContactPointTest {
     public static final ContactPoint CONTACT_POINT1 = new ContactPoint(
             "박주영",
             "01022983409",

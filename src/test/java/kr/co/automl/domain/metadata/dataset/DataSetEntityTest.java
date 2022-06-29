@@ -20,18 +20,16 @@ class DataSetEntityTest {
                 "데이터셋 설명"
         );
 
-        assertThat(dataSet).isEqualTo(
-                new DataSetEntity(
-                        "데이터셋 이름",
-                        Organization.of("위세아이텍",
-                                "위세아이텍",
-                                "박주영"),
-                        Type.ofName("이미지"),
-                        "키워드1, 키워드2, 키워드1",
-                        LicenseInfo.of("CLUST",
-                                "All"),
-                        "데이터셋 설명"
-                )
+        assertThat(dataSet).isEqualTo(DataSetEntity.builder()
+                .title("데이터셋 이름")
+                .organization(Organization.of("위세아이텍",
+                        "위세아이텍",
+                        "박주영"))
+                .type(Type.ofName("이미지"))
+                .keyword("키워드1, 키워드2, 키워드1")
+                .licenseInfo(LicenseInfo.of("CLUST", "All"))
+                .description("데이터셋 설명")
+                .build()
         );
     }
 }
