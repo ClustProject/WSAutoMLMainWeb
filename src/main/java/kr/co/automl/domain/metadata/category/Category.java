@@ -1,13 +1,13 @@
-package kr.co.automl.domain.metadata.catalog;
+package kr.co.automl.domain.metadata.category;
 
-import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchCatalogException;
-import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.category.exceptions.CannotFindMatchCategoryException;
+import kr.co.automl.domain.metadata.category.exceptions.CannotFindMatchThemeException;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
-public enum Catalog {
+public enum Category {
 
     ATMOSPHERIC_ENVIRONMENT("대기 환경", Set.of(
             Theme.AIR_QUALITY
@@ -46,23 +46,23 @@ public enum Catalog {
     private final String name;
     private final Set<Theme> themes;
 
-    Catalog(String name, Set<Theme> themes) {
+    Category(String name, Set<Theme> themes) {
         this.name = name;
         this.themes = themes;
     }
 
     /**
-     * 카탈로그 이름으로 일치하는 카탈로그를 찾아 리턴합니다.
-     * @param name 찾을 카탈로그 이름
-     * @return 찾은 카탈로그
+     * 카테고리 이름으로 일치하는 카테고리를 찾아 리턴합니다.
+     * @param name 찾을 카테고리 이름
+     * @return 찾은 카테고리
      *
-     * @throws CannotFindMatchCatalogException 이름으로 카탈로그를 찾지 못한 경우
+     * @throws CannotFindMatchCategoryException 이름으로 카테고리를 찾지 못한 경우
      */
-    public static Catalog ofName(String name) {
+    public static Category ofName(String name) {
         return Arrays.stream(values())
-                .filter(catalog -> catalog.matchName(name))
+                .filter(category -> category.matchName(name))
                 .findFirst()
-                .orElseThrow(() -> new CannotFindMatchCatalogException(name));
+                .orElseThrow(() -> new CannotFindMatchCategoryException(name));
     }
 
     /**

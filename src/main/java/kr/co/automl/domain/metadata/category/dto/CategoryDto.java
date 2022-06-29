@@ -1,14 +1,14 @@
-package kr.co.automl.domain.metadata.catalog.dto;
+package kr.co.automl.domain.metadata.category.dto;
 
 import lombok.Builder;
 
-public record CatalogDto(
+public record CategoryDto(
         String name,
         String theme,
         String themeTaxonomy
 ) {
 
     @Builder
-    public CatalogDto {
+    public CategoryDto {
     }
 }
