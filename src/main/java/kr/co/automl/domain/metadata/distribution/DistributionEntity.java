@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.distribution;
 
+import kr.co.automl.domain.metadata.distribution.dto.DistributionDto;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
@@ -31,5 +32,15 @@ public class DistributionEntity {
         this.accurualPeriodicity = accurualPeriodicity;
         this.spatial = spatial;
         this.timeInfo = timeInfo;
+    }
+
+    public static DistributionEntity from(DistributionDto distributionDto) {
+        return create(
+                distributionDto.distribution(),
+                distributionDto.timeStamp(),
+                distributionDto.accurualPeriodicity(),
+                distributionDto.spatial(),
+                distributionDto.timeInfo()
+        );
     }
 }

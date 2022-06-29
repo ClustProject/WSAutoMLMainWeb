@@ -10,8 +10,11 @@ class CatalogEntityTest {
     void create_생성_테스트() {
         CatalogEntity catalogEntity = CatalogEntity.create("대기 환경", "공기질", "themeTaxonomy");
 
-        assertThat(catalogEntity).isEqualTo(new CatalogEntity(
-                Catalog.ATMOSPHERIC_ENVIRONMENT, Theme.AIR_QUALITY, "themeTaxonomy")
+        assertThat(catalogEntity).isEqualTo(CatalogEntity.builder()
+                .catalog(Catalog.ATMOSPHERIC_ENVIRONMENT)
+                .theme(Theme.AIR_QUALITY)
+                .themeTaxonomy("themeTaxonomy")
+                .build()
         );
     }
 }

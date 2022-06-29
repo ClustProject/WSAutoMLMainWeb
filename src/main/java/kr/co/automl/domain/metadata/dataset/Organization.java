@@ -1,5 +1,7 @@
 package kr.co.automl.domain.metadata.dataset;
 
+import lombok.Builder;
+
 /**
  * 구축기관
  */
@@ -14,5 +16,9 @@ public record Organization(
         ContactPoint contactPoint = creator.findContactBy(contactPointName);
 
         return new Organization(publisher, creator, contactPoint);
+    }
+
+    @Builder
+    public Organization {
     }
 }
