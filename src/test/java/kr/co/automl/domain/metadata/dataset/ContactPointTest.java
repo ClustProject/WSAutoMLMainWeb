@@ -8,12 +8,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ContactPointTest {
     public static final ContactPoint CONTACT_POINT1 = new ContactPoint(
             "박주영",
-            "01022983409",
             "jypark1@wise.co.kr"
     );
     public static final ContactPoint CONTACT_POINT2 = new ContactPoint(
             "최태동",
-            "01055854925",
             "tdchoi@wise.co.kr"
     );
 
