@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata;
 
-import kr.co.automl.domain.metadata.catalog.CatalogEntity;
-import kr.co.automl.domain.metadata.catalog.dto.CatalogDto;
+import kr.co.automl.domain.metadata.category.CategoryEntity;
+import kr.co.automl.domain.metadata.category.dto.CategoryDto;
 import kr.co.automl.domain.metadata.dataset.DataSetEntity;
 import kr.co.automl.domain.metadata.dataset.dto.DataSetDto;
 import kr.co.automl.domain.metadata.distribution.DistributionEntity;
@@ -16,29 +16,29 @@ public class MetaDataEntity {
 
     private String description;
 
-    private CatalogEntity catalog;
+    private CategoryEntity category;
     private DataSetEntity dataSet;
     private DistributionEntity distribution;
 
     public static MetaDataEntity create(
             String description,
-            CatalogDto catalogDto,
+            CategoryDto categoryDto,
             DataSetDto dataSetDto,
             DistributionDto distributionDto
     ) {
 
         return MetaDataEntity.builder()
                 .description(description)
-                .catalog(CatalogEntity.from(catalogDto))
+                .category(CategoryEntity.from(categoryDto))
                 .dataSet(DataSetEntity.from(dataSetDto))
                 .distribution(DistributionEntity.from(distributionDto))
                 .build();
     }
 
     @Builder
-    private MetaDataEntity(String description, CatalogEntity catalog, DataSetEntity dataSet, DistributionEntity distribution) {
+    private MetaDataEntity(String description, CategoryEntity category, DataSetEntity dataSet, DistributionEntity distribution) {
         this.description = description;
-        this.catalog = catalog;
+        this.category = category;
         this.dataSet = dataSet;
         this.distribution = distribution;
     }

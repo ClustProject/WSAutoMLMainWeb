@@ -1,7 +1,7 @@
-package kr.co.automl.domain.metadata.catalog;
+package kr.co.automl.domain.metadata.category;
 
-import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchCatalogException;
-import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.category.exceptions.CannotFindMatchCategoryException;
+import kr.co.automl.domain.metadata.category.exceptions.CannotFindMatchThemeException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class CatalogTest {
+class CategoryTest {
 
     @Nested
     class ofName_메서드는 {
@@ -30,9 +30,9 @@ class CatalogTest {
                     "도시",
                     "오픈데이터"
             })
-            void 카탈로그를_리턴한다(String existName) {
-                Catalog catalog = Catalog.ofName(existName);
-                assertThat(catalog).isInstanceOf(Catalog.class);
+            void 카테고리를_리턴한다(String existName) {
+                Category category = Category.ofName(existName);
+                assertThat(category).isInstanceOf(Category.class);
             }
         }
 
@@ -40,10 +40,10 @@ class CatalogTest {
         class 존재하지_않는_이름이_주어질경우 {
 
             @Test
-            void CannotFindMatchCatalogException을_던진다() {
-                assertThatThrownBy(() -> Catalog.ofName("xxx"))
-                        .isInstanceOf(CannotFindMatchCatalogException.class)
-                        .hasMessage("일치하는 카탈로그를 찾을 수 없습니다: xxx");
+            void CannotFindMatchCategoryException을_던진다() {
+                assertThatThrownBy(() -> Category.ofName("xxx"))
+                        .isInstanceOf(CannotFindMatchCategoryException.class)
+                        .hasMessage("일치하는 카테고리를 찾을 수 없습니다: xxx");
             }
         }
     }
@@ -56,8 +56,8 @@ class CatalogTest {
 
             @Test
             void 찾은_주제를_리턴한다() {
-                Catalog catalog = Catalog.CITY;
-                Theme theme = catalog.findThemeByName("방문객");
+                Category category = Category.CITY;
+                Theme theme = category.findThemeByName("방문객");
 
                 assertThat(theme).isEqualTo(Theme.VISITOR);
             }
@@ -68,9 +68,9 @@ class CatalogTest {
 
             @Test
             void CannotFindMatchThemeException을_던진다() {
-                Catalog catalog = Catalog.CITY;
+                Category category = Category.CITY;
 
-                assertThatThrownBy(() -> catalog.findThemeByName("xxx"))
+                assertThatThrownBy(() -> category.findThemeByName("xxx"))
                         .isInstanceOf(CannotFindMatchThemeException.class)
                         .hasMessage("일치하는 주제를 찾을 수 없습니다: xxx");
             }

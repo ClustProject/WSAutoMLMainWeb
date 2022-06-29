@@ -1,9 +1,9 @@
 package kr.co.automl.domain.metadata;
 
-import kr.co.automl.domain.metadata.catalog.Catalog;
-import kr.co.automl.domain.metadata.catalog.CatalogEntity;
-import kr.co.automl.domain.metadata.catalog.Theme;
-import kr.co.automl.domain.metadata.catalog.dto.CatalogDto;
+import kr.co.automl.domain.metadata.category.Category;
+import kr.co.automl.domain.metadata.category.CategoryEntity;
+import kr.co.automl.domain.metadata.category.Theme;
+import kr.co.automl.domain.metadata.category.dto.CategoryDto;
 import kr.co.automl.domain.metadata.dataset.DataSetEntity;
 import kr.co.automl.domain.metadata.dataset.License;
 import kr.co.automl.domain.metadata.dataset.LicenseInfo;
@@ -22,7 +22,7 @@ class MetaDataEntityTest {
 
     @Test
     void create() {
-        CatalogDto catalogDto = CatalogDto.builder()
+        CategoryDto categoryDto = CategoryDto.builder()
                 .name("대기 환경")
                 .theme("공기질")
                 .themeTaxonomy("")
@@ -46,12 +46,12 @@ class MetaDataEntityTest {
                 .timeInfo("")
                 .build();
 
-        MetaDataEntity metadata = MetaDataEntity.create("", catalogDto, dataSetDto, distributionDto);
+        MetaDataEntity metadata = MetaDataEntity.create("", categoryDto, dataSetDto, distributionDto);
 
         assertThat(metadata).isEqualTo(MetaDataEntity.builder()
                 .description("")
-                .catalog(CatalogEntity.builder()
-                        .catalog(Catalog.ATMOSPHERIC_ENVIRONMENT)
+                .category(CategoryEntity.builder()
+                        .category(Category.ATMOSPHERIC_ENVIRONMENT)
                         .theme(Theme.AIR_QUALITY)
                         .themeTaxonomy("")
                         .build())

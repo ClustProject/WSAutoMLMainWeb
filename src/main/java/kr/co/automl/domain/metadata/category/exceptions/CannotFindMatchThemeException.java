@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.catalog.exceptions;
+package kr.co.automl.domain.metadata.category.exceptions;
 
 public class CannotFindMatchThemeException extends RuntimeException {
 
