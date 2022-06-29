@@ -9,7 +9,7 @@ public class DistributionEntity {
 
     private long id;
 
-    private String distribution;
+    private String downloadUrl;
     private String timeStamp;
     private AccurualPeriodicity accurualPeriodicity;
     private String spatial;
@@ -17,7 +17,7 @@ public class DistributionEntity {
 
     public static DistributionEntity create(String distribution, String timeStamp, String accurualPeriodicityName, String spatial, String timeInfo) {
         return DistributionEntity.builder()
-                .distribution(distribution)
+                .downloadUrl(distribution)
                 .timeStamp(timeStamp)
                 .accurualPeriodicity(AccurualPeriodicity.ofName(accurualPeriodicityName))
                 .spatial(spatial)
@@ -26,8 +26,8 @@ public class DistributionEntity {
     }
 
     @Builder
-    private DistributionEntity(String distribution, String timeStamp, AccurualPeriodicity accurualPeriodicity, String spatial, String timeInfo) {
-        this.distribution = distribution;
+    private DistributionEntity(String downloadUrl, String timeStamp, AccurualPeriodicity accurualPeriodicity, String spatial, String timeInfo) {
+        this.downloadUrl = downloadUrl;
         this.timeStamp = timeStamp;
         this.accurualPeriodicity = accurualPeriodicity;
         this.spatial = spatial;
