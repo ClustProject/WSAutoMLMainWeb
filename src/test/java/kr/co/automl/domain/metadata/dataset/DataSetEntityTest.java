@@ -26,7 +26,7 @@ class DataSetEntityTest {
                 .organization(ORGANIZATION1)
                 .type(Type.ofName("이미지"))
                 .keyword("키워드1, 키워드2, 키워드1")
-                .licenseInfo(LicenseInfo.of("CLUST", "All"))
+                .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
                 .description("데이터셋 설명")
                 .build()
         );
