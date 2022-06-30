@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.BaseTimeEntity;
-import kr.co.automl.domain.metadata.dataset.dto.DataSetDto;
+import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributes;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
@@ -27,19 +27,19 @@ public class DataSet extends BaseTimeEntity {
         this.description = description;
     }
 
-    public static DataSet from(DataSetDto dataSetDto) {
+    public static DataSet from(CreateDataSetAttributes createDataSetAttributes) {
         return DataSet.builder()
-                .title(dataSetDto.title())
+                .title(createDataSetAttributes.title())
                 .organization(Organization.of(
-                        dataSetDto.publisher(),
-                        dataSetDto.creator(),
-                        dataSetDto.contactPointName()
+                        createDataSetAttributes.publisher(),
+                        createDataSetAttributes.creator(),
+                        createDataSetAttributes.contactPointName()
                 ))
-                .type(Type.ofName(dataSetDto.typeName()))
-                .keyword(dataSetDto.keyword())
-                .description(dataSetDto.description())
+                .type(Type.ofName(createDataSetAttributes.typeName()))
+                .keyword(createDataSetAttributes.keyword())
+                .description(createDataSetAttributes.description())
                 .licenseInfo(LicenseInfo.of(
-                        dataSetDto.license(), dataSetDto.rights()
+                        createDataSetAttributes.license(), createDataSetAttributes.rights()
                 ))
                 .build();
     }

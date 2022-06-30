@@ -2,7 +2,7 @@ package kr.co.automl.domain.metadata.dataset.dto;
 
 import lombok.Builder;
 
-public record DataSetDto(
+public record CreateDataSetAttributes(
         String title,
         String publisher,
         String creator,
@@ -15,6 +15,6 @@ public record DataSetDto(
 ) {
 
     @Builder
-    public DataSetDto {
+    public CreateDataSetAttributes {
     }
 }

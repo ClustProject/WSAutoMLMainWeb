@@ -1,13 +1,13 @@
 package kr.co.automl.domain.metadata.dataset;
 
-import kr.co.automl.domain.metadata.dataset.dto.DataSetDto;
+import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributes;
 import org.junit.jupiter.api.Test;
 
 import static kr.co.automl.domain.metadata.dataset.OrganizationTest.ORGANIZATION1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataSetTest {
-    public static final DataSet DATA_SET1 = DataSet.from(DataSetDto.builder()
+    public static final DataSet DATA_SET1 = DataSet.from(CreateDataSetAttributes.builder()
             .title("데이터셋 이름")
             .publisher("위세아이텍")
             .creator("위세아이텍")
