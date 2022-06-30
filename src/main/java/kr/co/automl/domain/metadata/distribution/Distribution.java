@@ -44,7 +44,9 @@ public class Distribution {
     private String temporal;
 
     @Builder
-    private Distribution(String downloadUrl, String timeStamp, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+    private Distribution(String title, String description, String downloadUrl, String timeStamp, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+        this.title = title;
+        this.description = description;
         this.downloadUrl = downloadUrl;
         this.timeStamp = timeStamp;
         this.temporalResolution = temporalResolution;
@@ -55,6 +57,8 @@ public class Distribution {
 
     public static Distribution from(CreateDistributionAttributes createDistributionAttributes) {
         return Distribution.builder()
+                .title(createDistributionAttributes.title())
+                .description(createDistributionAttributes.description())
                 .downloadUrl(createDistributionAttributes.downloadUrl())
                 .timeStamp(createDistributionAttributes.timeStamp())
                 .temporalResolution(createDistributionAttributes.temporalResolution())
