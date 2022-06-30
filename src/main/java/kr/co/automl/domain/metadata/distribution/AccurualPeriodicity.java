@@ -1,12 +1,14 @@
 package kr.co.automl.domain.metadata.distribution;
 
+import kr.co.automl.global.utils.EntityEnumerable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
  * 배포 주기
  */
-public enum AccurualPeriodicity {
+public enum AccurualPeriodicity implements EntityEnumerable {
     TIME("시간"),
     DAY("일"),
     WEEK("주"),
@@ -23,7 +25,11 @@ public enum AccurualPeriodicity {
         return Arrays.stream(values())
                 .filter(accurualPeriodicity -> accurualPeriodicity.matchName(name))
                 .findFirst()
-                .orElse(AccurualPeriodicity.NAN);
+                .orElse(NAN);
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     private boolean matchName(String name) {
