@@ -14,14 +14,14 @@ public class Catalog {
     private Category category;
     private Theme theme;
     private String themeTaxonomy;
+
     private DataSet dataSet;
 
     @Builder
-    private Catalog(Category category, Theme theme, String themeTaxonomy, DataSet dataSet) {
+    private Catalog(Category category, Theme theme, String themeTaxonomy) {
         this.category = category;
         this.theme = theme;
         this.themeTaxonomy = themeTaxonomy;
-        this.dataSet = dataSet;
     }
 
     public static Catalog from(CreateCatalogAttributes createCatalogAttributes) {
@@ -32,7 +32,6 @@ public class Catalog {
                 .category(category)
                 .theme(theme)
                 .themeTaxonomy(createCatalogAttributes.themeTaxonomy())
-                .dataSet(createCatalogAttributes.dataSet())
                 .build();
     }
 }
