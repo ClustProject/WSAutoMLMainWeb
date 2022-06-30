@@ -14,7 +14,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.OneToOne;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -36,7 +36,7 @@ public class Catalog {
 
     private String themeTaxonomy;
 
-    @Transient // 엔티티로 매핑될 시 삭제
+    @OneToOne(mappedBy = "catalog")
     private DataSet dataSet;
 
     @Builder
