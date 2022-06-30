@@ -1,6 +1,6 @@
 package kr.co.automl.domain.metadata.catalog;
 
-import kr.co.automl.domain.metadata.catalog.dto.CategoryDto;
+import kr.co.automl.domain.metadata.catalog.dto.CreateCatalogAttributes;
 import kr.co.automl.domain.metadata.dataset.DataSet;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -35,12 +35,12 @@ public class Catalog {
                 .build();
     }
 
-    public static Catalog from(CategoryDto categoryDto) {
+    public static Catalog from(CreateCatalogAttributes createCatalogAttributes) {
         return create(
-                categoryDto.name(),
-                categoryDto.theme(),
-                categoryDto.themeTaxonomy(),
-                categoryDto.dataSet()
+                createCatalogAttributes.name(),
+                createCatalogAttributes.theme(),
+                createCatalogAttributes.themeTaxonomy(),
+                createCatalogAttributes.dataSet()
         );
     }
 }
