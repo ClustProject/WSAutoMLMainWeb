@@ -46,14 +46,14 @@ public class Catalog {
         this.themeTaxonomy = themeTaxonomy;
     }
 
-    public static Catalog from(CreateCatalogAttributes createCatalogAttributes) {
-        Category category = Category.ofName(createCatalogAttributes.name());
-        Theme theme = category.findThemeByName(createCatalogAttributes.theme());
+    public static Catalog from(CreateCatalogAttributes attributes) {
+        Category category = Category.ofName(attributes.name());
+        Theme theme = category.findThemeByName(attributes.theme());
 
         return Catalog.builder()
                 .category(category)
                 .theme(theme)
-                .themeTaxonomy(createCatalogAttributes.themeTaxonomy())
+                .themeTaxonomy(attributes.themeTaxonomy())
                 .build();
     }
 }

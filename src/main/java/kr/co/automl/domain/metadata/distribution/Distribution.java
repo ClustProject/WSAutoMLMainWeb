@@ -55,16 +55,16 @@ public class Distribution {
         this.temporal = temporal;
     }
 
-    public static Distribution from(CreateDistributionAttributes createDistributionAttributes) {
+    public static Distribution from(CreateDistributionAttributes attributes) {
         return Distribution.builder()
-                .title(createDistributionAttributes.title())
-                .description(createDistributionAttributes.description())
-                .downloadUrl(createDistributionAttributes.downloadUrl())
-                .timeStamp(createDistributionAttributes.timeStamp())
-                .temporalResolution(createDistributionAttributes.temporalResolution())
-                .accurualPeriodicity(AccurualPeriodicity.ofName(createDistributionAttributes.accurualPeriodicityName()))
-                .spatial(createDistributionAttributes.spatial())
-                .temporal(createDistributionAttributes.temporal())
+                .title(attributes.title())
+                .description(attributes.description())
+                .downloadUrl(attributes.downloadUrl())
+                .timeStamp(attributes.timeStamp())
+                .temporalResolution(attributes.temporalResolution())
+                .accurualPeriodicity(AccurualPeriodicity.ofName(attributes.accurualPeriodicityName()))
+                .spatial(attributes.spatial())
+                .temporal(attributes.temporal())
                 .build();
     }
 }
