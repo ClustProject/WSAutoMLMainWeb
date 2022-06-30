@@ -1,8 +1,7 @@
 package kr.co.automl.domain.metadata.catalog;
 
 import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
-import lombok.AccessLevel;
-import lombok.Getter;
+import kr.co.automl.global.utils.EntityEnumerable;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,8 +9,7 @@ import java.util.Objects;
 /**
  * 주제
  */
-@Getter(AccessLevel.PACKAGE)
-public enum Theme {
+public enum Theme implements EntityEnumerable {
 
     AIR_QUALITY("공기질"),
     FARM_ENVIRONMENT("농장 환경"),
@@ -57,5 +55,10 @@ public enum Theme {
      */
     boolean matchName(String name) {
         return Objects.equals(this.name, name);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }

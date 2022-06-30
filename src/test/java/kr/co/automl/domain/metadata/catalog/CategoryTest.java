@@ -76,4 +76,17 @@ class CategoryTest {
             }
         }
     }
+
+    @Nested
+    class getName_메서드는 {
+
+        @Test
+        void 이름을_리턴한다() {
+            Category city = Category.CITY;
+
+            String name = city.getName();
+
+            assertThat(name).isEqualTo("도시");
+        }
+    }
 }

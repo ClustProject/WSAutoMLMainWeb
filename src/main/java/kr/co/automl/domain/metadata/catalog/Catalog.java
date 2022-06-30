@@ -1,20 +1,42 @@
 package kr.co.automl.domain.metadata.catalog;
 
+import kr.co.automl.domain.metadata.catalog.converter.CatagoryConverter;
+import kr.co.automl.domain.metadata.catalog.converter.ThemeConverter;
 import kr.co.automl.domain.metadata.catalog.dto.CreateCatalogAttributes;
 import kr.co.automl.domain.metadata.dataset.DataSet;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import static lombok.AccessLevel.PROTECTED;
+
+@Entity
 @Getter(AccessLevel.PACKAGE)
+@NoArgsConstructor(access = PROTECTED)
 public class Catalog {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "catalog_id")
     private long id;
 
+    @Convert(converter = CatagoryConverter.class)
     private Category category;
+
+    @Convert(converter = ThemeConverter.class)
     private Theme theme;
+
     private String themeTaxonomy;
 
+    @Transient // 엔티티로 매핑될 시 삭제
     private DataSet dataSet;
 
     @Builder
