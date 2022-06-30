@@ -23,24 +23,15 @@ public class Catalog {
         this.dataSet = dataSet;
     }
 
-    public static Catalog create(String categoryName, String themeName, String themeTaxonomy, DataSet dataSet) {
-        Category category = Category.ofName(categoryName);
-        Theme theme = category.findThemeByName(themeName);
+    public static Catalog from(CreateCatalogAttributes createCatalogAttributes) {
+        Category category = Category.ofName(createCatalogAttributes.name());
+        Theme theme = category.findThemeByName(createCatalogAttributes.theme());
 
         return Catalog.builder()
                 .category(category)
                 .theme(theme)
-                .themeTaxonomy(themeTaxonomy)
-                .dataSet(dataSet)
+                .themeTaxonomy(createCatalogAttributes.themeTaxonomy())
+                .dataSet(createCatalogAttributes.dataSet())
                 .build();
-    }
-
-    public static Catalog from(CreateCatalogAttributes createCatalogAttributes) {
-        return create(
-                createCatalogAttributes.name(),
-                createCatalogAttributes.theme(),
-                createCatalogAttributes.themeTaxonomy(),
-                createCatalogAttributes.dataSet()
-        );
     }
 }
