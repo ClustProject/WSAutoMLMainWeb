@@ -68,19 +68,19 @@ public class DataSet extends BaseTimeEntity {
         this.description = description;
     }
 
-    public static DataSet from(CreateDataSetAttributes createDataSetAttributes) {
+    public static DataSet from(CreateDataSetAttributes attributes) {
         return DataSet.builder()
-                .title(createDataSetAttributes.title())
+                .title(attributes.title())
                 .organization(Organization.of(
-                        createDataSetAttributes.publisher(),
-                        createDataSetAttributes.creator(),
-                        createDataSetAttributes.contactPointName()
+                        attributes.publisher(),
+                        attributes.creator(),
+                        attributes.contactPointName()
                 ))
-                .type(Type.ofName(createDataSetAttributes.typeName()))
-                .keyword(createDataSetAttributes.keyword())
-                .description(createDataSetAttributes.description())
+                .type(Type.ofName(attributes.typeName()))
+                .keyword(attributes.keyword())
+                .description(attributes.description())
                 .licenseInfo(LicenseInfo.of(
-                        createDataSetAttributes.license(), createDataSetAttributes.rights()
+                        attributes.license(), attributes.rights()
                 ))
                 .build();
     }

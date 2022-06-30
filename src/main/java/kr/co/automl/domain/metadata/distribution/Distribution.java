@@ -12,6 +12,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -25,6 +26,13 @@ public class Distribution {
     @Column(name = "distribution_id")
     private long id;
 
+    @Column(name = "distribution_title")
+    private String title;
+
+    @Lob
+    @Column(name = "distribution_description")
+    private String description;
+
     private String downloadUrl;
     private String timeStamp;
     private String temporalResolution;
@@ -36,7 +44,9 @@ public class Distribution {
     private String temporal;
 
     @Builder
-    private Distribution(String downloadUrl, String timeStamp, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+    private Distribution(String title, String description, String downloadUrl, String timeStamp, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+        this.title = title;
+        this.description = description;
         this.downloadUrl = downloadUrl;
         this.timeStamp = timeStamp;
         this.temporalResolution = temporalResolution;
@@ -45,14 +55,16 @@ public class Distribution {
         this.temporal = temporal;
     }
 
-    public static Distribution from(CreateDistributionAttributes createDistributionAttributes) {
+    public static Distribution from(CreateDistributionAttributes attributes) {
         return Distribution.builder()
-                .downloadUrl(createDistributionAttributes.downloadUrl())
-                .timeStamp(createDistributionAttributes.timeStamp())
-                .temporalResolution(createDistributionAttributes.temporalResolution())
-                .accurualPeriodicity(AccurualPeriodicity.ofName(createDistributionAttributes.accurualPeriodicityName()))
-                .spatial(createDistributionAttributes.spatial())
-                .temporal(createDistributionAttributes.temporal())
+                .title(attributes.title())
+                .description(attributes.description())
+                .downloadUrl(attributes.downloadUrl())
+                .timeStamp(attributes.timeStamp())
+                .temporalResolution(attributes.temporalResolution())
+                .accurualPeriodicity(AccurualPeriodicity.ofName(attributes.accurualPeriodicityName()))
+                .spatial(attributes.spatial())
+                .temporal(attributes.temporal())
                 .build();
     }
 }

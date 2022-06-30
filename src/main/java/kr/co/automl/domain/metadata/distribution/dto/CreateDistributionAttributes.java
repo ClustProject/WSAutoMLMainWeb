@@ -3,6 +3,8 @@ package kr.co.automl.domain.metadata.distribution.dto;
 import lombok.Builder;
 
 public record CreateDistributionAttributes(
+        String title,
+        String description,
         String downloadUrl,
         String timeStamp,
         String temporalResolution,
