@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.category.dto;
+package kr.co.automl.domain.metadata.catalog.dto;
 
 import lombok.Builder;
 
