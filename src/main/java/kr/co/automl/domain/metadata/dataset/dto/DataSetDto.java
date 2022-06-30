@@ -7,7 +7,7 @@ public record DataSetDto(
         String publisher,
         String creator,
         String contactPointName,
-        String type,
+        String typeName,
         String keyword,
         String license,
         String rights,

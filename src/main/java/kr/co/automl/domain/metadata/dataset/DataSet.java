@@ -17,26 +17,6 @@ public class DataSet extends BaseTimeEntity {
     private LicenseInfo licenseInfo;
     private String description;
 
-    public static DataSet create(
-            String title,
-            String publisher,
-            String creatorName,
-            String contactPointName,
-            String typeName,
-            String keyword,
-            String licenseName,
-            String rightsName,
-            String description
-    ) {
-        Organization organization = Organization.of(publisher, creatorName, contactPointName);
-
-        Type type = Type.ofName(typeName);
-
-        LicenseInfo licenseInfo = LicenseInfo.of(licenseName, rightsName);
-
-        return new DataSet(title, organization, type, keyword, licenseInfo, description);
-    }
-
     @Builder
     private DataSet(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
         this.title = title;
@@ -48,16 +28,20 @@ public class DataSet extends BaseTimeEntity {
     }
 
     public static DataSet from(DataSetDto dataSetDto) {
-        return create(
-                dataSetDto.title(),
-                dataSetDto.publisher(),
-                dataSetDto.creator(),
-                dataSetDto.contactPointName(),
-                dataSetDto.type(),
-                dataSetDto.keyword(),
-                dataSetDto.license(),
-                dataSetDto.rights(),
-                dataSetDto.description()
-        );
+        return DataSet.builder()
+                .title(dataSetDto.title())
+                .organization(Organization.of(
+                        dataSetDto.publisher(),
+                        dataSetDto.creator(),
+                        dataSetDto.contactPointName()
+                ))
+                .type(Type.ofName(dataSetDto.typeName()))
+                .keyword(dataSetDto.keyword())
+                .description(dataSetDto.description())
+                .licenseInfo(LicenseInfo.of(
+                        dataSetDto.license(), dataSetDto.rights()
+                ))
+                .build();
     }
+
 }
