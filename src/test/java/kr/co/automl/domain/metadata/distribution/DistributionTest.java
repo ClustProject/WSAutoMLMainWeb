@@ -12,6 +12,7 @@ class DistributionTest {
         CreateDistributionAttributes createDistributionAttributes = CreateDistributionAttributes.builder()
                 .downloadUrl("downloadUrl")
                 .timeStamp("timeStamp")
+                .temporalResolution("temporalResolution")
                 .accurualPeriodicityName("일")
                 .spatial("spatial")
                 .temporal("temporal")
@@ -21,6 +22,7 @@ class DistributionTest {
 
         assertThat(distribution.getDownloadUrl()).isEqualTo("downloadUrl");
         assertThat(distribution.getTimeStamp()).isEqualTo("timeStamp");
+        assertThat(distribution.getTemporalResolution()).isEqualTo("temporalResolution");
         assertThat(distribution.getAccurualPeriodicity()).isEqualTo(AccurualPeriodicity.DAY);
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
         assertThat(distribution.getTemporal()).isEqualTo("temporal");
