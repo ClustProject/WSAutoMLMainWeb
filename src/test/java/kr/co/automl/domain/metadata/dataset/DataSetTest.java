@@ -7,29 +7,36 @@ import static kr.co.automl.domain.metadata.dataset.OrganizationTest.ORGANIZATION
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataSetTest {
-    public static final DataSet DATA_SET1 = DataSet.from(CreateDataSetAttributes.builder()
+    public static final DataSet DATA_SET1 = DataSet.builder()
             .title("데이터셋 이름")
-            .publisher("위세아이텍")
-            .creator("위세아이텍")
-            .contactPointName("박주영")
-            .typeName("이미지")
+            .organization(ORGANIZATION1)
+            .type(Type.IMAGE)
             .keyword("키워드1, 키워드2, 키워드1")
-            .license("CLUST")
-            .rights("All")
+            .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
             .description("데이터셋 설명")
-            .build());
-
+            .build();
 
     @Test
     void from_생성_테스트() {
-        assertThat(DATA_SET1).isEqualTo(DataSet.builder()
+        CreateDataSetAttributes createDataSetAttributes = CreateDataSetAttributes.builder()
                 .title("데이터셋 이름")
-                .organization(ORGANIZATION1)
-                .type(Type.ofName("이미지"))
+                .publisher("위세아이텍")
+                .creator("위세아이텍")
+                .contactPointName("박주영")
+                .typeName("이미지")
                 .keyword("키워드1, 키워드2, 키워드1")
-                .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
+                .license("CLUST")
+                .rights("All")
                 .description("데이터셋 설명")
-                .build()
-        );
+                .build();
+
+        DataSet dataSet = DataSet.from(createDataSetAttributes);
+
+        assertThat(dataSet.getTitle()).isEqualTo("데이터셋 이름");
+        assertThat(dataSet.getOrganization()).isEqualTo(ORGANIZATION1);
+        assertThat(dataSet.getType()).isEqualTo(Type.IMAGE);
+        assertThat(dataSet.getKeyword()).isEqualTo("키워드1, 키워드2, 키워드1");
+        assertThat(dataSet.getLicenseInfo()).isEqualTo(new LicenseInfo(License.CLUST, Rights.ALL));
+        assertThat(dataSet.getDescription()).isEqualTo("데이터셋 설명");
     }
 }

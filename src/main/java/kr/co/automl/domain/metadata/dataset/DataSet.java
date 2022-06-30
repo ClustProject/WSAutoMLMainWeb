@@ -2,10 +2,11 @@ package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.BaseTimeEntity;
 import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributes;
+import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@EqualsAndHashCode
+@Getter(AccessLevel.PACKAGE)
 public class DataSet extends BaseTimeEntity {
 
     private long id;

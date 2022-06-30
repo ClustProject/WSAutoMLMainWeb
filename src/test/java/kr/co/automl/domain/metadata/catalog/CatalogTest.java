@@ -19,12 +19,9 @@ class CatalogTest {
 
         Catalog catalog = Catalog.from(createCatalogAttributes);
 
-        assertThat(catalog).isEqualTo(Catalog.builder()
-                .category(Category.ATMOSPHERIC_ENVIRONMENT)
-                .theme(Theme.AIR_QUALITY)
-                .themeTaxonomy("themeTaxonomy")
-                .dataSet(DATA_SET1)
-                .build()
-        );
+        assertThat(catalog.getCategory()).isEqualTo(Category.ATMOSPHERIC_ENVIRONMENT);
+        assertThat(catalog.getTheme()).isEqualTo(Theme.AIR_QUALITY);
+        assertThat(catalog.getThemeTaxonomy()).isEqualTo("themeTaxonomy");
+        assertThat(catalog.getDataSet()).isEqualTo(DATA_SET1);
     }
 }

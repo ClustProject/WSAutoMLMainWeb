@@ -2,10 +2,11 @@ package kr.co.automl.domain.metadata.catalog;
 
 import kr.co.automl.domain.metadata.catalog.dto.CreateCatalogAttributes;
 import kr.co.automl.domain.metadata.dataset.DataSet;
+import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
-@EqualsAndHashCode
+@Getter(AccessLevel.PACKAGE)
 public class Catalog {
 
     private long id;
