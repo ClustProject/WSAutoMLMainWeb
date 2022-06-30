@@ -1,7 +1,9 @@
 package kr.co.automl.domain.metadata.dataset;
 
 import kr.co.automl.domain.metadata.BaseTimeEntity;
+import kr.co.automl.domain.metadata.catalog.Catalog;
 import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributes;
+import kr.co.automl.domain.metadata.distribution.Distribution;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +19,9 @@ public class DataSet extends BaseTimeEntity {
     private String keyword;
     private LicenseInfo licenseInfo;
     private String description;
+
+    private Catalog catalog;
+    private Distribution distribution;
 
     @Builder
     private DataSet(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
