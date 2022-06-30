@@ -5,23 +5,22 @@ import org.junit.jupiter.api.Test;
 import static kr.co.automl.domain.metadata.dataset.OrganizationTest.ORGANIZATION1;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DataSetEntityTest {
+public class DataSetEntityTest {
+    public static final DataSetEntity DATA_SET1 = DataSetEntity.create(
+            "데이터셋 이름",
+            "위세아이텍",
+            "위세아이텍",
+            "박주영",
+            "이미지",
+            "키워드1, 키워드2, 키워드1",
+            "CLUST",
+            "All",
+            "데이터셋 설명"
+    );
 
     @Test
     void create() {
-        DataSetEntity dataSet = DataSetEntity.create(
-                "데이터셋 이름",
-                "위세아이텍",
-                "위세아이텍",
-                "박주영",
-                "이미지",
-                "키워드1, 키워드2, 키워드1",
-                "CLUST",
-                "All",
-                "데이터셋 설명"
-        );
-
-        assertThat(dataSet).isEqualTo(DataSetEntity.builder()
+        assertThat(DATA_SET1).isEqualTo(DataSetEntity.builder()
                 .title("데이터셋 이름")
                 .organization(ORGANIZATION1)
                 .type(Type.ofName("이미지"))
