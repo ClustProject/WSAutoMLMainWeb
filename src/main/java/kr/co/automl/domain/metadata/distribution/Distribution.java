@@ -12,6 +12,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -24,6 +25,13 @@ public class Distribution {
     @GeneratedValue
     @Column(name = "distribution_id")
     private long id;
+
+    @Column(name = "distribution_title")
+    private String title;
+
+    @Lob
+    @Column(name = "distribution_description")
+    private String description;
 
     private String downloadUrl;
     private String timeStamp;
