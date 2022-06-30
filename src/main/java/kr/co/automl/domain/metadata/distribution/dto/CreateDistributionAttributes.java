@@ -2,15 +2,15 @@ package kr.co.automl.domain.metadata.distribution.dto;
 
 import lombok.Builder;
 
-public record DistributionDto(
-        String distribution,
+public record CreateDistributionAttributes(
+        String downloadUrl,
         String timeStamp,
-        String accurualPeriodicity,
+        String accurualPeriodicityName,
         String spatial,
         String timeInfo
 ) {
 
     @Builder
-    public DistributionDto {
+    public CreateDistributionAttributes {
     }
 }
