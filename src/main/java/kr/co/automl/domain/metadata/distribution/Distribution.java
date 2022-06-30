@@ -1,19 +1,37 @@
 package kr.co.automl.domain.metadata.distribution;
 
+import kr.co.automl.domain.metadata.distribution.converter.AccuralPeriodicityConverter;
 import kr.co.automl.domain.metadata.distribution.dto.CreateDistributionAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import static lombok.AccessLevel.PROTECTED;
+
+@Entity
+@NoArgsConstructor(access = PROTECTED)
 @Getter(AccessLevel.PACKAGE)
 public class Distribution {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "distribution_id")
     private long id;
 
     private String downloadUrl;
     private String timeStamp;
     private String temporalResolution;
+
+    @Convert(converter = AccuralPeriodicityConverter.class)
     private AccurualPeriodicity accurualPeriodicity;
+
     private String spatial;
     private String temporal;
 
