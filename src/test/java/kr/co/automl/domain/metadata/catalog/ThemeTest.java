@@ -53,4 +53,17 @@ class ThemeTest {
 
         }
     }
+
+    @Nested
+    class getName_메서드는 {
+
+        @Test
+        void 이름을_리턴한다() {
+            Theme airQuality = Theme.AIR_QUALITY;
+
+            String name = airQuality.getName();
+
+            assertThat(name).isEqualTo("공기질");
+        }
+    }
 }

@@ -2,12 +2,13 @@ package kr.co.automl.domain.metadata.catalog;
 
 import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchCategoryException;
 import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.global.utils.EntityEnumerable;
 
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
-public enum Category {
+public enum Category implements EntityEnumerable {
 
     ATMOSPHERIC_ENVIRONMENT("대기 환경", Set.of(
             Theme.AIR_QUALITY
@@ -78,6 +79,11 @@ public enum Category {
                 .filter(theme -> theme.matchName(name))
                 .findFirst()
                 .orElseThrow(() -> new CannotFindMatchThemeException(name));
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 
     private boolean matchName(String name) {
