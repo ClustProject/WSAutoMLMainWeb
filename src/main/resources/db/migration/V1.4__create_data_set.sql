@@ -1,0 +1,19 @@
+CREATE TABLE DATA_SET
+(
+    DATASET_ID      BIGINT NOT NULL,
+    ISSUED          DATE,
+    MODIFIED        DATE,
+    DESCRIPTION     LONGTEXT,
+    KEYWORD         VARCHAR(255),
+    LICENSE         INTEGER,
+    RIGHTS          INTEGER,
+    EMAIL           VARCHAR(255),
+    NAME            VARCHAR(255),
+    CREATOR         INTEGER,
+    PUBLISHER       VARCHAR(255),
+    TITLE           VARCHAR(255),
+    TYPE            VARCHAR(255),
+    CATALOG_ID      BIGINT,
+    DISTRIBUTION_ID BIGINT,
+    PRIMARY KEY (DATASET_ID)
+)

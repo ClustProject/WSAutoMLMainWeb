@@ -2,9 +2,12 @@ package kr.co.automl.domain.metadata.dataset;
 
 import lombok.Builder;
 
+import javax.persistence.Embeddable;
+
 /**
  * 구축기관
  */
+@Embeddable
 public record Organization(
         String publisher,
         Creator creator,
