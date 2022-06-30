@@ -14,7 +14,7 @@ class DistributionTest {
                 .timeStamp("timeStamp")
                 .accurualPeriodicityName("일")
                 .spatial("spatial")
-                .timeInfo("timeInfo")
+                .temporal("temporal")
                 .build();
 
         Distribution distribution = Distribution.from(createDistributionAttributes);
@@ -23,6 +23,6 @@ class DistributionTest {
         assertThat(distribution.getTimeStamp()).isEqualTo("timeStamp");
         assertThat(distribution.getAccurualPeriodicity()).isEqualTo(AccurualPeriodicity.DAY);
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
-        assertThat(distribution.getTimeInfo()).isEqualTo("timeInfo");
+        assertThat(distribution.getTemporal()).isEqualTo("temporal");
     }
 }

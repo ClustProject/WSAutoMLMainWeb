@@ -14,15 +14,15 @@ public class Distribution {
     private String timeStamp;
     private AccurualPeriodicity accurualPeriodicity;
     private String spatial;
-    private String timeInfo;
+    private String temporal;
 
     @Builder
-    private Distribution(String downloadUrl, String timeStamp, AccurualPeriodicity accurualPeriodicity, String spatial, String timeInfo) {
+    private Distribution(String downloadUrl, String timeStamp, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
         this.downloadUrl = downloadUrl;
         this.timeStamp = timeStamp;
         this.accurualPeriodicity = accurualPeriodicity;
         this.spatial = spatial;
-        this.timeInfo = timeInfo;
+        this.temporal = temporal;
     }
 
     public static Distribution from(CreateDistributionAttributes createDistributionAttributes) {
@@ -31,7 +31,7 @@ public class Distribution {
                 .timeStamp(createDistributionAttributes.timeStamp())
                 .accurualPeriodicity(AccurualPeriodicity.ofName(createDistributionAttributes.accurualPeriodicityName()))
                 .spatial(createDistributionAttributes.spatial())
-                .timeInfo(createDistributionAttributes.timeInfo())
+                .temporal(createDistributionAttributes.temporal())
                 .build();
     }
 }

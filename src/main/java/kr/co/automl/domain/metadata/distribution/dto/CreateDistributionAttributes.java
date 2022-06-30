@@ -7,7 +7,7 @@ public record CreateDistributionAttributes(
         String timeStamp,
         String accurualPeriodicityName,
         String spatial,
-        String timeInfo
+        String temporal
 ) {
 
     @Builder
