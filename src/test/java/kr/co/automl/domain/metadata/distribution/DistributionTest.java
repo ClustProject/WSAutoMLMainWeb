@@ -12,17 +12,19 @@ class DistributionTest {
         CreateDistributionAttributes createDistributionAttributes = CreateDistributionAttributes.builder()
                 .downloadUrl("downloadUrl")
                 .timeStamp("timeStamp")
+                .temporalResolution("temporalResolution")
                 .accurualPeriodicityName("일")
                 .spatial("spatial")
-                .timeInfo("timeInfo")
+                .temporal("temporal")
                 .build();
 
         Distribution distribution = Distribution.from(createDistributionAttributes);
 
         assertThat(distribution.getDownloadUrl()).isEqualTo("downloadUrl");
         assertThat(distribution.getTimeStamp()).isEqualTo("timeStamp");
+        assertThat(distribution.getTemporalResolution()).isEqualTo("temporalResolution");
         assertThat(distribution.getAccurualPeriodicity()).isEqualTo(AccurualPeriodicity.DAY);
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
-        assertThat(distribution.getTimeInfo()).isEqualTo("timeInfo");
+        assertThat(distribution.getTemporal()).isEqualTo("temporal");
     }
 }
