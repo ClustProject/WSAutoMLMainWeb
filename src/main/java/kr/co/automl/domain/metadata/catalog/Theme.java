@@ -1,6 +1,6 @@
-package kr.co.automl.domain.metadata.category;
+package kr.co.automl.domain.metadata.catalog;
 
-import kr.co.automl.domain.metadata.category.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.catalog.exceptions.CannotFindMatchThemeException;
 import lombok.AccessLevel;
 import lombok.Getter;
 
