@@ -64,7 +64,7 @@ class MetaDataEntityTest {
                         .description("")
                         .build())
                 .distribution(DistributionEntity.builder()
-                        .distribution("")
+                        .downloadUrl("")
                         .timeStamp("")
                         .accurualPeriodicity(AccurualPeriodicity.MONTH)
                         .spatial("")

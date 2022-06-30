@@ -9,7 +9,7 @@ class DistributionEntityTest {
     @Test
     void create() {
         DistributionEntity distribution = DistributionEntity.create(
-                "distribution",
+                "downloadUrl",
                 "timeStamp",
                 "일",
                 "spatial",
@@ -17,7 +17,7 @@ class DistributionEntityTest {
         );
 
         assertThat(distribution).isEqualTo(DistributionEntity.builder()
-                .distribution("distribution")
+                .downloadUrl("downloadUrl")
                 .timeStamp("timeStamp")
                 .accurualPeriodicity(AccurualPeriodicity.DAY)
                 .spatial("spatial")
