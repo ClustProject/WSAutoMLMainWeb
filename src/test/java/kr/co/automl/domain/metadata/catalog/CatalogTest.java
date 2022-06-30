@@ -2,7 +2,7 @@ package kr.co.automl.domain.metadata.catalog;
 
 import org.junit.jupiter.api.Test;
 
-import static kr.co.automl.domain.metadata.dataset.DataSetEntityTest.DATA_SET1;
+import static kr.co.automl.domain.metadata.dataset.DataSetTest.DATA_SET1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CatalogTest {

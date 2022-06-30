@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata.catalog;
 
 import kr.co.automl.domain.metadata.catalog.dto.CategoryDto;
-import kr.co.automl.domain.metadata.dataset.DataSetEntity;
+import kr.co.automl.domain.metadata.dataset.DataSet;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
@@ -13,17 +13,17 @@ public class Catalog {
     private Category category;
     private Theme theme;
     private String themeTaxonomy;
-    private DataSetEntity dataSet;
+    private DataSet dataSet;
 
     @Builder
-    private Catalog(Category category, Theme theme, String themeTaxonomy, DataSetEntity dataSet) {
+    private Catalog(Category category, Theme theme, String themeTaxonomy, DataSet dataSet) {
         this.category = category;
         this.theme = theme;
         this.themeTaxonomy = themeTaxonomy;
         this.dataSet = dataSet;
     }
 
-    public static Catalog create(String categoryName, String themeName, String themeTaxonomy, DataSetEntity dataSet) {
+    public static Catalog create(String categoryName, String themeName, String themeTaxonomy, DataSet dataSet) {
         Category category = Category.ofName(categoryName);
         Theme theme = category.findThemeByName(themeName);
 

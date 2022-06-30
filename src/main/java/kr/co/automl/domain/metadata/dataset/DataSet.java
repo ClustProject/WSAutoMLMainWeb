@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class DataSetEntity extends BaseTimeEntity {
+public class DataSet extends BaseTimeEntity {
 
     private long id;
 
@@ -17,7 +17,7 @@ public class DataSetEntity extends BaseTimeEntity {
     private LicenseInfo licenseInfo;
     private String description;
 
-    public static DataSetEntity create(
+    public static DataSet create(
             String title,
             String publisher,
             String creatorName,
@@ -34,11 +34,11 @@ public class DataSetEntity extends BaseTimeEntity {
 
         LicenseInfo licenseInfo = LicenseInfo.of(licenseName, rightsName);
 
-        return new DataSetEntity(title, organization, type, keyword, licenseInfo, description);
+        return new DataSet(title, organization, type, keyword, licenseInfo, description);
     }
 
     @Builder
-    private DataSetEntity(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
+    private DataSet(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
         this.title = title;
         this.organization = organization;
         this.type = type;
@@ -47,7 +47,7 @@ public class DataSetEntity extends BaseTimeEntity {
         this.description = description;
     }
 
-    public static DataSetEntity from(DataSetDto dataSetDto) {
+    public static DataSet from(DataSetDto dataSetDto) {
         return create(
                 dataSetDto.title(),
                 dataSetDto.publisher(),
