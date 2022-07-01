@@ -48,13 +48,10 @@ public class UserTest {
 
                 User user = User.of(oAuthAttributes);
 
-                assertThat(user).isEqualTo(User.builder()
-                        .name("name")
-                        .imageUrl("imageUrl")
-                        .email("email")
-                        .role(Role.USER)
-                        .build()
-                );
+                assertThat(user.getName()).isEqualTo("name");
+                assertThat(user.getImageUrl()).isEqualTo("imageUrl");
+                assertThat(user.getEmail()).isEqualTo("email");
+                assertThat(user.getRole()).isEqualTo(Role.USER);
             }
         }
     }
@@ -66,13 +63,10 @@ public class UserTest {
         void 기본권한이_설정되어_변환된_유저를_리턴한다() {
             User user = create("name", "imageUrl", "email");
 
-            assertThat(user).isEqualTo(User.builder()
-                    .name("name")
-                    .imageUrl("imageUrl")
-                    .email("email")
-                    .role(Role.USER)
-                    .build()
-            );
+            assertThat(user.getName()).isEqualTo("name");
+            assertThat(user.getImageUrl()).isEqualTo("imageUrl");
+            assertThat(user.getEmail()).isEqualTo("email");
+            assertThat(user.getRole()).isEqualTo(Role.USER);
         }
     }
 
@@ -81,7 +75,7 @@ public class UserTest {
 
         @Test
         void 변환된_세션유저를_리턴한다() {
-            User user = create("name", "imageUrl", "email");
+            User user = User.ofDefaultRole("name", "imageUrl", "email");
 
             SessionUser sessionUser = user.toSessionUser();
 
@@ -163,15 +157,12 @@ public class UserTest {
                 User user = create("name", "imageUrl", "email");
                 OAuthAttributes oAuthAttributes = new OAuthAttributes("OAuthName", "OAuthImageUrl", "OAuthEmail");
 
-                User updatedUser = user.update(oAuthAttributes);
+                user.update(oAuthAttributes);
 
-                assertThat(updatedUser).isEqualTo(User.builder()
-                        .name("OAuthName")
-                        .imageUrl("OAuthImageUrl")
-                        .email("OAuthEmail")
-                        .role(Role.USER)
-                        .build()
-                );
+                assertThat(user.getName()).isEqualTo("OAuthName");
+                assertThat(user.getImageUrl()).isEqualTo("OAuthImageUrl");
+                assertThat(user.getEmail()).isEqualTo("OAuthEmail");
+                assertThat(user.getRole()).isEqualTo(Role.USER);
             }
         }
     }

@@ -1,0 +1,15 @@
+package kr.co.automl.domain.metadata.domain.distribution.dto;
+
+public class CreateDistributionAttributesTest {
+    public static final CreateDistributionAttributes CREATE_DISTRIBUTION_ATTRIBUTES1 = CreateDistributionAttributes.builder()
+            .title("a.csv")
+            .description("설명...")
+            .downloadUrl("https://download-url.com")
+            .temporalResolution("측정 단위")
+            .accurualPeriodicityName("일")
+            .spatial("공간 정보")
+            .temporal("시간 정보")
+            .build();
+
+
+}
