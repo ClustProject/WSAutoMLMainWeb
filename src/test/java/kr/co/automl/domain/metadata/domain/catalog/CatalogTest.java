@@ -10,8 +10,8 @@ class CatalogTest {
     @Test
     void from_생성_테스트() {
         CreateCatalogAttributes createCatalogAttributes = CreateCatalogAttributes.builder()
-                .category("대기 환경")
-                .theme("공기질")
+                .categoryName("대기 환경")
+                .themeName("공기질")
                 .themeTaxonomy("themeTaxonomy")
                 .build();
 

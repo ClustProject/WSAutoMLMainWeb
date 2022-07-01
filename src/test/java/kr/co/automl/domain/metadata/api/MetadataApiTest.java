@@ -41,8 +41,8 @@ class MetadataApiTest {
     @DisplayName("POST /metadata 요청은")
     class post_metadata_요청은 {
         static CreateCatalogAttributes createCatalogAttributes = CreateCatalogAttributes.builder()
-                .category("대기 환경")
-                .theme("공기질")
+                .categoryName("대기 환경")
+                .themeName("공기질")
                 .themeTaxonomy("주제 분류")
                 .build();
 

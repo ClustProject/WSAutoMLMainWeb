@@ -8,10 +8,10 @@ import static kr.co.automl.domain.metadata.dto.CreateMetaDataAttributes.NOT_BLAN
 
 public record CreateCatalogAttributes(
         @NotBlank(message = "카테고리" + NOT_BLANK_MESSAGE_SUFFIX)
-        String category,
+        String categoryName,
 
         @NotBlank(message = "주제" + NOT_BLANK_MESSAGE_SUFFIX)
-        String theme,
+        String themeName,
 
         @NotBlank(message = "주제 분류" + NOT_BLANK_MESSAGE_SUFFIX)
         String themeTaxonomy
