@@ -47,7 +47,7 @@ public class Catalog {
     }
 
     public static Catalog from(CreateCatalogAttributes attributes) {
-        Category category = Category.ofName(attributes.name());
+        Category category = Category.ofName(attributes.category());
         Theme theme = category.findThemeByName(attributes.theme());
 
         return Catalog.builder()

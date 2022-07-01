@@ -22,7 +22,7 @@ public class DataSetTest {
                 .publisher("위세아이텍")
                 .creator("위세아이텍")
                 .contactPointName("박주영")
-                .typeName("이미지")
+                .type("이미지")
                 .keyword("키워드1, 키워드2, 키워드1")
                 .license("CLUST")
                 .rights("All")

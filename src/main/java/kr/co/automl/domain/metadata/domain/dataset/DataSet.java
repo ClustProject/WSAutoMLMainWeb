@@ -76,7 +76,7 @@ public class DataSet extends BaseTimeEntity {
                         attributes.creator(),
                         attributes.contactPointName()
                 ))
-                .type(Type.ofName(attributes.typeName()))
+                .type(Type.ofName(attributes.type()))
                 .keyword(attributes.keyword())
                 .description(attributes.description())
                 .licenseInfo(LicenseInfo.of(
