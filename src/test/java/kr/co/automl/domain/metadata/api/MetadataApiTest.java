@@ -22,9 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Stream;
 
+import static kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributesTest.CREATE_CATALOG_ATTRIBUTES1;
+import static kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributesTest.CREATE_DATASET_ATTRIBUTES1;
+import static kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributesTest.CREATE_DISTRIBUTION_ATTRIBUTES1;
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -40,38 +45,11 @@ class MetadataApiTest {
     @Nested
     @DisplayName("POST /metadata 요청은")
     class post_metadata_요청은 {
-        static CreateCatalogAttributes createCatalogAttributes = CreateCatalogAttributes.builder()
-                .categoryName("대기 환경")
-                .themeName("공기질")
-                .themeTaxonomy("주제 분류")
-                .build();
-
-        static CreateDataSetAttributes createDataSetAttributes = CreateDataSetAttributes.builder()
-                .title("제목")
-                .publisher("한국도로공사")
-                .creator("위세아이텍")
-                .contactPointName("박주영")
-                .type("이미지")
-                .keyword("키워드1, 키워드2")
-                .license("PUBLIC")
-                .rights("All")
-                .description("설명...")
-                .build();
-
-        static CreateDistributionAttributes createDistributionAttributes = CreateDistributionAttributes.builder()
-                .title("a.csv")
-                .description("설명...")
-                .downloadUrl("https://download-url.com")
-                .temporalResolution("측정 단위")
-                .accurualPeriodicityName("일")
-                .spatial("공간 정보")
-                .temporal("시간 정보")
-                .build();
 
         CreateMetaDataAttributes attributes = CreateMetaDataAttributes.builder()
-                .createCatalogAttributes(createCatalogAttributes)
-                .createDataSetAttributes(createDataSetAttributes)
-                .createDistributionAttributes(createDistributionAttributes)
+                .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
+                .createDataSetAttributes(CREATE_DATASET_ATTRIBUTES1)
+                .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
                 .build();
 
         @Nested
@@ -100,23 +78,6 @@ class MetadataApiTest {
         @WithMockUser(roles = {"MANAGER", "ADMIN"})
         class 올바르지않은_형식의_요청이_주어질경우 {
 
-            @ParameterizedTest
-            @MethodSource("invalidAttributesGenerator")
-            void status_400을_리턴한다(CreateMetaDataAttributes invalidAttributes) throws Exception {
-                ResultActions action = mockMvc.perform(
-                        post("/metadata")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .content(convert(invalidAttributes))
-                );
-
-                action
-                        .andExpect(status().isBadRequest())
-                        .andDo(document("post-metadata-invalid-attributes",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint()))
-                        );
-            }
-
             private static Stream<Arguments> invalidAttributesGenerator() {
                 CreateCatalogAttributes emptyCreateCatalogAttributes = CreateCatalogAttributes.builder()
                         .build();
@@ -135,26 +96,43 @@ class MetadataApiTest {
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
-                                        .createCatalogAttributes(createCatalogAttributes)
+                                        .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
                                         .createDataSetAttributes(emptyCreateDataSetAttributes)
                                         .createDistributionAttributes(emptyCreateDistributionAttributes)
                                         .build()
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
-                                        .createCatalogAttributes(createCatalogAttributes)
+                                        .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
                                         .createDataSetAttributes(emptyCreateDataSetAttributes)
-                                        .createDistributionAttributes(createDistributionAttributes)
+                                        .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
                                         .build()
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
                                         .createCatalogAttributes(emptyCreateCatalogAttributes)
-                                        .createDataSetAttributes(createDataSetAttributes)
-                                        .createDistributionAttributes(createDistributionAttributes)
+                                        .createDataSetAttributes(CREATE_DATASET_ATTRIBUTES1)
+                                        .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
                                         .build()
                         )
                 );
+            }
+
+            @ParameterizedTest
+            @MethodSource("invalidAttributesGenerator")
+            void status_400을_리턴한다(CreateMetaDataAttributes invalidAttributes) throws Exception {
+                ResultActions action = mockMvc.perform(
+                        post("/metadata")
+                                .accept(MediaType.APPLICATION_JSON)
+                                .content(convert(invalidAttributes))
+                );
+
+                action
+                        .andExpect(status().isBadRequest())
+                        .andDo(document("post-metadata-invalid-attributes",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()))
+                        );
             }
         }
 
