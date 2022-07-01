@@ -8,6 +8,9 @@ import kr.co.automl.domain.metadata.dto.CreateMetaDataAttributes;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 메타데이터 저장 담당
+ */
 @Service
 public class MetadataSaver {
     private final DataSetRepository dataSetRepository;
@@ -16,6 +19,10 @@ public class MetadataSaver {
         this.dataSetRepository = dataSetRepository;
     }
 
+    /**
+     * 메타데이터를 저장합니다.
+     * @param attributes 생성 시 필요한 필요한 요소들
+     */
     @Transactional
     public void save(CreateMetaDataAttributes attributes) {
         Catalog catalog = Catalog.from(attributes.createCatalogAttributes());

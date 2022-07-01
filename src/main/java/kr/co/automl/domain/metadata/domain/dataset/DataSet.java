@@ -24,6 +24,11 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
+/**
+ * 데이터셋.
+ *
+ * 데이터에 대한 핵심 정보들을 가지고 있습니다.
+ */
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 @Getter(AccessLevel.PACKAGE)
@@ -68,6 +73,11 @@ public class DataSet extends BaseTimeEntity {
         this.description = description;
     }
 
+    /**
+     * 생성한 데이터셋을 리턴합니다.
+     * @param attributes 데이터셋 생성에 필요한 요소들
+     * @return 생성한 데이터셋
+     */
     public static DataSet from(CreateDataSetAttributes attributes) {
         return DataSet.builder()
                 .title(attributes.title())
@@ -88,7 +98,7 @@ public class DataSet extends BaseTimeEntity {
     /**
      * 연관관계 편의 메서드. 양쪽의 연관관계를 모두 설정합니다.
      * @param catalog 카탈로그
-     * @param distribution 배포
+     * @param distribution 배포 정보
      */
     public void setRelation(Catalog catalog, Distribution distribution) {
         this.catalog = catalog;

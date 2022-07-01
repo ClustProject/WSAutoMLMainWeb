@@ -16,6 +16,9 @@ import javax.persistence.Lob;
 
 import static lombok.AccessLevel.PROTECTED;
 
+/**
+ * 배포 정보
+ */
 @Entity
 @NoArgsConstructor(access = PROTECTED)
 @Getter(AccessLevel.PACKAGE)
@@ -53,6 +56,11 @@ public class Distribution {
         this.temporal = temporal;
     }
 
+    /**
+     * 생성한 배포 정보를 리턴합니다.
+     * @param attributes 배포 정보 생성에 필요한 요소들
+     * @return 생성한 배봎 정보
+     */
     public static Distribution from(CreateDistributionAttributes attributes) {
         return Distribution.builder()
                 .title(attributes.title())

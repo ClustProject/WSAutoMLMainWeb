@@ -17,6 +17,11 @@ import javax.persistence.OneToOne;
 
 import static lombok.AccessLevel.PROTECTED;
 
+/**
+ * 카탈로그.
+ *
+ * 카테고리 목록들을 가지고 있습니다.
+ */
 @Entity
 @Getter
 @NoArgsConstructor(access = PROTECTED)
@@ -45,6 +50,11 @@ public class Catalog {
         this.themeTaxonomy = themeTaxonomy;
     }
 
+    /**
+     * 생성한 카탈로그를 리턴합니다.
+     * @param attributes 카탈로그 생성 시 필요한 요소들
+     * @return 생성한 카탈로그
+     */
     public static Catalog from(CreateCatalogAttributes attributes) {
         Category category = Category.ofName(attributes.category());
         Theme theme = category.findThemeByName(attributes.theme());
