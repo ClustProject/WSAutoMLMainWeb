@@ -104,9 +104,8 @@ class ContactPointsTest {
             @Test
             void 찾은_연락처를_리턴한다() {
                 ContactPoint contactPoint = ContactPointTest.CONTACT_POINT1;
-                String name = contactPoint.name();
 
-                assertThat(CONTACT_POINTS.findByName(name)).isEqualTo(contactPoint);
+                assertThat(CONTACT_POINTS.findByName("박주영")).isEqualTo(contactPoint);
             }
         }
 

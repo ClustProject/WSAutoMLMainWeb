@@ -1,7 +1,5 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
-import kr.co.automl.domain.metadata.domain.catalog.Category;
-import kr.co.automl.domain.metadata.domain.catalog.Theme;
 import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchCategoryException;
 import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchThemeException;
 import org.junit.jupiter.api.Nested;

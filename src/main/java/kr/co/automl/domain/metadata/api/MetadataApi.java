@@ -1,6 +1,7 @@
 package kr.co.automl.domain.metadata.api;
 
 import kr.co.automl.domain.metadata.dto.CreateMetaDataAttributes;
+import kr.co.automl.domain.metadata.service.MetadataSaver;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,17 @@ import java.net.URISyntaxException;
 @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
 public class MetadataApi {
 
+    private final MetadataSaver metadataSaver;
+
+    public MetadataApi(MetadataSaver metadataSaver) {
+        this.metadataSaver = metadataSaver;
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(
             @RequestBody @Valid CreateMetaDataAttributes attribues
     ) throws URISyntaxException {
-        // TODO: 2022/07/01 개발 해야함
+        metadataSaver.save(attribues);
     }
 }

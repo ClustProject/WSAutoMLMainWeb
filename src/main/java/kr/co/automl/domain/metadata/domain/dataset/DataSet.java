@@ -85,4 +85,15 @@ public class DataSet extends BaseTimeEntity {
                 .build();
     }
 
+    /**
+     * 연관관계 편의 메서드. 양쪽의 연관관계를 모두 설정합니다.
+     * @param catalog 카탈로그
+     * @param distribution 배포
+     */
+    public void setRelation(Catalog catalog, Distribution distribution) {
+        this.catalog = catalog;
+        catalog.setRelation(this);
+
+        this.distribution = distribution;
+    }
 }

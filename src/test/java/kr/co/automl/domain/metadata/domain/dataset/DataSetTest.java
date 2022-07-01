@@ -1,6 +1,9 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.domain.catalog.Catalog;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
+import kr.co.automl.domain.metadata.domain.distribution.Distribution;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,5 +40,22 @@ public class DataSetTest {
         assertThat(dataSet.getKeyword()).isEqualTo("키워드1, 키워드2, 키워드1");
         assertThat(dataSet.getLicenseInfo()).isEqualTo(new LicenseInfo(License.CLUST, Rights.ALL));
         assertThat(dataSet.getDescription()).isEqualTo("데이터셋 설명");
+    }
+
+    @Nested
+    class setRelation_메서드는 {
+
+        @Test
+        void 연관관계를_설정한다() {
+            DataSet dataSet = DataSet.builder().build();
+            Catalog catalog = Catalog.builder().build();
+            Distribution distribution = Distribution.builder().build();
+
+            dataSet.setRelation(catalog, distribution);
+
+            assertThat(dataSet.getCatalog()).isEqualTo(catalog);
+            assertThat(dataSet.getDistribution()).isEqualTo(distribution);
+            assertThat(catalog.getDataSet()).isEqualTo(dataSet);
+        }
     }
 }

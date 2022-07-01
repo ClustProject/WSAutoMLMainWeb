@@ -4,7 +4,6 @@ import kr.co.automl.domain.metadata.domain.catalog.converter.CatagoryConverter;
 import kr.co.automl.domain.metadata.domain.catalog.converter.ThemeConverter;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,7 @@ import javax.persistence.OneToOne;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Getter(AccessLevel.PACKAGE)
+@Getter
 @NoArgsConstructor(access = PROTECTED)
 public class Catalog {
 
@@ -55,5 +54,9 @@ public class Catalog {
                 .theme(theme)
                 .themeTaxonomy(attributes.themeTaxonomy())
                 .build();
+    }
+
+    public void setRelation(DataSet dataSet) {
+        this.dataSet = dataSet;
     }
 }
