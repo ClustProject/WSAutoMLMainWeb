@@ -11,7 +11,10 @@ spring:
     database-platform: org.hibernate.dialect.MariaDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
   flyway:
     enabled: true # 생략 가능하나 직관적 명시를 위해 추가
 
