@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.stream.Stream;
 
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -74,7 +76,7 @@ class MetadataApiTest {
 
         @Nested
         @WithMockUser
-        class 매니저_혹은_어드민이_아닌_유저의_요청일경우 {
+        class 해당_권한이_아닌_유저의_요청일경우 {
 
             @Test
             void status_403을_리턴한다() throws Exception {
@@ -85,7 +87,12 @@ class MetadataApiTest {
                 );
 
                 action
-                        .andExpect(status().isForbidden());
+                        .andExpect(status().isForbidden())
+                        .andDo(
+                                document("post-metadata-with-no-permission",
+                                        preprocessRequest(prettyPrint()),
+                                        preprocessResponse(prettyPrint()))
+                        );
             }
         }
 
@@ -103,7 +110,11 @@ class MetadataApiTest {
                 );
 
                 action
-                        .andExpect(status().isBadRequest());
+                        .andExpect(status().isBadRequest())
+                        .andDo(document("post-metadata-invalid-attributes",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint()))
+                        );
             }
 
             private static Stream<Arguments> invalidAttributesGenerator() {
@@ -160,7 +171,11 @@ class MetadataApiTest {
                 );
 
                 action
-                        .andExpect(status().isCreated());
+                        .andExpect(status().isCreated())
+                        .andDo(document("post-metadata",
+                                preprocessRequest(prettyPrint()),
+                                preprocessResponse(prettyPrint())
+                        ));
             }
 
         }

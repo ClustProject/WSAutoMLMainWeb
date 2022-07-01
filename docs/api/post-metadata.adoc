@@ -1,0 +1,17 @@
+== `POST /metadata` 메타 데이터 생성
+
+=== 어드민이 아닌 유저의 요청과 응답
+
+include::{snippets}/post-metadata-with-no-permission/http-request.adoc[]
+include::{snippets}/post-metadata-with-no-permission/http-response.adoc[]
+
+=== 올바르지 않은 형식 요청과 응답
+
+include::{snippets}/post-metadata-invalid-attributes/http-request.adoc[]
+include::{snippets}/post-metadata-invalid-attributes/http-response.adoc[]
+
+=== 올바른 형식 요청
+
+include::{snippets}/post-metadata/http-request.adoc[]
+include::{snippets}/post-metadata/http-response.adoc[]
+
