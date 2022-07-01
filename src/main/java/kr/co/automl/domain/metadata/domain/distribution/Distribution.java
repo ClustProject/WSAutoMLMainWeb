@@ -34,7 +34,6 @@ public class Distribution {
     private String description;
 
     private String downloadUrl;
-    private String timeStamp;
     private String temporalResolution;
 
     @Convert(converter = AccuralPeriodicityConverter.class)
@@ -44,11 +43,10 @@ public class Distribution {
     private String temporal;
 
     @Builder
-    private Distribution(String title, String description, String downloadUrl, String timeStamp, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+    private Distribution(String title, String description, String downloadUrl, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
         this.title = title;
         this.description = description;
         this.downloadUrl = downloadUrl;
-        this.timeStamp = timeStamp;
         this.temporalResolution = temporalResolution;
         this.accurualPeriodicity = accurualPeriodicity;
         this.spatial = spatial;
@@ -60,7 +58,6 @@ public class Distribution {
                 .title(attributes.title())
                 .description(attributes.description())
                 .downloadUrl(attributes.downloadUrl())
-                .timeStamp(attributes.timeStamp())
                 .temporalResolution(attributes.temporalResolution())
                 .accurualPeriodicity(AccurualPeriodicity.ofName(attributes.accurualPeriodicityName()))
                 .spatial(attributes.spatial())

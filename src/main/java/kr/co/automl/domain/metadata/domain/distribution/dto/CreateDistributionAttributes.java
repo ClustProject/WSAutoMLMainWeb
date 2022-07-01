@@ -6,7 +6,6 @@ public record CreateDistributionAttributes(
         String title,
         String description,
         String downloadUrl,
-        String timeStamp,
         String temporalResolution,
         String accurualPeriodicityName,
         String spatial,

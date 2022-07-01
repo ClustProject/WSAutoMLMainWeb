@@ -1,7 +1,5 @@
 package kr.co.automl.domain.metadata.domain.distribution;
 
-import kr.co.automl.domain.metadata.domain.distribution.AccurualPeriodicity;
-import kr.co.automl.domain.metadata.domain.distribution.Distribution;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +13,6 @@ class DistributionTest {
                 .title("destribution title")
                 .description("destribution description")
                 .downloadUrl("downloadUrl")
-                .timeStamp("timeStamp")
                 .temporalResolution("temporalResolution")
                 .accurualPeriodicityName("일")
                 .spatial("spatial")
@@ -27,7 +24,6 @@ class DistributionTest {
         assertThat(distribution.getTitle()).isEqualTo("destribution title");
         assertThat(distribution.getDescription()).isEqualTo("destribution description");
         assertThat(distribution.getDownloadUrl()).isEqualTo("downloadUrl");
-        assertThat(distribution.getTimeStamp()).isEqualTo("timeStamp");
         assertThat(distribution.getTemporalResolution()).isEqualTo("temporalResolution");
         assertThat(distribution.getAccurualPeriodicity()).isEqualTo(AccurualPeriodicity.DAY);
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
