@@ -32,22 +32,6 @@ class MetadataReaderTest {
     @Autowired
     private MetadataReader metadataReader;
 
-    /**
-     * 데이터셋을 count개 만큼 저장합니다.
-     * @param count 저장할 데이터셋 개수
-     */
-    private void saveDataSets(int count) {
-        IntStream.rangeClosed(1, count)
-                .forEach(i -> {
-                    Catalog catalog = CatalogTest.createFixture();
-                    Distribution distribution = DistributionTest.createFixture();
-
-                    DataSet dataSet = DataSetTest.createFixtureWith(catalog, distribution);
-
-                    dataSetRepository.save(dataSet);
-                });
-    }
-
     @Nested
     class readAll_메서드는 {
 
@@ -94,6 +78,22 @@ class MetadataReaderTest {
             List<MetadataResponse> metadataResponses = metadataReader.readAll(pageRequest);
 
             assertThat(metadataResponses).hasSize(2);
+        }
+
+        /**
+         * 데이터셋을 count개 만큼 저장합니다.
+         * @param count 저장할 데이터셋 개수
+         */
+        private void saveDataSets(int count) {
+            IntStream.rangeClosed(1, count)
+                    .forEach(i -> {
+                        Catalog catalog = CatalogTest.createFixture();
+                        Distribution distribution = DistributionTest.createFixture();
+
+                        DataSet dataSet = DataSetTest.createFixtureWith(catalog, distribution);
+
+                        dataSetRepository.save(dataSet);
+                    });
         }
     }
 }
