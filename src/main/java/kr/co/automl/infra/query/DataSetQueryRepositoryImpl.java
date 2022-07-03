@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.domain.dataset.query;
+package kr.co.automl.infra.query;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
