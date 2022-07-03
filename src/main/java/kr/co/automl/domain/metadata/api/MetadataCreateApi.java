@@ -16,11 +16,11 @@ import java.net.URISyntaxException;
 @RestController
 @RequestMapping("metadata")
 @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
-public class MetadataApi {
+public class MetadataCreateApi {
 
     private final MetadataSaver metadataSaver;
 
-    public MetadataApi(MetadataSaver metadataSaver) {
+    public MetadataCreateApi(MetadataSaver metadataSaver) {
         this.metadataSaver = metadataSaver;
     }
 

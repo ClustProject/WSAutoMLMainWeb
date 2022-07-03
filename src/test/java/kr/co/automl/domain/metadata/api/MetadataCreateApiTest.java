@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Transactional
-class MetadataApiTest {
+class MetadataCreateApiTest {
 
     @Autowired
     private MockMvc mockMvc;
