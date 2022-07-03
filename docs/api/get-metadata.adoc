@@ -1,0 +1,11 @@
+== `GET /metadata` - 메타데이터 목록 조회
+
+=== 허용되지 않은 권한을 가진 유저의 요청과 응답
+
+include::{snippets}/get-metadata-with-no-permission-user/http-request.adoc[]
+include::{snippets}/get-metadata-with-no-permission-user/http-response.adoc[]
+
+=== 어드민 유저의 요청과 응답
+
+include::{snippets}/get-metadata/http-request.adoc[]
+include::{snippets}/get-metadata/http-response.adoc[]
