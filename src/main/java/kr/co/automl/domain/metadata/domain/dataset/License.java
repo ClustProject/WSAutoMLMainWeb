@@ -34,7 +34,7 @@ public enum License implements EntityEnumerable {
      */
     private static void validateRightsInLicense(String rightsName, License license) {
         if (!license.contains(rightsName)) {
-            throw new CannotFindMatchRightsException();
+            throw new CannotFindMatchRightsException(rightsName);
         }
     }
 
@@ -52,7 +52,7 @@ public enum License implements EntityEnumerable {
         return this.rightses.stream()
                 .filter(rights -> rights.match(rightsName))
                 .findFirst()
-                .orElseThrow(CannotFindMatchRightsException::new);
+                .orElseThrow(() -> new CannotFindMatchRightsException(rightsName));
     }
 
     @Override

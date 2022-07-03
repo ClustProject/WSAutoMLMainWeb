@@ -23,7 +23,7 @@ public enum Rights implements EntityEnumerable {
         return Arrays.stream(values())
                 .filter(it -> it.match(rightsName))
                 .findFirst()
-                .orElseThrow(CannotFindMatchRightsException::new);
+                .orElseThrow(() -> new CannotFindMatchRightsException(rightsName));
     }
 
     /**

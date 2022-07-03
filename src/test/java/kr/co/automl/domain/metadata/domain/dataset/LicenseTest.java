@@ -36,7 +36,7 @@ class LicenseTest {
                     License.of(license.toString(), "xxx");
                 })
                         .isInstanceOf(CannotFindMatchRightsException.class)
-                        .hasMessage("일치하는 권한이 없습니다.");
+                        .hasMessage("일치하는 권한이 없습니다: xxx");
             }
 
         }
@@ -104,7 +104,8 @@ class LicenseTest {
             @EnumSource(License.class)
             void CannotFindMatchRightsException을_던진다(License license) {
                 assertThatThrownBy(() -> license.findRightsByName("xxx"))
-                        .isInstanceOf(CannotFindMatchRightsException.class);
+                        .isInstanceOf(CannotFindMatchRightsException.class)
+                        .hasMessage("일치하는 권한이 없습니다: xxx");
             }
         }
     }

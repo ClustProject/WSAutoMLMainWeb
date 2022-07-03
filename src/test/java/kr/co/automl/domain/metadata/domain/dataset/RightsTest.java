@@ -55,7 +55,7 @@ class RightsTest {
             void CannotFindMatchRightsException을_던진다() {
                 assertThatThrownBy(() -> Rights.ofName("xxx"))
                         .isInstanceOf(CannotFindMatchRightsException.class)
-                        .hasMessage("일치하는 권한이 없습니다.");
+                        .hasMessage("일치하는 권한이 없습니다: xxx");
             }
         }
     }
