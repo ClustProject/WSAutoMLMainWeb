@@ -1,21 +1,21 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.global.utils.EntityEnumerable;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 라이센스
  */
-public enum License {
+public enum License implements EntityEnumerable {
     CLUST(Rights.CLUST, Rights.ALL),
     PUBLIC(Rights.ALL);
 
-    private final List<Rights> rightsList;
+    private final Set<Rights> rightses;
 
     License(Rights... rights) {
-        this.rightsList = Arrays.asList(rights);
+        this.rightses = Set.of(rights);
     }
 
     public static License of(String licenseName, String rightsString) {
@@ -27,19 +27,24 @@ public enum License {
 
     /**
      * 권한이 라이센스 안에 있는지 검증합니다.
-     * @param rightString 권한 문자열
+     * @param rightsName 권한 이름
      * @param license 라이센스
      *
      * @throws CannotFindMatchRightsException 일치하는 권한을 찾지 못할 경우
      */
-    private static void validateRightsInLicense(String rightString, License license) {
-        if (!license.contains(rightString)) {
+    private static void validateRightsInLicense(String rightsName, License license) {
+        if (!license.contains(rightsName)) {
             throw new CannotFindMatchRightsException();
         }
     }
 
     boolean contains(String rightString) {
-        return this.rightsList.stream()
+        return this.rightses.stream()
                 .anyMatch(rights -> rights.match(rightString));
+    }
+
+    @Override
+    public String getName() {
+        return this.name();
     }
 }
