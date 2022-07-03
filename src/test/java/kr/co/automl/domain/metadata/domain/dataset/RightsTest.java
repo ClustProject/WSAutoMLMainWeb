@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.domain.dataset.Rights;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchRightsException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -43,8 +44,8 @@ class RightsTest {
 
             @Test
             void 변환된_권한을_리턴한다() {
-                assertThat(Rights.ofName("CLUST Consortium")).isEqualTo(Rights.CLUST);
-                assertThat(Rights.ofName("All")).isEqualTo(Rights.ALL);
+                assertThat(Rights.ofString("CLUST Consortium")).isEqualTo(Rights.CLUST);
+                assertThat(Rights.ofString("All")).isEqualTo(Rights.ALL);
             }
         }
 
@@ -53,7 +54,7 @@ class RightsTest {
 
             @Test
             void CannotFindMatchRightsException을_던진다() {
-                assertThatThrownBy(() -> Rights.ofName("xxx"))
+                assertThatThrownBy(() -> Rights.ofString("xxx"))
                         .isInstanceOf(CannotFindMatchRightsException.class)
                         .hasMessage("일치하는 권한이 없습니다.");
             }
