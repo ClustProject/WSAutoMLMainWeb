@@ -4,6 +4,7 @@ import kr.co.automl.domain.metadata.domain.catalog.Catalog;
 import kr.co.automl.domain.metadata.domain.catalog.CatalogTest;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetRepository;
+import kr.co.automl.domain.metadata.domain.dataset.DataSetTest;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
 import kr.co.automl.domain.metadata.domain.distribution.DistributionTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import static kr.co.automl.domain.metadata.domain.dataset.DataSetTest.DATA_SET1;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
@@ -43,10 +43,9 @@ class MetadataReadApiTest {
         Catalog catalog = CatalogTest.createFixture();
         Distribution distribution = DistributionTest.createFixture();
 
-        DataSet dataSet1 = DATA_SET1;
-        dataSet1.setRelation(catalog, distribution);
+        DataSet dataSet = DataSetTest.createFixtureWith(catalog, distribution);
 
-        dataSetRepository.save(dataSet1);
+        dataSetRepository.save(dataSet);
     }
 
     @Nested

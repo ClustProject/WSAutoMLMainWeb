@@ -10,14 +10,23 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataSetTest {
-    public static final DataSet DATA_SET1 = DataSet.builder()
-            .title("데이터셋 이름")
-            .organization(OrganizationTest.ORGANIZATION1)
-            .type(Type.IMAGE)
-            .keyword("키워드1, 키워드2, 키워드1")
-            .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
-            .description("데이터셋 설명")
-            .build();
+    public static DataSet createFixtureWith(Catalog catalog, Distribution distribution) {
+        DataSet dataSet = createFixture();
+        dataSet.setRelation(catalog, distribution);
+
+        return dataSet;
+    }
+
+    public static DataSet createFixture() {
+        return DataSet.builder()
+                .title("데이터셋 이름")
+                .organization(OrganizationTest.ORGANIZATION1)
+                .type(Type.IMAGE)
+                .keyword("키워드1, 키워드2, 키워드1")
+                .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
+                .description("데이터셋 설명")
+                .build();
+    }
 
     @Test
     void from_생성_테스트() {

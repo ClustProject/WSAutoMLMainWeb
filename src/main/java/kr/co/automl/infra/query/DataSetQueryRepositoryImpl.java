@@ -3,6 +3,7 @@ package kr.co.automl.infra.query;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetQueryRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -22,11 +23,13 @@ public class DataSetQueryRepositoryImpl implements DataSetQueryRepository {
     }
 
     @Override
-    public List<DataSet> findAllDataSets() {
+    public List<DataSet> findAllDataSets(Pageable pageable) {
         return queryFactory
                 .selectFrom(dataSet)
                 .join(dataSet.catalog, catalog).fetchJoin()
                 .join(dataSet.distribution, distribution).fetchJoin()
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
     }
 }
