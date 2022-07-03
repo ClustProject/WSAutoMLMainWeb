@@ -74,7 +74,7 @@ class MetadataReaderTest {
                             .type("이미지")
                             .keyword("키워드1, 키워드2, 키워드1")
                             .license("CLUST")
-                            .rights("All")
+                            .rights("ALL")
                             .description("데이터셋 설명")
                             .distributionTitle("destribution title")
                             .distributionDescription("destribution description")

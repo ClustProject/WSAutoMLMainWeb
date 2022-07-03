@@ -3,7 +3,6 @@ package kr.co.automl.domain.metadata.domain.distribution;
 import kr.co.automl.domain.metadata.domain.distribution.converter.AccuralPeriodicityConverter;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
 import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +21,7 @@ import static lombok.AccessLevel.PROTECTED;
  */
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-@Getter(AccessLevel.PACKAGE)
+@Getter
 public class Distribution {
 
     @Id
