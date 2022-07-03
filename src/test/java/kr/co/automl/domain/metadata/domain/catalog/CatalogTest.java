@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CatalogTest {
 
-    public static Catalog createFixture() {
+    public static Catalog createDefaultFixture() {
         return Catalog.builder()
                 .category(Category.CITY)
                 .theme(Theme.AIR_QUALITY)

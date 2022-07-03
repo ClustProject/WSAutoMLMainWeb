@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DistributionTest {
 
-    public static Distribution createFixture() {
+    public static Distribution createDefaultFixture() {
         return Distribution.builder()
                 .title("destribution title")
                 .description("destribution description")

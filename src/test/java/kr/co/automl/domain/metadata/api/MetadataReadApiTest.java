@@ -40,10 +40,10 @@ class MetadataReadApiTest {
 
     @BeforeEach
     void setUp() {
-        Catalog catalog = CatalogTest.createFixture();
-        Distribution distribution = DistributionTest.createFixture();
+        Catalog catalog = CatalogTest.createDefaultFixture();
+        Distribution distribution = DistributionTest.createDefaultFixture();
 
-        DataSet dataSet = DataSetTest.createFixtureWith(catalog, distribution);
+        DataSet dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
 
         dataSetRepository.save(dataSet);
     }

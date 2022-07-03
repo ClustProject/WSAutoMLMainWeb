@@ -87,10 +87,10 @@ class MetadataReaderTest {
         private void saveDataSets(int count) {
             IntStream.rangeClosed(1, count)
                     .forEach(i -> {
-                        Catalog catalog = CatalogTest.createFixture();
-                        Distribution distribution = DistributionTest.createFixture();
+                        Catalog catalog = CatalogTest.createDefaultFixture();
+                        Distribution distribution = DistributionTest.createDefaultFixture();
 
-                        DataSet dataSet = DataSetTest.createFixtureWith(catalog, distribution);
+                        DataSet dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
 
                         dataSetRepository.save(dataSet);
                     });

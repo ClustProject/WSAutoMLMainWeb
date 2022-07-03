@@ -9,14 +9,14 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataSetTest {
-    public static DataSet createFixtureWith(Catalog catalog, Distribution distribution) {
-        DataSet dataSet = createFixture();
+    public static DataSet createDefaultFixtureWith(Catalog catalog, Distribution distribution) {
+        DataSet dataSet = createDefaultFixture();
         dataSet.setRelation(catalog, distribution);
 
         return dataSet;
     }
 
-    public static DataSet createFixture() {
+    public static DataSet createDefaultFixture() {
         return DataSet.builder()
                 .title("데이터셋 이름")
                 .organization(OrganizationTest.ORGANIZATION1)
