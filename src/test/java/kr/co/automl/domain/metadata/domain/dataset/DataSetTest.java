@@ -3,6 +3,7 @@ package kr.co.automl.domain.metadata.domain.dataset;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
+import kr.co.automl.domain.metadata.dto.DataSetResponse;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +57,33 @@ public class DataSetTest {
             assertThat(dataSet.getCatalog()).isEqualTo(catalog);
             assertThat(dataSet.getDistribution()).isEqualTo(distribution);
             assertThat(catalog.getDataSet()).isEqualTo(dataSet);
+        }
+    }
+
+    @Nested
+    class toResponse_메서드는 {
+
+        @Test
+        void 변환된_응답객체를_리턴한다() {
+            DataSet dataSet = DataSet.builder()
+                    .title("데이터셋 이름")
+                    .organization(OrganizationTest.ORGANIZATION1)
+                    .type(Type.IMAGE)
+                    .keyword("키워드1, 키워드2, 키워드1")
+                    .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
+                    .description("데이터셋 설명")
+                    .build();
+
+            DataSetResponse dataSetResponse = dataSet.toResponse();
+
+            assertThat(dataSetResponse).isEqualTo(DataSetResponse.builder()
+                    .title("데이터셋 이름")
+                    .organization(OrganizationTest.ORGANIZATION1)
+                    .type("이미지")
+                    .keyword("키워드1, 키워드2, 키워드1")
+                    .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
+                    .description("데이터셋 설명")
+                    .build());
         }
     }
 }
