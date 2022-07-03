@@ -19,10 +19,10 @@ public class MetadataReadApi {
     private final MetadataReader metadataReader;
 
     @GetMapping("metadata")
-    public ListResponse getAllMetadata(Pageable pageable) {
+    public ListResponse<MetadataResponse> getAllMetadata(Pageable pageable) {
         List<MetadataResponse> metadataResponses = metadataReader.readAll(pageable);
 
-        return new ListResponse(metadataResponses);
+        return new ListResponse<>(metadataResponses);
     }
 
 }
