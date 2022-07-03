@@ -30,7 +30,7 @@ public class LicenseInfo {
 
     public static LicenseInfo of(String licenseName, String rightsName) {
         License license = License.of(licenseName, rightsName);
-        Rights rights = Rights.ofName(rightsName);
+        Rights rights = license.findRightsByName(rightsName);
 
         return new LicenseInfo(license, rights);
     }

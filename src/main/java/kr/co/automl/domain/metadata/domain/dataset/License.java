@@ -43,6 +43,18 @@ public enum License implements EntityEnumerable {
                 .anyMatch(rights -> rights.match(rightString));
     }
 
+    /**
+     * 권한 이름으로 찾은 권한을 리턴합니다.
+     * @param rightsName 찾을 권한 이름
+     * @return 찾은 권한
+     */
+    public Rights findRightsByName(String rightsName) {
+        return this.rightses.stream()
+                .filter(rights -> rights.match(rightsName))
+                .findFirst()
+                .orElseThrow(CannotFindMatchRightsException::new);
+    }
+
     @Override
     public String getName() {
         return this.name();
