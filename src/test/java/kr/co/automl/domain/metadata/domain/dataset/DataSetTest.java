@@ -2,8 +2,8 @@ package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
+import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
-import kr.co.automl.domain.metadata.dto.DataSetResponse;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

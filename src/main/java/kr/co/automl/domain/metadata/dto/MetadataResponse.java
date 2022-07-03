@@ -1,6 +1,9 @@
 package kr.co.automl.domain.metadata.dto;
 
+import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
+import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.Builder;
 
 public record MetadataResponse(

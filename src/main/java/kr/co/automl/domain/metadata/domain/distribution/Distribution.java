@@ -2,7 +2,7 @@ package kr.co.automl.domain.metadata.domain.distribution;
 
 import kr.co.automl.domain.metadata.domain.distribution.converter.AccuralPeriodicityConverter;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
-import kr.co.automl.domain.metadata.dto.DistributionResponse;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

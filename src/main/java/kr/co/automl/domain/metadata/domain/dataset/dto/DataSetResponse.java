@@ -1,4 +1,4 @@
-package kr.co.automl.domain.metadata.dto;
+package kr.co.automl.domain.metadata.domain.dataset.dto;
 
 import kr.co.automl.domain.metadata.domain.dataset.LicenseInfo;
 import kr.co.automl.domain.metadata.domain.dataset.Organization;
