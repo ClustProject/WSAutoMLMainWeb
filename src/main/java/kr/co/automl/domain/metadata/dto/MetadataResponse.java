@@ -1,26 +1,33 @@
 package kr.co.automl.domain.metadata.dto;
 
-import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
-import kr.co.automl.domain.metadata.domain.dataset.DataSet;
-import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
-import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 
 public record MetadataResponse(
-        CatalogResponse catalog,
-        DataSetResponse dataSet,
-        DistributionResponse distribution
+        String category,
+        String theme,
+        String themeTaxonomy,
+        String title,
+        String publisher,
+        String creator,
+        String contactPointName,
+        String contactPointEmail,
+        String type,
+        String keyword,
+        String license,
+        String rights,
+        String description,
+        String distributionTitle,
+        String distributionDescription,
+        String downloadUrl,
+        String temporalResolution,
+        String accurualPeriodicity,
+        String spatial,
+        String temporal
 ) {
 
     @Builder
+    @QueryProjection
     public MetadataResponse {
-    }
-
-    public static MetadataResponse from(DataSet dataSet) {
-        return MetadataResponse.builder()
-                .catalog(dataSet.getCatalog().toResponse())
-                .dataSet(dataSet.toResponse())
-                .distribution(dataSet.getDistribution().toResponse())
-                .build();
     }
 }

@@ -1,6 +1,7 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.global.utils.EntityEnumerable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 /**
  * 라이센스
  */
-public enum License {
+public enum License implements EntityEnumerable {
     CLUST(Rights.CLUST, Rights.ALL),
     PUBLIC(Rights.ALL);
 
@@ -41,5 +42,10 @@ public enum License {
     boolean contains(String rightString) {
         return this.rightsList.stream()
                 .anyMatch(rights -> rights.match(rightString));
+    }
+
+    @Override
+    public String getName() {
+        return name();
     }
 }
