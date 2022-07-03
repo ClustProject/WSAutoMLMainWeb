@@ -28,7 +28,6 @@ import static kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistrib
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -66,11 +65,9 @@ class MetadataCreateApiTest {
 
                 action
                         .andExpect(status().isForbidden())
-                        .andDo(
-                                document("post-metadata-with-no-permission",
-                                        preprocessRequest(prettyPrint()),
-                                        preprocessResponse(prettyPrint()))
-                        );
+                        .andDo(document("post-metadata-with-no-permission",
+                                preprocessRequest(prettyPrint())
+                        ));
             }
         }
 
@@ -130,9 +127,8 @@ class MetadataCreateApiTest {
                 action
                         .andExpect(status().isBadRequest())
                         .andDo(document("post-metadata-invalid-attributes",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint()))
-                        );
+                                preprocessRequest(prettyPrint())
+                        ));
             }
         }
 
@@ -151,8 +147,7 @@ class MetadataCreateApiTest {
                 action
                         .andExpect(status().isCreated())
                         .andDo(document("post-metadata",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint())
+                                preprocessRequest(prettyPrint())
                         ));
             }
 

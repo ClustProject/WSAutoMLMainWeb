@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -60,10 +59,7 @@ class MetadataReadApiTest {
             void status_403을_응답한다() throws Exception {
                 mockMvc.perform(get("/metadata"))
                         .andExpect(status().isForbidden())
-                        .andDo(document("get-metadata-with-no-permission-user",
-                                preprocessRequest(prettyPrint()),
-                                preprocessResponse(prettyPrint()))
-                        );
+                        .andDo(document("get-metadata-with-no-permission-user"));
             }
         }
 
@@ -76,7 +72,6 @@ class MetadataReadApiTest {
                 mockMvc.perform(get("/metadata"))
                         .andExpect(status().isOk())
                         .andDo(document("get-metadata",
-                                preprocessRequest(prettyPrint()),
                                 preprocessResponse(prettyPrint()))
                         );
             }
