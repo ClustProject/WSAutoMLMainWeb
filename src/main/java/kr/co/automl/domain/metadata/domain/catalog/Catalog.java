@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.co.automl.domain.metadata.domain.catalog.converter.CatagoryConverter;
 import kr.co.automl.domain.metadata.domain.catalog.converter.ThemeConverter;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
@@ -40,6 +41,7 @@ public class Catalog {
 
     private String themeTaxonomy;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "catalog")
     private DataSet dataSet;
 
