@@ -60,6 +60,12 @@ public class InMemoryUserRepository implements UserRepository {
         return new PageImpl<>(users.subList(start, last), pageable, users.size());
     }
 
+    @Override
+    public List<User> findAll() {
+        return users().stream()
+                .toList();
+    }
+
     private Collection<User> users() {
         return map.values();
     }
