@@ -2,6 +2,7 @@ package kr.co.automl.domain.metadata.domain.distribution;
 
 import kr.co.automl.domain.metadata.domain.distribution.converter.AccuralPeriodicityConverter;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,6 +70,22 @@ public class Distribution {
                 .accurualPeriodicity(AccurualPeriodicity.ofName(attributes.accurualPeriodicityName()))
                 .spatial(attributes.spatial())
                 .temporal(attributes.temporal())
+                .build();
+    }
+
+    /**
+     * 응답 객체를 리턴합니다. 주로 DTO에서 호출합니다.
+     * @return 변환된 응답 객체
+     */
+    public DistributionResponse toResponse() {
+        return DistributionResponse.builder()
+                .title(this.title)
+                .description(this.description)
+                .downloadUrl(this.downloadUrl)
+                .temporalResolution(this.temporalResolution)
+                .accurualPeriodicity(this.accurualPeriodicity.getName())
+                .spatial(this.spatial)
+                .temporal(this.temporal)
                 .build();
     }
 }

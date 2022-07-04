@@ -1,6 +1,8 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
+import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,5 +30,22 @@ public class CatalogTest {
         assertThat(catalog.getCategory()).isEqualTo(Category.ATMOSPHERIC_ENVIRONMENT);
         assertThat(catalog.getTheme()).isEqualTo(Theme.AIR_QUALITY);
         assertThat(catalog.getThemeTaxonomy()).isEqualTo("themeTaxonomy");
+    }
+
+    @Nested
+    class toResponse_메서드는 {
+
+        @Test
+        void 변환된_응답객체를_리턴한다() {
+            Catalog catalog = createFixture();
+
+            CatalogResponse catalogResponse = catalog.toResponse();
+
+            assertThat(catalogResponse).isEqualTo(CatalogResponse.builder()
+                    .category("도시")
+                    .theme("공기질")
+                    .themeTaxonomy("themeTaxonomy")
+                    .build());
+        }
     }
 }
