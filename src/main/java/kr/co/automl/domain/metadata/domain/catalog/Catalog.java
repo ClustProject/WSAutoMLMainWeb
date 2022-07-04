@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 /**
@@ -30,9 +31,9 @@ import static lombok.AccessLevel.PROTECTED;
 public class Catalog {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "catalog_id")
-    private long id;
+    private Long id;
 
     @Convert(converter = CatagoryConverter.class)
     private Category category;

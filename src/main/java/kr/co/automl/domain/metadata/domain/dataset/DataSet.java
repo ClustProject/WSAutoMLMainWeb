@@ -24,6 +24,7 @@ import javax.persistence.OneToOne;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 /**
@@ -37,9 +38,9 @@ import static lombok.AccessLevel.PROTECTED;
 public class DataSet extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "dataset_id")
-    private long id;
+    private Long id;
 
     private String title;
 
@@ -66,7 +67,8 @@ public class DataSet extends BaseTimeEntity {
     private Distribution distribution;
 
     @Builder
-    private DataSet(String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
+    private DataSet(Long id, String title, Organization organization, Type type, String keyword, LicenseInfo licenseInfo, String description) {
+        this.id = id;
         this.title = title;
         this.organization = organization;
         this.type = type;
@@ -115,6 +117,7 @@ public class DataSet extends BaseTimeEntity {
      */
     public DataSetResponse toResponse() {
         return DataSetResponse.builder()
+                .id(this.id)
                 .title(this.title)
                 .organization(this.organization)
                 .type(this.type.getName())

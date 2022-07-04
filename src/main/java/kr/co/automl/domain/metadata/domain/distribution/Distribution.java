@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 /**
@@ -25,9 +26,9 @@ import static lombok.AccessLevel.PROTECTED;
 public class Distribution {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "distribution_id")
-    private long id;
+    private Long id;
 
     @Column(name = "distribution_title")
     private String title;
