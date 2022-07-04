@@ -18,9 +18,9 @@ public record MetadataResponse(
 
     public static MetadataResponse from(DataSet dataSet) {
         return MetadataResponse.builder()
-                .catalog(dataSet.getCatalog().toResponse())
+                .catalog(dataSet.toCatalogResponse())
                 .dataSet(dataSet.toResponse())
-                .distribution(dataSet.getDistribution().toResponse())
+                .distribution(dataSet.toDistributionResponse())
                 .build();
     }
 }

@@ -1,15 +1,27 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
+import kr.co.automl.domain.metadata.domain.catalog.CatalogTest;
+import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
+import kr.co.automl.domain.metadata.domain.distribution.DistributionTest;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DataSetTest {
+    public static DataSet createDefaultFixtureWith(Catalog catalog) {
+        return createDefaultFixtureWith(catalog, null);
+    }
+
+    public static DataSet createDefaultFixtureWith(Distribution distribution) {
+        return createDefaultFixtureWith(CatalogTest.createDefaultFixture(), distribution);
+    }
+
     public static DataSet createDefaultFixtureWith(Catalog catalog, Distribution distribution) {
         DataSet dataSet = createDefaultFixture();
         dataSet.setRelation(catalog, distribution);
@@ -93,6 +105,34 @@ public class DataSetTest {
                     .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
                     .description("데이터셋 설명")
                     .build());
+        }
+    }
+
+    @Nested
+    class toCatalogResponse_메서드는 {
+
+        @Test
+        void 카탈로그_응답_객체를_리턴한다() {
+            Catalog catalog = CatalogTest.createDefaultFixture();
+            DataSet dataSet = createDefaultFixtureWith(catalog);
+
+            CatalogResponse catalogResponse = dataSet.toCatalogResponse();
+
+            assertThat(catalogResponse).isEqualTo(catalog.toResponse());
+        }
+    }
+
+    @Nested
+    class toDistributionResponse_메서드는 {
+
+        @Test
+        void 배포_정보_응답객체를_리턴한다() {
+            Distribution distribution = DistributionTest.createDefaultFixture();
+            DataSet dataSet = createDefaultFixtureWith(distribution);
+
+            DistributionResponse distributionResponse = dataSet.toDistributionResponse();
+
+            assertThat(distributionResponse).isEqualTo(distribution.toResponse());
         }
     }
 }

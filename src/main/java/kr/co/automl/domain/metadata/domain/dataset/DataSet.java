@@ -2,10 +2,12 @@ package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.BaseTimeEntity;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
+import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.dataset.converter.TypeConverter;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -120,5 +122,21 @@ public class DataSet extends BaseTimeEntity {
                 .licenseInfo(this.licenseInfo)
                 .description(this.description)
                 .build();
+    }
+
+    /**
+     * 카탈로그 응답 객체를 리턴합니다.
+     * @return 카탈로그 응답 객체
+     */
+    public CatalogResponse toCatalogResponse() {
+        return this.catalog.toResponse();
+    }
+
+    /**
+     * 배포 정보 응답 객체를 리턴합니다.
+     * @return 배포 정보 응답 객체
+     */
+    public DistributionResponse toDistributionResponse() {
+        return this.distribution.toResponse();
     }
 }
