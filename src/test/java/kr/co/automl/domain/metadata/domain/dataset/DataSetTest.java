@@ -86,14 +86,7 @@ public class DataSetTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            DataSet dataSet = DataSet.builder()
-                    .title("데이터셋 이름")
-                    .organization(OrganizationTest.ORGANIZATION1)
-                    .type(Type.IMAGE)
-                    .keyword("키워드1, 키워드2, 키워드1")
-                    .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
-                    .description("데이터셋 설명")
-                    .build();
+            DataSet dataSet = createDefaultFixture();
 
             DataSetResponse dataSetResponse = dataSet.toResponse();
 
