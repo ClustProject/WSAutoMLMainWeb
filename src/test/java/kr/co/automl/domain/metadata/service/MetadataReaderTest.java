@@ -40,19 +40,15 @@ class MetadataReaderTest {
 
         @BeforeEach
         void setUp() {
-            catalog = CatalogTest.createDefaultFixture();
-            distribution = DistributionTest.createDefaultFixture();
-            dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
-
             saveDataSets(12);
         }
 
         @Test
         void 응답객체_리스트를_리턴한다() {
-            List<MetadataResponse> metadataResponses = metadataReader.readAll(Pageable.ofSize(1));
+            List<MetadataResponse> metadataResponses = metadataReader.readAll(Pageable.ofSize(12));
 
-            assertThat(metadataResponses).hasSize(1);
-            assertThat(metadataResponses).containsExactly(
+            assertThat(metadataResponses).hasSize(12);
+            assertThat(metadataResponses).contains(
                     MetadataResponse.builder()
                             .catalog(catalog.toResponse())
                             .dataSet(dataSet.toResponse())

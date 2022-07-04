@@ -30,7 +30,12 @@ public class DataSetTest {
     }
 
     public static DataSet createDefaultFixture() {
+        return createDefaultFixtureWithId(null);
+    }
+
+    public static DataSet createDefaultFixtureWithId(Long id) {
         return DataSet.builder()
+                .id(id)
                 .title("데이터셋 이름")
                 .organization(OrganizationTest.ORGANIZATION1)
                 .type(Type.IMAGE)
@@ -86,11 +91,12 @@ public class DataSetTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            DataSet dataSet = createDefaultFixture();
+            DataSet dataSet = createDefaultFixtureWithId(1L);
 
             DataSetResponse dataSetResponse = dataSet.toResponse();
 
             assertThat(dataSetResponse).isEqualTo(DataSetResponse.builder()
+                    .id(1L)
                     .title("데이터셋 이름")
                     .organization(OrganizationTest.ORGANIZATION1)
                     .type("이미지")

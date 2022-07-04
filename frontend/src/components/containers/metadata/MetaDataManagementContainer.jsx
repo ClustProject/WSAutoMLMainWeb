@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "../../presentational/Header";
 import MainBox from "../MainBox";
-import ToDoContent from "../../presentational/ToDoContent";
+import MetadataManagementContent from "../../presentational/metadata/MetadataManagementContent";
 
 export default function MetaDataManagementContainer(props) {
   const {mainTitle, tabNames} = props;
@@ -12,7 +12,7 @@ export default function MetaDataManagementContainer(props) {
       tabNames={tabNames}
     />
     <MainBox
-      content={<ToDoContent/>}
+      content={<MetadataManagementContent/>}
     />
   </>;
 }
