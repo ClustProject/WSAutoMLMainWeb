@@ -73,4 +73,17 @@ class CreatorTest {
         }
     }
 
+    @Nested
+    class getName_메서드는 {
+
+        @Test
+        void 생성기관의_이름을_리턴한다() {
+            Creator creator = Creator.WISE_I_TECH;
+
+            String name = creator.getName();
+
+            assertThat(name).isEqualTo("위세아이텍");
+        }
+    }
+
 }
