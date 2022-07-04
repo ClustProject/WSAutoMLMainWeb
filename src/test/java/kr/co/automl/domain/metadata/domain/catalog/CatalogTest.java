@@ -37,7 +37,7 @@ public class CatalogTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            Catalog catalog = createFixture();
+            Catalog catalog = createDefaultFixture();
 
             CatalogResponse catalogResponse = catalog.toResponse();
 

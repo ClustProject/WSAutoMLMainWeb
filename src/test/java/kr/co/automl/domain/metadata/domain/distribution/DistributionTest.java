@@ -49,7 +49,7 @@ public class DistributionTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            Distribution distribution = createFixture();
+            Distribution distribution = createDefaultFixture();
 
             DistributionResponse distributionResponse = distribution.toResponse();
 

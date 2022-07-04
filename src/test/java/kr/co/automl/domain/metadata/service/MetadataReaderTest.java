@@ -26,9 +26,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Transactional
 class MetadataReaderTest {
 
+    private Catalog catalog;
+    private Distribution distribution;
+    private DataSet dataSet;
+
     @Autowired
     private DataSetRepository dataSetRepository;
-
     @Autowired
     private MetadataReader metadataReader;
 
@@ -37,6 +40,10 @@ class MetadataReaderTest {
 
         @BeforeEach
         void setUp() {
+            catalog = CatalogTest.createDefaultFixture();
+            distribution = DistributionTest.createDefaultFixture();
+            dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
+
             saveDataSets(12);
         }
 
@@ -47,26 +54,9 @@ class MetadataReaderTest {
             assertThat(metadataResponses).hasSize(1);
             assertThat(metadataResponses).containsExactly(
                     MetadataResponse.builder()
-                            .category("도시")
-                            .theme("공기질")
-                            .themeTaxonomy("themeTaxonomy")
-                            .title("데이터셋 이름")
-                            .publisher("위세아이텍")
-                            .creator("위세아이텍")
-                            .contactPointName("박주영")
-                            .contactPointEmail("jypark1@wise.co.kr")
-                            .type("이미지")
-                            .keyword("키워드1, 키워드2, 키워드1")
-                            .license("CLUST")
-                            .rights("ALL")
-                            .description("데이터셋 설명")
-                            .distributionTitle("destribution title")
-                            .distributionDescription("destribution description")
-                            .downloadUrl("downloadUrl")
-                            .temporalResolution("temporalResolution")
-                            .accurualPeriodicity("일")
-                            .spatial("spatial")
-                            .temporal("temporal")
+                            .catalog(catalog.toResponse())
+                            .dataSet(dataSet.toResponse())
+                            .distribution(distribution.toResponse())
                             .build()
             );
         }
@@ -87,10 +77,10 @@ class MetadataReaderTest {
         private void saveDataSets(int count) {
             IntStream.rangeClosed(1, count)
                     .forEach(i -> {
-                        Catalog catalog = CatalogTest.createDefaultFixture();
-                        Distribution distribution = DistributionTest.createDefaultFixture();
+                        catalog = CatalogTest.createDefaultFixture();
+                        distribution = DistributionTest.createDefaultFixture();
 
-                        DataSet dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
+                        dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
 
                         dataSetRepository.save(dataSet);
                     });
