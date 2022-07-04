@@ -2,10 +2,12 @@ package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.BaseTimeEntity;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
+import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.dataset.converter.TypeConverter;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
+import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
-import lombok.AccessLevel;
+import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +33,7 @@ import static lombok.AccessLevel.PROTECTED;
  */
 @Entity
 @NoArgsConstructor(access = PROTECTED)
-@Getter(AccessLevel.PACKAGE)
+@Getter
 public class DataSet extends BaseTimeEntity {
 
     @Id
@@ -105,5 +107,36 @@ public class DataSet extends BaseTimeEntity {
         catalog.setRelation(this);
 
         this.distribution = distribution;
+    }
+
+    /**
+     * 응답 객체를 리턴합니다. 주로 DTO에서 호출합니다.
+     * @return 변환된 응답 객체
+     */
+    public DataSetResponse toResponse() {
+        return DataSetResponse.builder()
+                .title(this.title)
+                .organization(this.organization)
+                .type(this.type.getName())
+                .keyword(this.keyword)
+                .licenseInfo(this.licenseInfo)
+                .description(this.description)
+                .build();
+    }
+
+    /**
+     * 카탈로그 응답 객체를 리턴합니다.
+     * @return 카탈로그 응답 객체
+     */
+    public CatalogResponse toCatalogResponse() {
+        return this.catalog.toResponse();
+    }
+
+    /**
+     * 배포 정보 응답 객체를 리턴합니다.
+     * @return 배포 정보 응답 객체
+     */
+    public DistributionResponse toDistributionResponse() {
+        return this.distribution.toResponse();
     }
 }

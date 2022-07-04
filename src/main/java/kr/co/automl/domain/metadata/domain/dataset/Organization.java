@@ -1,8 +1,11 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.domain.dataset.converter.CreatorConverter;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
@@ -13,9 +16,12 @@ import static lombok.AccessLevel.PROTECTED;
  */
 @Embeddable
 @NoArgsConstructor(access = PROTECTED)
+@Getter
 @EqualsAndHashCode
 public class Organization {
     private String publisher;
+
+    @Convert(converter = CreatorConverter.class)
     private Creator creator;
 
     @Embedded

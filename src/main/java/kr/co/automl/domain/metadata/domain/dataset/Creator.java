@@ -1,6 +1,7 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchCreatorException;
+import kr.co.automl.global.utils.EntityEnumerable;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
 /**
  * 생성 기관
  */
-public enum Creator {
+public enum Creator implements EntityEnumerable {
     WISE_I_TECH("위세아이텍", ContactPoints.ofWiseITech()),
     KETI("KETI", ContactPoints.ofKeti()),
     K_WEATHER("케이웨더(주)", ContactPoints.ofKWeather()),
@@ -45,5 +46,10 @@ public enum Creator {
      */
     public ContactPoint findContactBy(String contactPointName) {
         return this.contactPoints.findByName(contactPointName);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
     }
 }
