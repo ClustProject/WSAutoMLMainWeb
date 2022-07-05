@@ -18,5 +18,6 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
-application-oauth.yml
+# 설정 파일들
+application-local-env.yml
 .env
