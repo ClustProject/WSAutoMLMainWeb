@@ -3,13 +3,13 @@ cloud:
     region:
       static: ap-northeast-2
     s3:
-      bucket: automl-bucket
+      bucketName: ${S3_BUCKET_NAME}
     stack:
       auto: false
     credentials:
       instanceProfile: true
-      accessKey:
-      secretKey:
+      accessKey: ${AWS_ACCESS_KEY}
+      secretKey: ${AWS_SECRET_KEY}
 
 spring:
   h2:

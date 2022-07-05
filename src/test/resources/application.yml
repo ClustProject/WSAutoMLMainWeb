@@ -1,5 +1,7 @@
 cloud:
   aws:
+    s3:
+      bucketName: testBuckName
     region:
       static: ap-northeast-2
     stack:
