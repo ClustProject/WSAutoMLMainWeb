@@ -62,6 +62,8 @@ class UserApiTest {
 
             @BeforeEach
             void setUp() {
+                userRepository.deleteAll();
+
                 User user = UserTest.create();
                 userRepository.save(user);
 
