@@ -1,6 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
 import {getMetadatas} from "../../../api/metadata";
+import {
+  Button,
+  Checkbox,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  FormControlLabel,
+  FormGroup,
+  TextField
+} from "@mui/material";
 
 const DEFAULT_WIDTH = 110;
 
@@ -140,6 +152,7 @@ const DISPLAY_COUNT = 5;
 export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
+  const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false)
 
   useEffect(() => {
     getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
@@ -152,8 +165,58 @@ export default function MetadataManagementContent() {
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
 
+  function handleInputLinkDialogClose() {
+    setInputLinkDialogOpen(false);
+  }
+
+  /**
+   * 링크 입력 텍스트 필드를 비활성화 합니다.
+   */
+  function setLinkInputDisable() {
+    const urlTextField = document.getElementById("urlTextField");
+    const disabled = urlTextField.getAttribute("disabled");
+
+    if (disabled === null) {
+      urlTextField.setAttribute("disabled", "")
+      urlTextField.value = "";
+    } else {
+      urlTextField.removeAttribute("disabled");
+    }
+  }
+
   return (
     <>
+      <Button variant="outlined" sx={{
+        marginBottom: 2,
+      }} onClick={() => setInputLinkDialogOpen(true)}>
+        업로드
+      </Button>
+      <Dialog open={inputLinkDialogOpen} onClose={handleInputLinkDialogClose}>
+        <DialogTitle>링크 입력</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            데이터를 다운받은 링크를 먼저 입력해주세요.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="urlTextField"
+            label="데이터 링크"
+            fullWidth
+            variant="standard"
+          />
+
+          <FormGroup>
+            <FormControlLabel control={<Checkbox onChange={setLinkInputDisable}/>} label="링크 없음"/>
+          </FormGroup>
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleInputLinkDialogClose}>취소</Button>
+          <Button onClick={handleInputLinkDialogClose}>다음</Button>
+        </DialogActions>
+      </Dialog>
+
       <DataGrid
         rows={parseToRows(data)}
         rowCount={totalDisplayedRowCount + 1} // 다음 페이지로 넘어갈 수 있게 하나 더 추가
