@@ -1,0 +1,6 @@
+== GET /url/presigned - presigned url 요청
+
+=== 허용된 권한을 가진 유저의 요청과 응답
+
+include::{snippets}/get-presigned-url/http-request.adoc[]
+include::{snippets}/get-presigned-url/http-response.adoc[]

@@ -1,3 +1,16 @@
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucketName: testBuckName
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
+      accessKey: test
+      secretKey: test
+
 spring:
   security:
     oauth2:
