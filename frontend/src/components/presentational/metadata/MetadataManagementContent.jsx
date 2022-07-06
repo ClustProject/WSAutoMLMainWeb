@@ -18,115 +18,7 @@ import {
   TextField
 } from "@mui/material";
 
-const DEFAULT_WIDTH = 110;
-
-const columns = [
-  {
-    field: 'id',
-    headerName: '아이디',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'category',
-    headerName: '카테고리',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'theme',
-    headerName: '주제',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'themeTaxonomy',
-    headerName: '주제 분류',
-    width: 150,
-  },
-  {
-    field: 'dataSetTitle',
-    headerName: '제목',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'publisher',
-    headerName: '제공 기관',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'creator',
-    headerName: '생성 기관',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'name',
-    headerName: '구축기관 담당자 이름',
-    width: 180,
-  },
-  {
-    field: 'email',
-    headerName: '구축기관 담당자 이메일',
-    width: 180,
-  },
-  {
-    field: 'type',
-    headerName: '유형',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'keyword',
-    headerName: '키워드',
-    width: 500,
-  },
-  {
-    field: 'license',
-    headerName: '라이센스',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'rights',
-    headerName: '권한',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'dataSetDescription',
-    headerName: '데이터셋 설명',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'distributionTitle',
-    headerName: '배포 파일 제목',
-    width: 300,
-  },
-  {
-    field: 'distributionDescription',
-    headerName: '배포 파일 설명',
-    width: 700,
-  },
-  {
-    field: 'downloadUrl',
-    headerName: '다운로드 URL',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'temporalResolution',
-    headerName: '측정 단위',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'accurualPeriodicity',
-    headerName: '제공 주기',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'spatial',
-    headerName: '공간 정보',
-    width: DEFAULT_WIDTH,
-  },
-  {
-    field: 'temporal',
-    headerName: '시간 정보',
-    width: DEFAULT_WIDTH,
-  },
-];
+import {CATEGORY_THEME_MAP, COLUMNS, DEFAULT_PAGE_COUNT, DISPLAY_COUNT} from "./constants";
 
 /**
  * data grid에서 row로 읽을 수 있도록 파싱합니다.
@@ -149,45 +41,6 @@ function parseToRows(metadatas) {
     }
   });
 }
-
-const categoryThemeMap = {
-  "대기 환경": [
-    "공기질"
-  ],
-  "농장": [
-    "농장 환경"
-  ],
-  "공장": [
-    "공장모터",
-    "건설장비",
-  ],
-  "생체": [
-    "작업자",
-    "음성",
-    "움직임",
-    "생체 데이터",
-  ],
-  "생활/영상": [
-    "활동영상"
-  ],
-  "에너지": [
-    "태양광",
-    "실외대기",
-  ],
-  "환경": [
-    "방문객"
-  ],
-  "도시": [
-    "국내교통"
-  ],
-  "오픈데이터": [
-    "교통",
-    "캘린더"
-  ],
-}
-
-const DEFAULT_PAGE_COUNT = 0;
-const DISPLAY_COUNT = 5;
 
 export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
@@ -238,7 +91,7 @@ export default function MetadataManagementContent() {
   }
 
   const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
-    categories: Object.keys(categoryThemeMap),
+    categories: Object.keys(CATEGORY_THEME_MAP),
     category: '',
     themes: [],
     theme: '',
@@ -256,7 +109,7 @@ export default function MetadataManagementContent() {
       return {
         ...state,
         [name]: value,
-        themes: categoryThemeMap[value] // 카테고리에 따른 주제 목록 리스트 설정
+        themes: CATEGORY_THEME_MAP[value] // 카테고리에 따른 주제 목록 리스트 설정
       }
     }
 
@@ -353,7 +206,7 @@ export default function MetadataManagementContent() {
       <DataGrid
         rows={parseToRows(data)}
         rowCount={totalDisplayedRowCount + 1} // 다음 페이지로 넘어갈 수 있게 하나 더 추가
-        columns={columns}
+        columns={COLUMNS}
         page={page}
         pageSize={DISPLAY_COUNT}
         rowsPerPageOptions={[DISPLAY_COUNT]}
