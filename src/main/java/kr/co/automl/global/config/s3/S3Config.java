@@ -13,6 +13,9 @@ public class S3Config {
     @Value("${cloud.aws.s3.bucketName}")
     private String bucketName;
 
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
     @Bean
     public String bucketName() {
         return bucketName;
@@ -22,6 +25,7 @@ public class S3Config {
     public AmazonS3Client amazonS3Client() {
         return (AmazonS3Client) AmazonS3ClientBuilder.standard()
                 .withCredentials(new DefaultAWSCredentialsProviderChain())
+                .withRegion(region)
                 .build();
     }
 }
