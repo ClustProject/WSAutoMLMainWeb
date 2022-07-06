@@ -153,7 +153,7 @@ export default function MetadataManagementContent() {
           <Button onClick={handleInputLinkDialogNext}>다음</Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={inputDataInfoDialogOpen} onClose={closeInputLinkDialog}>
+      <Dialog open={inputDataInfoDialogOpen} onClose={closeDataInfoDialog}>
         <DialogTitle>데이터 정보 입력</DialogTitle>
         <DialogContent>
           <DialogContentText sx={{
