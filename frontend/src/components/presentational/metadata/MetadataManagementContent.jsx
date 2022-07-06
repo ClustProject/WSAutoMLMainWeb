@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import {DataGrid} from "@mui/x-data-grid";
 import {getMetadatas} from "../../../api/metadata";
 import {
@@ -9,8 +9,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField
 } from "@mui/material";
 
@@ -146,13 +150,50 @@ function parseToRows(metadatas) {
   });
 }
 
+const categoryThemeMap = {
+  "대기 환경": [
+    "공기질"
+  ],
+  "농장": [
+    "농장 환경"
+  ],
+  "공장": [
+    "공장모터",
+    "건설장비",
+  ],
+  "생체": [
+    "작업자",
+    "음성",
+    "움직임",
+    "생체 데이터",
+  ],
+  "생활/영상": [
+    "활동영상"
+  ],
+  "에너지": [
+    "태양광",
+    "실외대기",
+  ],
+  "환경": [
+    "방문객"
+  ],
+  "도시": [
+    "국내교통"
+  ],
+  "오픈데이터": [
+    "교통",
+    "캘린더"
+  ],
+}
+
 const DEFAULT_PAGE_COUNT = 0;
 const DISPLAY_COUNT = 5;
 
 export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
-  const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false)
+  const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
+  const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
 
   useEffect(() => {
     getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
@@ -163,9 +204,12 @@ export default function MetadataManagementContent() {
       .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
   }, [])
 
-  const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
+  function handleInputLinkDialogNext() {
+    closeInputLinkDialog();
+    setInputDataInfoDialogOpen(true);
+  }
 
-  function handleInputLinkDialogClose() {
+  function closeInputLinkDialog() {
     setInputLinkDialogOpen(false);
   }
 
@@ -184,6 +228,46 @@ export default function MetadataManagementContent() {
     }
   }
 
+  function closeDataInfoDialog() {
+    setInputDataInfoDialogOpen(false);
+  }
+
+  function handleDataInfoDialogPrevious() {
+    setInputDataInfoDialogOpen(false);
+    setInputLinkDialogOpen(true);
+  }
+
+  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
+    categories: Object.keys(categoryThemeMap),
+    category: '',
+    themes: [],
+    theme: '',
+    themeTaxonomy: '',
+  })
+
+  function onChangeCatalog(event) {
+    dispatchCatalog(event.target);
+  }
+
+  function catalogReducer(state, action) {
+    const {name, value} = action;
+
+    if (name === "category") {
+      return {
+        ...state,
+        [name]: value,
+        themes: categoryThemeMap[value] // 카테고리에 따른 주제 목록 리스트 설정
+      }
+    }
+
+    return {
+      ...state,
+      [name]: value
+    }
+  }
+
+  const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
+
   return (
     <>
       <Button variant="outlined" sx={{
@@ -191,7 +275,7 @@ export default function MetadataManagementContent() {
       }} onClick={() => setInputLinkDialogOpen(true)}>
         업로드
       </Button>
-      <Dialog open={inputLinkDialogOpen} onClose={handleInputLinkDialogClose}>
+      <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
         <DialogTitle>링크 입력</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -212,8 +296,57 @@ export default function MetadataManagementContent() {
 
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleInputLinkDialogClose}>취소</Button>
-          <Button onClick={handleInputLinkDialogClose}>다음</Button>
+          <Button onClick={closeInputLinkDialog}>취소</Button>
+          <Button onClick={handleInputLinkDialogNext}>다음</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={inputDataInfoDialogOpen} onClose={closeInputLinkDialog}>
+        <DialogTitle>데이터 정보 입력</DialogTitle>
+        <DialogContent>
+          <DialogContentText sx={{
+            marginBottom: '10px'
+          }}> 카탈로그 정보</DialogContentText>
+
+          <FormControl sx={{width: '500px'}}>
+            <InputLabel id="category">카테고리</InputLabel>
+            <Select
+              labelId="category-label"
+              id="category"
+              label="카테고리"
+              name="category" // note: reducer에서 해당 값을 쓰고있음
+              onChange={onChangeCatalog}
+            >
+              {catalogState.categories.map(category => (
+                <MenuItem value={category}>{category}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl sx={{width: '500px'}}>
+            <InputLabel id="theme-label">주제</InputLabel>
+            <Select
+              labelId="theme-label"
+              id="theme"
+              label="주제"
+              name="theme" // note: reducer에서 해당 값을 쓰고있음
+              onChange={onChangeCatalog}
+            >
+              {catalogState.themes.map(theme => (
+                <MenuItem value={theme}>{theme}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            id="themeTaxonomy"
+            label="주제 분류"
+            variant="filled"
+            name="themeTaxonomy" // note: reducer에서 해당 값을 쓰고있음
+            onChange={onChangeCatalog}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDataInfoDialogPrevious}>뒤로가기</Button>
+          <Button onClick={closeDataInfoDialog}>취소</Button>
+          <Button onClick={handleInputLinkDialogNext}>다음</Button>
         </DialogActions>
       </Dialog>
 
@@ -243,4 +376,3 @@ export default function MetadataManagementContent() {
     </>
   );
 }
-
