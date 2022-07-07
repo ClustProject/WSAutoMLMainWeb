@@ -22,7 +22,9 @@ import {
   COLUMNS,
   CREATOR_CONTACT_POINT_NAME_MAP,
   DEFAULT_PAGE_COUNT,
-  DISPLAY_COUNT, LICENSE_RIGHTS_MAP, TYPES
+  DISPLAY_COUNT,
+  LICENSE_RIGHTS_MAP,
+  TYPES
 } from "./constants";
 import {DataGrid} from "@mui/x-data-grid";
 
@@ -50,7 +52,10 @@ function parseToRows(metadatas) {
 
 function DataInfoContentText(props) {
   return (
-    <DialogContentText sx={{margin: "10px"}}>
+    <DialogContentText sx={{
+      margin: "10px",
+
+    }}>
       {props.name} 정보
     </DialogContentText>
   );
@@ -104,18 +109,20 @@ export default function MetadataManagementContent() {
   }
 
   /**
-   * 링크 입력 텍스트 필드를 비활성화 합니다.
+   *
    */
-  function setLinkInputDisable() {
-    const urlTextField = document.getElementById("urlTextField");
-    const disabled = urlTextField.getAttribute("disabled");
+  function setDownloadUrlState(event) {
+    const downloadUrl = document.getElementById("downloadUrl");
+    const disabled = downloadUrl.getAttribute("disabled");
 
     if (disabled === null) {
-      urlTextField.setAttribute("disabled", "")
-      urlTextField.value = "";
+      downloadUrl.setAttribute("disabled", "")
+      downloadUrl.value = "";
+      dispatchDistribution(event.target);
     } else {
-      urlTextField.removeAttribute("disabled");
+      downloadUrl.removeAttribute("disabled");
     }
+
   }
 
   function closeDataInfoDialog() {
@@ -192,6 +199,10 @@ export default function MetadataManagementContent() {
     };
   }
 
+  function onChangeDataSet(event) {
+    dispatchDataSet(event.target);
+  }
+
   const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, {
     creators: Object.keys(CREATOR_CONTACT_POINT_NAME_MAP),
     contactPointNames: [],
@@ -200,9 +211,29 @@ export default function MetadataManagementContent() {
     types: TYPES
   })
 
-  function onChangeDataSet(event) {
-    dispatchDataSet(event.target);
+  function onChangeDistribution(event) {
+    dispatchDistribution(event.target);
   }
+
+  function distributionReducer(state, action) {
+    const {name, value} = action;
+
+    const noDownloadUrlCheckBoxSelected = (name === "downloadUrl" && value === "on");
+    if (noDownloadUrlCheckBoxSelected) {
+      return {
+        ...state,
+        [name]: ""
+      }
+    }
+
+    return {
+      ...state,
+      [name]: value
+    }
+  }
+
+  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, {
+  })
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
 
@@ -222,14 +253,23 @@ export default function MetadataManagementContent() {
           <TextField
             autoFocus
             margin="dense"
-            id="urlTextField"
-            label="데이터 링크"
+            id="downloadUrl"
+            label="다운로드 URL"
             fullWidth
             variant="standard"
+            name="downloadUrl"
+            onChange={onChangeDistribution}
           />
 
           <FormGroup>
-            <FormControlLabel control={<Checkbox onChange={setLinkInputDisable}/>} label="링크 없음"/>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  name="downloadUrl"
+                  onChange={setDownloadUrlState}
+                />
+              }
+              label="링크 없음"/>
           </FormGroup>
 
         </DialogContent>
@@ -263,29 +303,6 @@ export default function MetadataManagementContent() {
             name={{eng: 'title', kor: '제목'}}
             onChange={onChangeDataSet}
           />
-          <CommonTextField
-            name={{eng: 'publisher', kor: '구축 기관'}}
-            onChange={onChangeDataSet}
-          />
-          <CommonSelect
-            name={{eng: 'creator', kor: '생성 기관'}}
-            onChange={onChangeDataSet}
-            list={dataSetState.creators}
-          />
-          <CommonSelect
-            name={{eng: 'contactPointName', kor: '담당자 이름'}}
-            onChange={onChangeDataSet}
-            list={dataSetState.contactPointNames}
-          />
-          <CommonSelect
-            name={{eng: 'type', kor: '유형'}}
-            onChange={onChangeDataSet}
-            list={dataSetState.types}
-          />
-          <CommonTextField
-            name={{eng: 'keyword', kor: '키워드'}}
-            onChange={onChangeDataSet}
-          />
           <CommonSelect
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
@@ -299,6 +316,44 @@ export default function MetadataManagementContent() {
           <CommonTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDataSet}
+          />
+
+          <DataInfoContentText name="배포"/>
+          <CommonTextField
+            name={{eng: 'title', kor: '제목'}}
+            onChange={onChangeDistribution}
+          />
+
+          <CommonTextField
+            name={{eng: 'description', kor: '설명'}}
+            onChange={onChangeDistribution}
+          />
+
+           <TextField
+              id="downloadUrl"
+              label="다운로드 URL"
+              variant="filled"
+              fullWidth
+              disabled
+              value={distributionState.downloadUrl}
+            />
+
+          <CommonTextField
+            name={{eng: 'temporalResolution', kor: '측정 단위'}}
+            onChange={onChangeDistribution}
+          />
+
+          <CommonTextField
+            name={{eng: 'accurualPeriodicity', kor: '제공 주기'}}
+            onChange={onChangeDistribution}
+          />
+          <CommonTextField
+            name={{eng: 'spatial', kor: '공간 정보'}}
+            onChange={onChangeDistribution}
+          />
+          <CommonTextField
+            name={{eng: 'temporal', kor: '시간 정보'}}
+            onChange={onChangeDistribution}
           />
 
         </DialogContent>
