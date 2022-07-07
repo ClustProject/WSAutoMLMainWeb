@@ -1,5 +1,4 @@
 import React, {useEffect, useReducer, useState} from 'react';
-import {DataGrid} from "@mui/x-data-grid";
 import {getMetadatas} from "../../../api/metadata";
 import {
   Button,
@@ -18,7 +17,14 @@ import {
   TextField
 } from "@mui/material";
 
-import {CATEGORY_THEME_MAP, COLUMNS, DEFAULT_PAGE_COUNT, DISPLAY_COUNT} from "./constants";
+import {
+  CATEGORY_THEME_MAP,
+  COLUMNS,
+  CREATOR_CONTACT_POINT_NAME_MAP,
+  DEFAULT_PAGE_COUNT,
+  DISPLAY_COUNT, LICENSE_RIGHTS_MAP, TYPES
+} from "./constants";
+import {DataGrid} from "@mui/x-data-grid";
 
 /**
  * data grid에서 row로 읽을 수 있도록 파싱합니다.
@@ -42,21 +48,52 @@ function parseToRows(metadatas) {
   });
 }
 
+function DataInfoContentText(props) {
+  return (
+    <DialogContentText sx={{margin: "10px"}}>
+      {props.name} 정보
+    </DialogContentText>
+  );
+}
+
+function CommonTextField(props) {
+  const {eng, kor} = props.name;
+
+  return <TextField
+    id={eng}
+    label={kor}
+    variant="filled"
+    fullWidth
+    name={eng} // note: reducer에서 해당 값을 쓰고있음
+    onChange={props.onChange}
+  />;
+}
+
+function CommonSelect(props) {
+  const {eng, kor} = props.name;
+
+  const labelName = `${eng}-label`;
+
+  return (
+    <FormControl fullWidth>
+      <InputLabel id={labelName}>{kor}</InputLabel>
+      <Select
+        labelId={labelName}
+        id={eng}
+        label={kor}
+        name={eng} // note: reducer에서 해당 값을 쓰고있음
+        fullWidth
+        onChange={props.onChange}
+      >
+        {props.list.map(it => (
+          <MenuItem value={it}>{it} </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+}
+
 export default function MetadataManagementContent() {
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
-  const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
-  const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
-
-  useEffect(() => {
-    getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
-      .then(it => {
-        setData(it)
-        setPage(DEFAULT_PAGE_COUNT)
-      })
-      .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
-  }, [])
-
   function handleInputLinkDialogNext() {
     closeInputLinkDialog();
     setInputDataInfoDialogOpen(true);
@@ -90,13 +127,19 @@ export default function MetadataManagementContent() {
     setInputLinkDialogOpen(true);
   }
 
-  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
-    categories: Object.keys(CATEGORY_THEME_MAP),
-    category: '',
-    themes: [],
-    theme: '',
-    themeTaxonomy: '',
-  })
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
+  const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
+  const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
+
+  useEffect(() => {
+    getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
+      .then(it => {
+        setData(it)
+        setPage(DEFAULT_PAGE_COUNT)
+      })
+    // .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
+  }, [])
 
   function onChangeCatalog(event) {
     dispatchCatalog(event.target);
@@ -117,6 +160,48 @@ export default function MetadataManagementContent() {
       ...state,
       [name]: value
     }
+  }
+
+  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
+    categories: Object.keys(CATEGORY_THEME_MAP),
+    themes: [],
+  })
+
+  function dataSetReducer(state, action) {
+    const {name, value} = action;
+
+    if (name === "creator") {
+      return {
+        ...state,
+        [name]: value,
+        contactPointNames: CREATOR_CONTACT_POINT_NAME_MAP[value]
+      }
+    }
+
+    if (name === "license") {
+      return {
+        ...state,
+        [name]: value,
+        rightses: LICENSE_RIGHTS_MAP[value]
+      }
+    }
+
+    return {
+      ...state,
+      [name]: value
+    };
+  }
+
+  const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, {
+    creators: Object.keys(CREATOR_CONTACT_POINT_NAME_MAP),
+    contactPointNames: [],
+    licenses: Object.keys(LICENSE_RIGHTS_MAP),
+    rightses: [],
+    types: TYPES
+  })
+
+  function onChangeDataSet(event) {
+    dispatchDataSet(event.target);
   }
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
@@ -156,45 +241,66 @@ export default function MetadataManagementContent() {
       <Dialog open={inputDataInfoDialogOpen} onClose={closeDataInfoDialog}>
         <DialogTitle>데이터 정보 입력</DialogTitle>
         <DialogContent>
-          <DialogContentText sx={{
-            marginBottom: '10px'
-          }}> 카탈로그 정보</DialogContentText>
 
-          <FormControl sx={{width: '500px'}}>
-            <InputLabel id="category">카테고리</InputLabel>
-            <Select
-              labelId="category-label"
-              id="category"
-              label="카테고리"
-              name="category" // note: reducer에서 해당 값을 쓰고있음
-              onChange={onChangeCatalog}
-            >
-              {catalogState.categories.map(category => (
-                <MenuItem value={category}>{category}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl sx={{width: '500px'}}>
-            <InputLabel id="theme-label">주제</InputLabel>
-            <Select
-              labelId="theme-label"
-              id="theme"
-              label="주제"
-              name="theme" // note: reducer에서 해당 값을 쓰고있음
-              onChange={onChangeCatalog}
-            >
-              {catalogState.themes.map(theme => (
-                <MenuItem value={theme}>{theme}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <TextField
-            id="themeTaxonomy"
-            label="주제 분류"
-            variant="filled"
-            name="themeTaxonomy" // note: reducer에서 해당 값을 쓰고있음
+          <DataInfoContentText name="카탈로그"/>
+          <CommonSelect
+            name={{eng: 'category', kor: '카테고리'}}
+            onChange={onChangeCatalog}
+            list={catalogState.categories}
+          />
+          <CommonSelect
+            name={{eng: 'theme', kor: '주제'}}
+            onChange={onChangeCatalog}
+            list={catalogState.themes}
+          />
+          <CommonTextField
+            name={{eng: 'themeTaxonomy', kor: '주제 분류'}}
             onChange={onChangeCatalog}
           />
+
+          <DataInfoContentText name="데이터셋"/>
+          <CommonTextField
+            name={{eng: 'title', kor: '제목'}}
+            onChange={onChangeDataSet}
+          />
+          <CommonTextField
+            name={{eng: 'publisher', kor: '구축 기관'}}
+            onChange={onChangeDataSet}
+          />
+          <CommonSelect
+            name={{eng: 'creator', kor: '생성 기관'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.creators}
+          />
+          <CommonSelect
+            name={{eng: 'contactPointName', kor: '담당자 이름'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.contactPointNames}
+          />
+          <CommonSelect
+            name={{eng: 'type', kor: '유형'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.types}
+          />
+          <CommonTextField
+            name={{eng: 'keyword', kor: '키워드'}}
+            onChange={onChangeDataSet}
+          />
+          <CommonSelect
+            name={{eng: 'license', kor: '라이센스'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.licenses}
+          />
+          <CommonSelect
+            name={{eng: 'rights', kor: '권한'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.rightses}
+          />
+          <CommonTextField
+            name={{eng: 'description', kor: '설명'}}
+            onChange={onChangeDataSet}
+          />
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDataInfoDialogPrevious}>뒤로가기</Button>

@@ -149,12 +149,62 @@ const CATEGORY_THEME_MAP = {
   ],
 }
 
+/**
+ * 구축 기관과 담당자 이름에 대한 정보를 가지고 있는 변수
+ *
+ * 구축 기관과 담당자 이름만 서버를 통해 전송하면 알맞은 연락처 정보를 서버에서 저장합니다.
+ */
+const CREATOR_CONTACT_POINT_NAME_MAP = {
+  "위세아이텍": [
+    "박주영",
+    "최태동",
+    "김정연"
+  ],
+  "KETI": [
+    "문재원",
+    "오승택"
+  ],
+  "케이웨더(주)": [
+    "이인혜"
+  ],
+  "광운대": [
+    "김대현"
+  ],
+  "고려대": [
+    "이정호",
+    "이지윤"
+  ],
+  "달리웍스(주)": [
+    "이순호"
+  ],
+}
+
+const LICENSE_RIGHTS_MAP = {
+  "CLUST": [
+    "CLUST Consortium",
+    "All"
+  ],
+  "PUBLIC": [
+    "All"
+  ]
+}
+
+const TYPES = [
+      "비디오",
+      "텍스트",
+      "숫자",
+      "이미지"
+]
+
 const DEFAULT_PAGE_COUNT = 0;
 const DISPLAY_COUNT = 5;
 
 export {
   COLUMNS,
   CATEGORY_THEME_MAP,
+  CREATOR_CONTACT_POINT_NAME_MAP,
+  LICENSE_RIGHTS_MAP,
+  TYPES,
   DEFAULT_PAGE_COUNT,
   DISPLAY_COUNT
 }
