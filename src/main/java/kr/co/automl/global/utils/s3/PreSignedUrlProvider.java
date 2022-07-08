@@ -2,12 +2,13 @@ package kr.co.automl.global.utils.s3;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import lombok.RequiredArgsConstructor;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
 import java.net.URL;
+import java.util.Date;
 
 /**
  * PreSignedUrl 제공을 담당합니다.
@@ -15,6 +16,8 @@ import java.net.URL;
 @Component
 @RequiredArgsConstructor
 public class PreSignedUrlProvider {
+
+    private static final int EXPIRATION_DAYS = 1;
 
     private final AmazonS3Client amazonS3Client;
     private final String bucketName;
@@ -27,13 +30,13 @@ public class PreSignedUrlProvider {
     public String getWithFilename(String filename) {
         validateEmpty(filename);
 
-        GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(
+        Date expiration = DateTime.now().plusDays(EXPIRATION_DAYS).toDate();
+        URL url = amazonS3Client.generatePresignedUrl(
                 bucketName,
                 getKey(filename),
+                expiration,
                 HttpMethod.PUT
         );
-
-        URL url = amazonS3Client.generatePresignedUrl(request);
 
         return url.toString();
     }

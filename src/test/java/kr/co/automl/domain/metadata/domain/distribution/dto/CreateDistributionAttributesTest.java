@@ -6,7 +6,7 @@ public class CreateDistributionAttributesTest {
             .description("설명...")
             .downloadUrl("https://download-url.com")
             .temporalResolution("측정 단위")
-            .accurualPeriodicityName("일")
+            .accurualPeriodicity("일")
             .spatial("공간 정보")
             .temporal("시간 정보")
             .build();

@@ -1,6 +1,5 @@
 package kr.co.automl.domain.metadata.domain.distribution;
 
-import kr.co.automl.domain.metadata.domain.distribution.converter.AccuralPeriodicityConverter;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
 import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import lombok.Builder;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,14 +38,13 @@ public class Distribution {
     private String downloadUrl;
     private String temporalResolution;
 
-    @Convert(converter = AccuralPeriodicityConverter.class)
-    private AccurualPeriodicity accurualPeriodicity;
+    private String accurualPeriodicity;
 
     private String spatial;
     private String temporal;
 
     @Builder
-    private Distribution(String title, String description, String downloadUrl, String temporalResolution, AccurualPeriodicity accurualPeriodicity, String spatial, String temporal) {
+    private Distribution(String title, String description, String downloadUrl, String temporalResolution, String accurualPeriodicity, String spatial, String temporal) {
         this.title = title;
         this.description = description;
         this.downloadUrl = downloadUrl;
@@ -68,7 +65,7 @@ public class Distribution {
                 .description(attributes.description())
                 .downloadUrl(attributes.downloadUrl())
                 .temporalResolution(attributes.temporalResolution())
-                .accurualPeriodicity(AccurualPeriodicity.ofName(attributes.accurualPeriodicityName()))
+                .accurualPeriodicity(attributes.accurualPeriodicity())
                 .spatial(attributes.spatial())
                 .temporal(attributes.temporal())
                 .build();
@@ -84,7 +81,7 @@ public class Distribution {
                 .description(this.description)
                 .downloadUrl(this.downloadUrl)
                 .temporalResolution(this.temporalResolution)
-                .accurualPeriodicity(this.accurualPeriodicity.getName())
+                .accurualPeriodicity(this.accurualPeriodicity)
                 .spatial(this.spatial)
                 .temporal(this.temporal)
                 .build();
