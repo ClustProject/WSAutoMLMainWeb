@@ -66,7 +66,7 @@ function DataInfoContentText(props) {
   );
 }
 
-function CommonTextField(props) {
+function DataSetTextField(props) {
   const {eng, kor} = props.name;
 
   return <TextField
@@ -79,7 +79,7 @@ function CommonTextField(props) {
   />;
 }
 
-function CommonSelect(props) {
+function DataSetSelect(props) {
   const {eng, kor} = props.name;
 
   const labelName = `${eng}-label`;
@@ -327,71 +327,71 @@ export default function MetadataManagementContent() {
         <DialogContent>
 
           <DataInfoContentText name="카탈로그"/>
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'category', kor: '카테고리'}}
             onChange={onChangeCatalog}
             list={catalogState.categories}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'theme', kor: '주제'}}
             onChange={onChangeCatalog}
             list={catalogState.themes}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'themeTaxonomy', kor: '주제 분류'}}
             onChange={onChangeCatalog}
           />
 
           <DataInfoContentText name="데이터셋"/>
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'title', kor: '제목'}}
             onChange={onChangeDataSet}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'publisher', kor: '구축 기관'}}
             onChange={onChangeDataSet}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'creator', kor: '생성 기관'}}
             onChange={onChangeDataSet}
             list={dataSetState.creators}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'contactPointName', kor: '담당자 이름'}}
             onChange={onChangeDataSet}
             list={dataSetState.contactPointNames}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'type', kor: '유형'}}
             onChange={onChangeDataSet}
             list={dataSetState.types}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'keyword', kor: '키워드'}}
             onChange={onChangeDataSet}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
             list={dataSetState.licenses}
           />
-          <CommonSelect
+          <DataSetSelect
             name={{eng: 'rights', kor: '권한'}}
             onChange={onChangeDataSet}
             list={dataSetState.rightses}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDataSet}
           />
 
           <DataInfoContentText name="배포"/>
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'title', kor: '제목'}}
             onChange={onChangeDistribution}
           />
 
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDistribution}
           />
@@ -405,20 +405,20 @@ export default function MetadataManagementContent() {
             value="파일 업로드 시 자동으로 채워집니다"
           />
 
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'temporalResolution', kor: '측정 단위'}}
             onChange={onChangeDistribution}
           />
 
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'accurualPeriodicity', kor: '제공 주기'}}
             onChange={onChangeDistribution}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'spatial', kor: '공간 정보'}}
             onChange={onChangeDistribution}
           />
-          <CommonTextField
+          <DataSetTextField
             name={{eng: 'temporal', kor: '시간 정보'}}
             onChange={onChangeDistribution}
           />
