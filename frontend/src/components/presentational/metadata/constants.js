@@ -34,7 +34,7 @@ const COLUMNS = [
   {
     field: 'creator',
     headerName: '생성 기관',
-    width: defaultWidth,
+    width: 200,
   },
   {
     field: 'name',
