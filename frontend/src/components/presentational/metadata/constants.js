@@ -84,7 +84,7 @@ const COLUMNS = [
   {
     field: 'downloadUrl',
     headerName: '다운로드 URL',
-    width: defaultWidth,
+    width: 500,
   },
   {
     field: 'temporalResolution',
@@ -190,10 +190,10 @@ const LICENSE_RIGHTS_MAP = {
 }
 
 const TYPES = [
-      "비디오",
-      "텍스트",
-      "숫자",
-      "이미지"
+  "비디오",
+  "텍스트",
+  "숫자",
+  "이미지"
 ]
 
 const DEFAULT_PAGE_COUNT = 0;
