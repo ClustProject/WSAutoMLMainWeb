@@ -81,7 +81,7 @@ public class Distribution {
                 .description(this.description)
                 .downloadUrl(this.downloadUrl)
                 .temporalResolution(this.temporalResolution)
-                .accurualPeriodicity(this.accurualPeriodicity.getName())
+                .accurualPeriodicity(this.accurualPeriodicity)
                 .spatial(this.spatial)
                 .temporal(this.temporal)
                 .build();
