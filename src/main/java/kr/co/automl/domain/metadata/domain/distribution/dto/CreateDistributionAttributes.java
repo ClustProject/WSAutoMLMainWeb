@@ -21,7 +21,7 @@ public record CreateDistributionAttributes(
         String temporalResolution,
 
         @NotBlank(message = "제공 주기" + NOT_BLANK_MESSAGE_SUFFIX)
-        String accurualPeriodicityName,
+        String accurualPeriodicity,
 
         @NotBlank(message = "공간 정보" + NOT_BLANK_MESSAGE_SUFFIX)
         String spatial,

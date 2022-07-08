@@ -15,7 +15,7 @@ public class DistributionTest {
                 .description("destribution description")
                 .downloadUrl("downloadUrl")
                 .temporalResolution("temporalResolution")
-                .accurualPeriodicity(AccurualPeriodicity.DAY)
+                .accurualPeriodicity("일")
                 .spatial("spatial")
                 .temporal("temporal")
                 .build();
@@ -28,7 +28,7 @@ public class DistributionTest {
                 .description("destribution description")
                 .downloadUrl("downloadUrl")
                 .temporalResolution("temporalResolution")
-                .accurualPeriodicityName("일")
+                .accurualPeriodicity("일")
                 .spatial("spatial")
                 .temporal("temporal")
                 .build();
@@ -39,7 +39,7 @@ public class DistributionTest {
         assertThat(distribution.getDescription()).isEqualTo("destribution description");
         assertThat(distribution.getDownloadUrl()).isEqualTo("downloadUrl");
         assertThat(distribution.getTemporalResolution()).isEqualTo("temporalResolution");
-        assertThat(distribution.getAccurualPeriodicity()).isEqualTo(AccurualPeriodicity.DAY);
+        assertThat(distribution.getAccurualPeriodicity()).isEqualTo("일");
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
         assertThat(distribution.getTemporal()).isEqualTo("temporal");
     }
