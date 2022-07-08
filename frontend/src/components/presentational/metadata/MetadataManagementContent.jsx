@@ -216,24 +216,15 @@ export default function MetadataManagementContent() {
   })
 
   function onChangeDistribution(event) {
-    dispatchDistribution({
-      payload: event.target
-    });
+    dispatchDistribution(event.target);
   }
 
   function distributionReducer(state, action) {
-    const {type, payload} = action;
-
-    if (type === "SET_DOWNLOAD_URL") {
-      return {
-        ...state,
-        ...payload
-      }
-    }
+    const {name, value} = action;
 
     return {
       ...state,
-      [payload.name]: payload.value
+      [name]: value
     };
   }
 
@@ -247,14 +238,7 @@ export default function MetadataManagementContent() {
     }
 
     const preSignedUrl = await getPreSignedUrl(file.name);
-
-    // URL 상태 설정
-    dispatchDistribution({
-      type: "SET_DOWNLOAD_URL",
-      payload: {
-        "downloadUrl": preSignedUrl.split("?")[0],
-      }
-    })
+    const downloadUrl = preSignedUrl.split("?")[0];
 
     const createMetadataAttributes = {
       catalog: {
@@ -280,7 +264,7 @@ export default function MetadataManagementContent() {
         accurualPeriodicity: distributionState.accurualPeriodicity,
         spatial: distributionState.spatial,
         temporal: distributionState.temporal,
-        downloadUrl: distributionState.downloadUrl
+        downloadUrl: downloadUrl
       }
     }
 
