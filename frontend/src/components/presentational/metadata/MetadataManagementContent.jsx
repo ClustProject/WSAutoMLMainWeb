@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, useState} from 'react';
-import {getMetadatas} from "../../../api/metadata";
+import {createMetadata, getMetadatas} from "../../../api/metadata";
 import {
   Button,
   Checkbox,
@@ -14,6 +14,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  styled,
   TextField
 } from "@mui/material";
 
@@ -27,6 +28,10 @@ import {
   TYPES
 } from "./constants";
 import {DataGrid} from "@mui/x-data-grid";
+import {getPreSignedUrl} from "../../../api/url";
+import {uploadFileToS3} from "../../../api/file-storage/s3";
+
+const Input = styled('input')({});
 
 /**
  * data grid에서 row로 읽을 수 있도록 파싱합니다.
@@ -111,16 +116,15 @@ export default function MetadataManagementContent() {
   /**
    *
    */
-  function setDownloadUrlState(event) {
-    const downloadUrl = document.getElementById("downloadUrl");
-    const disabled = downloadUrl.getAttribute("disabled");
+  function setSourceUrlState() {
+    const sourceUrl = document.getElementById("sourceUrl")
+    const disabled = sourceUrl.getAttribute("disabled");
 
     if (disabled === null) {
-      downloadUrl.setAttribute("disabled", "")
-      downloadUrl.value = "";
-      dispatchDistribution(event.target);
+      sourceUrl.setAttribute("disabled", "")
+      sourceUrl.value = "";
     } else {
-      downloadUrl.removeAttribute("disabled");
+      sourceUrl.removeAttribute("disabled");
     }
 
   }
@@ -212,28 +216,87 @@ export default function MetadataManagementContent() {
   })
 
   function onChangeDistribution(event) {
-    dispatchDistribution(event.target);
+    dispatchDistribution({
+      payload: event.target
+    });
   }
 
   function distributionReducer(state, action) {
-    const {name, value} = action;
+    const {type, payload} = action;
 
-    const noDownloadUrlCheckBoxSelected = (name === "downloadUrl" && value === "on");
-    if (noDownloadUrlCheckBoxSelected) {
+    if (type === "SET_DOWNLOAD_URL") {
       return {
         ...state,
-        [name]: ""
+        ...payload
       }
     }
 
     return {
       ...state,
-      [name]: value
-    }
+      [payload.name]: payload.value
+    };
   }
 
-  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, {
-  })
+  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, {})
+
+  async function handleFinish() {
+    const file = document.getElementById("file").files[0];
+    if (file === undefined) {
+      alert("파일을 업로드 해주세요.");
+      return;
+    }
+
+    const preSignedUrl = await getPreSignedUrl(file.name);
+
+    // URL 상태 설정
+    dispatchDistribution({
+      type: "SET_DOWNLOAD_URL",
+      payload: {
+        "downloadUrl": preSignedUrl.split("?")[0],
+      }
+    })
+
+    const createMetadataAttributes = {
+      catalog: {
+        categoryName: catalogState.category,
+        themeName: catalogState.theme,
+        themeTaxonomy: catalogState.themeTaxonomy
+      },
+      dataset: {
+        creator: dataSetState.creator,
+        contactPointName: dataSetState.contactPointName,
+        type: dataSetState.type,
+        title: dataSetState.title,
+        publisher: dataSetState.publisher,
+        keyword: dataSetState.keyword,
+        license: dataSetState.license,
+        rights: dataSetState.rights,
+        description: dataSetState.description,
+      },
+      distribution: {
+        title: distributionState.title,
+        description: distributionState.description,
+        temporalResolution: distributionState.temporalResolution,
+        accurualPeriodicity: distributionState.accurualPeriodicity,
+        spatial: distributionState.spatial,
+        temporal: distributionState.temporal,
+        downloadUrl: distributionState.downloadUrl
+      }
+    }
+
+    createMetadata(createMetadataAttributes)
+      .then(async () => await uploadFileToS3(preSignedUrl, file))
+      .then(() => {
+        alert("저장 완료")
+        window.location.reload();
+      })
+      .catch(err => {
+        if (err.response.data.errors) {
+          alert(err.response.data.errors[0].defaultMessage);
+        }
+      })
+
+  }
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
 
@@ -253,20 +316,17 @@ export default function MetadataManagementContent() {
           <TextField
             autoFocus
             margin="dense"
-            id="downloadUrl"
-            label="다운로드 URL"
+            id="sourceUrl"
+            label="다운받은 URL"
             fullWidth
             variant="standard"
-            name="downloadUrl"
-            onChange={onChangeDistribution}
           />
 
           <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
-                  name="downloadUrl"
-                  onChange={setDownloadUrlState}
+                  onChange={setSourceUrlState}
                 />
               }
               label="링크 없음"/>
@@ -303,6 +363,29 @@ export default function MetadataManagementContent() {
             name={{eng: 'title', kor: '제목'}}
             onChange={onChangeDataSet}
           />
+          <CommonTextField
+            name={{eng: 'publisher', kor: '구축 기관'}}
+            onChange={onChangeDataSet}
+          />
+          <CommonSelect
+            name={{eng: 'creator', kor: '생성 기관'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.creators}
+          />
+          <CommonSelect
+            name={{eng: 'contactPointName', kor: '담당자 이름'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.contactPointNames}
+          />
+          <CommonSelect
+            name={{eng: 'type', kor: '유형'}}
+            onChange={onChangeDataSet}
+            list={dataSetState.types}
+          />
+          <CommonTextField
+            name={{eng: 'keyword', kor: '키워드'}}
+            onChange={onChangeDataSet}
+          />
           <CommonSelect
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
@@ -329,14 +412,14 @@ export default function MetadataManagementContent() {
             onChange={onChangeDistribution}
           />
 
-           <TextField
-              id="downloadUrl"
-              label="다운로드 URL"
-              variant="filled"
-              fullWidth
-              disabled
-              value={distributionState.downloadUrl}
-            />
+          <TextField
+            id="downloadUrl-text-field"
+            label="다운로드 URL"
+            variant="filled"
+            fullWidth
+            disabled
+            value="파일 업로드 시 자동으로 채워집니다"
+          />
 
           <CommonTextField
             name={{eng: 'temporalResolution', kor: '측정 단위'}}
@@ -356,11 +439,20 @@ export default function MetadataManagementContent() {
             onChange={onChangeDistribution}
           />
 
+          <label htmlFor="file">
+            <Input
+              accept=".csv"
+              id="file"
+              type="file"
+              onChange={onChangeDistribution}
+            />
+          </label>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDataInfoDialogPrevious}>뒤로가기</Button>
           <Button onClick={closeDataInfoDialog}>취소</Button>
-          <Button onClick={handleInputLinkDialogNext}>다음</Button>
+          <Button onClick={handleFinish}>완료</Button>
         </DialogActions>
       </Dialog>
 
