@@ -46,99 +46,15 @@ const centerStyle = {
   justifyContent: 'center'
 };
 
-/**
- * data grid에서 row로 읽을 수 있도록 파싱합니다.
- */
-function parseToRows(metadatas) {
-  return metadatas.map(metadata => {
-    return {
-      ...metadata.catalog,
-      ...metadata.dataSet,
-      ...metadata.dataSet.organization,
-      ...metadata.dataSet.organization.contactPoint,
-      ...metadata.dataSet.licenseInfo,
-      ...metadata.distribution,
-
-      // dataSet과 distribution의 title과 description이 겹치므로 분리해서 사용
-      dataSetTitle: metadata.dataSet.title,
-      dataSetDescription: metadata.dataSet.description,
-      distributionTitle: metadata.distribution.title,
-      distributionDescription: metadata.distribution.description,
-    }
-  });
-}
-
-
 export default function MetadataManagementContent() {
-  const [progressBarOpend, setProgressBarOpend] = useState(false);
-  const [fileUploadPercent, setFileUploadPercent] = useState(0);
-
-  function displayProgressBar() {
-    setProgressBarOpend(true);
-  }
-
-  function closeProgressBar() {
-    setProgressBarOpend(false);
-  }
-
-  async function handleInputLinkDialogNext() {
-    const url = document.getElementById("sourceUrl").value;
-
-    const result = await scrap(url);
-
-    if (result !== undefined) {
-      [dispatchDataSet, dispatchDistribution].forEach(it => it({
-        type: 'data.go.kr',
-        payload: result
-      }))
-    }
-
-    closeInputLinkDialog();
-    setInputDataInfoDialogOpen(true);
-  }
-
-  function closeInputLinkDialog() {
-    setInputLinkDialogOpen(false);
-  }
-
-  function setSourceUrlState() {
-    const sourceUrl = document.getElementById("sourceUrl")
-    const disabled = sourceUrl.getAttribute("disabled");
-
-    if (disabled === null) {
-      sourceUrl.setAttribute("disabled", "")
-      sourceUrl.value = "";
-    } else {
-      sourceUrl.removeAttribute("disabled");
-    }
-
-  }
-
-  function clearAllStates() {
-    [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => {
-      it({
-        type: "clear"
-      })
-    })
-  }
-
-  function closeDataInfoDialog() {
-    setInputDataInfoDialogOpen(false);
-
-    clearAllStates();
-  }
-
-  function handleDataInfoDialogPrevious() {
-    setInputDataInfoDialogOpen(false);
-    clearAllStates();
-
-    setInputLinkDialogOpen(true);
-  }
-
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
+
   const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
   const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
+
+  const [progressBarOpend, setProgressBarOpend] = useState(false);
+  const [fileUploadPercent, setFileUploadPercent] = useState(0);
 
   useEffect(() => {
     getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
@@ -149,14 +65,15 @@ export default function MetadataManagementContent() {
     // .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
   }, [])
 
+  const [catalogState, dispatchCatalog] = useReducer(CatalogReducer, INIT_CATALOG_ARGS)
+
   function onChangeCatalog(event) {
     dispatchCatalog({
       payload: event.target
     });
   }
 
-
-  const [catalogState, dispatchCatalog] = useReducer(CatalogReducer, INIT_CATALOG_ARGS)
+  const [dataSetState, dispatchDataSet] = useReducer(DataSetReducer, INIT_DATASET_ARGS)
 
   function onChangeDataSet(event) {
     dispatchDataSet({
@@ -164,70 +81,12 @@ export default function MetadataManagementContent() {
     });
   }
 
-  const [dataSetState, dispatchDataSet] = useReducer(DataSetReducer, INIT_DATASET_ARGS)
+  const [distributionState, dispatchDistribution] = useReducer(DistributionReducer, INIT_DISTRIBUTION_ARGS)
 
   function onChangeDistribution(event) {
     dispatchDistribution({
       payload: event.target
     });
-  }
-
-  const [distributionState, dispatchDistribution] = useReducer(DistributionReducer, INIT_DISTRIBUTION_ARGS)
-
-  async function handleFinish() {
-    const file = document.getElementById("file").files[0];
-    if (file === undefined) {
-      alert("파일을 업로드 해주세요.");
-      return;
-    }
-
-    const preSignedUrl = await getPreSignedUrl(file.name);
-    const downloadUrl = preSignedUrl.split("?")[0];
-
-    const createMetadataAttributes = {
-      catalog: {
-        categoryName: catalogState.category,
-        themeName: catalogState.theme,
-        themeTaxonomy: catalogState.themeTaxonomy
-      },
-      dataset: {
-        creator: dataSetState.creator,
-        contactPointName: dataSetState.contactPointName,
-        type: dataSetState.type,
-        title: dataSetState.title,
-        publisher: dataSetState.publisher,
-        keyword: dataSetState.keyword,
-        license: dataSetState.license,
-        rights: dataSetState.rights,
-        description: dataSetState.description,
-      },
-      distribution: {
-        title: distributionState.title,
-        description: distributionState.description,
-        temporalResolution: distributionState.temporalResolution,
-        accurualPeriodicity: distributionState.accurualPeriodicity,
-        spatial: distributionState.spatial,
-        temporal: distributionState.temporal,
-        downloadUrl: downloadUrl
-      }
-    }
-
-    createMetadata(createMetadataAttributes)
-      .then(async () => {
-        displayProgressBar();
-        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
-      })
-      .then(() => {
-        closeProgressBar();
-        alert("저장 완료")
-        window.location.reload();
-      })
-      .catch(err => {
-        if (err.response.data.errors) {
-          alert(err.response.data.errors[0].defaultMessage);
-        }
-      })
-
   }
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
@@ -446,4 +305,145 @@ export default function MetadataManagementContent() {
       />
     </>
   );
+
+  /**
+   * data grid에서 row로 읽을 수 있도록 파싱합니다.
+   */
+  function parseToRows(metadatas) {
+    return metadatas.map(metadata => {
+      return {
+        ...metadata.catalog,
+        ...metadata.dataSet,
+        ...metadata.dataSet.organization,
+        ...metadata.dataSet.organization.contactPoint,
+        ...metadata.dataSet.licenseInfo,
+        ...metadata.distribution,
+
+        // dataSet과 distribution의 title과 description이 겹치므로 분리해서 사용
+        dataSetTitle: metadata.dataSet.title,
+        dataSetDescription: metadata.dataSet.description,
+        distributionTitle: metadata.distribution.title,
+        distributionDescription: metadata.distribution.description,
+      }
+    });
+  }
+
+  async function handleInputLinkDialogNext() {
+    const url = document.getElementById("sourceUrl").value;
+
+    const result = await scrap(url);
+
+    if (result !== undefined) {
+      [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        type: 'data.go.kr',
+        payload: result
+      }))
+    }
+
+    closeInputLinkDialog();
+    setInputDataInfoDialogOpen(true);
+  }
+
+  function closeInputLinkDialog() {
+    setInputLinkDialogOpen(false);
+  }
+
+  function setSourceUrlState() {
+    const sourceUrl = document.getElementById("sourceUrl")
+    const disabled = sourceUrl.getAttribute("disabled");
+
+    if (disabled === null) {
+      sourceUrl.setAttribute("disabled", "")
+      sourceUrl.value = "";
+    } else {
+      sourceUrl.removeAttribute("disabled");
+    }
+
+  }
+
+  function closeDataInfoDialog() {
+    setInputDataInfoDialogOpen(false);
+
+    clearAllStates();
+  }
+
+  function handleDataInfoDialogPrevious() {
+    setInputDataInfoDialogOpen(false);
+    clearAllStates();
+
+    setInputLinkDialogOpen(true);
+  }
+
+  function clearAllStates() {
+    [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => {
+      it({
+        type: "clear"
+      })
+    })
+  }
+
+  async function handleFinish() {
+    const file = document.getElementById("file").files[0];
+    if (file === undefined) {
+      alert("파일을 업로드 해주세요.");
+      return;
+    }
+
+    const preSignedUrl = await getPreSignedUrl(file.name);
+    const downloadUrl = preSignedUrl.split("?")[0];
+
+    const createMetadataAttributes = {
+      catalog: {
+        categoryName: catalogState.category,
+        themeName: catalogState.theme,
+        themeTaxonomy: catalogState.themeTaxonomy
+      },
+      dataset: {
+        creator: dataSetState.creator,
+        contactPointName: dataSetState.contactPointName,
+        type: dataSetState.type,
+        title: dataSetState.title,
+        publisher: dataSetState.publisher,
+        keyword: dataSetState.keyword,
+        license: dataSetState.license,
+        rights: dataSetState.rights,
+        description: dataSetState.description,
+      },
+      distribution: {
+        title: distributionState.title,
+        description: distributionState.description,
+        temporalResolution: distributionState.temporalResolution,
+        accurualPeriodicity: distributionState.accurualPeriodicity,
+        spatial: distributionState.spatial,
+        temporal: distributionState.temporal,
+        downloadUrl: downloadUrl
+      }
+    }
+
+    createMetadata(createMetadataAttributes)
+      .then(async () => {
+        displayProgressBar();
+        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
+      })
+      .then(() => {
+        closeProgressBar();
+        alert("저장 완료")
+        window.location.reload();
+      })
+      .catch(err => {
+        if (err.response.data.errors) {
+          alert(err.response.data.errors[0].defaultMessage);
+        }
+      })
+
+  }
+
+  function displayProgressBar() {
+    setProgressBarOpend(true);
+  }
+
+  function closeProgressBar() {
+    setProgressBarOpend(false);
+  }
+
 }
