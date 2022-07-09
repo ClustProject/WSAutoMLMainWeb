@@ -9,13 +9,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  InputLabel,
-  MenuItem,
   Modal,
-  Select,
   styled,
   TextField
 } from "@mui/material";
@@ -35,6 +31,9 @@ import {uploadFileToS3} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {scrap} from "../../../api/scrap/scrap";
+import DataSetSelect from "./DataSetSelect";
+import DataInfoContentText from "./DataInfoContentText";
+import DataSetTextField from "./DataSetTextField";
 
 const Input = styled('input')({});
 
@@ -64,56 +63,6 @@ function parseToRows(metadatas) {
       distributionDescription: metadata.distribution.description,
     }
   });
-}
-
-function DataInfoContentText(props) {
-  return (
-    <DialogContentText sx={{
-      margin: "10px",
-
-    }}>
-      {props.name} 정보
-    </DialogContentText>
-  );
-}
-
-function DataSetTextField(props) {
-  const {eng, kor} = props.name;
-  const {value} = props;
-
-  return <TextField
-    id={eng}
-    label={kor}
-    variant="filled"
-    fullWidth
-    name={eng} // note: reducer에서 해당 값을 쓰고있음
-    value={value}
-    onChange={props.onChange}
-  />;
-}
-
-function DataSetSelect(props) {
-  const {eng, kor} = props.name;
-
-  const labelName = `${eng}-label`;
-
-  return (
-    <FormControl fullWidth>
-      <InputLabel id={labelName}>{kor}</InputLabel>
-      <Select
-        labelId={labelName}
-        id={eng}
-        label={kor}
-        name={eng} // note: reducer에서 해당 값을 쓰고있음
-        fullWidth
-        onChange={props.onChange}
-      >
-        {props.list.map(it => (
-          <MenuItem value={it}>{it} </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  );
 }
 
 const initCatalogArgs = {
@@ -188,9 +137,9 @@ export default function MetadataManagementContent() {
 
   function handleDataInfoDialogPrevious() {
     setInputDataInfoDialogOpen(false);
-    setInputLinkDialogOpen(true);
-
     clearAllStates();
+
+    setInputLinkDialogOpen(true);
   }
 
   const [data, setData] = useState([]);
