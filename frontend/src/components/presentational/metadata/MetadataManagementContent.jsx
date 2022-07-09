@@ -185,23 +185,25 @@ export default function MetadataManagementContent() {
   }, [])
 
   function onChangeCatalog(event) {
-    dispatchCatalog(event.target);
+    dispatchCatalog({
+      payload: event.target
+    });
   }
 
   function catalogReducer(state, action) {
-    const {name, value} = action;
+    const {payload} = action;
 
-    if (name === "category") {
+    if (payload.name === "category") {
       return {
         ...state,
-        [name]: value,
-        themes: CATEGORY_THEME_MAP[value] // 카테고리에 따른 주제 목록 리스트 설정
+        [payload.name]: payload.value,
+        themes: CATEGORY_THEME_MAP[payload.value] // 카테고리에 따른 주제 목록 리스트 설정
       }
     }
 
     return {
       ...state,
-      [name]: value
+      [payload.name]: payload.value
     }
   }
 
@@ -223,32 +225,32 @@ export default function MetadataManagementContent() {
       }
     }
 
-    const {name, value} = action;
-
-    if (name === "creator") {
+    if (payload.name === "creator") {
       return {
         ...state,
-        [name]: value,
-        contactPointNames: CREATOR_CONTACT_POINT_NAME_MAP[value]
+        [payload.name]: payload.value,
+        contactPointNames: CREATOR_CONTACT_POINT_NAME_MAP[payload.value]
       }
     }
 
-    if (name === "license") {
+    if (payload.name === "license") {
       return {
         ...state,
-        [name]: value,
-        rightses: LICENSE_RIGHTS_MAP[value]
+        [payload.name]: payload.value,
+        rightses: LICENSE_RIGHTS_MAP[payload.value]
       }
     }
 
     return {
       ...state,
-      [name]: value
+      [payload.name]: payload.value
     };
   }
 
   function onChangeDataSet(event) {
-    dispatchDataSet(event.target);
+    dispatchDataSet({
+      payload: event.target
+    });
   }
 
   const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, {
@@ -260,15 +262,17 @@ export default function MetadataManagementContent() {
   })
 
   function onChangeDistribution(event) {
-    dispatchDistribution(event.target);
+    dispatchDistribution({
+      payload: event.target
+    });
   }
 
   function distributionReducer(state, action) {
-    const {name, value} = action;
+    const {payload} = action;
 
     return {
       ...state,
-      [name]: value
+      [payload.name]: payload.value
     };
   }
 
