@@ -116,6 +116,17 @@ function DataSetSelect(props) {
   );
 }
 
+const initCatalogArgs = {
+  themes: [],
+};
+
+const initDataSetArgs = {
+  contactPointNames: [],
+  rightses: [],
+};
+
+const initDistributionArgs = {};
+
 export default function MetadataManagementContent() {
   const [progressBarOpend, setProgressBarOpend] = useState(false);
   const [fileUploadPercent, setFileUploadPercent] = useState(0);
@@ -161,13 +172,25 @@ export default function MetadataManagementContent() {
 
   }
 
+  function clearAllStates() {
+    [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => {
+      it({
+        type: "clear"
+      })
+    })
+  }
+
   function closeDataInfoDialog() {
     setInputDataInfoDialogOpen(false);
+
+    clearAllStates();
   }
 
   function handleDataInfoDialogPrevious() {
     setInputDataInfoDialogOpen(false);
     setInputLinkDialogOpen(true);
+
+    clearAllStates();
   }
 
   const [data, setData] = useState([]);
@@ -191,14 +214,20 @@ export default function MetadataManagementContent() {
   }
 
   function catalogReducer(state, action) {
-    const {payload} = action;
+    const {type, payload} = action;
+
+    if (type === "clear") {
+      return {
+        ...initCatalogArgs
+      }
+    }
 
     if (payload.name === "category") {
       return {
         ...state,
         [payload.name]: payload.value,
         themes: CATEGORY_THEME_MAP[payload.value] // 카테고리에 따른 주제 목록 리스트 설정
-      }
+      };
     }
 
     return {
@@ -207,13 +236,16 @@ export default function MetadataManagementContent() {
     }
   }
 
-  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
-    categories: Object.keys(CATEGORY_THEME_MAP),
-    themes: [],
-  })
+  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, initCatalogArgs)
 
   function dataSetReducer(state, action) {
     const {type, payload} = action;
+
+    if (type === "clear") {
+      return {
+        ...initDataSetArgs
+      }
+    }
 
     if (type === "data.go.kr") {
       return {
@@ -253,13 +285,7 @@ export default function MetadataManagementContent() {
     });
   }
 
-  const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, {
-    creators: Object.keys(CREATOR_CONTACT_POINT_NAME_MAP),
-    contactPointNames: [],
-    licenses: Object.keys(LICENSE_RIGHTS_MAP),
-    rightses: [],
-    types: TYPES
-  })
+  const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, initDataSetArgs)
 
   function onChangeDistribution(event) {
     dispatchDistribution({
@@ -268,7 +294,13 @@ export default function MetadataManagementContent() {
   }
 
   function distributionReducer(state, action) {
-    const {payload} = action;
+    const {type, payload} = action;
+
+    if (type === "clear") {
+      return {
+        ...initDistributionArgs
+      }
+    }
 
     return {
       ...state,
@@ -276,7 +308,7 @@ export default function MetadataManagementContent() {
     };
   }
 
-  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, {})
+  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, initDistributionArgs)
 
   async function handleFinish() {
     const file = document.getElementById("file").files[0];
@@ -382,7 +414,7 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'category', kor: '카테고리'}}
             onChange={onChangeCatalog}
-            list={catalogState.categories}
+            list={Object.keys(CATEGORY_THEME_MAP)}
           />
           <DataSetSelect
             name={{eng: 'theme', kor: '주제'}}
@@ -408,7 +440,7 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'creator', kor: '생성 기관'}}
             onChange={onChangeDataSet}
-            list={dataSetState.creators}
+            list={Object.keys(CREATOR_CONTACT_POINT_NAME_MAP)}
           />
           <DataSetSelect
             name={{eng: 'contactPointName', kor: '담당자 이름'}}
@@ -418,7 +450,7 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'type', kor: '유형'}}
             onChange={onChangeDataSet}
-            list={dataSetState.types}
+            list={TYPES}
           />
           <DataSetTextField
             name={{eng: 'keyword', kor: '키워드'}}
@@ -428,7 +460,7 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
-            list={dataSetState.licenses}
+            list={Object.keys(LICENSE_RIGHTS_MAP)}
           />
           <DataSetSelect
             name={{eng: 'rights', kor: '권한'}}
