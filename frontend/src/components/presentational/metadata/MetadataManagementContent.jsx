@@ -3,6 +3,7 @@ import {createMetadata, getMetadatas} from "../../../api/metadata";
 import {
   Button,
   Checkbox,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -13,6 +14,7 @@ import {
   FormGroup,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
   styled,
   TextField
@@ -30,8 +32,16 @@ import {
 import {DataGrid} from "@mui/x-data-grid";
 import {getPreSignedUrl} from "../../../api/url";
 import {uploadFileToS3} from "../../../api/file-storage/s3";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const Input = styled('input')({});
+
+const centerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
 
 /**
  * data grid에서 row로 읽을 수 있도록 파싱합니다.
@@ -104,6 +114,17 @@ function DataSetSelect(props) {
 }
 
 export default function MetadataManagementContent() {
+  const [progressBarOpend, setProgressBarOpend] = useState(false);
+  const [fileUploadPercent, setFileUploadPercent] = useState(0);
+
+  function displayProgressBar() {
+    setProgressBarOpend(true);
+  }
+
+  function closeProgressBar() {
+    setProgressBarOpend(false);
+  }
+
   function handleInputLinkDialogNext() {
     closeInputLinkDialog();
     setInputDataInfoDialogOpen(true);
@@ -113,9 +134,6 @@ export default function MetadataManagementContent() {
     setInputLinkDialogOpen(false);
   }
 
-  /**
-   *
-   */
   function setSourceUrlState() {
     const sourceUrl = document.getElementById("sourceUrl")
     const disabled = sourceUrl.getAttribute("disabled");
@@ -269,8 +287,12 @@ export default function MetadataManagementContent() {
     }
 
     createMetadata(createMetadataAttributes)
-      .then(async () => await uploadFileToS3(preSignedUrl, file))
+      .then(async () => {
+        displayProgressBar();
+        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
+      })
       .then(() => {
+        closeProgressBar();
         alert("저장 완료")
         window.location.reload();
       })
@@ -439,6 +461,34 @@ export default function MetadataManagementContent() {
           <Button onClick={handleFinish}>완료</Button>
         </DialogActions>
       </Dialog>
+
+      <Modal
+        open={progressBarOpend}
+        onClose={!progressBarOpend}
+        aria-labelledby="parent-modal-title"
+        aria-describedby="parent-modal-description"
+        sx={{
+          ...centerStyle,
+        }}
+      >
+        <Box sx={{
+          backgroundColor: 'white',
+          ...centerStyle
+        }}>
+          <CircularProgress variant="determinate" value={fileUploadPercent}/>
+          <Box
+            sx={{
+              position: 'absolute',
+              ...centerStyle,
+            }}
+          >
+            <Typography variant="caption" component="div" color="text.secondary">
+              {fileUploadPercent}%
+            </Typography>
+          </Box>
+        </Box>
+      </Modal>
+
 
       <DataGrid
         rows={parseToRows(data)}
