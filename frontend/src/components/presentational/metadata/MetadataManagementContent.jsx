@@ -34,6 +34,9 @@ import {scrap} from "../../../api/scrap/scrap";
 import DataSetSelect from "./DataSetSelect";
 import DataInfoContentText from "./DataInfoContentText";
 import DataSetTextField from "./DataSetTextField";
+import CatalogReducer, {INIT_CATALOG_ARGS} from "./reducers/CatalogReducer";
+import DataSetReducer, {INIT_DATASET_ARGS} from "./reducers/DataSetReducer";
+import DistributionReducer, {INIT_DISTRIBUTION_ARGS} from "./reducers/DistributionReducer";
 
 const Input = styled('input')({});
 
@@ -65,16 +68,6 @@ function parseToRows(metadatas) {
   });
 }
 
-const initCatalogArgs = {
-  themes: [],
-};
-
-const initDataSetArgs = {
-  contactPointNames: [],
-  rightses: [],
-};
-
-const initDistributionArgs = {};
 
 export default function MetadataManagementContent() {
   const [progressBarOpend, setProgressBarOpend] = useState(false);
@@ -162,71 +155,8 @@ export default function MetadataManagementContent() {
     });
   }
 
-  function catalogReducer(state, action) {
-    const {type, payload} = action;
 
-    if (type === "clear") {
-      return {
-        ...initCatalogArgs
-      }
-    }
-
-    if (payload.name === "category") {
-      return {
-        ...state,
-        [payload.name]: payload.value,
-        themes: CATEGORY_THEME_MAP[payload.value] // 카테고리에 따른 주제 목록 리스트 설정
-      };
-    }
-
-    return {
-      ...state,
-      [payload.name]: payload.value
-    }
-  }
-
-  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, initCatalogArgs)
-
-  function dataSetReducer(state, action) {
-    const {type, payload} = action;
-
-    if (type === "clear") {
-      return {
-        ...initDataSetArgs
-      }
-    }
-
-    if (type === "data.go.kr") {
-      return {
-        ...state,
-        name: payload.name,
-        description: payload.description,
-        publisher: payload.creator.name,
-        keyword: payload.keywords.reduce((acc, cur) => `${acc},${cur}`)
-      }
-    }
-
-    if (payload.name === "creator") {
-      return {
-        ...state,
-        [payload.name]: payload.value,
-        contactPointNames: CREATOR_CONTACT_POINT_NAME_MAP[payload.value]
-      }
-    }
-
-    if (payload.name === "license") {
-      return {
-        ...state,
-        [payload.name]: payload.value,
-        rightses: LICENSE_RIGHTS_MAP[payload.value]
-      }
-    }
-
-    return {
-      ...state,
-      [payload.name]: payload.value
-    };
-  }
+  const [catalogState, dispatchCatalog] = useReducer(CatalogReducer, INIT_CATALOG_ARGS)
 
   function onChangeDataSet(event) {
     dispatchDataSet({
@@ -234,7 +164,7 @@ export default function MetadataManagementContent() {
     });
   }
 
-  const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, initDataSetArgs)
+  const [dataSetState, dispatchDataSet] = useReducer(DataSetReducer, INIT_DATASET_ARGS)
 
   function onChangeDistribution(event) {
     dispatchDistribution({
@@ -242,22 +172,7 @@ export default function MetadataManagementContent() {
     });
   }
 
-  function distributionReducer(state, action) {
-    const {type, payload} = action;
-
-    if (type === "clear") {
-      return {
-        ...initDistributionArgs
-      }
-    }
-
-    return {
-      ...state,
-      [payload.name]: payload.value
-    };
-  }
-
-  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, initDistributionArgs)
+  const [distributionState, dispatchDistribution] = useReducer(DistributionReducer, INIT_DISTRIBUTION_ARGS)
 
   async function handleFinish() {
     const file = document.getElementById("file").files[0];
