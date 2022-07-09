@@ -34,6 +34,7 @@ import {getPreSignedUrl} from "../../../api/url";
 import {uploadFileToS3} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {scrap} from "../../../api/scrap/scrap";
 
 const Input = styled('input')({});
 
@@ -78,6 +79,7 @@ function DataInfoContentText(props) {
 
 function DataSetTextField(props) {
   const {eng, kor} = props.name;
+  const {value} = props;
 
   return <TextField
     id={eng}
@@ -85,6 +87,7 @@ function DataSetTextField(props) {
     variant="filled"
     fullWidth
     name={eng} // note: reducer에서 해당 값을 쓰고있음
+    value={value}
     onChange={props.onChange}
   />;
 }
@@ -125,7 +128,18 @@ export default function MetadataManagementContent() {
     setProgressBarOpend(false);
   }
 
-  function handleInputLinkDialogNext() {
+  async function handleInputLinkDialogNext() {
+    const url = document.getElementById("sourceUrl").value;
+
+    const result = await scrap(url);
+
+    if (result !== undefined) {
+      [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        type: 'data.go.kr',
+        payload: result
+      }))
+    }
+
     closeInputLinkDialog();
     setInputDataInfoDialogOpen(true);
   }
@@ -197,6 +211,18 @@ export default function MetadataManagementContent() {
   })
 
   function dataSetReducer(state, action) {
+    const {type, payload} = action;
+
+    if (type === "data.go.kr") {
+      return {
+        ...state,
+        name: payload.name,
+        description: payload.description,
+        publisher: payload.creator.name,
+        keyword: payload.keywords.reduce((acc, cur) => `${acc},${cur}`)
+      }
+    }
+
     const {name, value} = action;
 
     if (name === "creator") {
@@ -367,10 +393,12 @@ export default function MetadataManagementContent() {
           <DataInfoContentText name="데이터셋"/>
           <DataSetTextField
             name={{eng: 'title', kor: '제목'}}
+            value={dataSetState.title}
             onChange={onChangeDataSet}
           />
           <DataSetTextField
             name={{eng: 'publisher', kor: '구축 기관'}}
+            value={dataSetState.publisher}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
@@ -390,6 +418,7 @@ export default function MetadataManagementContent() {
           />
           <DataSetTextField
             name={{eng: 'keyword', kor: '키워드'}}
+            value={dataSetState.keyword}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
@@ -404,12 +433,14 @@ export default function MetadataManagementContent() {
           />
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
+            value={dataSetState.description}
             onChange={onChangeDataSet}
           />
 
           <DataInfoContentText name="배포"/>
           <DataSetTextField
             name={{eng: 'title', kor: '제목'}}
+            value={distributionState.title}
             onChange={onChangeDistribution}
           />
 
