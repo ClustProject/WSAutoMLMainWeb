@@ -9,13 +9,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  FormControl,
   FormControlLabel,
   FormGroup,
-  InputLabel,
-  MenuItem,
   Modal,
-  Select,
   styled,
   TextField
 } from "@mui/material";
@@ -34,6 +30,24 @@ import {getPreSignedUrl} from "../../../api/url";
 import {uploadFileToS3} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import {scrap} from "../../../api/scrap/scrap";
+import DataSetSelect from "./DataSetSelect";
+import DataInfoContentText from "./DataInfoContentText";
+import DataSetTextField from "./DataSetTextField";
+import CatalogReducer from "./reducers/CatalogReducer";
+import DataSetReducer from "./reducers/DataSetReducer";
+import DistributionReducer from "./reducers/DistributionReducer";
+
+export const INIT_CATALOG_ARGS = {
+  themes: [],
+};
+
+export const INIT_DATASET_ARGS = {
+  contactPointNames: [],
+  rightses: [],
+};
+
+export const INIT_DISTRIBUTION_ARGS = {};
 
 const Input = styled('input')({});
 
@@ -43,123 +57,15 @@ const centerStyle = {
   justifyContent: 'center'
 };
 
-/**
- * data grid에서 row로 읽을 수 있도록 파싱합니다.
- */
-function parseToRows(metadatas) {
-  return metadatas.map(metadata => {
-    return {
-      ...metadata.catalog,
-      ...metadata.dataSet,
-      ...metadata.dataSet.organization,
-      ...metadata.dataSet.organization.contactPoint,
-      ...metadata.dataSet.licenseInfo,
-      ...metadata.distribution,
-
-      // dataSet과 distribution의 title과 description이 겹치므로 분리해서 사용
-      dataSetTitle: metadata.dataSet.title,
-      dataSetDescription: metadata.dataSet.description,
-      distributionTitle: metadata.distribution.title,
-      distributionDescription: metadata.distribution.description,
-    }
-  });
-}
-
-function DataInfoContentText(props) {
-  return (
-    <DialogContentText sx={{
-      margin: "10px",
-
-    }}>
-      {props.name} 정보
-    </DialogContentText>
-  );
-}
-
-function DataSetTextField(props) {
-  const {eng, kor} = props.name;
-
-  return <TextField
-    id={eng}
-    label={kor}
-    variant="filled"
-    fullWidth
-    name={eng} // note: reducer에서 해당 값을 쓰고있음
-    onChange={props.onChange}
-  />;
-}
-
-function DataSetSelect(props) {
-  const {eng, kor} = props.name;
-
-  const labelName = `${eng}-label`;
-
-  return (
-    <FormControl fullWidth>
-      <InputLabel id={labelName}>{kor}</InputLabel>
-      <Select
-        labelId={labelName}
-        id={eng}
-        label={kor}
-        name={eng} // note: reducer에서 해당 값을 쓰고있음
-        fullWidth
-        onChange={props.onChange}
-      >
-        {props.list.map(it => (
-          <MenuItem value={it}>{it} </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-  );
-}
-
 export default function MetadataManagementContent() {
-  const [progressBarOpend, setProgressBarOpend] = useState(false);
-  const [fileUploadPercent, setFileUploadPercent] = useState(0);
-
-  function displayProgressBar() {
-    setProgressBarOpend(true);
-  }
-
-  function closeProgressBar() {
-    setProgressBarOpend(false);
-  }
-
-  function handleInputLinkDialogNext() {
-    closeInputLinkDialog();
-    setInputDataInfoDialogOpen(true);
-  }
-
-  function closeInputLinkDialog() {
-    setInputLinkDialogOpen(false);
-  }
-
-  function setSourceUrlState() {
-    const sourceUrl = document.getElementById("sourceUrl")
-    const disabled = sourceUrl.getAttribute("disabled");
-
-    if (disabled === null) {
-      sourceUrl.setAttribute("disabled", "")
-      sourceUrl.value = "";
-    } else {
-      sourceUrl.removeAttribute("disabled");
-    }
-
-  }
-
-  function closeDataInfoDialog() {
-    setInputDataInfoDialogOpen(false);
-  }
-
-  function handleDataInfoDialogPrevious() {
-    setInputDataInfoDialogOpen(false);
-    setInputLinkDialogOpen(true);
-  }
-
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
+
   const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
   const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
+
+  const [progressBarOpend, setProgressBarOpend] = useState(false);
+  const [fileUploadPercent, setFileUploadPercent] = useState(0);
 
   useEffect(() => {
     getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT)
@@ -170,138 +76,28 @@ export default function MetadataManagementContent() {
     // .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
   }, [])
 
+  const [catalogState, dispatchCatalog] = useReducer(CatalogReducer, INIT_CATALOG_ARGS)
+
   function onChangeCatalog(event) {
-    dispatchCatalog(event.target);
+    dispatchCatalog({
+      payload: event.target
+    });
   }
 
-  function catalogReducer(state, action) {
-    const {name, value} = action;
-
-    if (name === "category") {
-      return {
-        ...state,
-        [name]: value,
-        themes: CATEGORY_THEME_MAP[value] // 카테고리에 따른 주제 목록 리스트 설정
-      }
-    }
-
-    return {
-      ...state,
-      [name]: value
-    }
-  }
-
-  const [catalogState, dispatchCatalog] = useReducer(catalogReducer, {
-    categories: Object.keys(CATEGORY_THEME_MAP),
-    themes: [],
-  })
-
-  function dataSetReducer(state, action) {
-    const {name, value} = action;
-
-    if (name === "creator") {
-      return {
-        ...state,
-        [name]: value,
-        contactPointNames: CREATOR_CONTACT_POINT_NAME_MAP[value]
-      }
-    }
-
-    if (name === "license") {
-      return {
-        ...state,
-        [name]: value,
-        rightses: LICENSE_RIGHTS_MAP[value]
-      }
-    }
-
-    return {
-      ...state,
-      [name]: value
-    };
-  }
+  const [dataSetState, dispatchDataSet] = useReducer(DataSetReducer, INIT_DATASET_ARGS)
 
   function onChangeDataSet(event) {
-    dispatchDataSet(event.target);
+    dispatchDataSet({
+      payload: event.target
+    });
   }
 
-  const [dataSetState, dispatchDataSet] = useReducer(dataSetReducer, {
-    creators: Object.keys(CREATOR_CONTACT_POINT_NAME_MAP),
-    contactPointNames: [],
-    licenses: Object.keys(LICENSE_RIGHTS_MAP),
-    rightses: [],
-    types: TYPES
-  })
+  const [distributionState, dispatchDistribution] = useReducer(DistributionReducer, INIT_DISTRIBUTION_ARGS)
 
   function onChangeDistribution(event) {
-    dispatchDistribution(event.target);
-  }
-
-  function distributionReducer(state, action) {
-    const {name, value} = action;
-
-    return {
-      ...state,
-      [name]: value
-    };
-  }
-
-  const [distributionState, dispatchDistribution] = useReducer(distributionReducer, {})
-
-  async function handleFinish() {
-    const file = document.getElementById("file").files[0];
-    if (file === undefined) {
-      alert("파일을 업로드 해주세요.");
-      return;
-    }
-
-    const preSignedUrl = await getPreSignedUrl(file.name);
-    const downloadUrl = preSignedUrl.split("?")[0];
-
-    const createMetadataAttributes = {
-      catalog: {
-        categoryName: catalogState.category,
-        themeName: catalogState.theme,
-        themeTaxonomy: catalogState.themeTaxonomy
-      },
-      dataset: {
-        creator: dataSetState.creator,
-        contactPointName: dataSetState.contactPointName,
-        type: dataSetState.type,
-        title: dataSetState.title,
-        publisher: dataSetState.publisher,
-        keyword: dataSetState.keyword,
-        license: dataSetState.license,
-        rights: dataSetState.rights,
-        description: dataSetState.description,
-      },
-      distribution: {
-        title: distributionState.title,
-        description: distributionState.description,
-        temporalResolution: distributionState.temporalResolution,
-        accurualPeriodicity: distributionState.accurualPeriodicity,
-        spatial: distributionState.spatial,
-        temporal: distributionState.temporal,
-        downloadUrl: downloadUrl
-      }
-    }
-
-    createMetadata(createMetadataAttributes)
-      .then(async () => {
-        displayProgressBar();
-        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
-      })
-      .then(() => {
-        closeProgressBar();
-        alert("저장 완료")
-        window.location.reload();
-      })
-      .catch(err => {
-        if (err.response.data.errors) {
-          alert(err.response.data.errors[0].defaultMessage);
-        }
-      })
-
+    dispatchDistribution({
+      payload: event.target
+    });
   }
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
@@ -352,7 +148,7 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'category', kor: '카테고리'}}
             onChange={onChangeCatalog}
-            list={catalogState.categories}
+            list={Object.keys(CATEGORY_THEME_MAP)}
           />
           <DataSetSelect
             name={{eng: 'theme', kor: '주제'}}
@@ -367,16 +163,18 @@ export default function MetadataManagementContent() {
           <DataInfoContentText name="데이터셋"/>
           <DataSetTextField
             name={{eng: 'title', kor: '제목'}}
+            value={dataSetState.title}
             onChange={onChangeDataSet}
           />
           <DataSetTextField
             name={{eng: 'publisher', kor: '구축 기관'}}
+            value={dataSetState.publisher}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
             name={{eng: 'creator', kor: '생성 기관'}}
             onChange={onChangeDataSet}
-            list={dataSetState.creators}
+            list={Object.keys(CREATOR_CONTACT_POINT_NAME_MAP)}
           />
           <DataSetSelect
             name={{eng: 'contactPointName', kor: '담당자 이름'}}
@@ -386,16 +184,17 @@ export default function MetadataManagementContent() {
           <DataSetSelect
             name={{eng: 'type', kor: '유형'}}
             onChange={onChangeDataSet}
-            list={dataSetState.types}
+            list={TYPES}
           />
           <DataSetTextField
             name={{eng: 'keyword', kor: '키워드'}}
+            value={dataSetState.keyword}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
-            list={dataSetState.licenses}
+            list={Object.keys(LICENSE_RIGHTS_MAP)}
           />
           <DataSetSelect
             name={{eng: 'rights', kor: '권한'}}
@@ -404,15 +203,19 @@ export default function MetadataManagementContent() {
           />
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
+            value={dataSetState.description}
             onChange={onChangeDataSet}
           />
 
           <DataInfoContentText name="배포"/>
-          <DataSetTextField
-            name={{eng: 'title', kor: '제목'}}
-            onChange={onChangeDistribution}
+          <TextField
+            id="distribution-title-text-field"
+            label="제목"
+            variant="filled"
+            fullWidth
+            disabled
+            value="파일 업로드 시 자동으로 채워집니다"
           />
-
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDistribution}
@@ -515,4 +318,145 @@ export default function MetadataManagementContent() {
       />
     </>
   );
+
+  /**
+   * data grid에서 row로 읽을 수 있도록 파싱합니다.
+   */
+  function parseToRows(metadatas) {
+    return metadatas.map(metadata => {
+      return {
+        ...metadata.catalog,
+        ...metadata.dataSet,
+        ...metadata.dataSet.organization,
+        ...metadata.dataSet.organization.contactPoint,
+        ...metadata.dataSet.licenseInfo,
+        ...metadata.distribution,
+
+        // dataSet과 distribution의 title과 description이 겹치므로 분리해서 사용
+        dataSetTitle: metadata.dataSet.title,
+        dataSetDescription: metadata.dataSet.description,
+        distributionTitle: metadata.distribution.title,
+        distributionDescription: metadata.distribution.description,
+      }
+    });
+  }
+
+  async function handleInputLinkDialogNext() {
+    const url = document.getElementById("sourceUrl").value;
+
+    const result = await scrap(url);
+
+    if (result !== undefined) {
+      [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        type: 'data.go.kr',
+        payload: result
+      }))
+    }
+
+    closeInputLinkDialog();
+    setInputDataInfoDialogOpen(true);
+  }
+
+  function closeInputLinkDialog() {
+    setInputLinkDialogOpen(false);
+  }
+
+  function setSourceUrlState() {
+    const sourceUrl = document.getElementById("sourceUrl")
+    const disabled = sourceUrl.getAttribute("disabled");
+
+    if (disabled === null) {
+      sourceUrl.setAttribute("disabled", "")
+      sourceUrl.value = "";
+    } else {
+      sourceUrl.removeAttribute("disabled");
+    }
+
+  }
+
+  function closeDataInfoDialog() {
+    setInputDataInfoDialogOpen(false);
+
+    clearAllStates();
+  }
+
+  function handleDataInfoDialogPrevious() {
+    setInputDataInfoDialogOpen(false);
+    clearAllStates();
+
+    setInputLinkDialogOpen(true);
+  }
+
+  function clearAllStates() {
+    [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => {
+      it({
+        type: "clear"
+      })
+    })
+  }
+
+  async function handleFinish() {
+    const file = document.getElementById("file").files[0];
+    if (file === undefined) {
+      alert("파일을 업로드 해주세요.");
+      return;
+    }
+
+    const preSignedUrl = await getPreSignedUrl(file.name);
+    const downloadUrl = preSignedUrl.split("?")[0];
+
+    const createMetadataAttributes = {
+      catalog: {
+        categoryName: catalogState.category,
+        themeName: catalogState.theme,
+        themeTaxonomy: catalogState.themeTaxonomy
+      },
+      dataset: {
+        creator: dataSetState.creator,
+        contactPointName: dataSetState.contactPointName,
+        type: dataSetState.type,
+        title: dataSetState.title,
+        publisher: dataSetState.publisher,
+        keyword: dataSetState.keyword,
+        license: dataSetState.license,
+        rights: dataSetState.rights,
+        description: dataSetState.description,
+      },
+      distribution: {
+        title: file.name,
+        description: distributionState.description,
+        temporalResolution: distributionState.temporalResolution,
+        accurualPeriodicity: distributionState.accurualPeriodicity,
+        spatial: distributionState.spatial,
+        temporal: distributionState.temporal,
+        downloadUrl: downloadUrl
+      }
+    }
+
+    createMetadata(createMetadataAttributes)
+      .then(async () => {
+        displayProgressBar();
+        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
+      })
+      .then(() => {
+        closeProgressBar();
+        alert("저장 완료")
+        window.location.reload();
+      })
+      .catch(err => {
+        if (err.response.data.errors) {
+          alert(err.response.data.errors[0].defaultMessage);
+        }
+      })
+
+  }
+
+  function displayProgressBar() {
+    setProgressBarOpend(true);
+  }
+
+  function closeProgressBar() {
+    setProgressBarOpend(false);
+  }
+
 }
