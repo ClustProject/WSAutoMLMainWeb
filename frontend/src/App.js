@@ -6,13 +6,13 @@ import PaperBase from "./components/presentational/PaperBase";
 import NotFound from "./error/NotFound";
 import MetaDataPage from "./pages/metadata/MetaDataPage";
 import UserPage from "./pages/user/UserPage";
+import LoginPage from "./pages/LoginPage";
 
 function PageTemplate() {
   return (
     <PaperBase>
       <Routes>
         {/* PaperBase에서 props.children으로 들어간다. */}
-        <Route path="/" element={<DashBoardPage/>}/>
         <Route path="/dashboard" element={<DashBoardPage/>}/>
         <Route path="/metadata/*" element={<MetaDataPage/>}/>
         <Route path="/user/*" element={<UserPage/>}/>
@@ -26,6 +26,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LoginPage/>}/>
         <Route path="/*" element={<PageTemplate/>}/>
       </Routes>
     </BrowserRouter>

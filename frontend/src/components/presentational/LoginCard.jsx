@@ -5,8 +5,6 @@ import Typography from '@mui/material/Typography';
 import GoogleButton from 'react-google-button';
 import {Box} from "@mui/material";
 
-const GOOGLE_LOGIN_URL = '/oauth2/authorization/google';
-
 export default function LoginCard() {
   return (
     <Card sx={{
@@ -28,7 +26,7 @@ export default function LoginCard() {
           <GoogleButton
             type="light"
             label="Google로 로그인"
-            onClick={() => window.location.href = GOOGLE_LOGIN_URL}
+            onClick={() => window.location.href = '/dashboard'}
           />
         </Box>
       </CardContent>
