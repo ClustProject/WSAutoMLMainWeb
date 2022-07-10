@@ -1,14 +1,10 @@
 import {CREATOR_CONTACT_POINT_NAME_MAP, LICENSE_RIGHTS_MAP} from "../constants";
-
-export const INIT_DATASET_ARGS = {
-  contactPointNames: [],
-  rightses: [],
-};
+import {INIT_DATASET_ARGS} from "../MetadataManagementContent";
 
 export default function DataSetReducer(state, action) {
   const {type, payload} = action;
-
   if (type === "clear") {
+
     return {
       ...INIT_DATASET_ARGS
     }

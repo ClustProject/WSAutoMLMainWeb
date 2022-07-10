@@ -1,4 +1,4 @@
-export const INIT_DISTRIBUTION_ARGS = {};
+import {INIT_DISTRIBUTION_ARGS} from "../MetadataManagementContent";
 
 export default function DistributionReducer(state, action) {
   const {type, payload} = action;

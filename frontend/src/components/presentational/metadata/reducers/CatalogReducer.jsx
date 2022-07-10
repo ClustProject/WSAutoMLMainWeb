@@ -1,8 +1,5 @@
 import {CATEGORY_THEME_MAP} from "../constants";
-
-export const INIT_CATALOG_ARGS = {
-  themes: [],
-};
+import {INIT_CATALOG_ARGS} from "../MetadataManagementContent";
 
 export default function CatalogReducer(state, action) {
   const {type, payload} = action;

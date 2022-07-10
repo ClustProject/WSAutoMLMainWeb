@@ -34,9 +34,20 @@ import {scrap} from "../../../api/scrap/scrap";
 import DataSetSelect from "./DataSetSelect";
 import DataInfoContentText from "./DataInfoContentText";
 import DataSetTextField from "./DataSetTextField";
-import CatalogReducer, {INIT_CATALOG_ARGS} from "./reducers/CatalogReducer";
-import DataSetReducer, {INIT_DATASET_ARGS} from "./reducers/DataSetReducer";
-import DistributionReducer, {INIT_DISTRIBUTION_ARGS} from "./reducers/DistributionReducer";
+import CatalogReducer from "./reducers/CatalogReducer";
+import DataSetReducer from "./reducers/DataSetReducer";
+import DistributionReducer from "./reducers/DistributionReducer";
+
+export const INIT_CATALOG_ARGS = {
+  themes: [],
+};
+
+export const INIT_DATASET_ARGS = {
+  contactPointNames: [],
+  rightses: [],
+};
+
+export const INIT_DISTRIBUTION_ARGS = {};
 
 const Input = styled('input')({});
 
