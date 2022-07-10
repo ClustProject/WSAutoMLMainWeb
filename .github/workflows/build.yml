@@ -16,6 +16,7 @@ jobs:
           distribution: 'corretto'
           cache: gradle
       - name: Gradle 권한 부여
+        working-directory: admin
         run: |
           chmod +x ./gradlew
       - name: Node 설치
