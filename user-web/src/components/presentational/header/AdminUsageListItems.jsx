@@ -1,42 +1,35 @@
-import React, {useState} from "react";
-
-import {Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography} from "@mui/material";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import {ExpandLess, ExpandMore} from "@mui/icons-material";
-import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
+import React from "react";
+import Button from "@mui/material/Button";
+import {Box, Menu, Typography} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 
 export default function AdminUsageListItems() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <List
-      sx={{margin: "20px", maxWidth: 200, bgcolor: 'background.paper'}}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-    >
-      <ListItemButton onClick={() => setOpen(!open)}>
-        <ListItemIcon>
-          <SupervisorAccountIcon/>
-        </ListItemIcon>
-        <ListItemText primary="관리자 기능"/>
-        {open ? <ExpandLess/> : <ExpandMore/>}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <DnsRoundedIcon/>
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography type="body2" style={{color: '#000000'}}>
-                  메타데이터
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </List>
-      </Collapse>
-    </List>
+    <Box sx={{
+      margin: "20px"
+    }}>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={(event) => setOpen(event.currentTarget)}
+      >
+        <Typography variant="h6">관리자 기능</Typography>
+      </Button>
+      <Menu
+        id="basic-menu"
+        anchorEl={open}
+        open={open}
+        onClose={() => setOpen(null)}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
+        }}
+      >
+        <MenuItem>메타데이터 관리</MenuItem>
+      </Menu>
+    </Box>
   );
 }
