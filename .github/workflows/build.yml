@@ -16,7 +16,6 @@ jobs:
           distribution: 'corretto'
           cache: gradle
       - name: Gradle 권한 부여
-        working-directory: admin
         run: |
           chmod +x ./gradlew
       - name: Node 설치
@@ -24,14 +23,11 @@ jobs:
         with:
           node-version: 16.14.0
       - name: Gradle 초기화
-        working-directory: admin
         run: |
           ./gradlew clean
       - name: Gradle 테스트
-        working-directory: admin
         run: |
           ./gradlew test
       - name: Gradle 빌드
-        working-directory: admin
         run: |
           ./gradlew build --exclude-task test --scan --no-daemon
