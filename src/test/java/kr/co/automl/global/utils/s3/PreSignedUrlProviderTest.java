@@ -35,7 +35,7 @@ class PreSignedUrlProviderTest {
 
     @Nested
     class getWithFilename_메서드는 {
-       
+
         @Nested
         class 빈_파일이름이_주어질경우 {
 

@@ -2,6 +2,7 @@ package kr.co.automl.global.utils.s3;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
+import kr.co.automl.global.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
@@ -53,7 +54,14 @@ public class PreSignedUrlProvider {
         }
     }
 
+    /**
+     * 키를 리턴합니다. 키는 파일 저장소에서 유일한 값이자 저장되는 파일 이름입니다.
+     * @param filename 파일 이름
+     * @return 키
+     */
     String getKey(String filename) {
-        return filename;
+        String keyPrefix = DateUtils.getFormattedDateString(DateTime.now());
+
+        return keyPrefix + "-" + filename;
     }
 }
