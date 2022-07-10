@@ -71,7 +71,7 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-def frontendDir = "$rootProject.rootDir/frontend"
+def frontendDir = "$rootProject.rootDir/admin-web"
 
 node {
     download = false
