@@ -22,7 +22,6 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
       - name: Docker 이미지 빌드
-        working-directory: admin
         run: |
           ./gradlew bootBuildImage --imageName=app
       - name: ECR 업로드
