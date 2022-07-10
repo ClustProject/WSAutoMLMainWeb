@@ -1,7 +1,6 @@
 import React from 'react'
 
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
 import DashBoardPage from "./pages/dashboard/DashBoardPage";
 import PaperBase from "./components/presentational/PaperBase";
 import NotFound from "./error/NotFound";
@@ -13,6 +12,7 @@ function PageTemplate() {
     <PaperBase>
       <Routes>
         {/* PaperBase에서 props.children으로 들어간다. */}
+        <Route path="/" element={<DashBoardPage/>}/>
         <Route path="/dashboard" element={<DashBoardPage/>}/>
         <Route path="/metadata/*" element={<MetaDataPage/>}/>
         <Route path="/user/*" element={<UserPage/>}/>
@@ -26,7 +26,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage/>}/>
         <Route path="/*" element={<PageTemplate/>}/>
       </Routes>
     </BrowserRouter>
