@@ -197,12 +197,14 @@ export default function MetadataManagementContent() {
           />
 
           <DataInfoContentText name="배포"/>
-          <DataSetTextField
-            name={{eng: 'title', kor: '제목'}}
-            value={distributionState.title}
-            onChange={onChangeDistribution}
+          <TextField
+            id="distribution-title-text-field"
+            label="제목"
+            variant="filled"
+            fullWidth
+            disabled
+            value="파일 업로드 시 자동으로 채워집니다"
           />
-
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDistribution}
@@ -410,7 +412,7 @@ export default function MetadataManagementContent() {
         description: dataSetState.description,
       },
       distribution: {
-        title: distributionState.title,
+        title: file.name,
         description: distributionState.description,
         temporalResolution: distributionState.temporalResolution,
         accurualPeriodicity: distributionState.accurualPeriodicity,
