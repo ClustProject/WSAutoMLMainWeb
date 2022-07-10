@@ -17,7 +17,7 @@ export default function DataSetReducer(state, action) {
   if (type === "data.go.kr") {
     return {
       ...state,
-      name: payload.name,
+      title: payload.name,
       description: payload.description,
       publisher: payload.creator.name,
       keyword: payload.keywords.reduce((acc, cur) => `${acc},${cur}`)
