@@ -4,7 +4,7 @@ import {Box, Link} from "@mui/material";
 
 const contactInfo = {
   "title": "데이터 활용 및 플랫폼 사용 문의",
-  "email": "jypark1@wise.co.kr"
+  "email": "tdchoi@wise.co.kr"
 }
 
 export default function ContactTextBox() {
