@@ -5,7 +5,7 @@ import LinkBox from "./LinkBox";
 
 const linkBoxInfo = [
   {
-    "title": "Data",
+    "title": "Page",
     "links": [
       {"name": "홈페이지"},
       {"name": "데이터 검색"},
