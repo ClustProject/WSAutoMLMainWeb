@@ -8,6 +8,7 @@ import LicenseTextBox from "./LicenseTextBox";
 export default function Footer() {
   return (
     <Box sx={{
+      marginTop: '50px',
       color: 'white',
       backgroundColor: '#2a3eb1',
       height: '425px',

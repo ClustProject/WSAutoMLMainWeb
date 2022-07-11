@@ -16,16 +16,11 @@ export default function MainPageContainer() {
       <MainAppBar/>
       <HomeBanner/>
       <DataTreeMap/>
-      <ContentDivider/>
+      <Divider sx={{
+        margin: "25px"
+      }}/>;
       <ContentMediaCards/>
-      <ContentDivider/>
       <Footer/>
     </>
   );
-}
-
-function ContentDivider() {
-  return <Divider sx={{
-    margin: "25px"
-  }}/>;
 }
