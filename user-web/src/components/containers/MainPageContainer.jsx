@@ -17,7 +17,10 @@ export default function MainPageContainer() {
       <HomeBanner/>
       <DataTreeMap/>
       <Divider sx={{
-        margin: "25px"
+        marginLeft: '15%',
+        marginRight: '15%',
+        marginTop: '35px',
+        marginBottom: '25px',
       }}/>;
       <ContentMediaCards/>
       <Footer/>
