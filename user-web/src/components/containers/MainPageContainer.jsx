@@ -1,11 +1,13 @@
 import React from 'react';
 
+import {Divider} from "@mui/material";
+
 import Header from "../presentational/header/Header";
 import MainAppBar from "../presentational/appbar/MainAppBar";
 import HomeBanner from "../presentational/banner/HomeBanner";
 import DataTreeMap from "../presentational/treemap/DataTreeMap";
-import {Divider} from "@mui/material";
 import ContentMediaCards from "../presentational/cards/ContentMediaCards";
+import Footer from "../presentational/footer/Footer";
 
 export default function MainPageContainer() {
   return (
@@ -14,10 +16,16 @@ export default function MainPageContainer() {
       <MainAppBar/>
       <HomeBanner/>
       <DataTreeMap/>
-      <Divider sx={{
-        margin: '25px'
-      }}/>
+      <ContentDivider/>
       <ContentMediaCards/>
+      <ContentDivider/>
+      <Footer/>
     </>
   );
+}
+
+function ContentDivider() {
+  return <Divider sx={{
+    margin: "25px"
+  }}/>;
 }
