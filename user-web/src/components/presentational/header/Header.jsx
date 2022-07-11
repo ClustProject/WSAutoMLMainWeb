@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Box} from "@mui/material";
-import MainLogoTypography from "./MainLogoTypography";
+import MainLogo from "./MainLogo";
 import AdminUsageListItems from "./AdminUsageListItems";
 
 export default function Header() {
@@ -9,7 +9,7 @@ export default function Header() {
     <Box sx={{
       display: "flex"
     }}>
-      <MainLogoTypography/>
+      <MainLogo/>
       <AdminUsageListItems/>
     </Box>
   );
