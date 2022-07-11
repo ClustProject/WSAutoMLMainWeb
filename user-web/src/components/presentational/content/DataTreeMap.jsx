@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 
+import {Box} from "@mui/material";
+
 import {ResponsiveContainer, Treemap} from "recharts";
 
 /**
@@ -25,19 +27,31 @@ export default function DataTreeMap() {
   }, [])
 
   return (
-    <ResponsiveContainer>
-      <Treemap
-        data={data.filter(it => it.size !== 0)
-          .map(it => {
-            return {
-              size: it.size,
-              name: `${it.name} ${it.size}건`,
-            }
-          })}
-        dataKey="size"
-        ratio={4 / 3}
-        stroke="#fff"
-      />
-    </ResponsiveContainer>
+    <Box sx={{
+      display: 'flex',
+      justifyContent: "center"
+    }}>
+      <Box sx={{
+        width: "50%",
+        height: "350px",
+        marginTop: "25px"
+      }}>
+        <ResponsiveContainer>
+          <Treemap
+            data={
+              data.filter(it => it.size !== 0)
+                .map(it => {
+                  return {
+                    size: it.size,
+                    name: `${it.name} ${it.size}건`,
+                  }
+                })}
+            dataKey="size"
+            ratio={4 / 3}
+            stroke="#fff"
+          />
+        </ResponsiveContainer>
+      </Box>
+    </Box>
   );
 }

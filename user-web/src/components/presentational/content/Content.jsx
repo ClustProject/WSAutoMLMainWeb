@@ -1,22 +1,19 @@
 import React from "react";
 
-import {Box} from "@mui/material";
+import {Divider} from "@mui/material";
 import DataTreeMap from "./DataTreeMap";
+import ContentMediaCards from "./ContentMediaCards";
 
 export default function Content() {
   return (
     <>
-      <Box sx={{
-        display: 'flex',
-        justifyContent: "center"
-      }}>
-        <Box sx={{
-          width: "80%",
-          height: "500px",
-        }}>
-          <DataTreeMap/>
-        </Box>
-      </Box>
+      <DataTreeMap/>
+
+      <Divider sx={{
+        margin: '25px'
+      }}/>
+
+      <ContentMediaCards/>
     </>
   )
 }
