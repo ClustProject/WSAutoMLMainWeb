@@ -14,7 +14,7 @@ export default function ClustImageCard() {
           component="img"
           height="140"
           image="/static/images/cards/empty.png"
-          alt="green iguana"
+          alt="CLUST IMAGE"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
