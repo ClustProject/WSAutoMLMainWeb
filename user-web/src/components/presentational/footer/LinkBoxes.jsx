@@ -54,7 +54,6 @@ const linkBoxInfo = [
 export default function LinkBoxes() {
   return (
     <Box sx={{
-      color: 'white',
       fontWeight: 'bold',
       display: 'flex',
       justifyContent: 'center',
