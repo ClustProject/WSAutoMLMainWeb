@@ -3,7 +3,9 @@ import React from 'react';
 import Header from "../presentational/header/Header";
 import MainAppBar from "../presentational/appbar/MainAppBar";
 import HomeBanner from "../presentational/banner/HomeBanner";
-import Content from "../presentational/content/Content";
+import DataTreeMap from "../presentational/treemap/DataTreeMap";
+import {Divider} from "@mui/material";
+import ContentMediaCards from "../presentational/cards/ContentMediaCards";
 
 export default function MainPageContainer() {
   return (
@@ -11,7 +13,11 @@ export default function MainPageContainer() {
       <Header/>
       <MainAppBar/>
       <HomeBanner/>
-      <Content/>
+      <DataTreeMap/>
+      <Divider sx={{
+        margin: '25px'
+      }}/>
+      <ContentMediaCards/>
     </>
   );
 }
