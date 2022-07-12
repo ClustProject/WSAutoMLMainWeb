@@ -3,25 +3,15 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DataUtilizationMenus from "./DataUtilizationMenus";
+import LoginButton from "./LoginButton";
 
-function LoginButton(props) {
-  return (
-    <Button
-      key="로그인"
-      sx={props.sx}
-    >
-      로그인
-    </Button>
-  );
-}
+const pages = ['홈페이지', '데이터 검색'];
+const buttonSx = {
+  my: 2, // margin top,bottom
+  color: 'white'
+};
 
 export default function MainAppBar() {
-  const pages = ['홈페이지', '데이터 검색'];
-  const buttonSx = {
-    my: 2,
-    color: 'white'
-  };
-
   return (
     <AppBar position="static">
       <Box sx={{
