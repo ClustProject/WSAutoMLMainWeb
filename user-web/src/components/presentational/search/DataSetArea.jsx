@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Box} from "@mui/material";
+import {Box, Pagination, Stack} from "@mui/material";
 import DataSetCards from "./DataSetCards";
 import DataSetCountText from "./DataSetCountText";
 
@@ -14,7 +14,16 @@ export default function DataSetArea() {
       }}>
         <DataSetCountText/>
         <DataSetCards/>
+        <TemporaryPagination/>
       </Box>
     </>
+  );
+}
+
+function TemporaryPagination() {
+  return (
+    <Stack spacing={2}>
+      <Pagination count={10} color="primary" disabled/>
+    </Stack>
   );
 }
