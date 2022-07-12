@@ -5,7 +5,17 @@ import Button from '@mui/material/Button';
 import DataUtilizationMenus from "./DataUtilizationMenus";
 import LoginButton from "./LoginButton";
 
-const pages = ['홈페이지', '데이터 검색'];
+const pages = [
+  {
+    "name": '홈페이지',
+    "link": "/"
+  },
+  {
+    "name": '데이터 검색',
+    "link": "/search"
+  }
+];
+
 const buttonSx = {
   my: 2, // margin top,bottom
   color: 'white'
@@ -23,10 +33,11 @@ export default function MainAppBar() {
         }}>
           {pages.map((page) => (
             <Button
-              key={page}
+              key={page.name}
               sx={buttonSx}
+              onClick={() => window.location.href = page.link}
             >
-              {page}
+              {page.name}
             </Button>
           ))}
           <DataUtilizationMenus/>
