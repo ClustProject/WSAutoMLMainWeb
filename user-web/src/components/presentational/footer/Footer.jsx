@@ -12,12 +12,15 @@ export default function Footer() {
       color: 'white',
       backgroundColor: '#2a3eb1',
       height: '425px',
-      textAlign: 'center',
     }}>
       <LinkBoxes/>
       <Divider/>
-      <ContactTextBox/>
-      <LicenseTextBox/>
+      <Box sx={{
+        textAlign: 'center',
+      }}>
+        <ContactTextBox/>
+        <LicenseTextBox/>
+      </Box>
     </Box>
   );
 }
