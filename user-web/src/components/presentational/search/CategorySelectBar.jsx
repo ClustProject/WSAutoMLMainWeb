@@ -73,39 +73,37 @@ export default function CategorySelectBar() {
       width: '25%',
       border: '1px solid gray'
     }}>
-      <nav aria-label="secondary mailbox folders">
-        {categories.map(category => (
-          <List
-            subheader={
-              <ListSubheader component="div" id="nested-list-subheader" sx={{
-                backgroundColor: '#6573c3',
-                color: 'white'
-              }}>
-                <Typography variant="h5">
-                  {category.name}
-                </Typography>
-              </ListSubheader>
-            }
-          >
+      {categories.map(category => (
+        <List
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader" sx={{
+              backgroundColor: '#6573c3',
+              color: 'white'
+            }}>
+              <Typography variant="h5">
+                {category.name}
+              </Typography>
+            </ListSubheader>
+          }
+        >
 
-            {category.children.map(children => (
-              <>
-                <Divider/>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary={children.name}/>
-                    <ListItemText primary={children.count} sx={{
-                      textAlign: "right"
-                    }}/>
-                  </ListItemButton>
-                </ListItem>
-              </>
-            ))}
-          </List>
+          {category.children.map(children => (
+            <>
+              <Divider/>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemText primary={children.name}/>
+                  <ListItemText primary={children.count} sx={{
+                    textAlign: "right"
+                  }}/>
+                </ListItemButton>
+              </ListItem>
+            </>
+          ))}
+        </List>
 
-        ))}
+      ))}
 
-      </nav>
     </Box>
   );
 }
