@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../presentational/global/header/Header";
 import MainAppBar from "../presentational/global/appbar/MainAppBar";
-import {Container, Divider} from "@mui/material";
+import {Box, Container, Divider} from "@mui/material";
 import SearchBar from "../presentational/search/SearchBar";
+import CategorySelectBar from "../presentational/search/CategorySelectBar";
 
 const marginSize = '25px';
 
@@ -21,6 +22,11 @@ export default function SearchPageContainer() {
           sx={{
             my: marginSize
           }}/>
+        <Box sx={{
+          display: 'flex',
+        }}>
+          <CategorySelectBar/>
+        </Box>
       </Container>
     </>
   );
