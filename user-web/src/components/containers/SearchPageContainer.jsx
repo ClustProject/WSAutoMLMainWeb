@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "../presentational/header/Header";
-import MainAppBar from "../presentational/appbar/MainAppBar";
+import Header from "../presentational/global/header/Header";
+import MainAppBar from "../presentational/global/appbar/MainAppBar";
 import {Container, Divider} from "@mui/material";
 import SearchBar from "../presentational/search/SearchBar";
 
