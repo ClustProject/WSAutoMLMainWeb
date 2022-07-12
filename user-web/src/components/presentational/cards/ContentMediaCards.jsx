@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Box} from "@mui/material";
+import {Box, CardActionArea} from "@mui/material";
 
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -46,10 +46,10 @@ export default function ContentMediaCards() {
 
 function ContentMediaCard(props) {
   return (
-    <Box sx={{
-      width: "29%",
+    <Card sx={{
+      width: '29%'
     }}>
-      <Card>
+      <CardActionArea>
         <CardMedia
           component="img"
           image={props.image}
@@ -65,8 +65,8 @@ function ContentMediaCard(props) {
             {props.name}
           </Typography>
         </CardContent>
-      </Card>
-    </Box>
+      </CardActionArea>
+    </Card>
   );
 }
 
