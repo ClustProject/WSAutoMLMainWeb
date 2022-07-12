@@ -4,6 +4,7 @@ import MainAppBar from "../presentational/global/appbar/MainAppBar";
 import {Box, Container, Divider} from "@mui/material";
 import SearchBar from "../presentational/search/SearchBar";
 import CategorySelectBar from "../presentational/search/CategorySelectBar";
+import DataSetArea from "../presentational/search/DataSetArea";
 
 const marginSize = '25px';
 
@@ -26,6 +27,7 @@ export default function SearchPageContainer() {
           display: 'flex',
         }}>
           <CategorySelectBar/>
+          <DataSetArea/>
         </Box>
       </Container>
     </>

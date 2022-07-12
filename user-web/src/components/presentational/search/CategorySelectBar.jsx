@@ -10,7 +10,7 @@ import {Divider, ListSubheader, Typography} from "@mui/material";
 const categories = [
   {
     "name": "도메인", children: [
-      {"name": "대기 환경", "count": 0},
+      {"name": "대기 환경", "count": 10},
       {"name": "농장", "count": 0},
       {"name": "공장", "count": 0},
       {"name": "생체", "count": 0},
