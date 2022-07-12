@@ -1,5 +1,4 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuItem from "@mui/material/MenuItem";
@@ -62,9 +61,7 @@ export default function DataUtilizationMenus() {
   };
 
   return (
-    <Box sx={{
-      marginTop: "16px"
-    }}>
+    <>
       <Button
         id="demo-customized-button"
         aria-controls={open ? 'demo-customized-menu' : undefined}
@@ -95,6 +92,6 @@ export default function DataUtilizationMenus() {
           시각화(예정)
         </MenuItem>
       </StyledMenu>
-    </Box>
+    </>
   );
 }
