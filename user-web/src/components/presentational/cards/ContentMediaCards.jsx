@@ -1,11 +1,7 @@
 import React from "react";
 
-import {Box, CardActionArea} from "@mui/material";
-
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import {Box} from "@mui/material";
+import ContentMediaCard from "./ContentMediaCard";
 
 const cardInfo = [
   {
@@ -43,30 +39,3 @@ export default function ContentMediaCards() {
       </Box></Box>
   );
 }
-
-function ContentMediaCard(props) {
-  return (
-    <Card sx={{
-      width: '29%'
-    }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          image={props.image}
-          alt={props.name}
-          sx={{
-            height: "230px"
-          }}
-        />
-        <CardContent>
-          <Typography variant="h5" sx={{
-            textAlign: "center"
-          }}>
-            {props.name}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
-}
-
