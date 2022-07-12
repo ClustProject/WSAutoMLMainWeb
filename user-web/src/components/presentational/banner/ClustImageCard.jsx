@@ -13,7 +13,7 @@ export default function ClustImageCard() {
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/empty.png"
+          image="/static/images/cards/clust.jpg"
           alt="CLUST IMAGE"
         />
         <CardContent>
