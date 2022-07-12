@@ -17,8 +17,7 @@ export default function MainPageContainer() {
       <HomeBanner/>
       <DataTreeMap/>
       <Divider sx={{
-        marginLeft: '15%',
-        marginRight: '15%',
+        mx: '15%',
         marginTop: '35px',
         marginBottom: '25px',
       }}/>;

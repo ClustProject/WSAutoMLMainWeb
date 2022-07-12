@@ -12,8 +12,7 @@ export default function IntroduceCommentBox() {
         Welcome to WS-AutoML.co.kr
       </Typography>
       <Divider sx={{
-        marginTop: "10px",
-        marginBottom: "10px",
+        my: "10px",
         border: 1,
         borderColor: "white"
       }}/>
