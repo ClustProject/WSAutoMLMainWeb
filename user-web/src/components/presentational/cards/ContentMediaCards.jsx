@@ -13,7 +13,7 @@ const cardInfo = [
     image: "/static/images/cards/search.jpg"
   },
   {
-    name: "모델 학습",
+    name: "모델 학습(예정)",
     image: "/static/images/cards/ai.jpeg"
   },
   {
