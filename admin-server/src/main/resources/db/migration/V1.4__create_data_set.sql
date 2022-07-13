@@ -1,4 +1,4 @@
-CREATE TABLE DATA_SET
+CREATE TABLE data_set
 (
     DATASET_ID      BIGINT NOT NULL,
     ISSUED          DATE,
