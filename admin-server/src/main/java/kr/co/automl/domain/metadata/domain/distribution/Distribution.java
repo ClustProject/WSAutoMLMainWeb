@@ -40,6 +40,7 @@ public class Distribution {
 
     private String accurualPeriodicity;
 
+    @Column(name = "spatials") // spatial은 DB 예약어
     private String spatial;
     private String temporal;
 
