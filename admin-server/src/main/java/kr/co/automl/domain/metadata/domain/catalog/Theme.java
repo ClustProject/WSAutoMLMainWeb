@@ -1,9 +1,7 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
-import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchThemeException;
 import kr.co.automl.global.utils.EntityEnumerable;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -32,20 +30,6 @@ public enum Theme implements EntityEnumerable {
 
     Theme(String name) {
         this.name = name;
-    }
-
-    /**
-     * 이름으로 찾은 주제를 찾아 리턴합니다.
-     * @param name 찾을 주제 이름
-     * @return 찾은 주제
-     *
-     * @throws CannotFindMatchThemeException 이름으로 주제를 찾지 못한 경우
-     */
-    public static Theme ofName(String name) {
-        return Arrays.stream(values())
-                .filter(theme -> theme.matchName(name))
-                .findFirst()
-                .orElseThrow(() -> new CannotFindMatchThemeException(name));
     }
 
     /**

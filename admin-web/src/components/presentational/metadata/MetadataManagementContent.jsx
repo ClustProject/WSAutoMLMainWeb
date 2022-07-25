@@ -446,7 +446,15 @@ export default function MetadataManagementContent() {
       .catch(err => {
         if (err.response.data.errors) {
           alert(err.response.data.errors[0].defaultMessage);
+          return;
         }
+
+        if (err.response.data.message) {
+          alert(err.response.data.message);
+          return;
+        }
+
+        alert("예상치 못한 에러가 발생했습니다. 관리자에게 문의하세요");
       })
 
   }
