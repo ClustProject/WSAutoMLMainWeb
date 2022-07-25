@@ -2,12 +2,12 @@ import React from 'react';
 
 import {Divider} from "@mui/material";
 
-import Header from "../presentational/header/Header";
-import MainAppBar from "../presentational/appbar/MainAppBar";
-import HomeBanner from "../presentational/banner/HomeBanner";
-import DataTreeMap from "../presentational/treemap/DataTreeMap";
-import ContentMediaCards from "../presentational/cards/ContentMediaCards";
-import Footer from "../presentational/footer/Footer";
+import Header from "../presentational/global/header/Header";
+import MainAppBar from "../presentational/global/appbar/MainAppBar";
+import HomeBanner from "../presentational/main/banner/HomeBanner";
+import DataTreeMap from "../presentational/main/treemap/DataTreeMap";
+import ContentMediaCards from "../presentational/main/cards/ContentMediaCards";
+import Footer from "../presentational/global/footer/Footer";
 
 export default function MainPageContainer() {
   return (
