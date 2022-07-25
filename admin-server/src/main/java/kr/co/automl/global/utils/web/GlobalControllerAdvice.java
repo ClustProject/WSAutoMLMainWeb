@@ -1,21 +1,35 @@
 package kr.co.automl.global.utils.web;
 
+import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchCategoryException;
+import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchContactNameException;
+import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchCreatorException;
+import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchRightsException;
+import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchTypeException;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
+import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotFindUserException;
 import kr.co.automl.global.utils.web.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ExceptionHandler({
-            CannotFindUserException.class,
-            AlreadyAdminRoleException.class
-    })
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({
+            CannotFindMatchCategoryException.class,
+            CannotFindMatchThemeException.class,
+            CannotFindMatchContactNameException.class,
+            CannotFindMatchCreatorException.class,
+            CannotFindMatchRightsException.class,
+            CannotFindMatchTypeException.class,
+            AlreadyAdminRoleException.class,
+            CannotChangeAdminRoleException.class,
+            CannotFindUserException.class,
+    })
     public ErrorResponse responseBadRequestAndReturnErrorResponse(
             RuntimeException runtimeException
     ) {
