@@ -3,15 +3,14 @@ package kr.co.automl.domain.metadata.domain.dataset;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchContactNameException;
 import lombok.EqualsAndHashCode;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 @EqualsAndHashCode
 public class ContactPoints {
-    private final List<ContactPoint> contactPoints;
+    private final Set<ContactPoint> contactPoints;
 
     public ContactPoints(ContactPoint... contactPoints) {
-        this.contactPoints = Arrays.asList(contactPoints);
+        this.contactPoints = Set.of(contactPoints);
     }
 
     public static ContactPoints ofWiseITech() {
