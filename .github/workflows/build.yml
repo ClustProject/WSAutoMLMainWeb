@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 분석의 더 나은 관련성을 위해 얕은 클론을 비활성화해야합니다.
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
