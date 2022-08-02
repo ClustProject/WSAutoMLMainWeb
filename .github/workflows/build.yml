@@ -15,25 +15,50 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
           cache: gradle
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
+
       - name: Gradle 권한 부여
         run: |
           chmod +x ./gradlew
+
       - name: Node 설치
         uses: actions/setup-node@v3
         with:
           node-version: 16.14.0
+
       - name: Gradle 초기화
         run: |
           ./gradlew clean
+
       - name: Gradle 테스트
         run: |
           ./gradlew test
+
+      - name: Gradle 빌드
+        run: |
+          ./gradlew build --exclude-task test --scan --no-daemon
+
       - name: 커버리지 codecov에 업로드
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./admin-server/build/reports/jacoco/test/jacocoTestReport.xml
 
-      - name: Gradle 빌드
-        run: |
-          ./gradlew build --exclude-task test --scan --no-daemon
+      - name: 소나큐브 분석 실행
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: ./gradlew sonarqube --info
