@@ -2,12 +2,11 @@ name: build
 
 on:
   pull_request_target:
-    types: [ labeled ]
+    branches: [ main ]
 
 jobs:
   gradle:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'safe to test')
     steps:
       - uses: actions/checkout@v3
         with:
