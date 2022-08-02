@@ -50,18 +50,14 @@ jobs:
         run: |
           ./gradlew test
 
-      - name: Gradle 빌드
-        run: |
-          ./gradlew build --exclude-task test --scan --no-daemon
-
       - name: 커버리지 codecov에 업로드
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./admin-server/build/reports/jacoco/test/jacocoTestReport.xml
 
-      - name: 소나큐브 분석 실행
+      - name: Gradle 빌드 및 소나큐브 분석 실행
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew sonarqube --info
+        run: ./gradlew build --exclude-task test --scan --no-daemon sonarqube --info
