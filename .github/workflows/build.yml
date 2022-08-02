@@ -28,6 +28,12 @@ jobs:
       - name: Gradle 테스트
         run: |
           ./gradlew test
+      - name: 커버리지 codecov에 업로드
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./admin-server/build/reports/jacoco/test/jacocoTestReport.xml
+
       - name: Gradle 빌드
         run: |
           ./gradlew build --exclude-task test --scan --no-daemon

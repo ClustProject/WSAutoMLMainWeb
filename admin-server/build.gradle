@@ -11,6 +11,7 @@ plugins {
     id "com.github.node-gradle.node" version "3.3.0"
     id 'org.asciidoctor.convert' version '2.4.0'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'jacoco'
 }
 
 group = 'kr.or.automl'
@@ -115,3 +116,27 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 //querydsl 추가 끝
+
+jacoco {
+    // JaCoCo 버전
+    toolVersion = '0.8.7'
+
+//  테스트결과 리포트를 저장할 경로 변경
+//  default는 "$/jacoco"
+}
+
+jacocoTestReport {
+    reports {
+        // 원하는 리포트를 켜고 끌 수 있습니다.
+        html.enabled true
+        xml.enabled true
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+test {
+    useJUnitPlatform()
+
+    finalizedBy 'jacocoTestReport'
+}
