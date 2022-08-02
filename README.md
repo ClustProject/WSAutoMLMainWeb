@@ -1,7 +1,10 @@
 # AutoMLMainWeb
 
-![https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build](https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+어드민 서버
+
+![https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build](https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build)
 
 ### 소개
 
