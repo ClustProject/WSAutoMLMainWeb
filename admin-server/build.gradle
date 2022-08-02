@@ -12,15 +12,6 @@ plugins {
     id 'org.asciidoctor.convert' version '2.4.0'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'jacoco'
-    id "org.sonarqube" version "3.4.0.2513"
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
-        property "sonar.organization", "wise-pangnem"
-        property "sonar.host.url", "https://sonarcloud.io"
-    }
 }
 
 group = 'kr.or.automl'
