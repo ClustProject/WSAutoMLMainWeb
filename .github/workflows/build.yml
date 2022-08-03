@@ -2,8 +2,8 @@ name: build
 
 on:
   pull_request:
-    branches: [ main ]
-
+    types: [ opened, synchronize, reopened ]
+   
 jobs:
   gradle:
     runs-on: ubuntu-latest
