@@ -6,4 +6,6 @@ public interface DataSetRepository {
     DataSet save(DataSet dataSet);
 
     List<DataSet> findAll();
+
+    void deleteAll();
 }
