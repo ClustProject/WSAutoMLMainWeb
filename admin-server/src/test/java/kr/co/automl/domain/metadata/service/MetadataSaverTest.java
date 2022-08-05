@@ -37,11 +37,11 @@ class MetadataSaverTest {
                     .build();
             Pageable pageable = PageRequest.of(0, 10);
 
-            assertThat(dataSetRepository.findAllDataSets(pageable)).isEmpty();
+            assertThat(dataSetRepository.findAll(pageable)).isEmpty();
 
             metadataSaver.save(attributes);
 
-            assertThat(dataSetRepository.findAllDataSets(pageable)).hasSize(1);
+            assertThat(dataSetRepository.findAll(pageable)).hasSize(1);
         }
     }
 }

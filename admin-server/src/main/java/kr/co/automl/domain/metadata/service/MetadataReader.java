@@ -22,7 +22,7 @@ public class MetadataReader {
     }
 
     public List<MetadataResponse> readAll(Pageable pageable) {
-        List<DataSet> allDataSets = dataSetQueryRepository.findAllDataSets(pageable);
+        List<DataSet> allDataSets = dataSetQueryRepository.findAll(pageable);
 
         return allDataSets.stream()
                 .map(MetadataResponse::from)

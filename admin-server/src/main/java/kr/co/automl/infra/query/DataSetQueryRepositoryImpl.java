@@ -20,7 +20,7 @@ public class DataSetQueryRepositoryImpl implements DataSetQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<DataSet> findAllDataSets(Pageable pageable) {
+    public List<DataSet> findAll(Pageable pageable) {
         return queryFactory
                 .selectFrom(dataSet)
                 .join(dataSet.catalog, catalog).fetchJoin()
