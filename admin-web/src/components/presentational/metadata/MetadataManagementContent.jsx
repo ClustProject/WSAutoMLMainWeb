@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, useState} from 'react';
-import {createMetadata, getMetadatas} from "../../../api/metadata";
+import {createMetadata, deleteMetadata, getMetadatas} from "../../../api/metadata";
 import {
   Button,
   Checkbox,
@@ -102,12 +102,28 @@ export default function MetadataManagementContent() {
 
   const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
 
+  const [selectedIds, setSelectedIds] = React.useState([]);
+
   return (
     <>
-      <Button variant="outlined" sx={{
-        marginBottom: 2,
-      }} onClick={() => setInputLinkDialogOpen(true)}>
+      <Button variant="outlined" onClick={() => setInputLinkDialogOpen(true)}>
         업로드
+      </Button>
+      <Button variant="outlined" color="error" sx={{
+        margin: 2
+      }} onClick={() => {
+        if (selectedIds.length === 0) {
+          return;
+        }
+
+        deleteMetadata(selectedIds)
+          .then(() => {
+            alert("삭제 완료")
+            window.location.reload()
+          })
+      }
+      }>
+        삭제하기
       </Button>
       <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
         <DialogTitle>링크 입력</DialogTitle>
@@ -300,13 +316,12 @@ export default function MetadataManagementContent() {
         page={page}
         pageSize={DISPLAY_COUNT}
         rowsPerPageOptions={[DISPLAY_COUNT]}
-        // checkboxSelection
-        // disableSelectionOnClick
+        disableSelectionOnClick
         paginationMode="server" // 서버에서 페이지네이션을 처리하므로 필수 옵션
         onPageChange={newPage => {
           getMetadatas(newPage, DISPLAY_COUNT)
-            .then(data => {
-              setData(data)
+            .then(it => {
+              setData(it)
               setPage(newPage)
             })
         }}
@@ -314,6 +329,9 @@ export default function MetadataManagementContent() {
           pagination: {
             page: DEFAULT_PAGE_COUNT
           }
+        }}
+        onSelectionModelChange={(ids) => {
+          setSelectedIds(ids);
         }}
       />
     </>

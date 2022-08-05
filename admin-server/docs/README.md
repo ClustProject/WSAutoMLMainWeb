@@ -7,3 +7,4 @@
 - [메타데이터 생성](api/post-metadata.adoc)
 - [메타데이터 목록 조회](api/get-metadata.adoc)
 - [presigned url 조회](api/get-presigned-url.adoc)
+- [메타데이터 단일 삭제](api/delete-metadata.adoc)
