@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const DATA_GO_KR_URL_REGEX = new RegExp("data.go.kr/data/[0-9]+");
-const DATA_GO_KR_ID_REGEX = new RegExp("[0-9]+");
+const DATA_GO_KR_URL_REGEX = /data.go.kr\/data\/\d+/;
+const DATA_GO_KR_ID_REGEX = /\d+/;
 
 /**
  * 스크래핑한 JSON 결과를 리턴합니다.
