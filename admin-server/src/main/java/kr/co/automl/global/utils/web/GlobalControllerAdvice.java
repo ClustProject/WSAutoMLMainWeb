@@ -2,6 +2,7 @@ package kr.co.automl.global.utils.web;
 
 import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchCategoryException;
 import kr.co.automl.domain.metadata.domain.catalog.exceptions.CannotFindMatchThemeException;
+import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindDataSetException;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchContactNameException;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchCreatorException;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchRightsException;
@@ -28,7 +29,7 @@ public class GlobalControllerAdvice {
             CannotFindMatchTypeException.class,
             AlreadyAdminRoleException.class,
             CannotChangeAdminRoleException.class,
-            CannotFindUserException.class,
+            CannotFindUserException.class
     })
     public ErrorResponse responseBadRequestAndReturnErrorResponse(
             RuntimeException runtimeException
@@ -36,4 +37,13 @@ public class GlobalControllerAdvice {
         return new ErrorResponse(runtimeException.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({
+            CannotFindDataSetException.class
+    })
+    public ErrorResponse responseNotFoundAndReturnErrorResponse(
+            RuntimeException runtimeException
+    ) {
+        return new ErrorResponse(runtimeException.getMessage());
+    }
 }

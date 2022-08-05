@@ -1,0 +1,16 @@
+== `DELETE /metadata/{id}` - 메타데이터 단일 삭제
+
+=== 허용되지 않은 권한을 가진 유저의 요청과 응답
+
+include::{snippets}/delete-metadata-with-no-permission-user/http-request.adoc[]
+include::{snippets}/delete-metadata-with-no-permission-user/http-response.adoc[]
+
+=== 존재하지 않는 아이디가 주어진 경우의 요청과 응답
+
+include::{snippets}/delete-metadata-with-not-exist-id/http-request.adoc[]
+include::{snippets}/delete-metadata-with-not-exist-id/http-response.adoc[]
+
+=== 허용된 권한을 가진 유저의 요청과 응답
+
+include::{snippets}/delete-metadata/http-request.adoc[]
+include::{snippets}/delete-metadata/http-response.adoc[]

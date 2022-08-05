@@ -34,7 +34,7 @@ public class DataSetTest {
     }
 
     public static DataSet createDefaultFixtureWithId(Long id) {
-        return DataSet.builder()
+        DataSet dataSet = DataSet.builder()
                 .id(id)
                 .title("데이터셋 이름")
                 .organization(OrganizationTest.ORGANIZATION1)
@@ -43,6 +43,13 @@ public class DataSetTest {
                 .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
                 .description("데이터셋 설명")
                 .build();
+
+        Catalog catalog = CatalogTest.createDefaultFixture();
+        Distribution distribution = DistributionTest.createDefaultFixture();
+
+        dataSet.setRelation(catalog, distribution);
+
+        return dataSet;
     }
 
     @Test
