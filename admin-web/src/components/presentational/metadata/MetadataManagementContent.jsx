@@ -165,15 +165,18 @@ export default function MetadataManagementContent() {
             name={{eng: 'category', kor: '카테고리'}}
             onChange={onChangeCatalog}
             list={Object.keys(CATEGORY_THEME_MAP)}
+            value={catalogState.category}
           />
           <DataSetSelect
             name={{eng: 'theme', kor: '주제'}}
             onChange={onChangeCatalog}
             list={catalogState.themes}
+            value={catalogState.theme}
           />
           <DataSetTextField
             name={{eng: 'themeTaxonomy', kor: '주제 분류'}}
             onChange={onChangeCatalog}
+            value={catalogState.themeTaxonomy}
           />
 
           <DataInfoContentText name="데이터셋"/>
@@ -191,6 +194,7 @@ export default function MetadataManagementContent() {
             name={{eng: 'creator', kor: '생성 기관'}}
             onChange={onChangeDataSet}
             list={Object.keys(CREATOR_CONTACT_POINT_NAME_MAP)}
+            value={dataSetState.creator}
           />
           <DataSetSelect
             name={{eng: 'contactPointName', kor: '담당자 이름'}}
@@ -211,11 +215,13 @@ export default function MetadataManagementContent() {
             name={{eng: 'license', kor: '라이센스'}}
             onChange={onChangeDataSet}
             list={Object.keys(LICENSE_RIGHTS_MAP)}
+            value={dataSetState.license}
           />
           <DataSetSelect
             name={{eng: 'rights', kor: '권한'}}
             onChange={onChangeDataSet}
             list={dataSetState.rightses}
+            value={dataSetState.rights}
           />
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
@@ -232,9 +238,11 @@ export default function MetadataManagementContent() {
             disabled
             value="파일 업로드 시 자동으로 채워집니다"
           />
+
           <DataSetTextField
             name={{eng: 'description', kor: '설명'}}
             onChange={onChangeDistribution}
+            value={distributionState.description}
           />
 
           <TextField
@@ -249,19 +257,23 @@ export default function MetadataManagementContent() {
           <DataSetTextField
             name={{eng: 'temporalResolution', kor: '측정 단위'}}
             onChange={onChangeDistribution}
+            value={distributionState.temporalResolution}
           />
 
           <DataSetTextField
             name={{eng: 'accurualPeriodicity', kor: '제공 주기'}}
             onChange={onChangeDistribution}
+            value={distributionState.accurualPeriodicity}
           />
           <DataSetTextField
             name={{eng: 'spatial', kor: '공간 정보'}}
             onChange={onChangeDistribution}
+            value={distributionState.spatial}
           />
           <DataSetTextField
             name={{eng: 'temporal', kor: '시간 정보'}}
             onChange={onChangeDistribution}
+            value={distributionState.temporal}
           />
 
           <label htmlFor="file">
@@ -316,6 +328,7 @@ export default function MetadataManagementContent() {
         page={page}
         pageSize={DISPLAY_COUNT}
         rowsPerPageOptions={[DISPLAY_COUNT]}
+        checkboxSelection={true}
         disableSelectionOnClick
         paginationMode="server" // 서버에서 페이지네이션을 처리하므로 필수 옵션
         onPageChange={newPage => {
@@ -361,6 +374,43 @@ export default function MetadataManagementContent() {
 
   async function handleInputLinkDialogNext() {
     const url = document.getElementById("sourceUrl").value;
+
+    if (url.startsWith("http://data.ex.co.kr")) {
+      dispatchCatalog({
+        type: "data.ex.co.kr"
+      })
+
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=79&requestfrom=datase") {
+        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+          type: "data-ex-79"
+        }))
+      }
+
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=datase") {
+        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+          type: 'data-ex-78'
+        }))
+      }
+
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=datase") {
+        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+          type: 'data-ex-38'
+        }))
+      }
+
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=23&requestfrom=datase") {
+        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+          type: 'data-ex-23'
+        }))
+      }
+    }
+
+    if (url === "https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tabNo=1") {
+      [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => it({
+        type: 'data-kma-36'
+      }))
+    }
+
 
     const result = await scrap(url);
 

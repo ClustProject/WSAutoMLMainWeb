@@ -10,6 +10,24 @@ export default function CatalogReducer(state, action) {
     }
   }
 
+  if (type === "data.ex.co.kr") {
+    return {
+      category: "오픈데이터",
+      themes: CATEGORY_THEME_MAP.오픈데이터,
+      theme: "교통",
+      themeTaxonomy: "국내 교통"
+    }
+  }
+
+  if (type === "data-kma-36") {
+    return {
+      category: "대기 환경",
+      themes: CATEGORY_THEME_MAP["대기 환경"],
+      theme: "공기질",
+      themeTaxonomy: "실외 대기"
+    }
+  }
+
   if (payload.name === "category") {
     return {
       ...state,
@@ -20,6 +38,6 @@ export default function CatalogReducer(state, action) {
 
   return {
     ...state,
-    [payload.name]: payload.value
+    [payload.name]: payload.value,
   }
 }
