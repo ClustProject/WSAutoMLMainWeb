@@ -18,8 +18,9 @@ export default function DataSetSelect(props) {
         name={eng} // note: reducer에서 해당 값을 쓰고있음
         fullWidth
         onChange={props.onChange}
+        value={props.value}
       >
-        {props.list.map(it => (
+        {props.list && props.list.map(it => (
           <MenuItem value={it}>{it} </MenuItem>
         ))}
       </Select>
