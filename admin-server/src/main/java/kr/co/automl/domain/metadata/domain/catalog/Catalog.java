@@ -60,8 +60,8 @@ public class Catalog {
      * @return 생성한 카탈로그
      */
     public static Catalog from(CreateCatalogAttributes attributes) {
-        Category category = Category.ofName(attributes.categoryName());
-        Theme theme = category.findThemeByName(attributes.themeName());
+        Category category = Category.ofName(attributes.category());
+        Theme theme = category.findThemeByName(attributes.theme());
 
         return Catalog.builder()
                 .category(category)

@@ -475,29 +475,15 @@ export default function MetadataManagementContent() {
 
     const createMetadataAttributes = {
       catalog: {
-        categoryName: catalogState.category,
-        themeName: catalogState.theme,
-        themeTaxonomy: catalogState.themeTaxonomy
+        ...catalogState
       },
       dataset: {
-        creator: dataSetState.creator,
-        contactPointName: dataSetState.contactPointName,
-        type: dataSetState.type,
-        title: dataSetState.title,
-        publisher: dataSetState.publisher,
-        keyword: dataSetState.keyword,
-        license: dataSetState.license,
-        rights: dataSetState.rights,
-        description: dataSetState.description,
+        ...dataSetState
       },
       distribution: {
+        ...distributionState,
         title: file.name,
-        description: distributionState.description,
-        temporalResolution: distributionState.temporalResolution,
-        accurualPeriodicity: distributionState.accurualPeriodicity,
-        spatial: distributionState.spatial,
-        temporal: distributionState.temporal,
-        downloadUrl: downloadUrl
+        downloadUrl
       }
     }
 
