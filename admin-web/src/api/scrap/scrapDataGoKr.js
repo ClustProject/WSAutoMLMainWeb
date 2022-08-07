@@ -6,15 +6,11 @@ const DATA_GO_KR_ID_REGEX = /\d+/;
 /**
  * 스크래핑한 JSON 결과를 리턴합니다.
  */
-export async function scrap(url) {
-  if (!matchDataGoKrUrlRegex(url)) {
-    return;
-  }
+export async function scrapDataGoKr(url) {
+  const id = extractIdFromUrl(url);
+  const catalogUrl = `https://www.data.go.kr/catalog/${id}/fileData.json`;
 
-  const extractedId = extractIdFromUrl(url);
-  const dataGoKrCatalogUrl = `https://www.data.go.kr/catalog/${extractedId}/fileData.json`;
-
-  return axios.get(dataGoKrCatalogUrl)
+  return axios.get(catalogUrl)
     .then(response => response.data)
 }
 
@@ -23,7 +19,6 @@ export function extractIdFromUrl(url) {
     .find(it => DATA_GO_KR_ID_REGEX.test(it))
 }
 
-export function matchDataGoKrUrlRegex(url) {
+export function matchDataGoKrUrl(url) {
   return DATA_GO_KR_URL_REGEX.test(url);
 }
-

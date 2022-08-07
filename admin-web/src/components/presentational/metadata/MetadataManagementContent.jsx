@@ -30,7 +30,7 @@ import {getPreSignedUrl} from "../../../api/url";
 import {uploadFileToS3} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {scrap} from "../../../api/scrap/scrap";
+import {matchDataGoKrUrl, scrapDataGoKr} from "../../../api/scrap/scrapDataGoKr";
 import DataSetSelect from "./DataSetSelect";
 import DataInfoContentText from "./DataInfoContentText";
 import DataSetTextField from "./DataSetTextField";
@@ -380,26 +380,28 @@ export default function MetadataManagementContent() {
         type: "data.ex.co.kr"
       })
 
+      const dispatches = [dispatchDataSet, dispatchDistribution];
+
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=79&requestfrom=datase") {
-        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        dispatches.forEach(it => it({
           type: "data-ex-79"
         }))
       }
 
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=datase") {
-        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        dispatches.forEach(it => it({
           type: 'data-ex-78'
         }))
       }
 
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=datase") {
-        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        dispatches.forEach(it => it({
           type: 'data-ex-38'
         }))
       }
 
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=23&requestfrom=datase") {
-        [dispatchDataSet, dispatchDistribution].forEach(it => it({
+        dispatches.forEach(it => it({
           type: 'data-ex-23'
         }))
       }
@@ -411,17 +413,20 @@ export default function MetadataManagementContent() {
       }))
     }
 
+    if (matchDataGoKrUrl(url)) {
+      const payload = await scrapDataGoKr(url);
 
-    const result = await scrap(url);
-
-    if (result !== undefined) {
       [dispatchDataSet, dispatchDistribution].forEach(it => it({
         type: 'data.go.kr',
-        payload: result
+        payload
       }))
     }
 
     closeInputLinkDialog();
+    openDataInfoDialog();
+  }
+
+  function openDataInfoDialog() {
     setInputDataInfoDialogOpen(true);
   }
 
@@ -488,10 +493,8 @@ export default function MetadataManagementContent() {
     }
 
     createMetadata(createMetadataAttributes)
-      .then(async () => {
-        displayProgressBar();
-        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
-      })
+      .then(() => displayProgressBar())
+      .then(() => uploadFileToS3(preSignedUrl, file, setFileUploadPercent))
       .then(() => {
         closeProgressBar();
         alert("저장 완료")
