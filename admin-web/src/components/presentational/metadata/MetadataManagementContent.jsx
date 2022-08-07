@@ -475,9 +475,7 @@ export default function MetadataManagementContent() {
 
     const createMetadataAttributes = {
       catalog: {
-        categoryName: catalogState.category,
-        themeName: catalogState.theme,
-        themeTaxonomy: catalogState.themeTaxonomy
+        ...catalogState
       },
       dataset: {
         ...dataSetState
