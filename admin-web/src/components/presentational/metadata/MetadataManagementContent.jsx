@@ -488,10 +488,8 @@ export default function MetadataManagementContent() {
     }
 
     createMetadata(createMetadataAttributes)
-      .then(async () => {
-        displayProgressBar();
-        await uploadFileToS3(preSignedUrl, file, setFileUploadPercent)
-      })
+      .then(() => displayProgressBar())
+      .then(() => uploadFileToS3(preSignedUrl, file, setFileUploadPercent))
       .then(() => {
         closeProgressBar();
         alert("저장 완료")
