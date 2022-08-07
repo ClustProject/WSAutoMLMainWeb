@@ -13,7 +13,6 @@ public record CreateCatalogAttributes(
         @NotBlank(message = "주제" + NOT_BLANK_MESSAGE_SUFFIX)
         String theme,
 
-        @NotBlank(message = "주제 분류" + NOT_BLANK_MESSAGE_SUFFIX)
         String themeTaxonomy
 ) {
 
