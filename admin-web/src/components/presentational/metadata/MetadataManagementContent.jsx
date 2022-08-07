@@ -411,7 +411,6 @@ export default function MetadataManagementContent() {
       }))
     }
 
-
     const result = await scrap(url);
 
     if (result !== undefined) {
@@ -422,6 +421,10 @@ export default function MetadataManagementContent() {
     }
 
     closeInputLinkDialog();
+    openDataInfoDialog();
+  }
+
+  function openDataInfoDialog() {
     setInputDataInfoDialogOpen(true);
   }
 
