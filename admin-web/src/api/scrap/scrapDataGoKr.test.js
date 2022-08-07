@@ -1,11 +1,11 @@
-import {extractIdFromUrl, matchDataGoKrUrlRegex} from "./scrap";
+import {extractIdFromUrl, matchDataGoKrUrl} from "./scrapDataGoKr";
 
 describe("matchDataGoKrUrlRegex 메서드는", () => {
 
   it("일치한 url이 주어진 경우 true를 리턴한다", () => {
     const url = "https://www.data.go.kr/data/15050247/fileData.do";
 
-    const actual = matchDataGoKrUrlRegex(url);
+    const actual = matchDataGoKrUrl(url);
 
     expect(actual).toBe(true);
   })
@@ -13,7 +13,7 @@ describe("matchDataGoKrUrlRegex 메서드는", () => {
   it("일치하지 않는 url이 주어진 경우 false를 리턴한다", () => {
     const url = "https://data-on.co.kr/";
 
-    const actual = matchDataGoKrUrlRegex(url);
+    const actual = matchDataGoKrUrl(url);
 
     expect(actual).toBe(false);
   })

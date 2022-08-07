@@ -30,7 +30,7 @@ import {getPreSignedUrl} from "../../../api/url";
 import {uploadFileToS3} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {scrap} from "../../../api/scrap/scrap";
+import {matchDataGoKrUrl, scrapDataGoKr} from "../../../api/scrap/scrapDataGoKr";
 import DataSetSelect from "./DataSetSelect";
 import DataInfoContentText from "./DataInfoContentText";
 import DataSetTextField from "./DataSetTextField";
@@ -411,12 +411,12 @@ export default function MetadataManagementContent() {
       }))
     }
 
-    const result = await scrap(url);
+    if (matchDataGoKrUrl(url)) {
+      const payload = await scrapDataGoKr(url);
 
-    if (result !== undefined) {
       [dispatchDataSet, dispatchDistribution].forEach(it => it({
         type: 'data.go.kr',
-        payload: result
+        payload
       }))
     }
 
