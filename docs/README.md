@@ -1,9 +1,15 @@
 # 문서 목록
 
-### CI
+### 기술 문서
+
+CI
 
 - [Gradle 빌드 속도 개선](ci/Gradle_빌드_속도_개선.md)
 
-### ECS
+ECS
 
 - [Stickey Session](ecs/stickey-session.md)
+
+### 노트
+
+- [2022.08.07 장애 기록 및 회고](2022_08_07.md) 
