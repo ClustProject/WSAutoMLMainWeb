@@ -382,25 +382,25 @@ export default function MetadataManagementContent() {
 
       const dispatches = [dispatchDataSet, dispatchDistribution];
 
-      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=79&requestfrom=datase") {
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=79&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: "data-ex-79"
         }))
       }
 
-      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=datase") {
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-78'
         }))
       }
 
-      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=datase") {
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-38'
         }))
       }
 
-      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=23&requestfrom=datase") {
+      if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=23&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-23'
         }))
