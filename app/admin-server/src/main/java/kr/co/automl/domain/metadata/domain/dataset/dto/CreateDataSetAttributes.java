@@ -21,6 +21,7 @@ public record CreateDataSetAttributes(
         @NotBlank(message = "유형" + NOT_BLANK_MESSAGE_SUFFIX)
         String type,
 
+        @NotBlank(message = "키워드" + NOT_BLANK_MESSAGE_SUFFIX)
         String keyword,
 
         @NotBlank(message = "라이센스" + NOT_BLANK_MESSAGE_SUFFIX)
