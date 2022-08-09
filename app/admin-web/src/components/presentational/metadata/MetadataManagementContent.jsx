@@ -200,11 +200,13 @@ export default function MetadataManagementContent() {
             name={{eng: 'contactPointName', kor: '담당자 이름'}}
             onChange={onChangeDataSet}
             list={dataSetState.contactPointNames}
+            value={dataSetState.contactPointName}
           />
           <DataSetSelect
             name={{eng: 'type', kor: '유형'}}
             onChange={onChangeDataSet}
             list={TYPES}
+            value={dataSetState.type}
           />
           <DataSetTextField
             name={{eng: 'keyword', kor: '키워드'}}
