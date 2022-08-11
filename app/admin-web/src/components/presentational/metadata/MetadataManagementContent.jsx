@@ -106,7 +106,9 @@ export default function MetadataManagementContent() {
 
   return (
     <>
-      <Button variant="outlined" onClick={() => setInputLinkDialogOpen(true)}>
+      <Button
+        id="uploadButton"
+        variant="outlined" onClick={() => setInputLinkDialogOpen(true)}>
         업로드
       </Button>
       <Button variant="outlined" color="error" sx={{
@@ -144,6 +146,7 @@ export default function MetadataManagementContent() {
             <FormControlLabel
               control={
                 <Checkbox
+                  id="linkCheckBox"
                   onChange={setSourceUrlState}
                 />
               }
@@ -153,7 +156,9 @@ export default function MetadataManagementContent() {
         </DialogContent>
         <DialogActions>
           <Button onClick={closeInputLinkDialog}>취소</Button>
-          <Button onClick={handleInputLinkDialogNext}>다음</Button>
+          <Button
+            id="linkInputNextButton"
+            onClick={handleInputLinkDialogNext}>다음</Button>
         </DialogActions>
       </Dialog>
       <Dialog open={inputDataInfoDialogOpen} onClose={closeDataInfoDialog}>
@@ -291,7 +296,9 @@ export default function MetadataManagementContent() {
         <DialogActions>
           <Button onClick={handleDataInfoDialogPrevious}>뒤로가기</Button>
           <Button onClick={closeDataInfoDialog}>취소</Button>
-          <Button onClick={handleFinish}>완료</Button>
+          <Button
+            id="finishButton"
+            onClick={handleFinish}>완료</Button>
         </DialogActions>
       </Dialog>
 
