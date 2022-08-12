@@ -1,0 +1,9 @@
+{
+  "name": "autometic",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "puppeteer": "^16.1.0",
+    "puppeteer-extra": "^3.3.4"
+  }
+}
