@@ -34,7 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "autometic-etc79-no-url": "npx babel-node --presets @babel/env src/autometic/etc79-no-url.js",
-    "autometic-etc78-no-url": "npx babel-node --presets @babel/env src/autometic/etc78-no-url.js"
+    "autometic-etc78-no-url": "npx babel-node --presets @babel/env src/autometic/etc78-no-url.js",
+    "autometic-vds38-no-url": "npx babel-node --presets @babel/env src/autometic/vds38-no-url.js"
   },
   "eslintConfig": {
     "extends": [
