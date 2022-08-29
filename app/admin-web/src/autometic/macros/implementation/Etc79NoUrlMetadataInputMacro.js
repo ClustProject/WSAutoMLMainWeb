@@ -1,7 +1,7 @@
 import NoUrlMetadataInputMacro from "../abstract/NoUrlMetadataInputMacro";
 import {URL} from "../../common/constrants";
 
-const UPLOAD_FILE_NAME = "./ETC_79_04_01_510483.csv";
+const UPLOAD_FILE_NAME = "files/ETC_79_04_01_510483.csv";
 
 class Etc79NoUrlMetadataInputMacro extends NoUrlMetadataInputMacro {
 
