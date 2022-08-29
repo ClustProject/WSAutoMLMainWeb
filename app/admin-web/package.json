@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "autometic-main": "npx babel-node --presets @babel/env src/autometic/main.js"
+    "autometic-etc79-no-url": "npx babel-node --presets @babel/env src/autometic/etc79-no-url.js"
   },
   "eslintConfig": {
     "extends": [
