@@ -11,10 +11,7 @@ import {INPUT_ID, INPUT_PASSWORD} from "./common/selectors";
 
   await googleLogin(page);
 
-  const macros = [new Etc79NoUrlMetadataInputMacro(page), new Etc79NoUrlMetadataInputMacro(page)];
-  for (const macro of macros) {
-    await macro.run();
-  }
+  await new Etc79NoUrlMetadataInputMacro(page).run();
 
   await browser.close();
 })();
