@@ -1,4 +1,4 @@
-import Etc79NoUrlMetadataInputMacro from "./macros/implementation/Etc79NoUrlMetadataInputMacro";
+import Etc78NoUrlMetadataInputMacro from "./macros/implementation/Etc78NoUrlMetadataInputMacro";
 import puppeteer from "puppeteer-extra";
 
 import {BROWSER_OPTIONS} from './common/constrants'
@@ -10,7 +10,8 @@ import {googleLogin} from "./common/functions";
 
   await googleLogin(page);
 
-  await new Etc79NoUrlMetadataInputMacro(page).run();
+  await new Etc78NoUrlMetadataInputMacro(page).run();
 
   await browser.close();
 })();
+
