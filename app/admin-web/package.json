@@ -40,6 +40,7 @@
     "autometic-vds38-no-url": "npx babel-node --presets @babel/env src/autometic/vds38-no-url.js",
     "autometic-vds38-with-url": "npx babel-node --presets @babel/env src/autometic/vds38-with-url.js",
     "autometic-vds23-no-url": "npx babel-node --presets @babel/env src/autometic/vds23-no-url.js",
+    "autometic-vds23-with-url": "npx babel-node --presets @babel/env src/autometic/vds23-with-url.js",
     "autometic-surface-asos-95-mi-no-url": "npx babel-node --presets @babel/env src/autometic/surface-asos-95-mi-no-url.js"
   },
   "eslintConfig": {
