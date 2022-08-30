@@ -3,7 +3,7 @@ import {FINISH_BUTTON, INPUT_FILE, LINK_INPUT_NEXT_BUTTON, UPLOAD_BUTTON} from "
 class MetadataInputMacro {
   page;
 
-  constructor(page) {
+  setPage(page) {
     this.page = page;
   }
 

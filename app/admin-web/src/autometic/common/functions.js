@@ -1,8 +1,26 @@
 import dotenv from "dotenv";
-import {URL} from "./constrants";
+import {BROWSER_OPTIONS, URL} from "./constrants";
 import {INPUT_ID, INPUT_PASSWORD} from "./selectors";
+import puppeteer from "puppeteer-extra";
 
-export async function googleLogin(page) {
+export async function runMacro(macro) {
+  const browser = await puppeteer.launch(BROWSER_OPTIONS);
+  const page = await browser.newPage();
+
+  await googleLogin(page);
+
+  const startTime = Date.now();
+
+  macro.setPage(page);
+  await macro.run();
+
+  const endTime = Date.now();
+  console.log(`걸린 시간: ${endTime - startTime}ms`);
+
+  await browser.close();
+}
+
+async function googleLogin(page) {
   dotenv.config();
 
   await page.goto(URL);
