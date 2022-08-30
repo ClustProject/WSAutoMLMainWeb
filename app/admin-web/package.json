@@ -35,6 +35,7 @@
     "eject": "react-scripts eject",
     "autometic-etc79-no-url": "npx babel-node --presets @babel/env src/autometic/etc79-no-url.js",
     "autometic-etc78-no-url": "npx babel-node --presets @babel/env src/autometic/etc78-no-url.js",
+    "autometic-etc78-with-url": "npx babel-node --presets @babel/env src/autometic/etc78-with-url.js",
     "autometic-vds38-no-url": "npx babel-node --presets @babel/env src/autometic/vds38-no-url.js",
     "autometic-vds23-no-url": "npx babel-node --presets @babel/env src/autometic/vds23-no-url.js",
     "autometic-surface-asos-95-mi-no-url": "npx babel-node --presets @babel/env src/autometic/surface-asos-95-mi-no-url.js"
