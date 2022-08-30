@@ -33,16 +33,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "autometic-etc79-no-url": "npx babel-node --presets @babel/env src/autometic/etc79-no-url.js",
-    "autometic-etc79-with-url": "npx babel-node --presets @babel/env src/autometic/etc79-with-url.js",
-    "autometic-etc78-no-url": "npx babel-node --presets @babel/env src/autometic/etc78-no-url.js",
-    "autometic-etc78-with-url": "npx babel-node --presets @babel/env src/autometic/etc78-with-url.js",
-    "autometic-vds38-no-url": "npx babel-node --presets @babel/env src/autometic/vds38-no-url.js",
-    "autometic-vds38-with-url": "npx babel-node --presets @babel/env src/autometic/vds38-with-url.js",
-    "autometic-vds23-no-url": "npx babel-node --presets @babel/env src/autometic/vds23-no-url.js",
-    "autometic-vds23-with-url": "npx babel-node --presets @babel/env src/autometic/vds23-with-url.js",
-    "autometic-surface-asos-95-mi-no-url": "npx babel-node --presets @babel/env src/autometic/surface-asos-95-mi-no-url.js",
-    "autometic-surface-asos-95-mi-with-url": "npx babel-node --presets @babel/env src/autometic/surface-asos-95-mi-with-url.js"
+    "automatic-etc79-no-url": "npx babel-node --presets @babel/env src/automatic/etc79-no-url.js",
+    "automatic-etc79-with-url": "npx babel-node --presets @babel/env src/automatic/etc79-with-url.js",
+    "automatic-etc78-no-url": "npx babel-node --presets @babel/env src/automatic/etc78-no-url.js",
+    "automatic-etc78-with-url": "npx babel-node --presets @babel/env src/automatic/etc78-with-url.js",
+    "automatic-vds38-no-url": "npx babel-node --presets @babel/env src/automatic/vds38-no-url.js",
+    "automatic-vds38-with-url": "npx babel-node --presets @babel/env src/automatic/vds38-with-url.js",
+    "automatic-vds23-no-url": "npx babel-node --presets @babel/env src/automatic/vds23-no-url.js",
+    "automatic-vds23-with-url": "npx babel-node --presets @babel/env src/automatic/vds23-with-url.js",
+    "automatic-surface-asos-95-mi-no-url": "npx babel-node --presets @babel/env src/automatic/surface-asos-95-mi-no-url.js",
+    "automatic-surface-asos-95-mi-with-url": "npx babel-node --presets @babel/env src/automatic/surface-asos-95-mi-with-url.js"
   },
   "eslintConfig": {
     "extends": [
