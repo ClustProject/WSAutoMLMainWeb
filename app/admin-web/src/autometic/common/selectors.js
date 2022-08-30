@@ -5,3 +5,4 @@ export const FINISH_BUTTON = "button#finishButton";
 export const INPUT_ID = "input#identifierId";
 export const INPUT_PASSWORD = 'input[type="password"]';
 export const INPUT_LINK_CHECK_BOX = 'input#linkCheckBox';
+export const INPUT_SOURCE_URL = "input#sourceUrl";

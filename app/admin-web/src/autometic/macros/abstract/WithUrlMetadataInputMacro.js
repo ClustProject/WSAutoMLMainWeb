@@ -1,6 +1,5 @@
 import MetadataInputMacro from "./MetadataInputMacro";
-
-const inputSourceUrl = "input#sourceUrl";
+import {INPUT_SOURCE_URL} from "../../common/selectors";
 
 class WithUrlMetadataInputMacro extends MetadataInputMacro {
   url;
@@ -11,7 +10,7 @@ class WithUrlMetadataInputMacro extends MetadataInputMacro {
   }
 
   async fillUrl() {
-    await this.page.click(inputSourceUrl);
+    await this.page.click(INPUT_SOURCE_URL);
     await this.page.keyboard.type(this.url);
   }
 }
