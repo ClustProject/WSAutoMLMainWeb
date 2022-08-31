@@ -506,7 +506,7 @@ export default function MetadataManagementContent() {
       .then(() => uploadFileToS3(preSignedUrl, file, setFileUploadPercent))
       .then(() => {
         closeProgressBar();
-        alert("저장 완료")
+        // alert("저장 완료")
         window.location.reload();
       })
       .catch(err => {
