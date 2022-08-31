@@ -5,16 +5,7 @@ const URL = "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=d
 
 class Vds38WithUrlMetadataInputMacro extends WithUrlMetadataInputMacro {
   constructor(page) {
-    super(page, URL)
-  }
-
-  async run() {
-    await this.clickUploadButton();
-    await this.fillUrl();
-    await this.clickLinkInputNextButton();
-    await this.uploadFile(FILE_NAME);
-    await this.clickFinishButton();
-    await this.waitDownloadComplete();
+    super(page, URL, FILE_NAME);
   }
 }
 

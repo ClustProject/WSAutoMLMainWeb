@@ -5,17 +5,9 @@ const URL = "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=d
 
 class Etc78WithUrlMetadataInputMacro extends WithUrlMetadataInputMacro {
   constructor(page) {
-    super(page, URL)
+    super(page, URL, FILE_NAME);
   }
 
-  async run() {
-    await this.clickUploadButton();
-    await this.fillUrl();
-    await this.clickLinkInputNextButton();
-    await this.uploadFile(FILE_NAME);
-    await this.clickFinishButton();
-    await this.waitDownloadComplete();
-  }
 }
 
 export default Etc78WithUrlMetadataInputMacro;

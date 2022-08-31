@@ -20,6 +20,10 @@ export async function runMacro(macro) {
   await browser.close();
 }
 
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function googleLogin(page) {
   dotenv.config();
 

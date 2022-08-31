@@ -5,16 +5,7 @@ const URL = "https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tab
 
 class SurfaceAsos95MiWithUrlMetadataInputMacro extends WithUrlMetadataInputMacro {
   constructor(page) {
-    super(page, URL)
-  }
-
-  async run() {
-    await this.clickUploadButton();
-    await this.fillUrl();
-    await this.clickLinkInputNextButton();
-    await this.uploadFile(FILE_NAME);
-    await this.clickFinishButton();
-    await this.waitDownloadComplete();
+    super(page, URL, FILE_NAME);
   }
 }
 
