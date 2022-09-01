@@ -19,13 +19,13 @@ class WithUrlMetadataInputMacro extends MetadataInputMacro {
 
   async run() {
     await this.clickUploadButton();
-    await sleep(700);
+    await sleep(1000);
     await this.fillUrl();
-    await sleep(700);
+    await sleep(1000);
     await this.clickLinkInputNextButton();
-    await sleep(2000);
+    await sleep(2400);
     await this.uploadFile(this.fileName);
-    await sleep(2000);
+    await sleep(2700);
     await this.clickFinishButton();
     await this.waitDownloadComplete();
   }
