@@ -23,9 +23,9 @@ class WithUrlMetadataInputMacro extends MetadataInputMacro {
     await this.fillUrl();
     await sleep(1000);
     await this.clickLinkInputNextButton();
-    await sleep(2400);
+    await sleep(2300);
     await this.uploadFile(this.fileName);
-    await sleep(2700);
+    await sleep(2300);
     await this.clickFinishButton();
     await this.waitDownloadComplete();
   }
