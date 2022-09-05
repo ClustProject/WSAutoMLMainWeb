@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
-import {Box, Menu, Typography} from "@mui/material";
+import {Box, Link, Menu, Typography} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
 export default function AdminUsageListItems() {
@@ -28,7 +28,10 @@ export default function AdminUsageListItems() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem>메타데이터 관리</MenuItem>
+        <Link
+          href="http://automl-main-web-load-balancer-213875655.ap-northeast-2.elb.amazonaws.com/metadata/management">
+          <MenuItem>메타데이터 관리</MenuItem>
+        </Link>
       </Menu>
     </Box>
   );

@@ -37,6 +37,22 @@ const categories = [
       },
     ],
   },
+  {
+    id: '메인화면',
+    link: 'https://ws-automl.netlify.app',
+    children: [
+      {
+        id: '검색',
+        link: 'https://ws-automl.netlify.app/search'
+      },
+      {
+        id: '시각화',
+      },
+      {
+        id: '분석',
+      },
+    ],
+  },
 ];
 
 const item = {
@@ -67,8 +83,15 @@ export default function Navigator(props) {
         {categories.map(({id, icon, link, children}) => (
           <Box key={id} sx={{bgcolor: '#101F33'}}>
             {children ?
-              <ListItem sx={{py: 2, px: 3}}>
-                <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
+              <ListItem>
+                <ListItemButton href={link} sx={{
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  '&:hover, &:focus': {
+                    bgcolor: 'rgba(255, 255, 255, 0.08)',
+                  },
+                }}>
+                  <ListItemText>{id}</ListItemText>
+                </ListItemButton>
               </ListItem>
               :
               <ListItem disablePadding sx={{marginTop: '15px'}}>
@@ -81,7 +104,7 @@ export default function Navigator(props) {
 
             {children &&
               children.map(({id: childId, icon, link, active}) => (
-                <ListItem disablePadding key={childId}>
+                <ListItem key={childId}>
                   <ListItemButton href={link} selected={active} sx={item}>
                     <ListItemIcon>{icon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
