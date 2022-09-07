@@ -2,7 +2,7 @@ import React from "react";
 
 import {Typography} from "@mui/material";
 
-const dataSetCount = 10;
+const dataSetCount = 3;
 
 export default function DataSetCountText() {
   return (
