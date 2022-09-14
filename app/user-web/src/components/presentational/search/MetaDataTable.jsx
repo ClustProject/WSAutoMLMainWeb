@@ -42,7 +42,7 @@ const ContentTableCell = (props) => {
 const CatalogTableRow = (props) => {
   return (
     <TableRow sx={{
-      backgroundColor: '#F5ECCE'
+      backgroundColor: '#F8F6F1'
     }}>
       {props.cells}
     </TableRow>
@@ -52,7 +52,7 @@ const CatalogTableRow = (props) => {
 const DataSetTableRow = (props) => {
   return (
     <TableRow sx={{
-      backgroundColor: '#81DAF5'
+      backgroundColor: '#F0F4F7'
     }}>
       {props.cells}
     </TableRow>
@@ -62,7 +62,7 @@ const DataSetTableRow = (props) => {
 const DistributionTableRow = (props) => {
   return (
     <TableRow sx={{
-      backgroundColor: '#BFFF00'
+      backgroundColor: '#ECF7EE'
     }}>
       {props.cells}
     </TableRow>
@@ -148,16 +148,6 @@ export default function MetaDataTable() {
               <ContentTableCell title={"csv"} colSpan={3}/>
               <TitleTableCell title={"키워드"} colSpan={2}/>
               <ContentTableCell title={"교통,도로,평균시속"} colSpan={3}/>
-            </>
-          }>
-          </DataSetTableRow>
-
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"랜딩페이지"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={3}/>
-              <TitleTableCell title={""} colSpan={2}/>
-              <ContentTableCell title={""} colSpan={3}/>
             </>
           }>
           </DataSetTableRow>
