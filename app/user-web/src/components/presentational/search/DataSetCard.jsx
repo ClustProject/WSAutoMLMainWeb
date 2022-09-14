@@ -11,7 +11,7 @@ export default function DataSetCard(props) {
     }}>
       <CardContent>
         <Typography variant="h5" component="div">
-          <Link href="#">
+          <Link href={`/metadata/${props.id}`}>
             {props.name}
           </Link>
         </Typography>

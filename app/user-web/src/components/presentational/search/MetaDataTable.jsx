@@ -1,0 +1,244 @@
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const TitleTableCell = (props) => {
+  return (
+    <TableCell
+      colSpan={props.colSpan}
+      rowSpan={props.rowSpan}
+      sx={{
+        border: '1px solid lightgray',
+        width: '75px',
+        padding: '7px'
+      }}
+    >
+      {props.title}
+    </TableCell>
+  )
+}
+
+const ContentTableCell = (props) => {
+  return (
+    <TableCell
+      colSpan={props.colSpan}
+      rowSpan={props.rowSpan}
+      sx={{
+        border: '1px solid lightgray',
+        width: '75px',
+        padding: '7px',
+        backgroundColor: 'white'
+      }}
+    >
+      {props.title}
+    </TableCell>
+  )
+}
+
+const CatalogTableRow = (props) => {
+  return (
+    <TableRow sx={{
+      backgroundColor: '#F5ECCE'
+    }}>
+      {props.cells}
+    </TableRow>
+  )
+}
+
+const DataSetTableRow = (props) => {
+  return (
+    <TableRow sx={{
+      backgroundColor: '#81DAF5'
+    }}>
+      {props.cells}
+    </TableRow>
+  )
+}
+
+const DistributionTableRow = (props) => {
+  return (
+    <TableRow sx={{
+      backgroundColor: '#BFFF00'
+    }}>
+      {props.cells}
+    </TableRow>
+  )
+}
+
+export default function MetaDataTable() {
+  return (
+    <TableContainer component={Paper}>
+      <Table sx={{
+        minWidth: 700
+      }} aria-label="spanning table">
+        {/*<TableHead>*/}
+        {/*  <TableRow>*/}
+        {/*    <TableCell align="center" colSpan={3}>*/}
+        {/*      Details*/}
+        {/*    </TableCell>*/}
+        {/*    <TableCell align="right">Price</TableCell>*/}
+        {/*  </TableRow>*/}
+        {/*  <TableRow>*/}
+        {/*    <TableCell>Desc</TableCell>*/}
+        {/*    <TableCell align="right">Qty.</TableCell>*/}
+        {/*    <TableCell align="right">Unit</TableCell>*/}
+        {/*    <TableCell align="right">Sum</TableCell>*/}
+        {/*  </TableRow>*/}
+        {/*</TableHead>*/}
+        <TableBody>
+          {/*{rows.map((row) => (*/}
+          {/*  <TableRow key={row.desc}>*/}
+          {/*    <TableCell>{row.desc}</TableCell>*/}
+          {/*    <TableCell align="right">{row.qty}</TableCell>*/}
+          {/*    <TableCell align="right">{row.unit}</TableCell>*/}
+          {/*    <TableCell align="right">{ccyFormat(row.price)}</TableCell>*/}
+          {/*  </TableRow>*/}
+          {/*))}*/}
+
+          <CatalogTableRow cells={
+            <>
+              <TitleTableCell title={"카테고리"} colSpan={2}/>
+              <ContentTableCell title={"오픈데이터"} colSpan={8}>오픈데이터</ContentTableCell>
+            </>
+          }/>
+
+          <CatalogTableRow cells={
+            <>
+              <TitleTableCell title={"주제"} colSpan={2}/>
+              <ContentTableCell title={"교통"} colSpan={3}/>
+              <TitleTableCell title={"주제 분류"} colSpan={2}/>
+              <ContentTableCell title={"국내 교통 "} colSpan={3}/>
+            </>
+          }/>
+
+          <DataSetTableRow cells={
+            <TitleTableCell title={"a.csv"} colSpan={10}/>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"데이터 구축 기관"} rowSpan={3}/>
+              <TitleTableCell title={"제공기관"}/>
+              <ContentTableCell title={"한국도로교통공사"} colSpan={8}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"생성자"}/>
+              <ContentTableCell title={"위세아이텍"} colSpan={8}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"담당자"}/>
+              <ContentTableCell title={"최태동"} colSpan={8}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"매체유형"} colSpan={2}/>
+              <ContentTableCell title={"type"} colSpan={3}/>
+              <TitleTableCell title={"식별자"} colSpan={2}/>
+              <ContentTableCell title={"1"} colSpan={3}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"등록일자"} colSpan={2}/>
+              <ContentTableCell title={"2022.08.15"} colSpan={3}/>
+              <TitleTableCell title={"수정일자"} colSpan={2}/>
+              <ContentTableCell title={"2022.08.15"} colSpan={3}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"제공 형태"} colSpan={2}/>
+              <ContentTableCell title={"csv"} colSpan={3}/>
+              <TitleTableCell title={"키워드"} colSpan={2}/>
+              <ContentTableCell title={"교통,도로,평균시속"} colSpan={3}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"랜딩페이지"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={3}/>
+              <TitleTableCell title={""} colSpan={2}/>
+              <ContentTableCell title={""} colSpan={3}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"라이센스"} colSpan={2}/>
+              <ContentTableCell title={"Public"} colSpan={3}/>
+              <TitleTableCell title={"권한"} colSpan={2}/>
+              <ContentTableCell title={"All"} colSpan={3}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"설명"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={8}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DistributionTableRow cells={
+            <>
+              <TitleTableCell title={"배포"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={8}/>
+            </>
+          }>
+          </DistributionTableRow>
+
+          <DistributionTableRow cells={
+            <>
+              <TitleTableCell title={"시간해상도"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={3}/>
+              <TitleTableCell title={"배포주기"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={3}/>
+            </>
+          }>
+          </DistributionTableRow>
+
+          <DistributionTableRow cells={
+            <>
+              <TitleTableCell title={"공간정보"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={3}/>
+              <TitleTableCell title={"시간정보"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={3}/>
+            </>
+          }>
+          </DistributionTableRow>
+
+          {/*<TableRow>*/}
+          {/*  <TableCell> asdf</TableCell>*/}
+          {/*  <TableCell> asdf</TableCell>*/}
+          {/*  <TableCell> asdf</TableCell>*/}
+          {/*  <TableCell> asdf</TableCell>*/}
+          {/*</TableRow>*/}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
