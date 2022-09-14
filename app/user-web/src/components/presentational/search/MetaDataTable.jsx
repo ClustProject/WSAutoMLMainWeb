@@ -75,30 +75,7 @@ export default function MetaDataTable() {
       <Table sx={{
         minWidth: 700
       }} aria-label="spanning table">
-        {/*<TableHead>*/}
-        {/*  <TableRow>*/}
-        {/*    <TableCell align="center" colSpan={3}>*/}
-        {/*      Details*/}
-        {/*    </TableCell>*/}
-        {/*    <TableCell align="right">Price</TableCell>*/}
-        {/*  </TableRow>*/}
-        {/*  <TableRow>*/}
-        {/*    <TableCell>Desc</TableCell>*/}
-        {/*    <TableCell align="right">Qty.</TableCell>*/}
-        {/*    <TableCell align="right">Unit</TableCell>*/}
-        {/*    <TableCell align="right">Sum</TableCell>*/}
-        {/*  </TableRow>*/}
-        {/*</TableHead>*/}
         <TableBody>
-          {/*{rows.map((row) => (*/}
-          {/*  <TableRow key={row.desc}>*/}
-          {/*    <TableCell>{row.desc}</TableCell>*/}
-          {/*    <TableCell align="right">{row.qty}</TableCell>*/}
-          {/*    <TableCell align="right">{row.unit}</TableCell>*/}
-          {/*    <TableCell align="right">{ccyFormat(row.price)}</TableCell>*/}
-          {/*  </TableRow>*/}
-          {/*))}*/}
-
           <CatalogTableRow cells={
             <>
               <TitleTableCell title={"카테고리"} colSpan={2}/>
@@ -230,13 +207,6 @@ export default function MetaDataTable() {
             </>
           }>
           </DistributionTableRow>
-
-          {/*<TableRow>*/}
-          {/*  <TableCell> asdf</TableCell>*/}
-          {/*  <TableCell> asdf</TableCell>*/}
-          {/*  <TableCell> asdf</TableCell>*/}
-          {/*  <TableCell> asdf</TableCell>*/}
-          {/*</TableRow>*/}
         </TableBody>
       </Table>
     </TableContainer>
