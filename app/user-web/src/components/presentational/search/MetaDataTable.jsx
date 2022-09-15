@@ -146,15 +146,6 @@ export default function MetaDataTable() {
           }>
           </DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"제공 형태"} colSpan={2}/>
-              <ContentTableCell title={"csv"} colSpan={3}/>
-              <TitleTableCell title={"키워드"} colSpan={2}/>
-              <ContentTableCell title={"교통,도로,평균시속"} colSpan={3}/>
-            </>
-          }>
-          </DataSetTableRow>
 
           <DataSetTableRow cells={
             <>
@@ -168,15 +159,23 @@ export default function MetaDataTable() {
 
           <DataSetTableRow cells={
             <>
-              <TitleTableCell title={"설명"} colSpan={2}/>
+              <TitleTableCell title={"데이터셋 설명"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={8}/>
+            </>
+          }>
+          </DataSetTableRow>
+
+          <DataSetTableRow cells={
+            <>
+              <TitleTableCell title={"키워드"} colSpan={2}/>
+              <ContentTableCell title={"교통,도로,평균시속"} colSpan={8}/>
             </>
           }>
           </DataSetTableRow>
 
           <DistributionTableRow cells={
             <>
-              <TitleTableCell title={"배포"} colSpan={2}/>
+              <TitleTableCell title={"배포 파일 설명"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={8}/>
             </>
           }>
@@ -184,9 +183,17 @@ export default function MetaDataTable() {
 
           <DistributionTableRow cells={
             <>
-              <TitleTableCell title={"시간해상도"} colSpan={2}/>
+              <TitleTableCell title={"다운로드 URL"} colSpan={2}/>
+              <ContentTableCell title={"..."} colSpan={8}/>
+            </>
+          }>
+          </DistributionTableRow>
+
+          <DistributionTableRow cells={
+            <>
+              <TitleTableCell title={"측정 단위"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={3}/>
-              <TitleTableCell title={"배포주기"} colSpan={2}/>
+              <TitleTableCell title={"제공 주기"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={3}/>
             </>
           }>
@@ -194,9 +201,9 @@ export default function MetaDataTable() {
 
           <DistributionTableRow cells={
             <>
-              <TitleTableCell title={"공간정보"} colSpan={2}/>
+              <TitleTableCell title={"공간 정보"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={3}/>
-              <TitleTableCell title={"시간정보"} colSpan={2}/>
+              <TitleTableCell title={"시간 정보"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={3}/>
             </>
           }>
