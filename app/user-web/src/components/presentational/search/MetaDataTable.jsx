@@ -14,7 +14,8 @@ const TitleTableCell = (props) => {
       sx={{
         border: '1px solid lightgray',
         width: '75px',
-        padding: '10px'
+        padding: '10px',
+        fontWeight: 'bold'
       }}
     >
       {props.title}
