@@ -14,7 +14,7 @@ const TitleTableCell = (props) => {
       sx={{
         border: '1px solid lightgray',
         width: '75px',
-        padding: '7px'
+        padding: '10px'
       }}
     >
       {props.title}
@@ -30,7 +30,7 @@ const ContentTableCell = (props) => {
       sx={{
         border: '1px solid lightgray',
         width: '75px',
-        padding: '7px',
+        padding: '10px',
         backgroundColor: 'white'
       }}
     >
