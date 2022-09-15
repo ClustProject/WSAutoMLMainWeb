@@ -183,14 +183,6 @@ export default function MetaDataTable() {
 
           <DistributionTableRow cells={
             <>
-              <TitleTableCell title={"다운로드 URL"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={8}/>
-            </>
-          }>
-          </DistributionTableRow>
-
-          <DistributionTableRow cells={
-            <>
               <TitleTableCell title={"측정 단위"} colSpan={2}/>
               <ContentTableCell title={"..."} colSpan={3}/>
               <TitleTableCell title={"제공 주기"} colSpan={2}/>
