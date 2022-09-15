@@ -88,12 +88,15 @@ export default function MetaDataTable() {
               <TitleTableCell title={"주제"} colSpan={2}/>
               <ContentTableCell title={"교통"} colSpan={3}/>
               <TitleTableCell title={"주제 분류"} colSpan={2}/>
-              <ContentTableCell title={"국내 교통 "} colSpan={3}/>
+              <ContentTableCell title={"국내 교통"} colSpan={3}/>
             </>
           }/>
 
           <DataSetTableRow cells={
-            <TitleTableCell title={"a.csv"} colSpan={10}/>
+            <>
+              <TitleTableCell title={"파일명"} colSpan={2}/>
+              <ContentTableCell title={"a.csv"} colSpan={8}/>
+            </>
           }>
           </DataSetTableRow>
 
