@@ -6,7 +6,8 @@ import ContentMediaCard from "./ContentMediaCard";
 const cardInfo = [
   {
     name: "검색",
-    image: "/static/images/cards/search.jpg"
+    image: "/static/images/cards/search.jpg",
+    link: "/search"
   },
   {
     name: "모델 학습(예정)",
@@ -34,6 +35,7 @@ export default function ContentMediaCards() {
           <ContentMediaCard
             name={it.name}
             image={it.image}
+            link={it.link}
           />
         )}
       </Box></Box>
