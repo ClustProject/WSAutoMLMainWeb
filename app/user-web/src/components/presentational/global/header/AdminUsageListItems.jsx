@@ -2,8 +2,6 @@ import React from "react";
 import {Link, Typography} from "@mui/material";
 
 export default function AdminUsageListItems() {
-  const [open, setOpen] = React.useState(false);
-
   return (
     <Typography
       variant="h6"
