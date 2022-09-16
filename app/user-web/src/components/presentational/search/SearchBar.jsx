@@ -1,6 +1,7 @@
 import React from "react";
 
 import {Box, TextField} from "@mui/material";
+import Button from "@mui/material/Button";
 
 export default function SearchBar() {
   return (
@@ -14,6 +15,15 @@ export default function SearchBar() {
           width: '85%',
         }}
       />
+
+      <Box sx={{
+        width: '20px'
+      }}>
+      </Box>
+
+      <Button variant="outlined">
+        검색
+      </Button>
     </Box>
   );
 }
