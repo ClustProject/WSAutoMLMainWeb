@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DataUtilizationMenus from "./DataUtilizationMenus";
-import LoginButton from "./LoginButton";
 
 const pages = [
   {
@@ -42,7 +41,6 @@ export default function MainAppBar() {
           ))}
           <DataUtilizationMenus/>
         </Box>
-        <LoginButton sx={buttonSx}/>
       </Box>
     </AppBar>
   );
