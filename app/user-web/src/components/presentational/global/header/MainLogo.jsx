@@ -9,7 +9,7 @@ export default function MainLogo() {
       margin: "20px",
       flexGrow: 1
     }}>
-      WS-AutoML.co.kr
+      WS-AutoML
     </Typography>
   );
 }
