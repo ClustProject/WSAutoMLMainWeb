@@ -170,13 +170,13 @@ export default function MetadataManagementContent() {
 
           <DataInfoContentText name="카탈로그"/>
           <DataSetSelect
-            name={{eng: 'category', kor: '카테고리'}}
+            name={{eng: 'category', kor: '* 카테고리'}}
             onChange={onChangeCatalog}
             list={Object.keys(CATEGORY_THEME_MAP)}
             value={catalogState.category}
           />
           <DataSetSelect
-            name={{eng: 'theme', kor: '주제'}}
+            name={{eng: 'theme', kor: '* 주제'}}
             onChange={onChangeCatalog}
             list={catalogState.themes}
             value={catalogState.theme}
@@ -189,52 +189,52 @@ export default function MetadataManagementContent() {
 
           <DataInfoContentText name="데이터셋"/>
           <DataSetTextField
-            name={{eng: 'title', kor: '제목'}}
+            name={{eng: 'title', kor: '* 제목'}}
             value={dataSetState.title}
             onChange={onChangeDataSet}
           />
           <DataSetTextField
-            name={{eng: 'publisher', kor: '구축 기관'}}
+            name={{eng: 'publisher', kor: '* 구축 기관'}}
             value={dataSetState.publisher}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
-            name={{eng: 'creator', kor: '생성 기관'}}
+            name={{eng: 'creator', kor: '* 생성 기관'}}
             onChange={onChangeDataSet}
             list={Object.keys(CREATOR_CONTACT_POINT_NAME_MAP)}
             value={dataSetState.creator}
           />
           <DataSetSelect
-            name={{eng: 'contactPointName', kor: '담당자 이름'}}
+            name={{eng: 'contactPointName', kor: '* 담당자 이름'}}
             onChange={onChangeDataSet}
             list={dataSetState.contactPointNames}
             value={dataSetState.contactPointName}
           />
           <DataSetSelect
-            name={{eng: 'type', kor: '유형'}}
+            name={{eng: 'type', kor: '* 유형'}}
             onChange={onChangeDataSet}
             list={TYPES}
             value={dataSetState.type}
           />
           <DataSetTextField
-            name={{eng: 'keyword', kor: '키워드'}}
+            name={{eng: 'keyword', kor: '* 키워드'}}
             value={dataSetState.keyword}
             onChange={onChangeDataSet}
           />
           <DataSetSelect
-            name={{eng: 'license', kor: '라이센스'}}
+            name={{eng: 'license', kor: '* 라이센스'}}
             onChange={onChangeDataSet}
             list={Object.keys(LICENSE_RIGHTS_MAP)}
             value={dataSetState.license}
           />
           <DataSetSelect
-            name={{eng: 'rights', kor: '권한'}}
+            name={{eng: 'rights', kor: '* 권한'}}
             onChange={onChangeDataSet}
             list={dataSetState.rightses}
             value={dataSetState.rights}
           />
           <DataSetTextField
-            name={{eng: 'description', kor: '설명'}}
+            name={{eng: 'description', kor: '* 설명'}}
             value={dataSetState.description}
             onChange={onChangeDataSet}
           />
@@ -242,7 +242,7 @@ export default function MetadataManagementContent() {
           <DataInfoContentText name="배포"/>
           <TextField
             id="distribution-title-text-field"
-            label="제목"
+            label="* 제목"
             variant="filled"
             fullWidth
             disabled
@@ -257,7 +257,7 @@ export default function MetadataManagementContent() {
 
           <TextField
             id="downloadUrl-text-field"
-            label="다운로드 URL"
+            label="* 다운로드 URL"
             variant="filled"
             fullWidth
             disabled
@@ -265,7 +265,7 @@ export default function MetadataManagementContent() {
           />
 
           <DataSetTextField
-            name={{eng: 'temporalResolution', kor: '측정 단위'}}
+            name={{eng: 'temporalResolution', kor: '* 시간 단위(ex. 1분, 5분, 15분, 30분, 1시간, 6시간, 1일)'}}
             onChange={onChangeDistribution}
             value={distributionState.temporalResolution}
           />
