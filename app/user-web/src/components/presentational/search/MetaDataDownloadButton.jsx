@@ -3,7 +3,7 @@ import React from "react";
 
 function MetaDataDownloadButton() {
   return <Button variant="outlined">
-    메타데이터 다운로드
+    CSV 파일 다운로드
   </Button>;
 }
 
