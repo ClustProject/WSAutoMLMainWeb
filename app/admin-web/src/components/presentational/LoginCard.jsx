@@ -9,17 +9,16 @@ export default function LoginCard() {
   return (
     <Card sx={{
       width: 350,
-      height: 200
     }}>
       <CardContent>
-        <Typography variant="h5" component="div" sx={{
+        <Typography variant="h6" component="div" sx={{
           margin: '15px',
           textAlign: 'center'
         }}>
-          로그인
+          관리자 전용 페이지로 허가 받은 <br/>사용자만 접속이 가능합니다.
         </Typography>
         <Box sx={{
-          marginTop: '50px',
+          marginTop: '25px',
           display: 'flex',
           justifyContent: 'center'
         }}>
