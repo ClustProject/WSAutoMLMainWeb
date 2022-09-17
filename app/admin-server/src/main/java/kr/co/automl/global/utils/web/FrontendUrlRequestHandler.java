@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FrontendUrlRequestHandler {
 
     @GetMapping(value = {
-            "/dashboard",
+            "/home",
             "/metadata/**",
     })
     @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
