@@ -22,10 +22,10 @@ class FrontendUrlRequestHandlerTest {
     private MockMvc mockMvc;
 
     @Nested
-    @DisplayName("GET /dashboard")
-    class get_dashboard_요청은 {
+    @DisplayName("GET /home")
+    class get_home_요청은 {
         MockHttpServletRequestBuilder request
-                = get("/dashboard");
+                = get("/home");
 
         @Nested
         @WithMockUser
@@ -88,10 +88,10 @@ class FrontendUrlRequestHandlerTest {
     }
 
     @Nested
-    @DisplayName("GET /user/role-management 요청은")
-    class get_user_roleManagement_요청은 {
+    @DisplayName("GET /user-management/role 요청은")
+    class get_user_management_role_요청은 {
         MockHttpServletRequestBuilder request
-                = get("/user/role-management");
+                = get("/user-management/role");
 
         @Nested
         @WithMockUser

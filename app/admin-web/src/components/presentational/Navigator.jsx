@@ -7,16 +7,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
+import SearchIcon from '@mui/icons-material/Search';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const categories = [
-  {
-    id: '대시보드',
-    icon: <HomeIcon/>,
-    link: '/dashboard'
-  },
   {
     id: '메타데이터',
     children: [
@@ -28,30 +23,25 @@ const categories = [
     ],
   },
   {
-    id: '유저',
+    id: '유저 관리',
     children: [
       {
         id: '권한 관리',
         icon: <ManageAccountsIcon/>,
-        link: '/user/role-management'
+        link: '/user-management/role'
       },
     ],
   },
   {
-    id: '메인화면',
+    id: 'WS-AutoML',
     link: 'https://ws-automl.netlify.app',
     children: [
       {
         id: '검색',
+        icon: <SearchIcon/>,
         link: 'https://ws-automl.netlify.app/search'
-      },
-      {
-        id: '시각화',
-      },
-      {
-        id: '분석',
-      },
-    ],
+      }
+    ]
   },
 ];
 
@@ -76,8 +66,8 @@ export default function Navigator(props) {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}>
-          AutoML
+        <ListItem sx={{...item, ...itemCategory, fontSize: 18, color: '#fff'}}>
+          WS-AutoML 관리자 페이지
         </ListItem>
 
         {categories.map(({id, icon, link, children}) => (
@@ -103,10 +93,10 @@ export default function Navigator(props) {
             }
 
             {children &&
-              children.map(({id: childId, icon, link, active}) => (
+              children.map(({id: childId, icon: childIcon, link: childLink, active}) => (
                 <ListItem key={childId}>
-                  <ListItemButton href={link} selected={active} sx={item}>
-                    <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemButton href={childLink} selected={active} sx={item}>
+                    <ListItemIcon>{childIcon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
                   </ListItemButton>
                 </ListItem>

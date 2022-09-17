@@ -4,11 +4,10 @@ import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
+import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import static kr.co.automl.domain.user.User.ofDefaultRole;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -171,21 +170,16 @@ public class UserTest {
     class changeRoleTo_메서드는 {
 
         @Nested
-        class 어드민이_아닌_권한이_주어질경우 {
+        class 매니저_권한이_주어질경우 {
 
-            @ParameterizedTest
-            @EnumSource(
-                    value = Role.class,
-                    mode = EnumSource.Mode.EXCLUDE,
-                    names = {"ADMIN"}
-            )
-            void 주어진_권한으로_변경한다(Role role) {
+            @Test
+            void 매니저_권한으로_변경한다() {
                 User user = create();
                 assertThat(user.getRole()).isEqualTo(Role.USER);
 
-                user.changeRoleTo(role);
+                user.changeRoleTo(Role.MANAGER);
 
-                assertThat(user.getRole()).isEqualTo(role);
+                assertThat(user.getRole()).isEqualTo(Role.MANAGER);
             }
         }
 
@@ -205,20 +199,30 @@ public class UserTest {
         @Nested
         class 이미_어드민_유저일경우 {
 
-            @ParameterizedTest
-            @EnumSource(
-                    value = Role.class,
-                    mode = EnumSource.Mode.EXCLUDE,
-                    names = {"ADMIN"}
-            )
-            void AlreadyAdminRoleException을_던진다(Role role) {
+            @Test
+            void AlreadyAdminRoleException을_던진다() {
                 User adminUser = User.builder()
                         .role(Role.ADMIN)
                         .build();
 
-                assertThatThrownBy(() -> adminUser.changeRoleTo(role))
+                assertThatThrownBy(() -> adminUser.changeRoleTo(Role.MANAGER))
                         .isInstanceOf(AlreadyAdminRoleException.class)
                         .hasMessage("이미 어드민 권한을 가진 유저입니다.");
+            }
+        }
+
+        @Nested
+        class 유저_권한이_주어질경우 {
+
+            @Test
+            void CannotChangeUserRoleException을_던진다() {
+                User managerUser = User.builder()
+                        .role(Role.MANAGER)
+                        .build();
+
+                assertThatThrownBy(() -> managerUser.changeRoleTo(Role.USER))
+                        .isInstanceOf(CannotChangeUserRoleException.class)
+                        .hasMessage("매니저 권한으로는 변경할 수 없습니다.");
             }
         }
     }

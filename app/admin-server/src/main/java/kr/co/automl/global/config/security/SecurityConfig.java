@@ -28,6 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .defaultSuccessUrl("/dashboard");
+                .defaultSuccessUrl("/home");
     }
 }

@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import MetaDataManagementPage from "./MetaDataManagementPage";
 import NotFound from "../../error/NotFound";
 
-const DOCUMENT_TITLE = "AutoML - 메타데이터";
+const DOCUMENT_TITLE = "WS-AutoML 관리자 페이지 | 메타데이터";
 
 const MAIN_TITLE = "메타데이터"
 const TAB_NAMES = ["관리"]
