@@ -26,7 +26,7 @@ export default function LoginCard() {
           <GoogleButton
             type="light"
             label="Google로 로그인"
-            onClick={() => window.location.href = '/dashboard'}
+            onClick={() => window.location.href = '/home'}
           />
         </Box>
       </CardContent>
