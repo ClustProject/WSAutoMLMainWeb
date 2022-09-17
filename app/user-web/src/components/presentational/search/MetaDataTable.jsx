@@ -80,23 +80,23 @@ export default function MetaDataTable() {
           <CatalogTableRow cells={
             <>
               <TitleTableCell title={"카테고리"} colSpan={2}/>
-              <ContentTableCell title={"오픈데이터"} colSpan={8}>오픈데이터</ContentTableCell>
+              <ContentTableCell title={"대기 환경"} colSpan={8}/>
             </>
           }/>
 
           <CatalogTableRow cells={
             <>
               <TitleTableCell title={"주제"} colSpan={2}/>
-              <ContentTableCell title={"교통"} colSpan={3}/>
+              <ContentTableCell title={"공기질"} colSpan={3}/>
               <TitleTableCell title={"주제 분류"} colSpan={2}/>
-              <ContentTableCell title={"국내 교통"} colSpan={3}/>
+              <ContentTableCell title={"실외 대기"} colSpan={3}/>
             </>
           }/>
 
           <DataSetTableRow cells={
             <>
               <TitleTableCell title={"파일명"} colSpan={2}/>
-              <ContentTableCell title={"a.csv"} colSpan={8}/>
+              <ContentTableCell title={"SURFACE_ASOS_95_MI_2022-01_2022-01_2022.csv"} colSpan={8}/>
             </>
           }>
           </DataSetTableRow>
@@ -105,7 +105,7 @@ export default function MetaDataTable() {
             <>
               <TitleTableCell title={"데이터 구축 기관"} rowSpan={3}/>
               <TitleTableCell title={"제공기관"}/>
-              <ContentTableCell title={"한국도로교통공사"} colSpan={8}/>
+              <ContentTableCell title={"기상청"} colSpan={8}/>
             </>
           }>
           </DataSetTableRow>
@@ -129,7 +129,7 @@ export default function MetaDataTable() {
           <DataSetTableRow cells={
             <>
               <TitleTableCell title={"매체유형"} colSpan={2}/>
-              <ContentTableCell title={"type"} colSpan={3}/>
+              <ContentTableCell title={"숫자"} colSpan={3}/>
               <TitleTableCell title={"식별자"} colSpan={2}/>
               <ContentTableCell title={"1"} colSpan={3}/>
             </>
@@ -160,7 +160,9 @@ export default function MetaDataTable() {
           <DataSetTableRow cells={
             <>
               <TitleTableCell title={"데이터셋 설명"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={8}/>
+              <ContentTableCell
+                title={"종관기상관측이란 종관규모의 날씨를 파악하기 위하여 정해진 시각에 모든 관측소에서 같은 시각에 실시하는 지상관측을 말합니다. 종관규모는 일기도에 표현되어 있는 보통의 고기압이나 저기압의 공간적 크기 및 수명을 말하며, 주로 매일의 날씨 현상을 뜻합니다."}
+                colSpan={8}/>
             </>
           }>
           </DataSetTableRow>
@@ -168,7 +170,7 @@ export default function MetaDataTable() {
           <DataSetTableRow cells={
             <>
               <TitleTableCell title={"키워드"} colSpan={2}/>
-              <ContentTableCell title={"교통,도로,평균시속"} colSpan={8}/>
+              <ContentTableCell title={"기온, 습도, 기압, 지면온도, 풍향, 풍속, 일조"} colSpan={8}/>
             </>
           }>
           </DataSetTableRow>
@@ -176,17 +178,17 @@ export default function MetaDataTable() {
           <DistributionTableRow cells={
             <>
               <TitleTableCell title={"배포 파일 설명"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={8}/>
+              <ContentTableCell title={"기상강원지방기상청 춘천기상대에서 측정한 데이터로 철원지점 해발고도 155m 지점에서 측정된 자료"} colSpan={8}/>
             </>
           }>
           </DistributionTableRow>
 
           <DistributionTableRow cells={
             <>
-              <TitleTableCell title={"측정 단위"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={3}/>
+              <TitleTableCell title={"시간 단위"} colSpan={2}/>
+              <ContentTableCell title={"1분"} colSpan={3}/>
               <TitleTableCell title={"제공 주기"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={3}/>
+              <ContentTableCell title={"1일"} colSpan={3}/>
             </>
           }>
           </DistributionTableRow>
@@ -194,9 +196,9 @@ export default function MetaDataTable() {
           <DistributionTableRow cells={
             <>
               <TitleTableCell title={"공간 정보"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={3}/>
+              <ContentTableCell title={"위도 : 38.14787 경도 : 127.3042"} colSpan={3}/>
               <TitleTableCell title={"시간 정보"} colSpan={2}/>
-              <ContentTableCell title={"..."} colSpan={3}/>
+              <ContentTableCell title={"2022.01.31~2022.01.31"} colSpan={3}/>
             </>
           }>
           </DistributionTableRow>
