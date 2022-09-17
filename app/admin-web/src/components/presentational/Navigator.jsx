@@ -28,7 +28,7 @@ const categories = [
     ],
   },
   {
-    id: '유저',
+    id: '유저 관리',
     children: [
       {
         id: '권한 관리',

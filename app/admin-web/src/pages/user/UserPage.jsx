@@ -3,9 +3,9 @@ import {Route, Routes} from "react-router-dom";
 import UserRoleManagementPage from "./UserRoleManagementPage";
 import NotFound from "../../error/NotFound";
 
-const DOCUMENT_TITLE = "AutoML - 유저";
+const DOCUMENT_TITLE = "AutoML - 유저 관리";
 
-const MAIN_TITLE = "유저"
+const MAIN_TITLE = "유저 관리"
 const TAB_NAMES = ["권한 관리"]
 
 export default function UserPage() {
