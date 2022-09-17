@@ -6,6 +6,8 @@ import Footer from "../presentational/global/footer/Footer";
 import MetaDataTable from "../presentational/search/MetaDataTable";
 import MetaDataDownloadButton from "../presentational/search/MetaDataDownloadButton";
 import MetaDataInfoBox from "../presentational/search/MetaDataInfoBox";
+import FileDataDetailBox from "../presentational/detail/FileDataDetailBox";
+import FileDataDetailCard from "../presentational/detail/FileDataDetailCard";
 
 const marginSize = '25px';
 
@@ -16,11 +18,21 @@ function MetadataDetailContainer() {
       <MainAppBar/>
 
       <Container sx={{
-        marginTop: marginSize
+        marginTop: marginSize,
+        fontWeight: "bold",
       }}>
         <Box sx={{
           display: "flex",
-          fontWeight: "bold",
+        }}>
+          <FileDataDetailBox/>
+        </Box>
+        <Box sx={{
+          my: "15px"
+        }}>
+          <FileDataDetailCard/>
+        </Box>
+        <Box sx={{
+          display: "flex",
           marginBottom: "15px"
         }}>
           <MetaDataInfoBox/>
