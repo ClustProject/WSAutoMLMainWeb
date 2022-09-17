@@ -7,16 +7,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const categories = [
-  {
-    id: '대시보드',
-    icon: <HomeIcon/>,
-    link: '/dashboard'
-  },
   {
     id: '메타데이터',
     children: [
