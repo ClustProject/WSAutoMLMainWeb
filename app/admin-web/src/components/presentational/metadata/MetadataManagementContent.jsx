@@ -127,6 +127,9 @@ export default function MetadataManagementContent() {
       }>
         삭제하기
       </Button>
+      <Typography variant="h6">
+        메타데이터 리스트
+      </Typography>
       <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
         <DialogTitle>링크 입력</DialogTitle>
         <DialogContent>
