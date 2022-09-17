@@ -8,6 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
+import SearchIcon from '@mui/icons-material/Search';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 const categories = [
@@ -32,20 +33,15 @@ const categories = [
     ],
   },
   {
-    id: '메인화면',
+    id: 'WS-AutoML',
     link: 'https://ws-automl.netlify.app',
     children: [
       {
         id: '검색',
+        icon: <SearchIcon/>,
         link: 'https://ws-automl.netlify.app/search'
-      },
-      {
-        id: '시각화',
-      },
-      {
-        id: '분석',
-      },
-    ],
+      }
+    ]
   },
 ];
 
