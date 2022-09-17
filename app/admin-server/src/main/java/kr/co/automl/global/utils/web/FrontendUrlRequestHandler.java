@@ -17,7 +17,7 @@ public class FrontendUrlRequestHandler {
     }
 
     @GetMapping(value = {
-            "/user/**"
+            "/user-management/**"
     })
     @PreAuthorize("hasRole('ADMIN')")
     public String returnToIndexHtmlOnlyAdmin() {

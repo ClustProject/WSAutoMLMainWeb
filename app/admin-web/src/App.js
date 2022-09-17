@@ -16,6 +16,7 @@ function PageTemplate() {
         <Route path="/Home" element={<HomePage/>}/>
         <Route path="/metadata/*" element={<MetaDataPage/>}/>
         <Route path="/user/*" element={<UserPage/>}/>
+        <Route path="/user-management/*" element={<UserPage/>}/>
         <Route path="*" element={<NotFound/>}/>
       </Routes>
     </PaperBase>

@@ -28,7 +28,7 @@ const categories = [
       {
         id: '권한 관리',
         icon: <ManageAccountsIcon/>,
-        link: '/user/role-management'
+        link: '/user-management/role'
       },
     ],
   },

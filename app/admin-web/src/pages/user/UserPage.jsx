@@ -15,7 +15,7 @@ export default function UserPage() {
 
   return (
     <Routes>
-      <Route path="role-management" element={
+      <Route path="role" element={
         <UserRoleManagementPage
           mainTitle={MAIN_TITLE}
           tabNames={TAB_NAMES}

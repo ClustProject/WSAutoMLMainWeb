@@ -119,4 +119,37 @@ class FrontendUrlRequestHandlerTest {
             }
         }
     }
+
+    @Nested
+    @DisplayName("GET /user-management/role 요청은")
+    class get_user_management_role_요청은 {
+        MockHttpServletRequestBuilder request
+                = get("/user-management/role");
+
+        @Nested
+        @WithMockUser
+        class 매니저나_관리자가_아닌_유저일경우 {
+
+            @Test
+            void status_403을_리턴한다() throws Exception {
+                ResultActions action = mockMvc.perform(request);
+
+                action
+                        .andExpect(status().isForbidden());
+            }
+        }
+
+        @Nested
+        class 매니저나_관리저인_유저일경우 {
+
+            @Test
+            @WithMockUser(roles = {"MANAGER", "ADMIN"})
+            void status_200을_리턴한다() throws Exception {
+                ResultActions action = mockMvc.perform(request);
+
+                action
+                        .andExpect(status().isOk());
+            }
+        }
+    }
 }
