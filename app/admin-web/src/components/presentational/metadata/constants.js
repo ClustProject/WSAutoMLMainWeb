@@ -88,7 +88,7 @@ const COLUMNS = [
   },
   {
     field: 'temporalResolution',
-    headerName: '측정 단위',
+    headerName: '시간 단위',
     width: defaultWidth,
   },
   {
