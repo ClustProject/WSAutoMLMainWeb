@@ -76,8 +76,8 @@ export default function Navigator(props) {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}>
-          AutoML
+        <ListItem sx={{...item, ...itemCategory, fontSize: 18, color: '#fff'}}>
+          WS-AutoML 관리자 페이지
         </ListItem>
 
         {categories.map(({id, icon, link, children}) => (
@@ -103,10 +103,10 @@ export default function Navigator(props) {
             }
 
             {children &&
-              children.map(({id: childId, icon, link, active}) => (
+              children.map(({id: childId, icon: childIcon, link: childLink, active}) => (
                 <ListItem key={childId}>
-                  <ListItemButton href={link} selected={active} sx={item}>
-                    <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemButton href={childLink} selected={active} sx={item}>
+                    <ListItemIcon>{childIcon}</ListItemIcon>
                     <ListItemText>{childId}</ListItemText>
                   </ListItemButton>
                 </ListItem>
