@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import UserRoleManagementPage from "./UserRoleManagementPage";
 import NotFound from "../../error/NotFound";
 
-const DOCUMENT_TITLE = "AutoML - 유저 관리";
+const DOCUMENT_TITLE = "WS-AutoML 관리자 페이지 | 유저 관리";
 
 const MAIN_TITLE = "유저 관리"
 const TAB_NAMES = ["권한 관리"]
