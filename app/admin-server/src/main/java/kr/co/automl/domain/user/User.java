@@ -4,6 +4,7 @@ import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
+import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -93,13 +94,17 @@ public class User {
     /**
      * 권한을 변경합니다.
      *
-     * 변경할 권한이 어드민 권한이거나 이미 어드민인 유저는 변경될 수 없습니다.
      * @param role 변경할 권한
      *
+     * @throws CannotChangeUserRoleException 유저 권한이 주어진경우
      * @throws CannotChangeAdminRoleException 어드민 권한이 주어진경우
      * @throws AlreadyAdminRoleException 이미 어드민 권한을 가진 유저일경우
      */
     public void changeRoleTo(Role role) {
+        if (role.isUser()) {
+            throw new CannotChangeUserRoleException();
+        }
+
         if (role.isAdmin()) {
             throw new CannotChangeAdminRoleException();
         }

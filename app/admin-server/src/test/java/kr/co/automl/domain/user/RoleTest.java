@@ -22,6 +22,36 @@ class RoleTest {
     }
 
     @Nested
+    class isUser_메서드는 {
+
+        @Nested
+        class 유저_권한일경우 {
+
+            @Test
+            void true를_리턴한다() {
+                Role role = Role.USER;
+                assertThat(role.isUser()).isTrue();
+            }
+
+        }
+
+        @Nested
+        class 유저_권한이_아닐경우 {
+
+            @ParameterizedTest
+            @EnumSource(
+                    value = Role.class,
+                    mode = EnumSource.Mode.EXCLUDE,
+                    names = {"USER"}
+            )
+            void false를_리턴한다(Role role) {
+                assertThat(role.isUser()).isFalse();
+            }
+
+        }
+    }
+
+    @Nested
     class isAdmin_메서드는 {
 
         @Nested

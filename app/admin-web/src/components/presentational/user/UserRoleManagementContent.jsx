@@ -53,7 +53,7 @@ export default function UserRoleManagementContent() {
 
   useEffect(() => {
     getUsers()
-      .then(users => setUsers(users));
+      .then(it => setUsers(it));
   }, []);
 
   const openDialog = () => {
@@ -118,7 +118,6 @@ export default function UserRoleManagementContent() {
               <MenuItem value={EMPTY_STRING}>
                 <em>권한 선택</em>
               </MenuItem>
-              <MenuItem value={"USER"}>USER</MenuItem>
               <MenuItem value={"MANAGER"}>MANAGER</MenuItem>
             </Select>
           </FormControl>
