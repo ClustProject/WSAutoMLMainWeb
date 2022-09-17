@@ -10,6 +10,7 @@ public record CreateDataSetAttributes(
         @NotBlank(message = "데이터셋 제목" + NOT_BLANK_MESSAGE_SUFFIX)
         String title,
 
+        @NotBlank(message = "구축 기관" + NOT_BLANK_MESSAGE_SUFFIX)
         String publisher,
 
         @NotBlank(message = "생성 기관" + NOT_BLANK_MESSAGE_SUFFIX)

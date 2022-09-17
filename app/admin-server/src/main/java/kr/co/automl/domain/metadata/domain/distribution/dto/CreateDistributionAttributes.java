@@ -19,6 +19,7 @@ public record CreateDistributionAttributes(
         @NotBlank(message = "다운로드 URL" + NOT_BLANK_MESSAGE_SUFFIX)
         String downloadUrl,
 
+        @NotBlank(message = "시간 단위" + NOT_BLANK_MESSAGE_SUFFIX)
         String temporalResolution,
 
         String accurualPeriodicity,
