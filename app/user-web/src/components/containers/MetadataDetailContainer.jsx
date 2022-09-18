@@ -3,9 +3,9 @@ import Header from "../presentational/global/header/Header";
 import MainAppBar from "../presentational/global/appbar/MainAppBar";
 import {Box, Container} from "@mui/material";
 import Footer from "../presentational/global/footer/Footer";
-import MetaDataTable from "../presentational/search/MetaDataTable";
-import MetaDataDownloadButton from "../presentational/search/MetaDataDownloadButton";
-import MetaDataInfoBox from "../presentational/search/MetaDataInfoBox";
+import MetaDataTable from "../presentational/detail/MetaDataTable";
+import MetaDataDownloadButton from "../presentational/detail/MetaDataDownloadButton";
+import MetaDataInfoBox from "../presentational/detail/MetaDataInfoBox";
 import FileDataDetailBox from "../presentational/detail/FileDataDetailBox";
 import FileDataDetailCard from "../presentational/detail/FileDataDetailCard";
 
