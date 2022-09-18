@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {Link, Typography} from "@mui/material";
+import {Box, Link, Typography} from "@mui/material";
 
 export default function DataSetCard(props) {
   return (
@@ -23,16 +23,23 @@ export default function DataSetCard(props) {
           {props.title}
         </Typography>
         <br/>
-        <Typography variant="body2" display="inline" sx={{
-          fontWeight: 'bold'
-        }}>
-          설명&nbsp;
-        </Typography>
-        <Typography variant="body2" display="inline">
-          {props.description}
-        </Typography>
 
-        <br/>
+        <Box sx={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }}>
+          <Typography variant="body2" display="inline" sx={{
+            fontWeight: 'bold',
+          }}>
+            설명&nbsp;
+          </Typography>
+          <Typography variant="body2" display="inline">
+            {props.description}
+          </Typography>
+
+        </Box>
+
         <Typography variant="body2" display="inline" sx={{
           fontWeight: 'bold'
         }}>
