@@ -131,16 +131,25 @@ export default function MetadataManagementContent() {
         메타데이터 리스트
       </Typography>
       <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
-        <DialogTitle>링크 입력</DialogTitle>
+        <DialogTitle>URL 링크 입력</DialogTitle>
         <DialogContent>
+          <Typography variant="body1">
+            메타데이터 매핑을 위해 데이터를 받아온 URL을 입력해주세요.
+          </Typography>
           <DialogContentText>
-            데이터를 다운받은 링크를 먼저 입력해주세요.
+            * 메타데이터 자동 매핑이 제공되는 Url 링크는 아래와 같습니다.
+          </DialogContentText>
+          <DialogContentText>
+            - '고속도로 공공데이터 포털>교통'
+          </DialogContentText>
+          <DialogContentText>
+            - '기상자료개방포털>기상관측>지상'
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
             id="sourceUrl"
-            label="다운받은 URL"
+            label="URL 입력 부분"
             fullWidth
             variant="standard"
           />
