@@ -5,7 +5,7 @@ public class CreateDistributionAttributesTest {
             .title("a.csv")
             .description("설명...")
             .downloadUrl("https://download-url.com")
-            .temporalResolution("측정 단위")
+            .temporalResolution("시간 단위")
             .accurualPeriodicity("일")
             .spatial("공간 정보")
             .temporal("시간 정보")
