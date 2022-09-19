@@ -408,19 +408,16 @@ export default function MetadataManagementContent() {
           type: "data-ex-79"
         }))
       }
-
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=ETC&num=78&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-78'
         }))
       }
-
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=38&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-38'
         }))
       }
-
       if (url === "http://data.ex.co.kr/portal/fdwn/view?type=VDS&num=23&requestfrom=dataset") {
         dispatches.forEach(it => it({
           type: 'data-ex-23'
@@ -428,11 +425,240 @@ export default function MetadataManagementContent() {
       }
     }
 
+    //교통 하드 코딩
+    if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS")) {
+      dispatchCatalog({
+        type: "ex/tcs"
+      })
+
+      const dispatches = [dispatchDataSet]
+
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=34")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/34'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=35")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/35'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=32")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/32'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=31")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/31'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=39")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/39'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=65")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/65'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=64")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/64'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C7")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C7'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=17")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/17'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=33")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/33'
+        }))
+      }
+      //페이지 전환
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=67")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/67'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C5")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C5'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=18")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/18'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B6")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B6'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B1")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B1'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B5")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B5'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B3")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B3'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=68")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/68'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B4")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B4'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B2")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B2'
+        }))
+      }
+      //페이지 전환
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B7")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B7'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C2")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C2'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C4")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C4'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C3")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C3'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=66")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/66'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=A2")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/A2'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=B9")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/B9'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=C0")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/C0'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=A5")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/A5'
+        }))
+      }
+      if (url.startsWith("http://data.ex.co.kr/portal/fdwn/view?type=TCS&num=69")) {
+        dispatches.forEach(it => it({
+          type: 'ex/tcs/69'
+        }))
+      }
+
+
+    }
+    //교통 하드 코딩
+
     if (url === "https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tabNo=1") {
-      [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach(it => it({
+      [dispatchCatalog, dispatchDataSet].forEach(it => it({
         type: 'data-kma-36'
       }))
     }
+
+    // kma 하드 코딩
+    if (url.startsWith("https://data.kma.go.kr")) {
+      dispatchCatalog({
+        type: "kma"
+      })
+
+      const dispatches = [dispatchDataSet];
+
+      if (url === "https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36") {
+        dispatches.forEach(it => it({
+          type: "kma/grnd_Asos"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/grnd/selectAwsRltmList.do?pgmNo=56") {
+        dispatches.forEach(it => it({
+          type: "kma/grnd_Aws"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/grnd/selectAgrRltmList.do?pgmNo=72") {
+        dispatches.forEach(it => it({
+          type: "kma/grnd_Agr"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/grnd/selectNkRltmList.do?pgmNo=58") {
+        dispatches.forEach(it => it({
+          type: "kma/grnd_Nk"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/grnd/selectAwosRltmList.do?pgmNo=638") {
+        dispatches.forEach(it => it({
+          type: "kma/grnd_Awos"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/seasonObs/seasonObsDataList.do?pgmNo=648") {
+        dispatches.forEach(it => it({
+          type: "kma/season"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/seasonObs/seasonObsDataList.do?pgmNo=648&tabNo=1") {
+        dispatches.forEach(it => it({
+          type: "kma/season_Obs"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/climate/selectDustRltmList.do?pgmNo=68") {
+        dispatches.forEach(it => it({
+          type: "kma/climate"
+        }))
+      }
+
+      if (url === "https://data.kma.go.kr/data/lightning/lightningRltmList.do?pgmNo=641") {
+        dispatches.forEach(it => it({
+          type: "kma/lightning"
+        }))
+      }
+    }
+    // kma 하드 코딩
 
     if (matchDataGoKrUrl(url)) {
       const payload = await scrapDataGoKr(url);
