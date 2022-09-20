@@ -4,8 +4,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import DataUtilizationMenus from "./DataUtilizationMenus";
 
+import HomeIcon from '@mui/icons-material/Home';
+import {IconButton} from "@mui/material";
+
 const pages = [
   {
+    "icon": <HomeIcon/>,
     "name": '홈페이지',
     "link": "/"
   },
@@ -14,11 +18,6 @@ const pages = [
     "link": "/search"
   }
 ];
-
-const buttonSx = {
-  my: 2, // margin top,bottom
-  color: 'white'
-};
 
 export default function MainAppBar() {
   return (
@@ -31,13 +30,31 @@ export default function MainAppBar() {
           flexGrow: 1,
         }}>
           {pages.map((page) => (
-            <Button
-              key={page.name}
-              sx={buttonSx}
-              onClick={() => window.location.href = page.link}
-            >
-              {page.name}
-            </Button>
+            <>
+              {page.icon ?
+                <IconButton
+                  aria-label="home"
+                  onClick={() => window.location.href = page.link}
+                  sx={{
+                    color: 'white'
+                  }}
+                >
+                  {page.icon}
+                </IconButton>
+                :
+                <Button
+                  key={page.name}
+                  sx={{
+                    my: 2, // margin top,bottom
+                    color: 'white'
+                  }}
+                  onClick={() => window.location.href = page.link}
+                >
+                  {page.name}
+                </Button>
+              }
+
+            </>
           ))}
           <DataUtilizationMenus/>
         </Box>
