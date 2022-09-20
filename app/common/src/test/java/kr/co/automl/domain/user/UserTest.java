@@ -28,13 +28,6 @@ public class UserTest {
         return create("name", "imageUrl", "email");
     }
 
-    public static User createWithId(long id) {
-        return User.builder()
-                .id(id)
-                .role(Role.USER)
-                .build();
-    }
-
     @Nested
     class of_메서드는 {
 

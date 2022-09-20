@@ -1,5 +1,6 @@
 package kr.co.automl.infra;
 
+import kr.co.automl.domain.user.TestUserFactory;
 import kr.co.automl.domain.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static kr.co.automl.domain.user.UserTest.createWithEmail;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class InMemoryUserRepositoryTest {
@@ -26,7 +26,7 @@ class InMemoryUserRepositoryTest {
 
             @Test
             void 찾은_유저_Optional을_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
                 inMemoryUserRepository.save(user);
 
                 Optional<User> actual = inMemoryUserRepository.findByEmail("jypark1@wise.co.kr");
@@ -40,7 +40,7 @@ class InMemoryUserRepositoryTest {
 
             @Test
             void 빈_Optional을_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
                 inMemoryUserRepository.save(user);
 
                 Optional<User> actual = inMemoryUserRepository.findByEmail("xxx");
@@ -50,6 +50,5 @@ class InMemoryUserRepositoryTest {
         }
 
     }
-
 
 }

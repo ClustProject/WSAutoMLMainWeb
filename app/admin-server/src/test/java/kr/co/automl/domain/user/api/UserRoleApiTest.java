@@ -1,8 +1,8 @@
 package kr.co.automl.domain.user.api;
 
+import kr.co.automl.domain.user.TestUserFactory;
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
-import kr.co.automl.domain.user.UserTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -86,7 +86,7 @@ class UserRoleApiTest {
 
             @BeforeEach
             void setUp() {
-                User user = UserTest.create("name", "imageUrl", "email");
+                User user = TestUserFactory.create("name", "imageUrl", "email");
                 this.savedUser = userRepository.save(user);
             }
 

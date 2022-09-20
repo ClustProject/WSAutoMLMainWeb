@@ -1,9 +1,9 @@
 package kr.co.automl.domain.user.service;
 
 import kr.co.automl.domain.user.Role;
+import kr.co.automl.domain.user.TestUserFactory;
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
-import kr.co.automl.domain.user.UserTest;
 import kr.co.automl.domain.user.exceptions.CannotFindUserException;
 import kr.co.automl.infra.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +33,7 @@ class UserRoleChangerTest {
 
             @BeforeEach
             void setUp() {
-                User user = UserTest.createWithId(1L);
+                User user = TestUserFactory.createWithId(1L);
                 userRepository.save(user);
 
                 this.existUserId = user.getId();

@@ -1,6 +1,5 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
-import kr.co.automl.domain.metadata.domain.dataset.ContactPoint;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 

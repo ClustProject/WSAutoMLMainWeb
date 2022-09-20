@@ -1,7 +1,7 @@
 package kr.co.automl.domain.user.service;
 
+import kr.co.automl.domain.user.TestUserFactory;
 import kr.co.automl.domain.user.UserRepository;
-import kr.co.automl.domain.user.UserTest;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.infra.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ class UserServiceTest {
         @BeforeEach
         void setUp_유저_11명_저장() {
             IntStream.range(0, 11)
-                    .mapToObj(UserTest::createWithId)
+                    .mapToObj(TestUserFactory::createWithId)
                     .forEach(user -> userRepository.save(user));
         }
 
