@@ -7,7 +7,7 @@ const linkBoxInfo = [
   {
     "title": "Page",
     "links": [
-      {"name": "홈페이지", "href": "/"},
+      {"name": "메인페이지", "href": "/"},
       {"name": "데이터 검색", "href": "/search"},
       {"name": "데이터 활용"},
       {"name": "- 모델 학습(예정)"},
