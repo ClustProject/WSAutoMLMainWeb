@@ -2,6 +2,19 @@ import React, {useEffect, useState} from "react";
 
 import DataSetCard from './DataSetCard'
 
+/**
+ * 오름차순 정렬
+ */
+function ascOrder() {
+  return (a, b) => {
+    if (a.name === b.name) {
+      return 0;
+    }
+
+    return a.name > b.name ? -1 : 1;
+  };
+}
+
 const mockDataSetInfo = [
   {
     "id": 1,
@@ -35,15 +48,16 @@ export default function DataSetCards() {
 
   return (
     <>
-      {dataSet.map(it => (
-        <DataSetCard
-          id={it.id}
-          name={it.name}
-          title={it.title}
-          description={it.description}
-          keyword={it.keyword}
-        />
-      ))}
+      {dataSet.sort(ascOrder())
+        .map(it => (
+          <DataSetCard
+            id={it.id}
+            name={it.name}
+            title={it.title}
+            description={it.description}
+            keyword={it.keyword}
+          />
+        ))}
     </>
   );
 }

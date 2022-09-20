@@ -11,19 +11,9 @@ export default function DataSetCard(props) {
       <CardContent>
         <Typography variant="h5" component="div">
           <Link href={`/metadata/${props.id}`}>
-            {props.name}
+            {props.title}
           </Link>
         </Typography>
-        <Typography variant="body2" display="inline" sx={{
-          fontWeight: 'bold'
-        }}>
-          제목&nbsp;
-        </Typography>
-        <Typography variant="body2" display="inline">
-          {props.title}
-        </Typography>
-        <br/>
-
         <Box sx={{
           overflow: 'hidden',
           textOverflow: 'ellipsis',
@@ -39,6 +29,16 @@ export default function DataSetCard(props) {
           </Typography>
 
         </Box>
+
+        <Typography variant="body2" display="inline" sx={{
+          fontWeight: 'bold'
+        }}>
+          파일&nbsp;
+        </Typography>
+        <Typography variant="body2" display="inline">
+          {props.name}
+        </Typography>
+        <br/>
 
         <Typography variant="body2" display="inline" sx={{
           fontWeight: 'bold'
