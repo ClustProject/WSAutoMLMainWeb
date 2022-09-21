@@ -71,6 +71,10 @@ asciidoctor {
     dependsOn test
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.4.1'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }

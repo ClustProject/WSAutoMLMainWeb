@@ -25,6 +25,10 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // assertj
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.4.2'
+}
+
 // 하위 모듈 설정 부분
 bootJar {
     enabled = false
