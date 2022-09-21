@@ -1,0 +1,78 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'jacoco'
+    id "org.sonarqube" version "3.4.0.2513"
+}
+
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+    implementation 'org.mariadb.jdbc:mariadb-java-client'
+
+    implementation project(':app:common')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.4.2'
+}
+
+jacoco {
+    // JaCoCo 버전
+    toolVersion = '0.8.7'
+
+//  테스트결과 리포트를 저장할 경로 변경
+//  default는 "$/jacoco"
+}
+
+jacocoTestReport {
+    reports {
+        // 원하는 리포트를 켜고 끌 수 있습니다.
+        html.enabled true
+        xml.enabled true
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+test {
+    useJUnitPlatform()
+
+    finalizedBy 'jacocoTestReport'
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
+        property "sonar.organization", "wise-pangnem"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.projectName", "user-server"
+    }
+}
+
+subprojects {
+    version = '1.0'
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main"
+            property "sonar.tests", "src/test"
+
+            // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
+            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/test/jacocoTestReport.xml"
+            property "sonar.host.url", "https://sonarcloud.io"
+        }
+    }
+}

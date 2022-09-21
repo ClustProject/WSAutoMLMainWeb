@@ -2,4 +2,4 @@ rootProject.name = 'automl'
 
 include 'app:admin-server'
 include 'app:common'
-
+include 'app:user-server'
