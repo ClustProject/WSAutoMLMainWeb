@@ -2,6 +2,7 @@ package kr.co.automl.global.config.security;
 
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
+import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +35,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
         User user = saveOrUpdateUser(attributes);
-        httpSession.setAttribute("user", user.toSessionUser());
+        httpSession.setAttribute("user", SessionUser.from(user));
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRoleName())),

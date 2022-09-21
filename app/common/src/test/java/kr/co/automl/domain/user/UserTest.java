@@ -1,6 +1,5 @@
 package kr.co.automl.domain.user;
 
-import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
@@ -60,22 +59,6 @@ public class UserTest {
             assertThat(user.getEmail()).isEqualTo("email");
             assertThat(user.getRole()).isEqualTo(Role.USER);
         }
-    }
-
-    @Nested
-    class toSessionUser_메서드는 {
-
-        @Test
-        void 변환된_세션유저를_리턴한다() {
-            User user = User.ofDefaultRole("name", "imageUrl", "email");
-
-            SessionUser sessionUser = user.toSessionUser();
-
-            assertThat(sessionUser).isEqualTo(
-                    new SessionUser("name", "imageUrl", "email", Role.USER)
-            );
-        }
-
     }
 
     @Nested

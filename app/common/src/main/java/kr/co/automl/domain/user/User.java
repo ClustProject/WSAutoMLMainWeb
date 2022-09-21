@@ -1,6 +1,5 @@
 package kr.co.automl.domain.user;
 
-import kr.co.automl.domain.user.dto.SessionUser;
 import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
@@ -60,10 +59,6 @@ public class User {
                 .email(email)
                 .role(Role.DEFAULT)
                 .build();
-    }
-
-    public SessionUser toSessionUser() {
-        return new SessionUser(name, imageUrl, email, role);
     }
 
     public boolean matchEmail(User user) {
