@@ -18,7 +18,6 @@ public class UserReader {
      * 유저 응답 객체 목록을 리턴합니다.
      */
     public List<UserResponse> readUsers(Pageable pageable) {
-
         List<User> users = userRepository.findAll(pageable)
                 .getContent();
 
