@@ -11,13 +11,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserReader {
     private final UserRepository userRepository;
 
     /**
      * 유저 응답 객체 목록을 리턴합니다.
      */
-    public List<UserResponse> getUsers(Pageable pageable) {
+    public List<UserResponse> readUsers(Pageable pageable) {
+
         List<User> users = userRepository.findAll(pageable)
                 .getContent();
 

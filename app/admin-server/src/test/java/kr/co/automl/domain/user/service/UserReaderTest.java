@@ -14,19 +14,19 @@ import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserServiceTest {
+class UserReaderTest {
 
-    private UserService userService;
+    private UserReader userReader;
     private UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
         this.userRepository = new InMemoryUserRepository();
-        this.userService = new UserService(userRepository);
+        this.userReader = new UserReader(userRepository);
     }
 
     @Nested
-    class getUsers {
+    class readAllUsers {
 
         @BeforeEach
         void setUp_유저_11명_저장() {
@@ -37,10 +37,10 @@ class UserServiceTest {
 
         @Test
         void 페이지네이션_테스트_11개를넣어도_10개가_나온다() {
-            List<UserResponse> users = userService.getUsers(PageRequest.of(0, 10));
+            List<UserResponse> users = userReader.readUsers(PageRequest.of(0, 10));
             assertThat(users).hasSize(10);
 
-            users = userService.getUsers(PageRequest.of(1, 10));
+            users = userReader.readUsers(PageRequest.of(1, 10));
             assertThat(users).hasSize(1);
         }
     }
