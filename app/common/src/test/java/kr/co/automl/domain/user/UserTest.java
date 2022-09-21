@@ -3,7 +3,6 @@ package kr.co.automl.domain.user;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
-import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserTest {
+
     public static User create(String name, String imageUrl, String email) {
         return ofDefaultRole(name, imageUrl, email);
     }
@@ -24,26 +24,6 @@ public class UserTest {
 
     public static User create() {
         return create("name", "imageUrl", "email");
-    }
-
-    @Nested
-    class of_메서드는 {
-
-        @Nested
-        class OAuthAttributes가_주어지면 {
-
-            @Test
-            void 기본권한이_설정되어_변환된_유저를_리턴한다() {
-                OAuthAttributes oAuthAttributes = new OAuthAttributes("name", "imageUrl", "email");
-
-                User user = User.of(oAuthAttributes);
-
-                assertThat(user.getName()).isEqualTo("name");
-                assertThat(user.getImageUrl()).isEqualTo("imageUrl");
-                assertThat(user.getEmail()).isEqualTo("email");
-                assertThat(user.getRole()).isEqualTo(Role.USER);
-            }
-        }
     }
 
     @Nested
@@ -124,18 +104,20 @@ public class UserTest {
     class update_메서드는 {
 
         @Nested
-        class OAuthAttributes가_주어지면 {
+        class 변경할_요소들이_주어지면 {
 
             @Test
-            void 변경된_정보를_리턴한다() {
-                User user = create("name", "imageUrl", "email");
-                OAuthAttributes oAuthAttributes = new OAuthAttributes("OAuthName", "OAuthImageUrl", "OAuthEmail");
+            void 변경된_정보를_가진_유저를_리턴한다() {
+                User user = create();
+                String oAuthName = "OAuthName";
+                String oAuthImageUrl = "OAuthImageUrl";
+                String oAuthEmail = "OAuthEmail";
 
-                user.update(oAuthAttributes);
+                user.update(oAuthName, oAuthImageUrl, oAuthEmail);
 
-                assertThat(user.getName()).isEqualTo("OAuthName");
-                assertThat(user.getImageUrl()).isEqualTo("OAuthImageUrl");
-                assertThat(user.getEmail()).isEqualTo("OAuthEmail");
+                assertThat(user.getName()).isEqualTo(oAuthName);
+                assertThat(user.getImageUrl()).isEqualTo(oAuthImageUrl);
+                assertThat(user.getEmail()).isEqualTo(oAuthEmail);
                 assertThat(user.getRole()).isEqualTo(Role.USER);
             }
         }

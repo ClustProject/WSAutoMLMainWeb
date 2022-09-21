@@ -50,9 +50,13 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private User saveOrUpdateUser(Map<String, Object> attributes) {
         OAuthAttributes oAuthAttributes = createOAuthAttributes(attributes);
 
-        User user = userRepository.findByEmail(oAuthAttributes.email())
-                .map(it -> it.update(oAuthAttributes))
-                .orElse(User.of(oAuthAttributes));
+        String name = oAuthAttributes.name();
+        String imageUrl = oAuthAttributes.imageUrl();
+        String email = oAuthAttributes.email();
+
+        User user = userRepository.findByEmail(email)
+                .map(it -> it.update(name, imageUrl, email))
+                .orElse(User.ofDefaultRole(name, imageUrl, email));
 
         return userRepository.save(user);
     }

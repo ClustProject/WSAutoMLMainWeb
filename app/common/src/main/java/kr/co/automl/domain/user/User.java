@@ -3,7 +3,6 @@ package kr.co.automl.domain.user;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
-import kr.co.automl.global.config.security.dto.OAuthAttributes;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,15 +42,7 @@ public class User {
         this.role = role;
     }
 
-    public static User of(OAuthAttributes oAuthAttributes) {
-        return ofDefaultRole(
-                oAuthAttributes.name(),
-                oAuthAttributes.imageUrl(),
-                oAuthAttributes.email()
-        );
-    }
-
-    static User ofDefaultRole(String name, String imageUrl, String email) {
+    public static User ofDefaultRole(String name, String imageUrl, String email) {
         return User.builder()
                 .name(name)
                 .imageUrl(imageUrl)
@@ -77,10 +68,10 @@ public class User {
         return this.role.getName();
     }
 
-    public User update(OAuthAttributes oAuthAttributes) {
-        this.name = oAuthAttributes.name();
-        this.imageUrl = oAuthAttributes.imageUrl();
-        this.email = oAuthAttributes.email();
+    public User update(String name, String imageUrl, String email) {
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.email = email;
 
         return this;
     }
