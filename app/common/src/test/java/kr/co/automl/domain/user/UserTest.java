@@ -1,6 +1,5 @@
 package kr.co.automl.domain.user;
 
-import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
@@ -200,19 +199,6 @@ public class UserTest {
                         .isInstanceOf(CannotChangeUserRoleException.class)
                         .hasMessage("매니저 권한으로는 변경할 수 없습니다.");
             }
-        }
-    }
-
-    @Nested
-    class toResponse {
-
-        @Test
-        void 변환된_응답_리턴() {
-            User user = create();
-
-            UserResponse userResponse = user.toResponse();
-
-            assertThat(userResponse).isEqualTo(new UserResponse(0L, "name", "email", Role.USER));
         }
     }
 }

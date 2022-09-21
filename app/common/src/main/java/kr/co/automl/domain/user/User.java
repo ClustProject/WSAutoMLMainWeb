@@ -1,6 +1,5 @@
 package kr.co.automl.domain.user;
 
-import kr.co.automl.domain.user.dto.UserResponse;
 import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
 import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
@@ -109,9 +108,5 @@ public class User {
         }
 
         this.role = role;
-    }
-
-    public UserResponse toResponse() {
-        return new UserResponse(id, name, email, role);
     }
 }
