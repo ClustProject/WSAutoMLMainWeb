@@ -25,6 +25,16 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // assertj
 }
 
+// 하위 모듈 설정 부분
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+//
+
 jacoco {
     // JaCoCo 버전
     toolVersion = '0.8.7'
