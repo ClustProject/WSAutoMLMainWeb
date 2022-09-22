@@ -88,6 +88,14 @@ jacocoTestReport {
     finalizedBy 'jacocoTestCoverageVerification'
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            excludes = ['*.testFixtures.*']
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
 
