@@ -1,6 +1,6 @@
 package kr.co.automl.global.utils;
 
-import com.nimbusds.oauth2.sdk.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.AttributeConverter;
 import java.util.Objects;
@@ -10,7 +10,7 @@ public abstract class EntityEnumerableConverter<T extends EntityEnumerable>
 
     private final Class<T> clazz;
 
-    public EntityEnumerableConverter(Class<T> clazz) {
+    protected EntityEnumerableConverter(Class<T> clazz) {
         this.clazz = clazz;
     }
 
