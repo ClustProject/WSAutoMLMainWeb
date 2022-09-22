@@ -1,56 +1,20 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
+import kr.co.automl.domain.metadata.dataset.TestDataSetFactory;
+import kr.co.automl.domain.metadata.distribution.TestDistributionFactory;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
-import kr.co.automl.domain.metadata.domain.catalog.CatalogTest;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
-import kr.co.automl.domain.metadata.domain.distribution.DistributionTest;
 import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DataSetTest {
-    public static DataSet createDefaultFixtureWith(Catalog catalog) {
-        return createDefaultFixtureWith(catalog, null);
-    }
-
-    public static DataSet createDefaultFixtureWith(Distribution distribution) {
-        return createDefaultFixtureWith(CatalogTest.createDefaultFixture(), distribution);
-    }
-
-    public static DataSet createDefaultFixtureWith(Catalog catalog, Distribution distribution) {
-        DataSet dataSet = createDefaultFixture();
-        dataSet.setRelation(catalog, distribution);
-
-        return dataSet;
-    }
-
-    public static DataSet createDefaultFixture() {
-        return createDefaultFixtureWithId(null);
-    }
-
-    public static DataSet createDefaultFixtureWithId(Long id) {
-        DataSet dataSet = DataSet.builder()
-                .id(id)
-                .title("데이터셋 이름")
-                .organization(OrganizationTest.ORGANIZATION1)
-                .type(Type.IMAGE)
-                .keyword("키워드1, 키워드2, 키워드1")
-                .licenseInfo(new LicenseInfo(License.CLUST, Rights.ALL))
-                .description("데이터셋 설명")
-                .build();
-
-        Catalog catalog = CatalogTest.createDefaultFixture();
-        Distribution distribution = DistributionTest.createDefaultFixture();
-
-        dataSet.setRelation(catalog, distribution);
-
-        return dataSet;
-    }
+class DataSetTest {
 
     @Test
     void from_생성_테스트() {
@@ -98,7 +62,7 @@ public class DataSetTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            DataSet dataSet = createDefaultFixtureWithId(1L);
+            DataSet dataSet = TestDataSetFactory.createDefaultFixtureWithId(1L);
 
             DataSetResponse dataSetResponse = dataSet.toResponse();
 
@@ -119,8 +83,8 @@ public class DataSetTest {
 
         @Test
         void 카탈로그_응답_객체를_리턴한다() {
-            Catalog catalog = CatalogTest.createDefaultFixture();
-            DataSet dataSet = createDefaultFixtureWith(catalog);
+            Catalog catalog = TestCatalogFactory.createDefaultFixture();
+            DataSet dataSet = TestDataSetFactory.createDefaultFixtureWith(catalog);
 
             CatalogResponse catalogResponse = dataSet.toCatalogResponse();
 
@@ -133,8 +97,8 @@ public class DataSetTest {
 
         @Test
         void 배포_정보_응답객체를_리턴한다() {
-            Distribution distribution = DistributionTest.createDefaultFixture();
-            DataSet dataSet = createDefaultFixtureWith(distribution);
+            Distribution distribution = TestDistributionFactory.createDefaultFixture();
+            DataSet dataSet = TestDataSetFactory.createDefaultFixtureWith(distribution);
 
             DistributionResponse distributionResponse = dataSet.toDistributionResponse();
 

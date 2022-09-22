@@ -1,19 +1,12 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.dataset.ContactPointFixtures;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContactPointTest {
-    public static final ContactPoint CONTACT_POINT1 = new ContactPoint(
-            "박주영",
-            "jypark1@wise.co.kr"
-    );
-    public static final ContactPoint CONTACT_POINT2 = new ContactPoint(
-            "최태동",
-            "tdchoi@wise.co.kr"
-    );
 
     @Nested
     class matchName_메서드는 {
@@ -23,7 +16,7 @@ public class ContactPointTest {
 
             @Test
             void true를_리턴한다() {
-                boolean actual = CONTACT_POINT1.matchName("박주영");
+                boolean actual = ContactPointFixtures.fixture1().matchName("박주영");
 
                 assertThat(actual).isTrue();
             }
@@ -34,7 +27,7 @@ public class ContactPointTest {
 
             @Test
             void true를_리턴한다() {
-                boolean actual = CONTACT_POINT1.matchName("xxx");
+                boolean actual = ContactPointFixtures.fixture1().matchName("xxx");
 
                 assertThat(actual).isFalse();
             }

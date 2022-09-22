@@ -6,6 +6,8 @@ buildscript {
 
 plugins {
     id 'java'
+    id 'java-library'
+    id "java-test-fixtures"
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"

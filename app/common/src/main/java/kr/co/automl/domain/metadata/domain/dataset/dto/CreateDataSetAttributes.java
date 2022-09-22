@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 
 import static kr.co.automl.domain.metadata.dto.CreateMetaDataAttributes.NOT_BLANK_MESSAGE_SUFFIX;
 
+
 public record CreateDataSetAttributes(
         @NotBlank(message = "데이터셋 제목" + NOT_BLANK_MESSAGE_SUFFIX)
         String title,

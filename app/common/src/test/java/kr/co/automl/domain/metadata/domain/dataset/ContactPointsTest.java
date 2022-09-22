@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.dataset.ContactPointFixtures;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchContactNameException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -8,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ContactPointsTest {
-    public ContactPoints CONTACT_POINTS = new ContactPoints(
-            ContactPointTest.CONTACT_POINT1,
-            ContactPointTest.CONTACT_POINT2
+    private static final ContactPoints CONTACT_POINTS = new ContactPoints(
+            ContactPointFixtures.fixture1(),
+            ContactPointFixtures.fixture2()
     );
 
     @Nested
@@ -103,7 +104,7 @@ class ContactPointsTest {
 
             @Test
             void 찾은_연락처를_리턴한다() {
-                ContactPoint contactPoint = ContactPointTest.CONTACT_POINT1;
+                ContactPoint contactPoint = ContactPointFixtures.fixture1();
 
                 assertThat(CONTACT_POINTS.findByName("박주영")).isEqualTo(contactPoint);
             }

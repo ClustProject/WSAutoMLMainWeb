@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.distribution;
 
+import kr.co.automl.domain.metadata.distribution.TestDistributionFactory;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
 import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
 import org.junit.jupiter.api.Nested;
@@ -7,19 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DistributionTest {
+class DistributionTest {
 
-    public static Distribution createDefaultFixture() {
-        return Distribution.builder()
-                .title("destribution title")
-                .description("destribution description")
-                .downloadUrl("downloadUrl")
-                .temporalResolution("temporalResolution")
-                .accurualPeriodicity("일")
-                .spatial("spatial")
-                .temporal("temporal")
-                .build();
-    }
 
     @Test
     void from_생성_테스트() {
@@ -49,7 +39,7 @@ public class DistributionTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            Distribution distribution = createDefaultFixture();
+            Distribution distribution = TestDistributionFactory.createDefaultFixture();
 
             DistributionResponse distributionResponse = distribution.toResponse();
 

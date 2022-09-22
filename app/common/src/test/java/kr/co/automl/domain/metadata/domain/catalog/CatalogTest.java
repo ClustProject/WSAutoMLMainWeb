@@ -7,15 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CatalogTest {
-
-    public static Catalog createDefaultFixture() {
-        return Catalog.builder()
-                .category(Category.CITY)
-                .theme(Theme.AIR_QUALITY)
-                .themeTaxonomy("themeTaxonomy")
-                .build();
-    }
+class CatalogTest {
 
     @Test
     void from_생성_테스트() {
@@ -37,7 +29,7 @@ public class CatalogTest {
 
         @Test
         void 변환된_응답객체를_리턴한다() {
-            Catalog catalog = createDefaultFixture();
+            Catalog catalog = TestCatalogFactory.createDefaultFixture();
 
             CatalogResponse catalogResponse = catalog.toResponse();
 

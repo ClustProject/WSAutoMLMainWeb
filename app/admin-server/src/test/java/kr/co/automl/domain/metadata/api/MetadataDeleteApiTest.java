@@ -1,8 +1,8 @@
 package kr.co.automl.domain.metadata.api;
 
+import kr.co.automl.domain.metadata.dataset.TestDataSetFactory;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetRepository;
-import kr.co.automl.domain.metadata.domain.dataset.DataSetTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -76,7 +76,7 @@ public class MetadataDeleteApiTest {
 
             @BeforeEach
             void setUp() {
-                DataSet dataSet = DataSetTest.createDefaultFixtureWithId(1L);
+                DataSet dataSet = TestDataSetFactory.createDefaultFixtureWithId(1L);
 
                 dataSetRepository.save(dataSet);
             }

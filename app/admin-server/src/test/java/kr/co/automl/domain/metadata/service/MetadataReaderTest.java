@@ -1,12 +1,12 @@
 package kr.co.automl.domain.metadata.service;
 
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
+import kr.co.automl.domain.metadata.dataset.TestDataSetFactory;
+import kr.co.automl.domain.metadata.distribution.TestDistributionFactory;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
-import kr.co.automl.domain.metadata.domain.catalog.CatalogTest;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetRepository;
-import kr.co.automl.domain.metadata.domain.dataset.DataSetTest;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
-import kr.co.automl.domain.metadata.domain.distribution.DistributionTest;
 import kr.co.automl.domain.metadata.dto.MetadataResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -47,14 +47,15 @@ class MetadataReaderTest {
         void 응답객체_리스트를_리턴한다() {
             List<MetadataResponse> metadataResponses = metadataReader.readAll(Pageable.ofSize(12));
 
-            assertThat(metadataResponses).hasSize(12);
-            assertThat(metadataResponses).contains(
-                    MetadataResponse.builder()
-                            .catalog(catalog.toResponse())
-                            .dataSet(dataSet.toResponse())
-                            .distribution(distribution.toResponse())
-                            .build()
-            );
+            assertThat(metadataResponses)
+                    .hasSize(12)
+                    .contains(
+                            MetadataResponse.builder()
+                                    .catalog(catalog.toResponse())
+                                    .dataSet(dataSet.toResponse())
+                                    .distribution(distribution.toResponse())
+                                    .build()
+                    );
         }
 
         @Test
@@ -73,10 +74,10 @@ class MetadataReaderTest {
         private void saveDataSets(int count) {
             IntStream.rangeClosed(1, count)
                     .forEach(i -> {
-                        catalog = CatalogTest.createDefaultFixture();
-                        distribution = DistributionTest.createDefaultFixture();
+                        catalog = TestCatalogFactory.createDefaultFixture();
+                        distribution = TestDistributionFactory.createDefaultFixture();
 
-                        dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
+                        dataSet = TestDataSetFactory.createDefaultFixtureWith(catalog, distribution);
 
                         dataSetRepository.save(dataSet);
                     });

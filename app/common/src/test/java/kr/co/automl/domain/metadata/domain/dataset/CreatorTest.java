@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.dataset.ContactPointFixtures;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchContactNameException;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindMatchCreatorException;
 import org.junit.jupiter.api.Nested;
@@ -24,7 +25,7 @@ class CreatorTest {
 
                 ContactPoint contactPoint = creator.findContactBy("박주영");
 
-                assertThat(contactPoint).isEqualTo(ContactPointTest.CONTACT_POINT1);
+                assertThat(contactPoint).isEqualTo(ContactPointFixtures.fixture1());
             }
         }
 

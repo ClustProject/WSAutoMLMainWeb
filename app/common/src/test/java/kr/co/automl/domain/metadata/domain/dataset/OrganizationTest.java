@@ -1,15 +1,15 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import kr.co.automl.domain.metadata.dataset.ContactPointFixtures;
 import org.junit.jupiter.api.Test;
 
-import static kr.co.automl.domain.metadata.domain.dataset.ContactPointTest.CONTACT_POINT1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrganizationTest {
     public static final Organization ORGANIZATION1 = new Organization(
             "위세아이텍",
             Creator.WISE_I_TECH,
-            CONTACT_POINT1
+            ContactPointFixtures.fixture1()
     );
 
     @Test
