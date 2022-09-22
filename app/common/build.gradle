@@ -91,7 +91,11 @@ jacocoTestReport {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            excludes = ['*.testFixtures.*']
+            excludes = [
+                    '*.dto.*',
+                    '*.exceptions.*',
+                    '*.testFixtures.*'
+            ]
         }
     }
 }
