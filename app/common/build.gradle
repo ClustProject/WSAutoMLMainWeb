@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.6.7'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
 }
@@ -16,29 +14,19 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
-    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'javax.persistence:javax.persistence-api:2.2'
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '7.4.2'
 }
-
-// 하위 모듈 설정 부분
-bootJar {
-    enabled = false
-}
-
-jar {
-    enabled = true
-}
-//
 
 jacoco {
     // JaCoCo 버전
