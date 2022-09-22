@@ -3,6 +3,10 @@ package kr.co.automl.domain.user;
 import static kr.co.automl.domain.user.User.ofDefaultRole;
 
 public class TestUserFactory {
+
+    private TestUserFactory() {
+    }
+
     public static User create(String name, String imageUrl, String email) {
         return ofDefaultRole(name, imageUrl, email);
     }

@@ -6,32 +6,17 @@ import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static kr.co.automl.domain.user.User.ofDefaultRole;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserTest {
-
-    public static User create(String name, String imageUrl, String email) {
-        return ofDefaultRole(name, imageUrl, email);
-    }
-
-    public static User createWithEmail(String email) {
-        return User.builder()
-                .email(email)
-                .build();
-    }
-
-    public static User create() {
-        return create("name", "imageUrl", "email");
-    }
 
     @Nested
     class ofDefaultRole_메서드는 {
 
         @Test
         void 기본권한이_설정되어_변환된_유저를_리턴한다() {
-            User user = create("name", "imageUrl", "email");
+            User user = TestUserFactory.create("name", "imageUrl", "email");
 
             assertThat(user.getName()).isEqualTo("name");
             assertThat(user.getImageUrl()).isEqualTo("imageUrl");
@@ -48,8 +33,8 @@ public class UserTest {
 
             @Test
             void true를_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
-                User matchEmailUser = createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User matchEmailUser = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
 
                 boolean actual = user.matchEmail(matchEmailUser);
 
@@ -63,8 +48,8 @@ public class UserTest {
 
             @Test
             void false를_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
-                User notMatchEmailUser = createWithEmail("xxx");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User notMatchEmailUser = TestUserFactory.createWithEmail("xxx");
 
                 boolean actual = user.matchEmail(notMatchEmailUser);
 
@@ -78,7 +63,7 @@ public class UserTest {
 
             @Test
             void true를_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
 
                 boolean actual = user.matchEmail("jypark1@wise.co.kr");
 
@@ -91,7 +76,7 @@ public class UserTest {
 
             @Test
             void false를_리턴한다() {
-                User user = createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
 
                 boolean actual = user.matchEmail("xxx");
 
@@ -108,7 +93,7 @@ public class UserTest {
 
             @Test
             void 변경된_정보를_가진_유저를_리턴한다() {
-                User user = create();
+                User user = TestUserFactory.create("name", "imageUrl", "email");
                 String oAuthName = "OAuthName";
                 String oAuthImageUrl = "OAuthImageUrl";
                 String oAuthEmail = "OAuthEmail";
@@ -131,7 +116,7 @@ public class UserTest {
 
             @Test
             void 매니저_권한으로_변경한다() {
-                User user = create();
+                User user = TestUserFactory.create();
                 assertThat(user.getRole()).isEqualTo(Role.USER);
 
                 user.changeRoleTo(Role.MANAGER);
@@ -145,7 +130,7 @@ public class UserTest {
 
             @Test
             void CannotChangeAdminRoleException을_던진다() {
-                User user = create();
+                User user = TestUserFactory.create();
 
                 assertThatThrownBy(() -> user.changeRoleTo(Role.ADMIN))
                         .isInstanceOf(CannotChangeAdminRoleException.class)
