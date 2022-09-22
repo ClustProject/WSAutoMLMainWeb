@@ -1,7 +1,14 @@
+buildscript {
+    ext {
+        queryDslVersion = '5.0.0'
+    }
+}
+
 plugins {
     id 'java'
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 version 'unspecified'
@@ -21,9 +28,17 @@ dependencies {
 
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
 
-    implementation 'javax.persistence:javax.persistence-api:2.2'
-
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'org.springframework.data:spring-data-jpa:2.7.3'
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-core:${queryDslVersion}"
 }
 
 task wrapper(type: Wrapper) {
@@ -37,6 +52,29 @@ jacoco {
 //  테스트결과 리포트를 저장할 경로 변경
 //  default는 "$/jacoco"
 }
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+//querydsl 추가 끝
+
 
 jacocoTestReport {
     reports {
