@@ -77,6 +77,12 @@ configurations {
 }
 //querydsl 추가 끝
 
+def excludeTestCoverageDirectories = [
+        "**/dto/*",
+        "**/exceptions/*",
+        "**/converter/*",
+        "**/Q*"
+]
 
 jacocoTestReport {
     reports {
@@ -85,18 +91,20 @@ jacocoTestReport {
         xml.enabled true
     }
 
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeTestCoverageDirectories)
+        }))
+    }
+
     finalizedBy 'jacocoTestCoverageVerification'
 }
 
 jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            excludes = [
-                    '*.dto.*',
-                    '*.exceptions.*',
-                    '*.testFixtures.*'
-            ]
-        }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeTestCoverageDirectories)
+        }))
     }
 }
 
