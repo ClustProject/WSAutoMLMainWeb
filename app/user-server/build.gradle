@@ -21,8 +21,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
-
-    implementation project(':app:common')
 }
 
 task wrapper(type: Wrapper) {
@@ -51,10 +49,4 @@ test {
     useJUnitPlatform()
 
     finalizedBy 'jacocoTestReport'
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectName", "user-server"
-    }
 }

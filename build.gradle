@@ -46,8 +46,6 @@ subprojects {
             property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
             property "sonar.host.url", "https://sonarcloud.io"
 
-            property "sonar.login", "aeef8596f50ad4a53192a4054cabf26a608e5f13"
-
             property "sonar.sources", "src"
             property "sonar.language", "java"
             property "sonar.sourceEncoding", "UTF-8"

@@ -93,9 +93,3 @@ test {
 
     finalizedBy 'jacocoTestReport'
 }
-
-sonarqube {
-    properties {
-        property "sonar.projectName", "common"
-    }
-}

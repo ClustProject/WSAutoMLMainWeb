@@ -63,9 +63,6 @@ dependencies {
 
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-
-//    implementation project(':app:common')
-//    testImplementation(testFixtures(project(":app:common")))
 }
 
 asciidoctor {
@@ -146,10 +143,4 @@ test {
     useJUnitPlatform()
 
     finalizedBy 'jacocoTestReport'
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectName", "admin-server"
-    }
 }
