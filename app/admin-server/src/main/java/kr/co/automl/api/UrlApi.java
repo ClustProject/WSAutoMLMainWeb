@@ -1,7 +1,7 @@
 package kr.co.automl.api;
 
 import kr.co.automl.dto.PreSignedUrlResponse;
-import kr.co.automl.global.utils.s3.PreSignedUrlProvider;
+import kr.co.automl.service.PreSignedUrlProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

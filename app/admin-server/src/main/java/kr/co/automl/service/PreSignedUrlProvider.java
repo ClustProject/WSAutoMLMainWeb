@@ -1,4 +1,4 @@
-package kr.co.automl.global.utils.s3;
+package kr.co.automl.service;
 
 import com.amazonaws.HttpMethod;
 import com.amazonaws.services.s3.AmazonS3Client;
