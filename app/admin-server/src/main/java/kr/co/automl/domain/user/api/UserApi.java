@@ -1,7 +1,7 @@
 package kr.co.automl.domain.user.api;
 
 import kr.co.automl.domain.user.dto.UserResponse;
-import kr.co.automl.domain.user.service.UserService;
+import kr.co.automl.domain.user.service.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,12 +16,12 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class UserApi {
-    private final UserService userService;
+    private final UserReader userReader;
 
     @GetMapping
     public List<UserResponse> users(
             Pageable pageable
     ) {
-        return userService.getUsers(pageable);
+        return userReader.readUsers(pageable);
     }
 }

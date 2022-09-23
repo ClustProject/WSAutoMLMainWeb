@@ -1,0 +1,43 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;
+    driver-class-name: org.h2.Driver
+    username:
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:mariadb://${DATABASE_URL}:3306/automl
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  h2:
+    console:
+      enabled: false
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none

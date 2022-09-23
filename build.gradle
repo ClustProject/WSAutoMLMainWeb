@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.sonarqube'
+    apply plugin: 'jacoco'
+
+    group = 'kr.or.automl'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        useJUnitPlatform()
+        finalizedBy 'jacocoTestReport'
+    }
+
+    jacoco {
+        toolVersion = "0.8.7"
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+            csv.enabled false
+            html.enabled true
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
+            property "sonar.host.url", "https://sonarcloud.io"
+            property "sonar.organization", "wise-pangnem"
+
+            property "sonar.sources", "src"
+            property "sonar.language", "java"
+            property "sonar.sourceEncoding", "UTF-8"
+
+            property "sonar.test.inclusions", "**/*Test.java"
+            property "sonar.coverage.exclusions",
+                    "**/App.java, " +
+                            "**/dto/**, " +
+                            "**/exceptions/**, " +
+                            "**/converter/**, " +
+                            "**/testFixtures/**"
+            property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+        }
+    }
+
+}
+
+project(':app:admin-server') {
+    dependencies {
+        implementation project(':app:common')
+        testImplementation(testFixtures(project(":app:common")))
+    }
+}
+
+project(':app:user-server') {
+    dependencies {
+        implementation project(':app:common')
+    }
+}

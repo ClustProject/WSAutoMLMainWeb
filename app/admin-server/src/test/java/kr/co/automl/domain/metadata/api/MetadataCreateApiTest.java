@@ -1,5 +1,8 @@
 package kr.co.automl.domain.metadata.api;
 
+import kr.co.automl.domain.metadata.catalog.dto.CreateCatalogAttributesFixtures;
+import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributesFixtures;
+import kr.co.automl.domain.metadata.distribution.dto.CreateDistributionAttributesFixtures;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributes;
@@ -22,9 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Stream;
 
-import static kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributesTest.CREATE_CATALOG_ATTRIBUTES1;
-import static kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributesTest.CREATE_DATASET_ATTRIBUTES1;
-import static kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributesTest.CREATE_DISTRIBUTION_ATTRIBUTES1;
 import static kr.co.automl.domain.user.utils.ObjectToStringConverter.convert;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
@@ -46,9 +46,9 @@ class MetadataCreateApiTest {
     class post_metadata_요청은 {
 
         CreateMetaDataAttributes attributes = CreateMetaDataAttributes.builder()
-                .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
-                .createDataSetAttributes(CREATE_DATASET_ATTRIBUTES1)
-                .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
+                .createCatalogAttributes(CreateCatalogAttributesFixtures.fixture1())
+                .createDataSetAttributes(CreateDataSetAttributesFixtures.fixture1())
+                .createDistributionAttributes(CreateDistributionAttributesFixtures.fixture1())
                 .build();
 
         @Nested
@@ -93,23 +93,23 @@ class MetadataCreateApiTest {
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
-                                        .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
+                                        .createCatalogAttributes(CreateCatalogAttributesFixtures.fixture1())
                                         .createDataSetAttributes(emptyCreateDataSetAttributes)
                                         .createDistributionAttributes(emptyCreateDistributionAttributes)
                                         .build()
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
-                                        .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
+                                        .createCatalogAttributes(CreateCatalogAttributesFixtures.fixture1())
                                         .createDataSetAttributes(emptyCreateDataSetAttributes)
-                                        .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
+                                        .createDistributionAttributes(CreateDistributionAttributesFixtures.fixture1())
                                         .build()
                         ),
                         Arguments.of(
                                 CreateMetaDataAttributes.builder()
                                         .createCatalogAttributes(emptyCreateCatalogAttributes)
-                                        .createDataSetAttributes(CREATE_DATASET_ATTRIBUTES1)
-                                        .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
+                                        .createDataSetAttributes(CreateDataSetAttributesFixtures.fixture1())
+                                        .createDistributionAttributes(CreateDistributionAttributesFixtures.fixture1())
                                         .build()
                         )
                 );

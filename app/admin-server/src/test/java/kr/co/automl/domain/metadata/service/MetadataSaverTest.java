@@ -1,5 +1,8 @@
 package kr.co.automl.domain.metadata.service;
 
+import kr.co.automl.domain.metadata.catalog.dto.CreateCatalogAttributesFixtures;
+import kr.co.automl.domain.metadata.dataset.dto.CreateDataSetAttributesFixtures;
+import kr.co.automl.domain.metadata.distribution.dto.CreateDistributionAttributesFixtures;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetQueryRepository;
 import kr.co.automl.domain.metadata.dto.CreateMetaDataAttributes;
 import org.junit.jupiter.api.Nested;
@@ -10,9 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import static kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributesTest.CREATE_CATALOG_ATTRIBUTES1;
-import static kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributesTest.CREATE_DATASET_ATTRIBUTES1;
-import static kr.co.automl.domain.metadata.domain.distribution.dto.CreateDistributionAttributesTest.CREATE_DISTRIBUTION_ATTRIBUTES1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -31,9 +31,9 @@ class MetadataSaverTest {
         @Test
         void 메타데이터를_저장한다() {
             CreateMetaDataAttributes attributes = CreateMetaDataAttributes.builder()
-                    .createCatalogAttributes(CREATE_CATALOG_ATTRIBUTES1)
-                    .createDataSetAttributes(CREATE_DATASET_ATTRIBUTES1)
-                    .createDistributionAttributes(CREATE_DISTRIBUTION_ATTRIBUTES1)
+                    .createCatalogAttributes(CreateCatalogAttributesFixtures.fixture1())
+                    .createDataSetAttributes(CreateDataSetAttributesFixtures.fixture1())
+                    .createDistributionAttributes(CreateDistributionAttributesFixtures.fixture1())
                     .build();
             Pageable pageable = PageRequest.of(0, 10);
 

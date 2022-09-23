@@ -1,13 +1,13 @@
 package kr.co.automl.domain.metadata.service;
 
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
+import kr.co.automl.domain.metadata.dataset.TestDataSetFactory;
+import kr.co.automl.domain.metadata.distribution.TestDistributionFactory;
 import kr.co.automl.domain.metadata.domain.catalog.Catalog;
-import kr.co.automl.domain.metadata.domain.catalog.CatalogTest;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetRepository;
-import kr.co.automl.domain.metadata.domain.dataset.DataSetTest;
 import kr.co.automl.domain.metadata.domain.dataset.exceptions.CannotFindDataSetException;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
-import kr.co.automl.domain.metadata.domain.distribution.DistributionTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -55,9 +55,9 @@ class MetadataRemoverTest {
 
             @BeforeEach
             void setUp() {
-                Catalog catalog = CatalogTest.createDefaultFixture();
-                Distribution distribution = DistributionTest.createDefaultFixture();
-                DataSet dataSet = DataSetTest.createDefaultFixtureWith(catalog, distribution);
+                Catalog catalog = TestCatalogFactory.createDefaultFixture();
+                Distribution distribution = TestDistributionFactory.createDefaultFixture();
+                DataSet dataSet = TestDataSetFactory.createDefaultFixtureWith(catalog, distribution);
 
                 dataSetRepository.save(dataSet);
 

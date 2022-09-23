@@ -1,8 +1,9 @@
 package kr.co.automl.domain.user.api;
 
+import kr.co.automl.domain.user.TestUserFactory;
 import kr.co.automl.domain.user.User;
 import kr.co.automl.domain.user.UserRepository;
-import kr.co.automl.domain.user.UserTest;
+import kr.co.automl.domain.user.dto.UserResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -64,7 +65,7 @@ class UserApiTest {
             void setUp() {
                 userRepository.deleteAll();
 
-                User user = UserTest.create();
+                User user = TestUserFactory.create();
                 userRepository.save(user);
 
                 this.savedUser = user;
@@ -77,7 +78,7 @@ class UserApiTest {
 
                 action
                         .andExpect(status().isOk())
-                        .andExpect(content().string(convert(List.of(savedUser.toResponse()))))
+                        .andExpect(content().string(convert(List.of(UserResponse.from(savedUser)))))
                         .andDo(document("get-user"));
             }
         }

@@ -1,0 +1,115 @@
+buildscript {
+    ext {
+        queryDslVersion = '5.0.0'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id "java-test-fixtures"
+    id 'jacoco'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
+
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    implementation 'jakarta.validation:jakarta.validation-api:2.0.2'
+
+    implementation 'javax.persistence:javax.persistence-api:2.2'
+    implementation 'org.springframework.data:spring-data-jpa:2.7.3'
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+    implementation "com.querydsl:querydsl-core:${queryDslVersion}"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.4.2'
+}
+
+jacoco {
+    // JaCoCo 버전
+    toolVersion = '0.8.7'
+
+//  테스트결과 리포트를 저장할 경로 변경
+//  default는 "$/jacoco"
+}
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+//querydsl 추가 끝
+
+def excludeTestCoverageDirectories = [
+        "**/App.java",
+        "**/dto/*",
+        "**/exceptions/*",
+        "**/converter/*",
+        "**/Q*"
+]
+
+jacocoTestReport {
+    reports {
+        // 원하는 리포트를 켜고 끌 수 있습니다.
+        html.enabled true
+        xml.enabled true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeTestCoverageDirectories)
+        }))
+    }
+
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+jacocoTestCoverageVerification {
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: excludeTestCoverageDirectories)
+        }))
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    finalizedBy 'jacocoTestReport'
+}

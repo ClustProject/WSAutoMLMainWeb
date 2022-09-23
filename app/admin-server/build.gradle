@@ -12,7 +12,6 @@ plugins {
     id 'org.asciidoctor.convert' version '2.4.0'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'jacoco'
-    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'kr.or.automl'
@@ -69,6 +68,10 @@ asciidoctor {
     dependsOn test
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '7.4.1'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
@@ -120,9 +123,6 @@ configurations {
 jacoco {
     // JaCoCo 버전
     toolVersion = '0.8.7'
-
-//  테스트결과 리포트를 저장할 경로 변경
-//  default는 "$/jacoco"
 }
 
 jacocoTestReport {
@@ -139,28 +139,4 @@ test {
     useJUnitPlatform()
 
     finalizedBy 'jacocoTestReport'
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
-        property "sonar.organization", "wise-pangnem"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.sourceEncoding", "UTF-8"
-        property "sonar.projectName", "admin-server"
-    }
-}
-
-subprojects {
-    version = '1.0'
-    sonarqube {
-        properties {
-            property "sonar.sources", "src/main"
-            property "sonar.tests", "src/test"
-
-            // I was testing with JaCoCo, so the next line is not needed if you're using some other tool
-            property "sonar.coverage.jacoco.xmlReportPaths", "../build/reports/jacoco/test/jacocoTestReport.xml"
-            property "sonar.host.url", "https://sonarcloud.io"
-        }
-    }
 }
