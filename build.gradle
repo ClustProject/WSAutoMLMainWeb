@@ -54,6 +54,7 @@ subprojects {
             property "sonar.test.inclusions", "**/*Test.java"
             property "sonar.coverage.exclusions",
                     "**/App.java, " +
+                            "**/CustomOAuth2UserService.java, " +
                             "**/dto/**, " +
                             "**/exceptions/**, " +
                             "**/converter/**, " +
