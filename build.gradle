@@ -52,11 +52,12 @@ subprojects {
             property "sonar.sourceEncoding", "UTF-8"
 
             property "sonar.test.inclusions", "**/*Test.java"
-            property "sonar.coverage.exclusions", "**/App.java"
-            property "sonar.coverage.exclusions", "**/dto/**"
-            property "sonar.coverage.exclusions", "**/exceptions/**"
-            property "sonar.coverage.exclusions", "**/converter/**"
-            property "sonar.coverage.exclusions", "**/testFixtures/**"
+            property "sonar.coverage.exclusions",
+                    "**/App.java, " +
+                            "**/dto/**, " +
+                            "**/exceptions/**, " +
+                            "**/converter/**, " +
+                            "**/testFixtures/**"
             property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
         }
     }
