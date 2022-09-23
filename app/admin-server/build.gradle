@@ -12,7 +12,6 @@ plugins {
     id 'org.asciidoctor.convert' version '2.4.0'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'jacoco'
-//    id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'kr.or.automl'
@@ -124,9 +123,6 @@ configurations {
 jacoco {
     // JaCoCo 버전
     toolVersion = '0.8.7'
-
-//  테스트결과 리포트를 저장할 경로 변경
-//  default는 "$/jacoco"
 }
 
 jacocoTestReport {
