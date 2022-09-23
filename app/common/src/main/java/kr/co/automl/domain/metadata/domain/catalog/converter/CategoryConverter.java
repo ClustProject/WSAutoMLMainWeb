@@ -3,9 +3,9 @@ package kr.co.automl.domain.metadata.domain.catalog.converter;
 import kr.co.automl.domain.metadata.domain.catalog.Category;
 import kr.co.automl.global.utils.EntityEnumerableConverter;
 
-public class CatagoryConverter extends EntityEnumerableConverter<Category> {
+public class CategoryConverter extends EntityEnumerableConverter<Category> {
 
-    public CatagoryConverter() {
+    public CategoryConverter() {
         super(Category.class);
     }
 }

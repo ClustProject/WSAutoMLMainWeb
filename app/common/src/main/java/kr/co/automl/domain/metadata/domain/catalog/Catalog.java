@@ -1,7 +1,7 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import kr.co.automl.domain.metadata.domain.catalog.converter.CatagoryConverter;
+import kr.co.automl.domain.metadata.domain.catalog.converter.CategoryConverter;
 import kr.co.automl.domain.metadata.domain.catalog.converter.ThemeConverter;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
@@ -35,7 +35,7 @@ public class Catalog {
     @Column(name = "catalog_id")
     private Long id;
 
-    @Convert(converter = CatagoryConverter.class)
+    @Convert(converter = CategoryConverter.class)
     private Category category;
 
     @Convert(converter = ThemeConverter.class)
