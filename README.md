@@ -2,9 +2,8 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-어드민 서버
-
 ![https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build](https://img.shields.io/github/workflow/status/wise-pangnem/WSAutoMLMainWeb/build)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=wise-pangnem_AutoMLMainWeb&metric=coverage)](https://sonarcloud.io/summary/new_code?id=wise-pangnem_AutoMLMainWeb)
 
 ### 소개
 
