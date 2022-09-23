@@ -1,5 +1,6 @@
 package kr.co.automl.domain.metadata.domain.catalog;
 
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CatalogResponse;
 import kr.co.automl.domain.metadata.domain.catalog.dto.CreateCatalogAttributes;
 import org.junit.jupiter.api.Nested;
