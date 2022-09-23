@@ -78,6 +78,7 @@ configurations {
 //querydsl 추가 끝
 
 def excludeTestCoverageDirectories = [
+        "**/App.java",
         "**/dto/*",
         "**/exceptions/*",
         "**/converter/*",
