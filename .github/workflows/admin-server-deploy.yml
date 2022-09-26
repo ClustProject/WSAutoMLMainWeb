@@ -1,4 +1,4 @@
-name: deploy
+name: admin-server-deploy
 
 on:
   push:
@@ -23,6 +23,7 @@ jobs:
           distribution: 'corretto'
       - name: Docker 이미지 빌드
         run: |
+          cd app/admin-server
           ./gradlew bootBuildImage --imageName=app
       - name: ECR 업로드
         uses: jwalton/gh-ecr-push@v1
