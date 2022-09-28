@@ -1,0 +1,56 @@
+name: user-server-deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: ECR 로그인
+        id: ecr-login
+        uses: jwalton/gh-ecr-login@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ap-northeast-2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+      - name: Docker 이미지 빌드
+        run: |
+          cd app/user-server
+          ./gradlew bootBuildImage --imageName=app
+      - name: ECR 업로드
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ap-northeast-2
+          direction: push
+          local-image: app
+          image: automl-main-web-user:latest, automl-main-web-user:${GITHUB_SHA::7}
+
+  ecs:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - name: AWS CLI 설치
+        uses: unfor19/install-aws-cli-action@master
+      - name: AWS CLI 설정
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      - name: ECS 배포
+        run: |
+          aws ecs update-service \
+          --cluster automl-cluster-user \
+          --service automl-service-user \
+          --task-definition automl-main-web-user-task-definition:1 \
+          --force-new-deployment
