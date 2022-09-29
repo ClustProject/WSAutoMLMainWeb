@@ -28,25 +28,27 @@ export default function CatalogReducer(state, action) {
     }
   }
 
-  if (type.startsWith("kma")) {
-    return {
-      category: "대기 환경",
-      themes: CATEGORY_THEME_MAP["대기 환경"],
-      theme: "공기질",
-      themeTaxonomy: "실외 대기"
+  if (type !== undefined) {
+    if (type.startsWith("kma")) {
+      return {
+        category: "대기 환경",
+        themes: CATEGORY_THEME_MAP["대기 환경"],
+        theme: "공기질",
+        themeTaxonomy: "실외 대기"
+      };
     }
-  }
 
-  //교통 하드 코딩
-  if (type.startsWith("ex/tcs")) {
-    return {
-      category: "오픈데이터",
-      themes: CATEGORY_THEME_MAP.오픈데이터,
-      theme: "교통",
-      themeTaxonomy: "국내 교통"
+    //교통 하드 코딩
+    if (type.startsWith("ex/tcs")) {
+      return {
+        category: "오픈데이터",
+        themes: CATEGORY_THEME_MAP.오픈데이터,
+        theme: "교통",
+        themeTaxonomy: "국내 교통"
+      }
     }
+    //교통 하드 코딩
   }
-  //교통 하드 코딩
 
   if (payload.name === "category") {
     return {
