@@ -1,0 +1,26 @@
+{
+  "name": "automatic",
+  "version": "1.0.0",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "puppeteer": "^16.1.0",
+    "puppeteer-extra": "^3.3.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10"
+  },
+  "scripts": {
+    "automatic-etc79-no-url": "npx babel-node --presets @babel/env ./src/etc79-no-url.js",
+    "automatic-etc79-with-url": "npx babel-node --presets @babel/env ./src/etc79-with-url.js",
+    "automatic-etc78-no-url": "npx babel-node --presets @babel/env ./src/etc78-no-url.js",
+    "automatic-etc78-with-url": "npx babel-node --presets @babel/env ./src/etc78-with-url.js",
+    "automatic-vds38-no-url": "npx babel-node --presets @babel/env ./src/vds38-no-url.js",
+    "automatic-vds38-with-url": "npx babel-node --presets @babel/env ./src/vds38-with-url.js",
+    "automatic-vds23-no-url": "npx babel-node --presets @babel/env ./src/vds23-no-url.js",
+    "automatic-vds23-with-url": "npx babel-node --presets @babel/env ./src/vds23-with-url.js",
+    "automatic-surface-asos-95-mi-no-url": "npx babel-node --presets @babel/env ./src/surface-asos-95-mi-no-url.js",
+    "automatic-surface-asos-95-mi-with-url": "npx babel-node --presets @babel/env ./src/surface-asos-95-mi-with-url.js"
+  }
+}
