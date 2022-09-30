@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
+    id "com.github.node-gradle.node" version "3.3.0"
 }
 
 version 'unspecified'
@@ -44,3 +45,25 @@ test {
 
     finalizedBy 'jacocoTestReport'
 }
+
+def frontendDir = "$rootProject.rootDir/app/user-web"
+
+node {
+    download = false
+    nodeProjectDir = file("${frontendDir}")
+}
+
+task npmBuild(type: NpmTask) {
+    args = ["run", "build"]
+}
+
+task copyFrontendBuildFiles(type: Copy) {
+    from "$frontendDir/build"
+    into "$buildDir/resources/main/static"
+}
+
+task setUpFrontEnd(type: GradleBuild) {
+    tasks = ["npmInstall", "npmBuild", "copyFrontendBuildFiles"]
+}
+
+bootJar.dependsOn("setUpFrontEnd")
