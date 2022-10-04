@@ -17,4 +17,13 @@ public class TestCatalogFactory {
                 .build();
     }
 
+    public static Catalog createWithCategory(Category category) {
+        Theme theme = category.findAnyTheme();
+
+        return Catalog.builder()
+                .category(category)
+                .theme(theme)
+                .themeTaxonomy("themeTaxonomy")
+                .build();
+    }
 }
