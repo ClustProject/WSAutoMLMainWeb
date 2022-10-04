@@ -11,6 +11,7 @@ plugins {
     id 'jacoco'
     id "com.github.node-gradle.node" version "3.3.0"
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+    id 'org.asciidoctor.convert' version '2.4.0'
 }
 
 version 'unspecified'
@@ -22,6 +23,10 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Spring REST Docs
+    asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
@@ -35,6 +40,10 @@ dependencies {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '7.4.2'
+}
+
+asciidoctor {
+    dependsOn test
 }
 
 jacoco {
@@ -101,4 +110,3 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 //querydsl 추가 끝
-
