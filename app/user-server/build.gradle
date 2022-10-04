@@ -28,6 +28,7 @@ dependencies {
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 
+    // DB 데이터 접근
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
     implementation 'org.mariadb.jdbc:mariadb-java-client'
@@ -36,6 +37,10 @@ dependencies {
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
     implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
     implementation "com.querydsl:querydsl-core:${queryDslVersion}"
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 task wrapper(type: Wrapper) {
