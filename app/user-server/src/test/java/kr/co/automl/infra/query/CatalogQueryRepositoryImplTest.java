@@ -30,24 +30,43 @@ class CatalogQueryRepositoryImplTest {
     @Nested
     class countGroupByCategory_메서드는 {
 
-        @BeforeEach
-        void setUp() {
-            Arrays.stream(Category.values())
-                    .map(TestCatalogFactory::createWithCategory)
-                    .forEach(catalog -> catalogRepository.save(catalog));
+        @Nested
+        class 값이_있을경우 {
 
+            @BeforeEach
+            void setUp() {
+                Arrays.stream(Category.values())
+                        .map(TestCatalogFactory::createWithCategory)
+                        .forEach(catalog -> catalogRepository.save(catalog));
+
+            }
+
+            @Test
+            void 그룹별_카테고리_이름과_개수를_리턴한다() {
+                List<Tuple> tuples = catalogQueryRepositoryImpl.countGroupByCategory();
+
+                for (Tuple tuple : tuples) {
+                    Category category = tuple.get(catalog.category);
+                    Long count = tuple.get(catalog.count());
+
+                    assertThat(category).isInstanceOf(Category.class);
+                    assertThat(count).isEqualTo(1);
+                }
+            }
         }
 
-        @Test
-        void 그룹별_카테고리_이름과_개수를_리턴한다() {
-            List<Tuple> tuples = catalogQueryRepositoryImpl.countGroupByCategory();
+        @Nested
+        class 값이_없을경우 {
 
-            for (Tuple tuple : tuples) {
-                Category category = tuple.get(catalog.category);
-                Long count = tuple.get(catalog.count());
+            @BeforeEach
+            void setUp() {
+                catalogRepository.deleteAll();
+            }
 
-                assertThat(category).isInstanceOf(Category.class);
-                assertThat(count).isEqualTo(1);
+            @Test
+            void 빈_배열을_리턴한다() {
+                List<Tuple> tuples = catalogQueryRepositoryImpl.countGroupByCategory();
+                assertThat(tuples).isEmpty();
             }
         }
     }
