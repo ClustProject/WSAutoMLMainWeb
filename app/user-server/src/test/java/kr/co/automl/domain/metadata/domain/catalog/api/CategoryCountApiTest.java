@@ -3,7 +3,6 @@ package kr.co.automl.domain.metadata.domain.catalog.api;
 import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
 import kr.co.automl.domain.metadata.domain.catalog.CatalogRepository;
 import kr.co.automl.domain.metadata.domain.catalog.Category;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
@@ -36,24 +34,30 @@ class CategoryCountApiTest {
     @Autowired
     private CatalogRepository catalogRepository;
 
-    @BeforeEach
-    void setUp() {
-        Arrays.stream(Category.values())
-                .map(TestCatalogFactory::createWithCategory)
-                .forEach(catalog -> catalogRepository.save(catalog));
-    }
-
     @Nested
     @DisplayName("GET /category/count 요청은")
     class getCategoryCount요청은 {
+        final String requestUrl = "/category/count";
 
         @Test
         void 카테고리별_카운트를_리턴한다() throws Exception {
-            ResultActions action = mockMvc.perform(
-                    get("/category/count")
-            );
+            mockMvc.perform(get(requestUrl))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.atmosphericEnvironment").value(0))
+                    .andExpect(jsonPath("$.farm").value(0))
+                    .andExpect(jsonPath("$.factory").value(0))
+                    .andExpect(jsonPath("$.vital").value(0))
+                    .andExpect(jsonPath("$.lifeAndVideo").value(0))
+                    .andExpect(jsonPath("$.energy").value(0))
+                    .andExpect(jsonPath("$.environment").value(0))
+                    .andExpect(jsonPath("$.city").value(0))
+                    .andExpect(jsonPath("$.openData").value(0));
 
-            action
+            Arrays.stream(Category.values())
+                    .map(TestCatalogFactory::createWithCategory)
+                    .forEach(catalog -> catalogRepository.save(catalog));
+
+            mockMvc.perform(get(requestUrl))
                     .andExpect(status().isOk())
                     .andExpect(jsonPath("$.atmosphericEnvironment").value(1))
                     .andExpect(jsonPath("$.farm").value(1))
