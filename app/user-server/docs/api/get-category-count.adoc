@@ -1,0 +1,4 @@
+= `GET /category/count` 카테고리 개수
+
+include::{snippets}/get-category-count/http-request.adoc[]
+include::{snippets}/get-category-count/http-response.adoc[]

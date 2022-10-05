@@ -81,6 +81,12 @@ public enum Category implements EntityEnumerable {
                 .orElseThrow(() -> new CannotFindMatchThemeException(name));
     }
 
+    public Theme findAnyTheme() {
+        return this.themes.stream()
+                .findAny()
+                .orElseThrow(IllegalStateException::new);
+    }
+
     @Override
     public String getName() {
         return this.name;

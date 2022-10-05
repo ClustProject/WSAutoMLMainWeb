@@ -70,5 +70,6 @@ project(':app:admin-server') {
 project(':app:user-server') {
     dependencies {
         implementation project(':app:common')
+        testImplementation(testFixtures(project(":app:common")))
     }
 }
