@@ -85,7 +85,7 @@ export default function DataUtilizationMenus() {
       >
         <MenuItem onClick={handleClose} disableRipple>
           <ModelTrainingIcon/>
-          모델 학습(예정)
+          모델 학습
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <QueryStatsIcon/>
