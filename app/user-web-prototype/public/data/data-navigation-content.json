@@ -1,0 +1,150 @@
+{
+  "count": 4444,
+  "missing_count": 666,
+  "data": [
+    {
+      "variable_name": "집계날",
+      "variable_type": "Datetime",
+      "min": "2021-01-01 00:00:00",
+      "max": "2021-01-28 23:55:00",
+      "missing_value": "0",
+      "average": "0",
+      "standard_deviation": "0"
+    },
+    {
+      "variable_name": "콘존ID",
+      "variable_type": "Object",
+      "min": "",
+      "max": "",
+      "missing_value": "0",
+      "average": "",
+      "standard_deviation": ""
+    },
+    {
+      "variable_name": "차로유형구분코드",
+      "variable_type": "Numerical",
+      "min": "1",
+      "max": "2",
+      "missing_value": "0",
+      "average": "1.017",
+      "standard_deviation": "0.130"
+    },
+    {
+      "variable_name": "교통량",
+      "variable_type": "Numerical",
+      "min": "-1",
+      "max": "850",
+      "missing_value": "0",
+      "average": "312",
+      "standard_deviation": "86.026"
+    },
+    {
+      "variable_name": "평균속도",
+      "variable_type": "Numerical",
+      "min": "0",
+      "max": "180",
+      "missing_value": "0",
+      "average": "87.432",
+      "standard_deviation": "26.349"
+    },
+    {
+      "variable_name": "콘존길이",
+      "variable_type": "Numerical",
+      "min": "110",
+      "max": "26610",
+      "missing_value": "864",
+      "average": "7090.591",
+      "standard_deviation": "5057.941"
+    },
+    {
+      "variable_name": "기점종점방향구분코드",
+      "variable_type": "Object",
+      "min": "",
+      "max": "",
+      "missing_value": "864",
+      "average": "",
+      "standard_deviation": ""
+    },
+    {
+      "variable_name": "시작노드ID",
+      "variable_type": "Numerical",
+      "min": "2",
+      "max": "1028",
+      "missing_value": "864",
+      "average": "353.908",
+      "standard_deviation": "234.065"
+    },
+    {
+      "variable_name": "종료노드ID",
+      "variable_type": "Numerical",
+      "min": "2",
+      "max": "1028",
+      "missing_value": "864",
+      "average": "354.703",
+      "standard_deviation": "233.956"
+    },
+    {
+      "variable_name": "차로수",
+      "variable_type": "Numerical",
+      "min": "1",
+      "max": "6",
+      "missing_value": "33120",
+      "average": "2.526",
+      "standard_deviation": "0.867"
+    },
+    {
+      "variable_name": "노선번호",
+      "variable_type": "Numerical",
+      "min": "10",
+      "max": "6000",
+      "missing_value": "864",
+      "average": "684.194",
+      "standard_deviation": "1075.409"
+    },
+    {
+      "variable_name": "제한속도",
+      "variable_type": "Numerical",
+      "min": "80",
+      "max": "110",
+      "missing_value": "864",
+      "average": "101.448",
+      "standard_deviation": "5.041"
+    },
+    {
+      "variable_name": "노선구성순번",
+      "variable_type": "Numerical",
+      "min": "1",
+      "max": "66",
+      "missing_value": "864",
+      "average": "13.440",
+      "standard_deviation": "12.726"
+    },
+    {
+      "variable_name": "콘존명",
+      "variable_type": "Object",
+      "min": "",
+      "max": "",
+      "missing_value": "864",
+      "average": "",
+      "standard_deviation": ""
+    },
+    {
+      "variable_name": "버스전용차로유무",
+      "variable_type": "Numerical",
+      "min": "0",
+      "max": "1",
+      "missing_value": "864",
+      "average": "0.0496",
+      "standard_deviation": "0.217"
+    },
+    {
+      "variable_name": "도로등급구분코드",
+      "variable_type": "Numerical",
+      "min": "101",
+      "max": "109",
+      "missing_value": "864",
+      "average": "102.562",
+      "standard_deviation": "3.113"
+    }
+  ]
+}

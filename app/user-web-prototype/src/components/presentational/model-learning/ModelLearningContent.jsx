@@ -5,6 +5,7 @@ import Step from '@mui/material/Step';
 import {Divider, StepLabel, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import DataInputBox from "./DataInputBox";
+import DataNavigationContent from "./DataNavigationContent";
 
 export const CONTENT_NAME_HEIGHT = '50px';
 const CONTENT_BACKGROUND_COLOR = '#F4F8F9';
@@ -27,10 +28,18 @@ function ModelLearningMainContent(props) {
   if (activeStep === 0) {
     const {fileChanged, setFileChanged} = props;
 
-    return <DataInputBox
-      fileChanged={fileChanged}
-      setFileChanged={setFileChanged}
-    />
+    return (
+      <DataInputBox
+        fileChanged={fileChanged}
+        setFileChanged={setFileChanged}
+      />
+    )
+  }
+
+  if (activeStep === 1) {
+    return (
+      <DataNavigationContent/>
+    );
   }
 }
 
@@ -80,7 +89,7 @@ function ModelLearningContent() {
       </Box>
       <Box sx={{
         backgroundColor: CONTENT_BACKGROUND_COLOR,
-        height: '450px',
+        minHeight: '450px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
