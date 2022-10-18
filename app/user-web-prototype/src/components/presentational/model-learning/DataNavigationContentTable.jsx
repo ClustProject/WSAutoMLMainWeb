@@ -30,6 +30,7 @@ export default function DataNavigationContentTable(props) {
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">변수명</StyledTableCell>
+            <StyledTableCell align="center">변수유형</StyledTableCell>
             <StyledTableCell align="right">최솟값</StyledTableCell>
             <StyledTableCell align="right">최대값</StyledTableCell>
             <StyledTableCell align="right">결측값</StyledTableCell>

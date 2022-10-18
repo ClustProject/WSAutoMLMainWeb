@@ -146,5 +146,6 @@
       "average": "102.562",
       "standard_deviation": "3.113"
     }
-  ]
+  ],
+  "heatmap_image_url": "/static/images/heatmap.jpg"
 }

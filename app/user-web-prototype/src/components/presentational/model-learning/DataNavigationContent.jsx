@@ -3,15 +3,36 @@ import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 import DataNavigationContentTable from "./DataNavigationContentTable";
 import getNavigationContent from "../../../api/get-navigation-content";
+import CardMedia from "@mui/material/CardMedia";
+
+const HeatMapImageBox = (props: { imageUrl: string }) => {
+  return (
+    <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "40px"
+    }}>
+      <CardMedia
+        component="img"
+        image={props.imageUrl}
+        alt="heatmap image"
+        sx={{
+          width: "50%"
+        }}
+      />
+    </Box>
+  );
+}
 
 /**
  * 데이터 탐색 콘텐츠
  */
-function DataNavigationContent() {
+const DataNavigationContent = () => {
   const [content, setContent] = useState({
     count: 0,
     missing_count: 0,
-    data: []
+    data: [],
+    heatmap_image_url: ""
   });
 
   useEffect(() => {
@@ -29,6 +50,10 @@ function DataNavigationContent() {
 
       <DataNavigationContentTable
         data={content.data}
+      />
+
+      <HeatMapImageBox
+        imageUrl={content.heatmap_image_url}
       />
     </Box>
   )
