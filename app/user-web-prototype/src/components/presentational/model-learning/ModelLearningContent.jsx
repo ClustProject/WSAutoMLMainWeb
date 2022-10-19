@@ -11,11 +11,11 @@ export const CONTENT_NAME_HEIGHT = '50px';
 const CONTENT_BACKGROUND_COLOR = '#F4F8F9';
 
 const STEP_COUNT_AND_NAME_MAP = {
-  0: '데이터 입력',
-  1: '데이터 탐색',
-  2: '특징 선택',
-  3: '알고리즘 선택',
-  4: '모델 학습 결과',
+  1: '데이터 입력',
+  2: '데이터 탐색',
+  3: '특징 선택',
+  4: '알고리즘 선택',
+  5: '모델 학습 결과',
 };
 
 const STEPS = Object.keys(STEP_COUNT_AND_NAME_MAP);
@@ -25,7 +25,7 @@ const MAX_STEP = Math.max(...STEPS);
 const ModelLearningMainContent = (props) => {
   const {activeStep} = props;
 
-  if (activeStep === 0) {
+  if (activeStep === 1) {
     const {fileChanged, setFileChanged} = props;
 
     return (
@@ -36,7 +36,7 @@ const ModelLearningMainContent = (props) => {
     )
   }
 
-  if (activeStep === 1) {
+  if (activeStep === 2) {
     const {setAnyTargetVariableChecked} = props;
 
     return (
@@ -48,7 +48,7 @@ const ModelLearningMainContent = (props) => {
 }
 
 const ModelLearningContent = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
 
   function decreaseStep() {
     setActiveStep(activeStep - 1);
@@ -58,10 +58,10 @@ const ModelLearningContent = () => {
     setActiveStep(activeStep + 1);
   }
 
-  // step0
+  // step1
   const [fileChanged, setFileChanged] = useState(false);
 
-  // step1
+  // step2
   const [anyTargetVariableChecked, setAnyTargetVariableChecked] = useState(false);
 
   function handleDisableNextButton() {
@@ -69,13 +69,13 @@ const ModelLearningContent = () => {
       return true;
     }
 
-    if (activeStep === 0) {
+    if (activeStep === 1) {
       if (!fileChanged) {
         return true;
       }
     }
 
-    if (activeStep === 1) {
+    if (activeStep === 2) {
       if (!anyTargetVariableChecked) {
         return true;
       }
@@ -96,7 +96,7 @@ const ModelLearningContent = () => {
         marginTop: '30px'
       }}>
         <Stepper
-          activeStep={activeStep}
+          activeStep={activeStep - 1}
           // nonLinear
           alternativeLabel
         >
