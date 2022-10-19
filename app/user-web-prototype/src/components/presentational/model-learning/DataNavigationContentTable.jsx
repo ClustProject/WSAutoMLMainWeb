@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -22,11 +23,82 @@ const StyledTableCell = styled(TableCell)({
 })
 
 export default function DataNavigationContentTable(props) {
-  const {data} = props;
+  const {setAnyTargetVariableChecked} = props;
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+      const setUseAndTargetVariableData = props.data.map(it => {
+        if (it.variable_name === AVERAGE_SPEED) {
+          setAnyTargetVariableChecked(true);
+
+          return {
+            ...it,
+            use: true,
+            target_variable: true
+          }
+        }
+
+        return {
+          ...it,
+          use: true,
+          target_variable: false
+        }
+      });
+
+      setData(setUseAndTargetVariableData);
+
+    }, [props.data] // 변경될때마다 호출됨
+  );
+
+  function handleChangeSwitch(row, idx) {
+    return () => {
+      let copyOfData = JSON.parse(JSON.stringify(data));
+      const use = data[idx].use;
+
+      copyOfData[idx] = {
+        ...row,
+        use: !use,
+        target_variable: false
+      }
+
+      setData(copyOfData);
+      handleNextButton(copyOfData);
+    };
+  }
+
+  function handleChangeCheckbox(row, idx) {
+    return () => {
+      let copyOfData = JSON.parse(JSON.stringify(data));
+      const targetVariable = data[idx].target_variable;
+
+      copyOfData[idx] = {
+        ...row,
+        target_variable: !targetVariable,
+      }
+
+      setData(copyOfData);
+      handleNextButton(copyOfData);
+    };
+  }
+
+  function handleNextButton(copyOfData) {
+    if (anyTargetVariableChecked(copyOfData)) {
+      setAnyTargetVariableChecked(true);
+    } else {
+      setAnyTargetVariableChecked(false);
+    }
+  }
+
+  function anyTargetVariableChecked(copyOfData) {
+    const targetVariableCheckRows = copyOfData.filter(it => it.target_variable === true);
+
+    return targetVariableCheckRows.length > 0;
+  }
 
   return (
     <TableContainer component={Paper}>
-      <StyledTable aria-label="simple table">
+      <StyledTable aria-label="data table">
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">변수명</StyledTableCell>
@@ -41,14 +113,9 @@ export default function DataNavigationContentTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {data.map((row, idx) => (
             <TableRow
               key={row.variable_name}
-              sx={{
-                '&:last-child td, &:last-child th': {
-                  border: 0
-                }
-              }}
             >
               <StyledTableCell align="left">{row.variable_name}</StyledTableCell>
               <StyledTableCell align="left">{row.variable_type}</StyledTableCell>
@@ -58,22 +125,23 @@ export default function DataNavigationContentTable(props) {
               <StyledTableCell align="right">{row.average}</StyledTableCell>
               <StyledTableCell align="right">{row.standard_deviation}</StyledTableCell>
               <StyledTableCell>
-                <Switch {...SWITCH_LABEL} defaultChecked/>
+                <Switch {...SWITCH_LABEL}
+                        checked={row.use}
+                        onChange={handleChangeSwitch(row, idx)}
+                />
               </StyledTableCell>
-              {
-                row.variable_name === AVERAGE_SPEED ?
-                  <StyledTableCell>
-                    <Checkbox {...CHECKBOX_LABEL} defaultChecked/>
-                  </StyledTableCell>
-                  :
-                  <StyledTableCell>
-                    <Checkbox {...CHECKBOX_LABEL} />
-                  </StyledTableCell>
-              }
+              <StyledTableCell>
+                <Checkbox {...CHECKBOX_LABEL}
+                          disabled={!row.use}
+                          checked={row.target_variable}
+                          onChange={handleChangeCheckbox(row, idx)}
+                />
+              </StyledTableCell>
             </TableRow>
           ))}
         </TableBody>
       </StyledTable>
     </TableContainer>
   );
+
 }

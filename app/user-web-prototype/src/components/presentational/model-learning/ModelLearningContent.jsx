@@ -22,7 +22,7 @@ const STEPS = Object.keys(STEP_COUNT_AND_NAME_MAP);
 const MIN_STEP = Math.min(...STEPS);
 const MAX_STEP = Math.max(...STEPS);
 
-function ModelLearningMainContent(props) {
+const ModelLearningMainContent = (props) => {
   const {activeStep} = props;
 
   if (activeStep === 0) {
@@ -37,15 +37,52 @@ function ModelLearningMainContent(props) {
   }
 
   if (activeStep === 1) {
+    const {setAnyTargetVariableChecked} = props;
+
     return (
-      <DataNavigationContent/>
+      <DataNavigationContent
+        setAnyTargetVariableChecked={setAnyTargetVariableChecked}
+      />
     );
   }
 }
 
-function ModelLearningContent() {
-  const [fileChanged, setFileChanged] = useState(false);
+const ModelLearningContent = () => {
   const [activeStep, setActiveStep] = useState(0);
+
+  function decreaseStep() {
+    setActiveStep(activeStep - 1);
+  }
+
+  function increaseStep() {
+    setActiveStep(activeStep + 1);
+  }
+
+  // step0
+  const [fileChanged, setFileChanged] = useState(false);
+
+  // step1
+  const [anyTargetVariableChecked, setAnyTargetVariableChecked] = useState(false);
+
+  function handleDisableNextButton() {
+    if (activeStep >= MAX_STEP) {
+      return true;
+    }
+
+    if (activeStep === 0) {
+      if (!fileChanged) {
+        return true;
+      }
+    }
+
+    if (activeStep === 1) {
+      if (!anyTargetVariableChecked) {
+        return true;
+      }
+    }
+
+    return false;
+  }
 
   return (
     <>
@@ -99,6 +136,7 @@ function ModelLearningContent() {
             activeStep={activeStep}
             fileChanged={fileChanged}
             setFileChanged={setFileChanged}
+            setAnyTargetVariableChecked={setAnyTargetVariableChecked}
           />
         }
       </Box>
@@ -114,17 +152,16 @@ function ModelLearningContent() {
           <Button
             disabled={(activeStep <= MIN_STEP)}
             variant="outlined"
-            onClick={() => decreaseStep(activeStep, setActiveStep)}
+            onClick={() => decreaseStep()}
           >
             이전
           </Button>
           <Button
             disabled={
-              (activeStep >= MAX_STEP)
-              || (!fileChanged)
+              handleDisableNextButton()
             }
             variant="contained"
-            onClick={() => increaseStep(activeStep, setActiveStep)}
+            onClick={() => increaseStep()}
             sx={{
               marginLeft: '15px'
             }}
@@ -135,14 +172,6 @@ function ModelLearningContent() {
       </Box>
     </>
   );
-}
-
-function decreaseStep(activeStep, setActiveStep) {
-  setActiveStep(activeStep - 1);
-}
-
-function increaseStep(activeStep, setActiveStep) {
-  setActiveStep(activeStep + 1);
 }
 
 export default ModelLearningContent;

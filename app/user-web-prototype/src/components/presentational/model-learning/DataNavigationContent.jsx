@@ -27,7 +27,9 @@ const HeatMapImageBox = (props: { imageUrl: string }) => {
 /**
  * 데이터 탐색 콘텐츠
  */
-const DataNavigationContent = () => {
+const DataNavigationContent = (props) => {
+  const {setAnyTargetVariableChecked} = props;
+
   const [content, setContent] = useState({
     count: 0,
     missing_count: 0,
@@ -50,6 +52,7 @@ const DataNavigationContent = () => {
 
       <DataNavigationContentTable
         data={content.data}
+        setAnyTargetVariableChecked={setAnyTargetVariableChecked}
       />
 
       <HeatMapImageBox
