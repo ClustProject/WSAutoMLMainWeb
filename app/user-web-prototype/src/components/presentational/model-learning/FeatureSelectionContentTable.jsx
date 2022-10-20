@@ -58,9 +58,8 @@ const FeatureSelectionContentTable = (props) => {
   }
 
   function anySwitchOn(copyOfData) {
-    const useData = copyOfData.filter(it => it.use === true);
-
-    return useData.length > 0;
+    return copyOfData.map(it => it.use)
+      .includes(true)
   }
 
   return (

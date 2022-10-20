@@ -80,9 +80,8 @@ export default function DataNavigationContentTable(props) {
   }
 
   function anyTargetVariableChecked(copyOfData) {
-    const targetVariableCheckRows = copyOfData.filter(it => it.target_variable === true);
-
-    return targetVariableCheckRows.length > 0;
+    return copyOfData.map(it => it.target_variable)
+      .includes(true)
   }
 
   return (
