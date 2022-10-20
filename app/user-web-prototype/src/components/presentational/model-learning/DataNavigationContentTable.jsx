@@ -1,26 +1,16 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import Table from '@mui/material/Table';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Checkbox, Paper, Switch} from "@mui/material";
-import {styled} from '@mui/system';
 import TableBody from "@mui/material/TableBody";
+import {StyledTable, StyledTableCell} from "./StyledTableComponents";
 
 const AVERAGE_SPEED = "평균속도";
 
 const SWITCH_LABEL = {inputProps: {'aria-label': 'Switch'}};
 const CHECKBOX_LABEL = {inputProps: {'aria-label': 'CheckBox'}};
-
-const StyledTable = styled(Table)({
-  minWidth: 650
-})
-
-const StyledTableCell = styled(TableCell)({
-  padding: '10px',
-})
 
 export default function DataNavigationContentTable(props) {
   const {setAnyTargetVariableChecked} = props;
@@ -47,7 +37,6 @@ export default function DataNavigationContentTable(props) {
       });
 
       setData(setUseAndTargetVariableData);
-
     }, [props.data] // 변경될때마다 호출됨
   );
 

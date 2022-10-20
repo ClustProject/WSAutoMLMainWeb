@@ -1,6 +1,5 @@
 import axios from "axios";
-
-export const LOCALHOST_PREFIX = "http://localhost:3000";
+import {LOCALHOST_PREFIX} from "../contants";
 
 function getNavigationContent() {
   return axios.get(LOCALHOST_PREFIX + "/data/data-navigation-content.json")

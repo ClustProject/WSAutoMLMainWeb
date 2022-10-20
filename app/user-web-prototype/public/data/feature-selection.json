@@ -1,0 +1,49 @@
+{
+  "removed_missing_value_count": 41760,
+  "data": [
+    {
+      "variable_name": "콘존길이",
+      "importance": 0.290
+    },
+    {
+      "variable_name": "제한속도",
+      "importance": 0.130
+    },
+    {
+      "variable_name": "버스전용차로유무",
+      "importance": 0.122
+    },
+    {
+      "variable_name": "교통량",
+      "importance": 0.110
+    },
+    {
+      "variable_name": "차로수",
+      "importance": 0.070
+    },
+    {
+      "variable_name": "노선번호",
+      "importance": 0.057
+    },
+    {
+      "variable_name": "노선구성순번",
+      "importance": 0.057
+    },
+    {
+      "variable_name": "차로유형구분코드",
+      "importance": 0.033
+    },
+    {
+      "variable_name": "도로등급구분코드",
+      "importance": 0.017
+    },
+    {
+      "variable_name": "시작노드ID",
+      "importance": 0.004
+    },
+    {
+      "variable_name": "종료노드ID",
+      "importance": 0.003
+    }
+  ]
+}

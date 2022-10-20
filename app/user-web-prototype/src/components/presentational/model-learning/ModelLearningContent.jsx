@@ -4,10 +4,10 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import {Divider, StepLabel, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
-import DataInputBox from "./DataInputBox";
-import DataNavigationContent from "./DataNavigationContent";
+import ModelLearningMainContent from "./ModelLearningMainContent";
 
 export const CONTENT_NAME_HEIGHT = '50px';
+
 const CONTENT_BACKGROUND_COLOR = '#F4F8F9';
 
 const STEP_COUNT_AND_NAME_MAP = {
@@ -17,35 +17,9 @@ const STEP_COUNT_AND_NAME_MAP = {
   4: '알고리즘 선택',
   5: '모델 학습 결과',
 };
-
 const STEPS = Object.keys(STEP_COUNT_AND_NAME_MAP);
 const MIN_STEP = Math.min(...STEPS);
 const MAX_STEP = Math.max(...STEPS);
-
-const ModelLearningMainContent = (props) => {
-  const {activeStep} = props;
-
-  if (activeStep === 1) {
-    const {fileChanged, setFileChanged} = props;
-
-    return (
-      <DataInputBox
-        fileChanged={fileChanged}
-        setFileChanged={setFileChanged}
-      />
-    )
-  }
-
-  if (activeStep === 2) {
-    const {setAnyTargetVariableChecked} = props;
-
-    return (
-      <DataNavigationContent
-        setAnyTargetVariableChecked={setAnyTargetVariableChecked}
-      />
-    );
-  }
-}
 
 const ModelLearningContent = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -64,6 +38,9 @@ const ModelLearningContent = () => {
   // step2
   const [anyTargetVariableChecked, setAnyTargetVariableChecked] = useState(false);
 
+  // step3
+  const [anyTargetVariableUsed, setAnyTargetVariableUsed] = useState(false);
+
   function handleDisableNextButton() {
     if (activeStep >= MAX_STEP) {
       return true;
@@ -77,6 +54,12 @@ const ModelLearningContent = () => {
 
     if (activeStep === 2) {
       if (!anyTargetVariableChecked) {
+        return true;
+      }
+    }
+
+    if (activeStep === 3) {
+      if (!anyTargetVariableUsed) {
         return true;
       }
     }
@@ -96,7 +79,7 @@ const ModelLearningContent = () => {
         marginTop: '30px'
       }}>
         <Stepper
-          activeStep={activeStep - 1}
+          activeStep={activeStep - 1} // 0부터 시작
           // nonLinear
           alternativeLabel
         >
@@ -137,6 +120,7 @@ const ModelLearningContent = () => {
             fileChanged={fileChanged}
             setFileChanged={setFileChanged}
             setAnyTargetVariableChecked={setAnyTargetVariableChecked}
+            setAnyTargetVariableUsed={setAnyTargetVariableUsed}
           />
         }
       </Box>
