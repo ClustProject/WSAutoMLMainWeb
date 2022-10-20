@@ -4,7 +4,7 @@ import {Paper, Switch} from "@mui/material";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
-import {StyledTable, StyledTableCell} from "./StyledTableComponents";
+import {StyledTable, StyledTableCell} from "../StyledTableComponents";
 
 const SWITCH_LABEL = {inputProps: {'aria-label': 'Switch'}};
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import getFeatureSelectionContent from "../../../api/get-feature-selection-content";
+import getFeatureSelectionContent from "../../../../api/get-feature-selection-content";
 import {Typography} from "@mui/material";
 import FeatureSelectionContentTable from "./FeatureSelectionContentTable";
 import Box from "@mui/material/Box";

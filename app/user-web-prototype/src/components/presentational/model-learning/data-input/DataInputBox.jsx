@@ -6,7 +6,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DoneIcon from "@mui/icons-material/Done";
 import SaveIcon from "@mui/icons-material/Save";
 import Button from "@mui/material/Button";
-import {CONTENT_NAME_HEIGHT} from "./ModelLearningContent";
+import {CONTENT_NAME_HEIGHT} from "../ModelLearningContent";
 
 const DATA_INPUT_BOX_BACKGROUND_COLOR = 'white';
 

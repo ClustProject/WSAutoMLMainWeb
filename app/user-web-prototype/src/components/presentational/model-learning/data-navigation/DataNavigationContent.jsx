@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 import DataNavigationContentTable from "./DataNavigationContentTable";
-import getNavigationContent from "../../../api/get-navigation-content";
+import getNavigationContent from "../../../../api/get-navigation-content";
 import CardMedia from "@mui/material/CardMedia";
 
 const HeatMapImageBox = (props: { imageUrl: string }) => {

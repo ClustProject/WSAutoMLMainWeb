@@ -1,8 +1,8 @@
 import React from "react";
 
-import DataInputBox from "./DataInputBox";
-import DataNavigationContent from "./DataNavigationContent";
-import FeatureSelectionContent from "./FeatureSelectionContent";
+import DataInputBox from "./data-input/DataInputBox";
+import DataNavigationContent from "./data-navigation/DataNavigationContent";
+import FeatureSelectionContent from "./feature-selection/FeatureSelectionContent";
 
 const ModelLearningMainContent = (props) => {
   const {activeStep} = props;
