@@ -3,26 +3,7 @@ import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 import DataNavigationContentTable from "./DataNavigationContentTable";
 import getNavigationContent from "../../../../api/get-navigation-content";
-import CardMedia from "@mui/material/CardMedia";
-
-const HeatMapImageBox = (props: { imageUrl: string }) => {
-  return (
-    <Box sx={{
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "40px"
-    }}>
-      <CardMedia
-        component="img"
-        image={props.imageUrl}
-        alt="heatmap image"
-        sx={{
-          width: "50%"
-        }}
-      />
-    </Box>
-  );
-}
+import HeatMapImageBox from "./HeatMapImageBox";
 
 /**
  * 데이터 탐색 콘텐츠
