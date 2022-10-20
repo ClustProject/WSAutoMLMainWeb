@@ -78,7 +78,7 @@ const FeatureSelectionContentTable = (props) => {
             <TableRow
               key={row.variable_name}
             >
-              <StyledTableCell>
+              <StyledTableCell align="center">
                 <Switch {...SWITCH_LABEL}
                         checked={row.use}
                         onChange={handleChangeSwitch(row, idx)}
