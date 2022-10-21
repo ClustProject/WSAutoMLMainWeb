@@ -3,6 +3,7 @@ import React from "react";
 import DataInputBox from "./data-input/DataInputBox";
 import DataNavigationContent from "./data-navigation/DataNavigationContent";
 import FeatureSelectionContent from "./feature-selection/FeatureSelectionContent";
+import SelectAlgorithmContent from "./select-algorithm/SelectAlgorithmContent";
 
 const ModelLearningMainContent = (props) => {
   const {activeStep} = props;
@@ -34,6 +35,20 @@ const ModelLearningMainContent = (props) => {
     return (
       <FeatureSelectionContent
         setAnyTargetVariableUsed={setAnyTargetVariableUsed}
+      />
+    )
+  }
+
+  if (activeStep === 4) {
+    const {
+      dispatchLearnModelRequest,
+      setAllLearnModelRequestFilled
+    } = props;
+
+    return (
+      <SelectAlgorithmContent
+        dispatchLearnModelRequest={dispatchLearnModelRequest}
+        setAllLearnModelRequestFilled={setAllLearnModelRequestFilled}
       />
     )
   }

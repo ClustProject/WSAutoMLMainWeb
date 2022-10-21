@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -6,6 +6,7 @@ import {Divider, StepLabel, Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import ModelLearningMainContent from "./ModelLearningMainContent";
 import {styled} from "@mui/system";
+import LearnModelRequestReducer, {INIT_LEARN_MODEL_REQUEST} from "./select-algorithm/reducers/LearnModelRequestReducer";
 
 export const CONTENT_NAME_HEIGHT = '50px';
 
@@ -108,11 +109,13 @@ const StepNameBox = (props) => {
   </Box>;
 }
 
-function ModelLearningTypography() {
+const ModelLearningTypography = () => {
   return <Typography variant="h5">
     모델 학습
   </Typography>;
 }
+
+const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -133,6 +136,29 @@ const ModelLearningContent = () => {
 
   // step3
   const [anyTargetVariableUsed, setAnyTargetVariableUsed] = useState(false);
+
+  // step4
+  const [learnModelRequest, dispatchLearnModelRequest]
+    = useReducer(LearnModelRequestReducer, INIT_LEARN_MODEL_REQUEST);
+  const [allLearnModelRequestFilled, setAllLearnModelRequestFilled] = useState(true);
+
+  useEffect(() => {
+    checkHasEmptyAndSetState(learnModelRequest);
+  }, [learnModelRequest]);
+
+  function checkHasEmptyAndSetState(_learnModelRequest) {
+    if (hasEmptyValue(_learnModelRequest)) {
+      setAllLearnModelRequestFilled(false);
+    } else {
+      setAllLearnModelRequestFilled(true);
+    }
+  }
+
+  function hasEmptyValue(_learnModelRequest) {
+    return Object.values(_learnModelRequest)
+      .map(it => it.toString().trim())
+      .includes(EMPTY_STRING);
+  }
 
   function handleDisableNextStepButton() {
     if (activeStep >= MAX_STEP) {
@@ -157,6 +183,12 @@ const ModelLearningContent = () => {
       }
     }
 
+    if (activeStep === 4) {
+      if (!allLearnModelRequestFilled) {
+        return true;
+      }
+    }
+
     return false;
   }
 
@@ -175,6 +207,8 @@ const ModelLearningContent = () => {
           setFileChanged={setFileChanged}
           setAnyTargetVariableChecked={setAnyTargetVariableChecked}
           setAnyTargetVariableUsed={setAnyTargetVariableUsed}
+          dispatchLearnModelRequest={dispatchLearnModelRequest}
+          setAllLearnModelRequestFilled={setAllLearnModelRequestFilled}
         />
       </ModelLearningMainContentWrappingBox>
       <StepButtonsWrappingBox>
