@@ -118,7 +118,7 @@ const ModelLearningTypography = () => {
 const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(4);
 
   function decreaseStep() {
     setActiveStep(activeStep - 1);

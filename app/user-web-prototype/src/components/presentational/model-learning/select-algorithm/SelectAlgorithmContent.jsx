@@ -79,12 +79,12 @@ const SelectForm = (props) => {
       </Select>
     </FormControl>
   );
-}
+};
 
 const ModelPreviewImageCard = styled(Card)({
   width: 250,
   height: 150
-})
+});
 
 const TEST_DATA_SET_SLIDER_MARKS = [
   {
@@ -103,9 +103,15 @@ const TEST_DATA_SET_SLIDER_MARKS = [
 
 const EMPTY_STRING = "";
 
-const MODEL_NUMBER_NAME_MAP = {
-  0: "LSTM",
-  1: "RNN"
+const MODEL_NUMBER_MAP = {
+  0: {
+    "name": "LSTM",
+    "imageUrl": "/static/images/cards/LSTM.png"
+  },
+  1: {
+    "name": "RNN",
+    "imageUrl": "/static/images/cards/RNN.png"
+  }
 }
 
 function a11yProps(index) {
@@ -126,7 +132,7 @@ const SelectAlgorithmContent = (props) => {
   useEffect(() => {
     dispatchLearnModelRequest({
       type: "model",
-      payload: MODEL_NUMBER_NAME_MAP[0]
+      payload: MODEL_NUMBER_MAP[0].name
     });
   }, []);
 
@@ -134,7 +140,7 @@ const SelectAlgorithmContent = (props) => {
     setModelNumber(newModelNumber);
     dispatchLearnModelRequest({
       "type": "model",
-      "payload": MODEL_NUMBER_NAME_MAP[newModelNumber]
+      "payload": MODEL_NUMBER_MAP[newModelNumber].name
     });
   };
 
@@ -174,20 +180,11 @@ const SelectAlgorithmContent = (props) => {
 
         <ContentWrappingBox>
           <ModelPreviewImageCard>
-            {
-              modelNumber === 0 ?
-                <CardMedia
-                  component="img"
-                  image={"/static/images/cards/LSTM.png"}
-                  alt="algorithm preview image"
-                />
-                :
-                <CardMedia
-                  component="img"
-                  image={"/static/images/cards/RNN.png"}
-                  alt="algorithm preview image"
-                />
-            }
+            <CardMedia
+              component="img"
+              image={MODEL_NUMBER_MAP[modelNumber].imageUrl}
+              alt="algorithm preview image"
+            />
           </ModelPreviewImageCard>
 
           <Divider orientation="vertical" flexItem sx={{
