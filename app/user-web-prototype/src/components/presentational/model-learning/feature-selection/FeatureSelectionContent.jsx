@@ -22,7 +22,7 @@ const FeatureSelectionContent = (props) => {
       <Typography variant="h5" align="right" sx={{
         marginBottom: '10px'
       }}>
-        데이터 정제 (제거된 결측치 : {content.removed_missing_value_count}, standard scaile)
+        데이터 정제 (제거된 결측치 : {content.removed_missing_value_count}, standard scale)
       </Typography>
 
       <FeatureSelectionContentTable
