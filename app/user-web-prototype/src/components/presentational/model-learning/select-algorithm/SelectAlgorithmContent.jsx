@@ -103,6 +103,11 @@ const TEST_DATA_SET_SLIDER_MARKS = [
 
 const EMPTY_STRING = "";
 
+const MODEL_NUMBER_NAME_MAP = {
+  0: "LSTM",
+  1: "RNN"
+}
+
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
@@ -121,7 +126,7 @@ const SelectAlgorithmContent = (props) => {
   useEffect(() => {
     dispatchLearnModelRequest({
       type: "model",
-      payload: "LSTM"
+      payload: MODEL_NUMBER_NAME_MAP[0]
     });
   }, []);
 
@@ -129,7 +134,7 @@ const SelectAlgorithmContent = (props) => {
     setModelNumber(newModelNumber);
     dispatchLearnModelRequest({
       "type": "model",
-      "payload": newModelNumber === 0 ? "LSTM" : "RNN"
+      "payload": MODEL_NUMBER_NAME_MAP[newModelNumber]
     });
   };
 
