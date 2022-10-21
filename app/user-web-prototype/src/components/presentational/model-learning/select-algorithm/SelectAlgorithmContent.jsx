@@ -86,6 +86,21 @@ const ModelPreviewImageCard = styled(Card)({
   height: 150
 });
 
+const TestSetSlider = (props) => {
+  return (
+    <Slider
+      defaultValue={INIT_LEARN_MODEL_REQUEST.test_set}
+      step={10}
+      min={INIT_LEARN_MODEL_REQUEST.test_set}
+      max={50}
+      getAriaValueText={(value) => `${value}%`}
+      marks={TEST_DATA_SET_SLIDER_MARKS}
+      valueLabelDisplay="on"
+      onChange={props.onChange}
+    />
+  )
+}
+
 const TEST_DATA_SET_SLIDER_MARKS = [
   {
     value: 20,
@@ -243,16 +258,8 @@ const SelectAlgorithmContent = (props) => {
                 onChange={(event) => dispatchAndHandleNextStepButton("metrics", event)}
               />
             </SpaceBetweenFlexBox>
-
             <H6Typography> 테스트 셋 비율을 선택해 주십시오. </H6Typography>
-            <Slider
-              defaultValue={INIT_LEARN_MODEL_REQUEST.test_set}
-              step={10}
-              min={INIT_LEARN_MODEL_REQUEST.test_set}
-              max={50}
-              getAriaValueText={(value) => `${value}%`}
-              marks={TEST_DATA_SET_SLIDER_MARKS}
-              valueLabelDisplay="on"
+            <TestSetSlider
               onChange={(event) => dispatchAndHandleNextStepButton("test_set", event)}
             />
           </Box>
