@@ -1,5 +1,6 @@
 {
   "removed_missing_value_count": 41760,
+  "scale_type": "standard",
   "data": [
     {
       "variable_name": "콘존길이",
