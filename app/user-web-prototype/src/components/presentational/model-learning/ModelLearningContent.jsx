@@ -4,11 +4,14 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import { Divider, StepLabel, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import ModelLearningMainContent from "./ModelLearningMainContent";
 import { styled } from "@mui/system";
 import LearnModelRequestReducer, {
   INIT_LEARN_MODEL_REQUEST,
 } from "./select-algorithm/reducers/LearnModelRequestReducer";
+import DataInputBox from "./data-input/DataInputBox";
+import DataNavigationContent from "./data-navigation/DataNavigationContent";
+import FeatureSelectionContent from "./feature-selection/FeatureSelectionContent";
+import SelectAlgorithmContent from "./select-algorithm/SelectAlgorithmContent";
 
 export const CONTENT_NAME_HEIGHT = "50px";
 
@@ -123,7 +126,7 @@ const ModelLearningTypography = () => {
 const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
-  const [activeStep, setActiveStep] = useState(4);
+  const [activeStep, setActiveStep] = useState(1);
 
   function decreaseStep() {
     setActiveStep(activeStep - 1);
@@ -203,6 +206,41 @@ const ModelLearningContent = () => {
     return false;
   }
 
+  const switchModelLearningMainContent = () => {
+    switch (activeStep) {
+      case 1:
+        return (
+          <DataInputBox
+            fileChanged={fileChanged}
+            setFileChanged={setFileChanged}
+          />
+        );
+      case 2:
+        return (
+          <DataNavigationContent
+            setAnyTargetVariableChecked={setAnyTargetVariableChecked}
+          />
+        );
+      case 3:
+        return (
+          <FeatureSelectionContent
+            setAnyTargetVariableUsed={setAnyTargetVariableUsed}
+          />
+        );
+      case 4:
+        return (
+          <SelectAlgorithmContent
+            dispatchLearnModelRequest={dispatchLearnModelRequest}
+            setAllLearnModelRequestFilled={setAllLearnModelRequestFilled}
+          />
+        );
+      case 5:
+        return;
+      default:
+        throw new Error("해당 스텝에 대한 컨텐츠를 찾을 수 없습니다.");
+    }
+  };
+
   return (
     <>
       <ModelLearningTypography />
@@ -214,15 +252,7 @@ const ModelLearningContent = () => {
       <StepperBox activeStep={activeStep} />
       <StepNameBox activeStep={activeStep} />
       <ModelLearningMainContentWrappingBox>
-        <ModelLearningMainContent
-          activeStep={activeStep}
-          fileChanged={fileChanged}
-          setFileChanged={setFileChanged}
-          setAnyTargetVariableChecked={setAnyTargetVariableChecked}
-          setAnyTargetVariableUsed={setAnyTargetVariableUsed}
-          dispatchLearnModelRequest={dispatchLearnModelRequest}
-          setAllLearnModelRequestFilled={setAllLearnModelRequestFilled}
-        />
+        {switchModelLearningMainContent()}
       </ModelLearningMainContentWrappingBox>
       <StepButtonsWrappingBox>
         <Box
