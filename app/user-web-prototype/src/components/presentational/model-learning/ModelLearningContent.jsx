@@ -15,8 +15,7 @@ import SelectAlgorithmContent from "./select-algorithm/SelectAlgorithmContent";
 import ModelLearningResultContent from "./learning-result/ModelLearningResultContent";
 
 export const CONTENT_NAME_HEIGHT = "50px";
-
-const CONTENT_BACKGROUND_COLOR = "#F4F8F9";
+export const CONTENT_BACKGROUND_COLOR = "#F4F8F9";
 
 const STEP_COUNT_AND_NAME_MAP = {
   1: "데이터 입력",
@@ -127,8 +126,7 @@ const ModelLearningTypography = () => {
 const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
-  // TODO: change state before commit
-  const [activeStep, setActiveStep] = useState(5);
+  const [activeStep, setActiveStep] = useState(1);
 
   function decreaseStep() {
     setActiveStep(activeStep - 1);
