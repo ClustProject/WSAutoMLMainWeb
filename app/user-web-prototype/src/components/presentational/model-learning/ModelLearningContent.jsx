@@ -12,6 +12,7 @@ import DataInputBox from "./data-input/DataInputBox";
 import DataNavigationContent from "./data-navigation/DataNavigationContent";
 import FeatureSelectionContent from "./feature-selection/FeatureSelectionContent";
 import SelectAlgorithmContent from "./select-algorithm/SelectAlgorithmContent";
+import ModelLearningResultContent from "./learning-result/ModelLearningResultContent";
 
 export const CONTENT_NAME_HEIGHT = "50px";
 
@@ -126,7 +127,8 @@ const ModelLearningTypography = () => {
 const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  // TODO: change state before commit
+  const [activeStep, setActiveStep] = useState(5);
 
   function decreaseStep() {
     setActiveStep(activeStep - 1);
@@ -235,7 +237,7 @@ const ModelLearningContent = () => {
           />
         );
       case 5:
-        return;
+        return <ModelLearningResultContent />;
       default:
         throw new Error("해당 스텝에 대한 컨텐츠를 찾을 수 없습니다.");
     }
