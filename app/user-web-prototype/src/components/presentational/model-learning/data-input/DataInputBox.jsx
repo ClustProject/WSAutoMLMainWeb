@@ -35,30 +35,34 @@ function DataInputBox(props) {
           height: '280px',
           marginBottom: '20px'
         }}>
-          <Box>
-            <CloudUploadIcon color='info' fontSize='large'/>
-          </Box>
+          <Box >
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}>
+              <CloudUploadIcon color='info' style={{fontSize: 75}}/>
+            </Box>
 
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            margin: '15px'
-          }}>
-            {props.fileChanged ?
-              <IconButton color='info' component="label" size='large'>
-                <DoneIcon/>
-              </IconButton> :
-              <IconButton color='info' component="label" size='large'>
-                <SaveIcon/>
-              </IconButton>
-            }
-            <Button variant="contained" component="label" size="small">
-              로컬 파일 업로드
-              <input hidden accept=".csv" type="file" onChange={() => {
-                props.setFileChanged(true);
-              }}/>
-            </Button>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+              {props.fileChanged ?
+                <IconButton color='info' component="label" size='large'>
+                  <DoneIcon/>
+                </IconButton> :
+                <IconButton color='info' component="label" size='large'>
+                  <SaveIcon/>
+                </IconButton>
+              }
+              <Button variant="contained" component="label" size="small">
+                로컬 파일 업로드
+                <input hidden accept=".csv" type="file" onChange={() => {
+                  props.setFileChanged(true);
+                }}/>
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>
