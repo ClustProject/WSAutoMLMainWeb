@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import TableContainer from "@mui/material/TableContainer";
-import { Paper, Switch } from "@mui/material";
+import {Paper, Switch} from "@mui/material";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
-import { StyledTable, StyledTableCell } from "../StyledTableComponents";
+import {StyledTable, StyledTableCell, StyledTableHeaderCell} from "../StyledTableComponents";
 
-const SWITCH_LABEL = { inputProps: { "aria-label": "Switch" } };
+const SWITCH_LABEL = {inputProps: {"aria-label": "Switch"}};
 
 const FeatureSelectionContentTable = (props) => {
-  const { setAnyTargetVariableUsed } = props;
+  const {setAnyTargetVariableUsed} = props;
 
   const [data, setData] = useState([]);
 
@@ -62,14 +62,17 @@ const FeatureSelectionContentTable = (props) => {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <StyledTable aria-label="data table">
+    <TableContainer component={Paper} sx={{
+      height: '400px'
+    }}>
+      <StyledTable aria-label="data table" stickyHeader>
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">사용</StyledTableCell>
-            <StyledTableCell align="center">순위</StyledTableCell>
-            <StyledTableCell align="center">변수</StyledTableCell>
-            <StyledTableCell align="center">중요도</StyledTableCell>
+            {["사용", "순위", "변수", "중요도"].map(headerName => (
+              <StyledTableHeaderCell align="center">
+                {headerName}
+              </StyledTableHeaderCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>

@@ -10,7 +10,13 @@ const StyledTableCell = styled(TableCell)({
   padding: '10px',
 });
 
+const StyledTableHeaderCell = styled(TableCell)({
+  padding: '10px',
+  backgroundColor: '#AFAFAF'
+});
+
 export {
   StyledTable,
-  StyledTableCell
+  StyledTableCell,
+  StyledTableHeaderCell
 }

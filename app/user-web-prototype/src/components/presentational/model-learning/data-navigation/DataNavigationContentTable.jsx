@@ -5,7 +5,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Checkbox, Paper, Switch} from "@mui/material";
 import TableBody from "@mui/material/TableBody";
-import {StyledTable, StyledTableCell} from "../StyledTableComponents";
+import {StyledTable, StyledTableCell, StyledTableHeaderCell} from "../StyledTableComponents";
 
 const AVERAGE_SPEED = "평균속도";
 
@@ -85,19 +85,21 @@ export default function DataNavigationContentTable(props) {
   }
 
   return (
-    <TableContainer component={Paper}>
-      <StyledTable aria-label="data table">
+    <TableContainer component={Paper} sx={{
+      height: '400px'
+    }}>
+      <StyledTable aria-label="data table" stickyHeader>
         <TableHead>
           <TableRow>
-            <StyledTableCell align="left">변수명</StyledTableCell>
-            <StyledTableCell align="center">변수유형</StyledTableCell>
-            <StyledTableCell align="right">최솟값</StyledTableCell>
-            <StyledTableCell align="right">최대값</StyledTableCell>
-            <StyledTableCell align="right">결측값</StyledTableCell>
-            <StyledTableCell align="right">평균</StyledTableCell>
-            <StyledTableCell align="right">표준편차</StyledTableCell>
-            <StyledTableCell align="center">사용</StyledTableCell>
-            <StyledTableCell align="center">목표변수</StyledTableCell>
+            <StyledTableHeaderCell align="left">변수명</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="center">변수유형</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="right">최솟값</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="right">최대값</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="right">결측값</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="right">평균</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="right">표준편차</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="center">사용</StyledTableHeaderCell>
+            <StyledTableHeaderCell align="center">목표변수</StyledTableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
