@@ -9,62 +9,24 @@ export const INIT_LEARN_MODEL_REQUEST = {
   "test_set": 20
 }
 
+const PROPERTIES = [
+  "model",
+  "batch_size",
+  "window_size",
+  "epoch",
+  "loss",
+  "optimizer",
+  "metrics",
+  "test_set",
+]
+
 function LearnModelRequestReducer(state, action) {
   const {type, payload} = action;
 
-  if (type === "model") {
+  if (PROPERTIES.includes(type)) {
     return {
       ...state,
-      "model": payload
-    }
-  }
-
-  if (type === "batch_size") {
-    return {
-      ...state,
-      "batch_size": payload
-    }
-  }
-
-  if (type === "window_size") {
-    return {
-      ...state,
-      "window_size": payload
-    }
-  }
-
-  if (type === "epoch") {
-    return {
-      ...state,
-      "epoch": payload
-    }
-  }
-
-  if (type === "loss") {
-    return {
-      ...state,
-      "loss": payload
-    }
-  }
-
-  if (type === "optimizer") {
-    return {
-      ...state,
-      "optimizer": payload
-    }
-  }
-
-  if (type === "metrics") {
-    return {
-      ...state,
-      "metrics": payload
-    }
-  }
-
-  if (type === "test_set") {
-    return {
-      ...state,
-      "test_set": payload
+      type: payload
     }
   }
 
