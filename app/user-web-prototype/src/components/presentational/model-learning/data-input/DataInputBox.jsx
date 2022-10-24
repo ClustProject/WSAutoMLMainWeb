@@ -33,9 +33,13 @@ function DataInputBox(props) {
           alignItems: 'center',
           flexDirection: 'column',
           height: '280px',
-          marginBottom: '20px'
+          marginBottom: '20px',
         }}>
-          <Box >
+          <Box sx={{
+            boxShadow: 2,
+            borderRadius: '10px',
+            padding: '20px'
+          }}>
             <Box sx={{
               display: 'flex',
               justifyContent: 'center'
