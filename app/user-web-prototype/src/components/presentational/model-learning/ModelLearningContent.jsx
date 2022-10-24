@@ -28,6 +28,8 @@ const STEPS = Object.keys(STEP_COUNT_AND_NAME_MAP);
 const MIN_STEP = Math.min(...STEPS);
 const MAX_STEP = Math.max(...STEPS);
 
+const EMPTY_STRING = "";
+
 const ModelLearningMainContentWrappingBox = styled(Box)({
   backgroundColor: CONTENT_BACKGROUND_COLOR,
   minHeight: "450px",
@@ -122,8 +124,6 @@ const StepNameBox = (props) => {
 const ModelLearningTypography = () => {
   return <Typography variant="h5">모델 학습</Typography>;
 };
-
-const EMPTY_STRING = "";
 
 const ModelLearningContent = () => {
   const [activeStep, setActiveStep] = useState(1);
