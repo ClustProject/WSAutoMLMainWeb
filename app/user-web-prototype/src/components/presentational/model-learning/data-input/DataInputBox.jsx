@@ -24,7 +24,7 @@ function DataInputBox(props) {
           height: '20px'
         }}>
           <Typography variant="h5">
-            데이터 업로드
+            업로드 방법
           </Typography>
         </Box>
         <Box sx={{
