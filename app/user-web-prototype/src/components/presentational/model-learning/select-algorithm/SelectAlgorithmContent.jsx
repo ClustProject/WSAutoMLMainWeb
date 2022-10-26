@@ -34,24 +34,16 @@ const SpaceBetweenFlexBox = styled(Box)({
   marginBottom: '20px'
 });
 
-const H6Typography = (props) => {
-  return (
-    <Typography variant="h6" sx={props.sx}>
-      {props.children}
-    </Typography>
-  )
-}
-
 const ParameterTitleTypography = (props) => {
   return (
-    <H6Typography
+    <Typography variant="h6"
       sx={{
         marginTop: '13px',
         marginRight: '20px'
       }}
     >
       {props.children}
-    </H6Typography>
+    </Typography>
   )
 }
 
@@ -306,7 +298,7 @@ const SelectAlgorithmContent = (props) => {
                 onChange={(event) => dispatchAndHandleNextStepButton("metrics", event)}
               />
             </SpaceBetweenFlexBox>
-            <H6Typography> 테스트 셋 비율을 선택해 주십시오. </H6Typography>
+            <Typography variant="h6"> 테스트 셋 비율을 선택해 주십시오. </Typography>
             <TestSetSlider
               onChange={(event) => dispatchAndHandleNextStepButton("test_set", event)}
             />
