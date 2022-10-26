@@ -63,7 +63,7 @@ const StandardTextField = (props) => {
       onChange={props.onChange}
       defaultValue={props.defaultValue}
       sx={{
-        minWidth: '200px'
+        minWidth: '180px'
       }}
     />
   );
@@ -156,6 +156,7 @@ function a11yProps(index) {
   };
 }
 
+const CONTENT_HEIGHT = '250px';
 const SelectAlgorithmContent = (props) => {
   const {
     dispatchLearnModelRequest,
@@ -215,19 +216,28 @@ const SelectAlgorithmContent = (props) => {
 
         <ContentWrappingBox>
 
-          <Box>
+          <Box sx={{
+            height: CONTENT_HEIGHT
+          }}>
+
             {
-              <Tooltip
-                title={MODEL_NUMBER_MAP[modelNumber].toolTipTitle}
-                placement="top"
-              >
-                <IconButton>
-                  <InfoIcon color="primary"/>
-                </IconButton>
-              </Tooltip>
+              <>
+                <Typography variant="h5">
+                  {MODEL_NUMBER_MAP[modelNumber].name}
+                <Tooltip
+                  title={MODEL_NUMBER_MAP[modelNumber].toolTipTitle}
+                  placement="top"
+                >
+                  <IconButton>
+                    <InfoIcon color="primary"/>
+                  </IconButton>
+                </Tooltip>
+
+                </Typography>
+              </>
             }
 
-            <Card sx={{ width: 400}}>
+            <Card sx={{width: 400}}>
               <CardMedia
                 component="img"
                 image={MODEL_NUMBER_MAP[modelNumber].imageUrl}
@@ -240,7 +250,11 @@ const SelectAlgorithmContent = (props) => {
             mx: '25px'
           }}/>
 
-          <Box>
+          <Box sx={{
+            overflow: 'auto',
+            height: CONTENT_HEIGHT,
+            padding: '25px'
+          }}>
             <SpaceBetweenFlexBox>
               <ParameterTitleTypography> Batch Size: </ParameterTitleTypography>
               <StandardTextField
