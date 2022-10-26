@@ -11,7 +11,8 @@ const cardInfo = [
   },
   {
     name: "모델 학습",
-    image: "/static/images/cards/ai.jpeg"
+    image: "/static/images/cards/ai.jpeg",
+    link: "/model-learning"
   },
   {
     name: "시각화(예정)",
