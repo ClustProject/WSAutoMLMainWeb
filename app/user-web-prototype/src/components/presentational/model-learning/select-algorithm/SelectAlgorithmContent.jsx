@@ -5,7 +5,18 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
-import {Divider, FormControl, InputLabel, Select, Slider, TextField, Typography} from "@mui/material";
+import {
+  Divider,
+  FormControl,
+  IconButton,
+  InputLabel,
+  Select,
+  Slider,
+  TextField,
+  Tooltip,
+  Typography
+} from "@mui/material";
+import InfoIcon from '@mui/icons-material/Info';
 import {styled} from "@mui/system";
 import MenuItem from "@mui/material/MenuItem";
 import {INIT_LEARN_MODEL_REQUEST} from "./reducers/LearnModelRequestReducer";
@@ -121,11 +132,25 @@ const EMPTY_STRING = "";
 const MODEL_NUMBER_MAP = {
   0: {
     "name": "LSTM",
-    "imageUrl": "/static/images/cards/LSTM.png"
+    "imageUrl": "/static/images/cards/LSTM.png",
+    "toolTipTitle": (
+      <div>
+        Long-Short Term Memory
+        <br/> <br/>
+        순환신경망 기반의 장/단기 메모리 분석 방법
+      </div>
+    )
   },
   1: {
     "name": "RNN",
-    "imageUrl": "/static/images/cards/RNN.png"
+    "imageUrl": "/static/images/cards/RNN.png",
+    "toolTipTitle": (
+      <div>
+        Recurrent Neural Network
+        <br/> <br/>
+        인공 신경망의 한 종류로, 유닛간의 연결이 순환적 구조를 갖는 특징을 갖고 있다.
+      </div>
+    )
   }
 }
 
@@ -194,13 +219,27 @@ const SelectAlgorithmContent = (props) => {
         </AppBar>
 
         <ContentWrappingBox>
-          <ModelPreviewImageCard>
-            <CardMedia
-              component="img"
-              image={MODEL_NUMBER_MAP[modelNumber].imageUrl}
-              alt="algorithm preview image"
-            />
-          </ModelPreviewImageCard>
+
+          <Box>
+            {
+              <Tooltip
+                title={MODEL_NUMBER_MAP[modelNumber].toolTipTitle}
+                placement="top"
+              >
+                <IconButton>
+                  <InfoIcon color="primary"/>
+                </IconButton>
+              </Tooltip>
+            }
+
+            <ModelPreviewImageCard>
+              <CardMedia
+                component="img"
+                image={MODEL_NUMBER_MAP[modelNumber].imageUrl}
+                alt="algorithm preview image"
+              />
+            </ModelPreviewImageCard>
+          </Box>
 
           <Divider orientation="vertical" flexItem sx={{
             mx: '25px'
