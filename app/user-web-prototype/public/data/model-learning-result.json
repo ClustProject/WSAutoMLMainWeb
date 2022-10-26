@@ -1,6 +1,6 @@
 {
   "image_url": "/static/images/cards/model-learning-result.png",
-  "data_set": "Input data.csv",
+  "data_set": "data.csv",
   "model_learning_info": {
     "name": "LSTM",
     "batch_size": 32,
@@ -11,5 +11,6 @@
     "metrics": "acc"
   },
   "target_variable": "평균속도",
-  "performance_indicators": "Mse: 2.9"
+  "performance_indicators": "Mse: 2.9",
+  "test_set": 50
 }
