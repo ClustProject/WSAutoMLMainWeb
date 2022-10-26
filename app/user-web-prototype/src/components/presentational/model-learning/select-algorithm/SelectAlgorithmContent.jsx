@@ -92,11 +92,6 @@ const SelectForm = (props) => {
   );
 };
 
-const ModelPreviewImageCard = styled(Card)({
-  width: 250,
-  height: 150
-});
-
 const TestSetSlider = (props) => {
   return (
     <Slider
@@ -201,7 +196,7 @@ const SelectAlgorithmContent = (props) => {
     <Box>
       <Box sx={{
         bgcolor: 'background.paper',
-        width: 750,
+        width: 900,
         marginTop: '25px'
       }}>
         <AppBar position="static">
@@ -232,13 +227,13 @@ const SelectAlgorithmContent = (props) => {
               </Tooltip>
             }
 
-            <ModelPreviewImageCard>
+            <Card sx={{ width: 400}}>
               <CardMedia
                 component="img"
                 image={MODEL_NUMBER_MAP[modelNumber].imageUrl}
                 alt="algorithm preview image"
               />
-            </ModelPreviewImageCard>
+            </Card>
           </Box>
 
           <Divider orientation="vertical" flexItem sx={{
