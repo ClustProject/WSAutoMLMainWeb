@@ -18,12 +18,13 @@ export default function DataNavigationContentTable(props) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-      const setUseAndTargetVariableData = props.data.map(it => {
+      const setUseAndTargetVariableData = props.data.map((it, idx) => {
         if (it.variable_name === AVERAGE_SPEED) {
           setAnyTargetVariableChecked(true);
 
           return {
             ...it,
+            id: idx + 1,
             use: true,
             target_variable: true
           }
@@ -31,6 +32,7 @@ export default function DataNavigationContentTable(props) {
 
         return {
           ...it,
+          id: idx +1,
           use: true,
           target_variable: false
         }
@@ -91,6 +93,7 @@ export default function DataNavigationContentTable(props) {
       <StyledTable aria-label="data table" stickyHeader>
         <TableHead>
           <TableRow>
+            <StyledTableHeaderCell align="left">아이디</StyledTableHeaderCell>
             <StyledTableHeaderCell align="left">변수명</StyledTableHeaderCell>
             <StyledTableHeaderCell align="center">변수유형</StyledTableHeaderCell>
             <StyledTableHeaderCell align="right">최솟값</StyledTableHeaderCell>
@@ -107,6 +110,7 @@ export default function DataNavigationContentTable(props) {
             <TableRow
               key={row.variable_name}
             >
+              <StyledTableCell align="left">{row.id}</StyledTableCell>
               <StyledTableCell align="left">{row.variable_name}</StyledTableCell>
               <StyledTableCell align="left">{row.variable_type}</StyledTableCell>
               <StyledTableCell align="right">{row.min}</StyledTableCell>
