@@ -50,8 +50,5 @@ jobs:
         run: |
           ./gradlew test
 
-      - name: Gradle 빌드 및 소나큐브 분석 실행
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build --exclude-task test --scan --no-daemon sonarqube --info
+      - name: Gradle 빌드
+        run: ./gradlew build --exclude-task test --scan --no-daemon
