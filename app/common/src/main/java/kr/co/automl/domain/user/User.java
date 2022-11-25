@@ -55,6 +55,13 @@ public class User {
         return user.matchEmail(this.email);
     }
 
+    /**
+     * 이메일이 일치할경우 true, 아닐경우 false를 리턴합니다.
+     *
+     * @param email 이메일
+     *
+     * @return 이메일이 일치할경우 true, 아닐경우 false
+     */
     public boolean matchEmail(String email) {
         return Objects.equals(this.email, email);
     }
@@ -68,6 +75,15 @@ public class User {
         return this.role.getName();
     }
 
+    /**
+     * 정보를 업데이트합니다.
+     *
+     * @param name 이름
+     * @param imageUrl 이미지 URL
+     * @param email 이메일
+     *
+     * @return 업데이트된 유저
+     */
     public User update(String name, String imageUrl, String email) {
         this.name = name;
         this.imageUrl = imageUrl;

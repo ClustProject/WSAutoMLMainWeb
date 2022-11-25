@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * 카테고리
+ */
 public enum Category implements EntityEnumerable {
 
     ATMOSPHERIC_ENVIRONMENT("대기 환경", Set.of(
@@ -81,6 +84,11 @@ public enum Category implements EntityEnumerable {
                 .orElseThrow(() -> new CannotFindMatchThemeException(name));
     }
 
+    /**
+     * 아무 주제 하나를 리턴합니다.
+     *
+     * @return 아무 주제 하나
+     */
     public Theme findAnyTheme() {
         return this.themes.stream()
                 .findAny()
