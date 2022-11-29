@@ -5,6 +5,12 @@ import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
+/**
+ * 연락처 리스트.
+ *
+ * 해당 연락처 리스트에서 삭제만 하면 웹에 있는 드롭다운 리스트는 삭제되지 않습니다.
+ * 드롭다운 목록을 삭제하려면 웹(클라이언트)에 있는 코드도 같이 수정해야 합니다.
+ */
 @EqualsAndHashCode
 public class ContactPoints {
     private final Set<ContactPoint> contactPoints;

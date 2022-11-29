@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
 
+/**
+ * 테스트 코드에서 Multipart 파일을 변환하기 위해 사용
+ */
 @Component
 public class MultipartJackson2HttpMessageConverter extends AbstractJackson2HttpMessageConverter {
 

@@ -57,6 +57,12 @@ const centerStyle = {
   justifyContent: 'center'
 };
 
+/**
+ * 메타데이터 관리 컴포넌트.
+ *
+ * 메타데이터 페이지에서 매우 많은 비중을 차지하고 있습니다.
+ * (데이터 입력에 따른 상태 변화는 각각의 reducer를 참조)
+ */
 export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
@@ -393,6 +399,12 @@ export default function MetadataManagementContent() {
     });
   }
 
+  /**
+   * 링크 입력 다이얼로그에서 다음 버튼을 누른 이후의 과정을 처리합니다.
+   * 다이얼로그에서 입력한 url에 따라 dispatch 함수를 실행시켜 reducer를 호출합니다.
+   *
+   * See Also: https://ko.reactjs.org/docs/hooks-reference.html#usereducer
+   */
   async function handleInputLinkDialogNext() {
     const url = document.getElementById("sourceUrl").value;
 
@@ -715,6 +727,11 @@ export default function MetadataManagementContent() {
     })
   }
 
+  /**
+   * 마지막 과정을 처리합니다.
+   *
+   * 데이터를 파일 저장소(S3)에 저장 및 DB에 입력한 메타데이터를 저장합니다.
+   */
   async function handleFinish() {
     const file = document.getElementById("file").files[0];
     if (file === undefined) {

@@ -11,6 +11,9 @@ import javax.persistence.Embeddable;
 
 import static lombok.AccessLevel.PROTECTED;
 
+/**
+ * 라이센스 정보
+ */
 @Embeddable
 @NoArgsConstructor(access = PROTECTED)
 @Getter
