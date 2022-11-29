@@ -34,12 +34,12 @@ const categories = [
   },
   {
     id: 'WS-AutoML',
-    link: 'https://ws-automl.netlify.app',
+    link: 'http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com',
     children: [
       {
         id: '검색',
         icon: <SearchIcon/>,
-        link: 'https://ws-automl.netlify.app/search'
+        link: 'http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search'
       }
     ]
   },
