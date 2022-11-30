@@ -7,11 +7,12 @@ const cardInfo = [
   {
     name: "검색",
     image: "/static/images/cards/search.jpg",
-    link: "/search"
+    link: "https://ws-automl.netlify.app/search"
   },
   {
-    name: "모델 학습(예정)",
-    image: "/static/images/cards/ai.jpeg"
+    name: "모델 학습",
+    image: "/static/images/cards/ai.jpeg",
+    link: "https://ws-automl.netlify.app/model-learning"
   },
   {
     name: "시각화(예정)",
