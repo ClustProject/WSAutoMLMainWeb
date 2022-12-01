@@ -11,7 +11,7 @@ const pages = [
   {
     "icon": <HomeIcon/>,
     "name": '홈페이지',
-    "link": "/"
+    "link": "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com"
   },
   {
     "name": '데이터 검색',
