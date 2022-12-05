@@ -3,19 +3,19 @@ import {INIT_CATALOG_ARGS} from "../MetadataManagementContent";
 
 export default function CatalogReducer(state, action) {
   const {type, payload} = action;
-
+  
+  if (type === "clear") {
+    return {
+      ...INIT_CATALOG_ARGS
+    }
+  }
+  
   if (type === "test") {
     retirn {
       category: "오픈데이터",
       themes: CATEGORY_THEME_MAP.오픈데이터,
       theme: "test",
       themeTaxonomy: "test"
-    }
-  }
-  
-  if (type === "clear") {
-    return {
-      ...INIT_CATALOG_ARGS
     }
   }
 
