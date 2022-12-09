@@ -14,7 +14,7 @@ class OrganizationTest {
 
     @Test
     void of() {
-        Organization org = Organization.of("위세아이텍", "위세아이텍", "박주영");
+        Organization org = Organization.of("위세아이텍", "위세아이텍", "김정연");
 
         assertThat(org).isEqualTo(ORGANIZATION1);
     }

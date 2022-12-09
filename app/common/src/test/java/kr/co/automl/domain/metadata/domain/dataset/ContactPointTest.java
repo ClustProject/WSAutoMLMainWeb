@@ -16,7 +16,7 @@ public class ContactPointTest {
 
             @Test
             void true를_리턴한다() {
-                boolean actual = ContactPointFixtures.fixture1().matchName("박주영");
+                boolean actual = ContactPointFixtures.fixture1().matchName("김정연");
 
                 assertThat(actual).isTrue();
             }
