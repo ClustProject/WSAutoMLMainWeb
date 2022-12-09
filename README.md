@@ -17,8 +17,6 @@ AutoML은 날씨, 교통 관련 오픈 데이터를 제공하는 오픈 데이�
 사용자 서비스 메인 페이지
 ![user-service-main-page.png](images/user-service-main-page.png)
 
-- (2022.08.01) 현재 사용자 서비스는 서버는 존재하지 않고 웹으로만 구성되어 있습니다. [링크](https://ws-automl.netlify.app/)
-
 ### 주요 기술
 
 웹

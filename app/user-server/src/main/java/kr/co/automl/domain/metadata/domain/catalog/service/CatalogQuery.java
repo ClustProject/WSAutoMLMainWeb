@@ -14,6 +14,9 @@ import java.util.Objects;
 
 import static kr.co.automl.domain.metadata.domain.catalog.QCatalog.catalog;
 
+/**
+ * 카탈로그 조회 담당.
+ */
 @Service
 public class CatalogQuery {
     private static final Map<String, Integer> categoryCountMap = new HashMap<>();

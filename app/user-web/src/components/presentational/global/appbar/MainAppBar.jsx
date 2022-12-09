@@ -15,7 +15,7 @@ const pages = [
   },
   {
     "name": '데이터 검색',
-    "link": "/search"
+    "link": "https://ws-automl.netlify.app/search"
   }
 ];
 

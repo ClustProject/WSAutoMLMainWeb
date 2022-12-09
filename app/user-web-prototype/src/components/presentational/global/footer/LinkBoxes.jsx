@@ -7,10 +7,19 @@ const linkBoxInfo = [
   {
     "title": "Page",
     "links": [
-      {"name": "메인페이지", "href": "/"},
-      {"name": "데이터 검색", "href": "/search"},
+      {
+        "name": "메인페이지",
+        "href": "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com"
+      },
+      {
+        "name": "데이터 검색",
+        "href": "/search"
+      },
       {"name": "데이터 활용"},
-      {"name": "- 모델 학습(예정)"},
+      {
+        "name": "- 모델 학습",
+        "href": "/model-learning"
+      },
       {"name": "- 시각화(예정)"},
     ]
   },
@@ -46,7 +55,10 @@ const linkBoxInfo = [
   {
     "title": "Vocabulary",
     "links": [
-      {"name": "용어사전"},
+      {
+        "name": "용어사전",
+        "href": "/vocabulary"
+      },
     ]
   }
 ]

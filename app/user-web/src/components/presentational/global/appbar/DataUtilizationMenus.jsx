@@ -6,6 +6,7 @@ import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 import QueryStatsIcon from "@mui/icons-material/QueryStats";
 import {alpha, styled} from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
+import {Link} from "@mui/material";
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -83,10 +84,12 @@ export default function DataUtilizationMenus() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <ModelTrainingIcon/>
-          모델 학습(예정)
-        </MenuItem>
+        <Link href="https://ws-automl.netlify.app/model-learning">
+          <MenuItem disableRipple>
+            <ModelTrainingIcon/>
+            모델 학습
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleClose} disableRipple>
           <QueryStatsIcon/>
           시각화(예정)
