@@ -19,15 +19,6 @@ export default function CatalogReducer(state, action) {
     }
   }
   
-  if (type === "test") {
-    retirn {
-      category: "오픈데이터",
-      themes: CATEGORY_THEME_MAP.오픈데이터,
-      theme: "test",
-      themeTaxonomy: "test"
-    }
-  }
-
   if (type === "data.ex.co.kr") {
     return {
       category: "오픈데이터",
