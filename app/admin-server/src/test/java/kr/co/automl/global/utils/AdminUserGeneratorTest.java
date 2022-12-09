@@ -50,11 +50,11 @@ class AdminUserGeneratorTest {
             ADMIN_EMAILS.stream()
                     .map(this::createUserWith)
                     .forEach(userRepository::save);
-            assertThat(userRepository.findAll()).hasSize(2);
+            assertThat(userRepository.findAll()).hasSize(1);
 
             adminUserGenerator.run();
 
-            assertThat(userRepository.findAll()).hasSize(2);
+            assertThat(userRepository.findAll()).hasSize(1);
         }
 
         private User createUserWith(String email) {
