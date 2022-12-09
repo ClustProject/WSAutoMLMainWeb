@@ -9,8 +9,8 @@ public class ContactPointFixtures {
 
     public static ContactPoint fixture1() {
         return new ContactPoint(
-                "박주영",
-                "jypark1@wise.co.kr"
+                "김정연",
+                "jykim@wise.co.kr"
         );
     }
 

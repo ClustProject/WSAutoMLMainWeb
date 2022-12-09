@@ -36,7 +36,6 @@ class AdminUserGeneratorTest {
 
         @ParameterizedTest
         @ValueSource(strings = {
-                "jypark1@wise.co.kr",
                 "tdchoi@wise.co.kr"
         })
         void 어드민_유저가_없다면_생성한다(String adminEmail) {
@@ -51,11 +50,11 @@ class AdminUserGeneratorTest {
             ADMIN_EMAILS.stream()
                     .map(this::createUserWith)
                     .forEach(userRepository::save);
-            assertThat(userRepository.findAll()).hasSize(2);
+            assertThat(userRepository.findAll()).hasSize(1);
 
             adminUserGenerator.run();
 
-            assertThat(userRepository.findAll()).hasSize(2);
+            assertThat(userRepository.findAll()).hasSize(1);
         }
 
         private User createUserWith(String email) {

@@ -156,7 +156,6 @@ const CATEGORY_THEME_MAP = {
  */
 const CREATOR_CONTACT_POINT_NAME_MAP = {
   "위세아이텍": [
-    "박주영",
     "최태동",
     "김정연"
   ],

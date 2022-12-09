@@ -16,7 +16,6 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class AdminUserGenerator implements CommandLineRunner {
     public static final Set<String> ADMIN_EMAILS = Set.of(
-            "jypark1@wise.co.kr",
             "tdchoi@wise.co.kr"
     );
 

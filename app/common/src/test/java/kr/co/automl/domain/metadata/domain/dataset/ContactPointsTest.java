@@ -23,7 +23,6 @@ class ContactPointsTest {
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
                     new ContactPoint("김정연", "jykim@wise.co.kr"),
-                    new ContactPoint("박주영", "jypark1@wise.co.kr"),
                     new ContactPoint("최태동", "tdchoi@wise.co.kr")
             ));
         }
@@ -106,7 +105,7 @@ class ContactPointsTest {
             void 찾은_연락처를_리턴한다() {
                 ContactPoint contactPoint = ContactPointFixtures.fixture1();
 
-                assertThat(CONTACT_POINTS.findByName("박주영")).isEqualTo(contactPoint);
+                assertThat(CONTACT_POINTS.findByName("김정연")).isEqualTo(contactPoint);
             }
         }
 

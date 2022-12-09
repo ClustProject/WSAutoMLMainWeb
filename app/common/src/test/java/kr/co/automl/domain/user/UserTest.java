@@ -33,8 +33,8 @@ public class UserTest {
 
             @Test
             void true를_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
-                User matchEmailUser = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
+                User matchEmailUser = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
 
                 boolean actual = user.matchEmail(matchEmailUser);
 
@@ -48,7 +48,7 @@ public class UserTest {
 
             @Test
             void false를_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
                 User notMatchEmailUser = TestUserFactory.createWithEmail("xxx");
 
                 boolean actual = user.matchEmail(notMatchEmailUser);
@@ -63,9 +63,9 @@ public class UserTest {
 
             @Test
             void true를_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
 
-                boolean actual = user.matchEmail("jypark1@wise.co.kr");
+                boolean actual = user.matchEmail("tdchoi@wise.co.kr");
 
                 assertThat(actual).isTrue();
             }
@@ -76,7 +76,7 @@ public class UserTest {
 
             @Test
             void false를_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
 
                 boolean actual = user.matchEmail("xxx");
 
