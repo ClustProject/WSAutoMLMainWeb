@@ -36,7 +36,6 @@ class AdminUserGeneratorTest {
 
         @ParameterizedTest
         @ValueSource(strings = {
-                "jypark1@wise.co.kr",
                 "tdchoi@wise.co.kr"
         })
         void 어드민_유저가_없다면_생성한다(String adminEmail) {

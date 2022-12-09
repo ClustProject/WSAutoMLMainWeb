@@ -26,10 +26,10 @@ class InMemoryUserRepositoryTest {
 
             @Test
             void 찾은_유저_Optional을_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
                 inMemoryUserRepository.save(user);
 
-                Optional<User> actual = inMemoryUserRepository.findByEmail("jypark1@wise.co.kr");
+                Optional<User> actual = inMemoryUserRepository.findByEmail("tdchoi@wise.co.kr");
 
                 assertThat(actual).isEqualTo(Optional.of(user));
             }
@@ -40,7 +40,7 @@ class InMemoryUserRepositoryTest {
 
             @Test
             void 빈_Optional을_리턴한다() {
-                User user = TestUserFactory.createWithEmail("jypark1@wise.co.kr");
+                User user = TestUserFactory.createWithEmail("tdchoi@wise.co.kr");
                 inMemoryUserRepository.save(user);
 
                 Optional<User> actual = inMemoryUserRepository.findByEmail("xxx");

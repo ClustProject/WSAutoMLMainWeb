@@ -22,7 +22,6 @@ public class ContactPoints {
     public static ContactPoints ofWiseITech() {
         return new ContactPoints(
                 new ContactPoint("김정연", "jykim@wise.co.kr"),
-                new ContactPoint("박주영", "jypark1@wise.co.kr"),
                 new ContactPoint("최태동", "tdchoi@wise.co.kr")
         );
     }
