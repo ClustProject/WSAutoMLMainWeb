@@ -28,49 +28,48 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class CategoryCountApiTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @Autowired
-    private CatalogRepository catalogRepository;
+        @Autowired
+        private CatalogRepository catalogRepository;
 
-    @Nested
-    @DisplayName("GET /category/count 요청은")
-    class getCategoryCount요청은 {
-        final String requestUrl = "/category/count";
+        @Nested
+        @DisplayName("GET /category/count 요청은")
+        class getCategoryCount요청은 {
+                final String requestUrl = "/category/count";
 
-        @Test
-        void 카테고리별_카운트를_리턴한다() throws Exception {
-            mockMvc.perform(get(requestUrl))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.atmosphericEnvironment").value(0))
-                    .andExpect(jsonPath("$.farm").value(0))
-                    .andExpect(jsonPath("$.factory").value(0))
-                    .andExpect(jsonPath("$.vital").value(0))
-                    .andExpect(jsonPath("$.lifeAndVideo").value(0))
-                    .andExpect(jsonPath("$.energy").value(0))
-                    .andExpect(jsonPath("$.environment").value(0))
-                    .andExpect(jsonPath("$.city").value(0))
-                    .andExpect(jsonPath("$.openData").value(0));
+                @Test
+                void 카테고리별_카운트를_리턴한다() throws Exception {
+                        mockMvc.perform(get(requestUrl))
+                                        .andExpect(status().isOk())
+                                        .andExpect(jsonPath("$.atmosphericEnvironment").value(0))
+                                        .andExpect(jsonPath("$.farm").value(0))
+                                        .andExpect(jsonPath("$.factory").value(0))
+                                        .andExpect(jsonPath("$.vital").value(0))
+                                        .andExpect(jsonPath("$.lifeAndVideo").value(0))
+                                        .andExpect(jsonPath("$.energy").value(0))
+                                        .andExpect(jsonPath("$.environment").value(0))
+                                        .andExpect(jsonPath("$.city").value(0))
+                                        .andExpect(jsonPath("$.openData").value(0));
 
-            Arrays.stream(Category.values())
-                    .map(TestCatalogFactory::createWithCategory)
-                    .forEach(catalog -> catalogRepository.save(catalog));
+                        Arrays.stream(Category.values())
+                                        .map(TestCatalogFactory::createWithCategory)
+                                        .forEach(catalog -> catalogRepository.save(catalog));
 
-            mockMvc.perform(get(requestUrl))
-                    .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.atmosphericEnvironment").value(1))
-                    .andExpect(jsonPath("$.farm").value(1))
-                    .andExpect(jsonPath("$.factory").value(1))
-                    .andExpect(jsonPath("$.vital").value(1))
-                    .andExpect(jsonPath("$.lifeAndVideo").value(1))
-                    .andExpect(jsonPath("$.energy").value(1))
-                    .andExpect(jsonPath("$.environment").value(1))
-                    .andExpect(jsonPath("$.city").value(1))
-                    .andExpect(jsonPath("$.openData").value(1))
-                    .andDo(document("get-category-count",
-                            preprocessResponse(prettyPrint())
-                    ));
+                        mockMvc.perform(get(requestUrl))
+                                        .andExpect(status().isOk())
+                                        .andExpect(jsonPath("$.atmosphericEnvironment").value(1))
+                                        .andExpect(jsonPath("$.farm").value(1))
+                                        .andExpect(jsonPath("$.factory").value(1))
+                                        .andExpect(jsonPath("$.vital").value(1))
+                                        .andExpect(jsonPath("$.lifeAndVideo").value(1))
+                                        .andExpect(jsonPath("$.energy").value(1))
+                                        .andExpect(jsonPath("$.environment").value(1))
+                                        .andExpect(jsonPath("$.city").value(1))
+                                        .andExpect(jsonPath("$.openData").value(1))
+                                        .andDo(document("get-category-count",
+                                                        preprocessResponse(prettyPrint())));
+                }
         }
-    }
 }

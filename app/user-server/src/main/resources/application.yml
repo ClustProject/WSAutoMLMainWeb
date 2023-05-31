@@ -24,6 +24,11 @@ logging:
 
 ---
 spring:
+  profiles:
+    include: local-env
+    active: local
+---
+spring:
   config:
     activate:
       on-profile: prod
@@ -33,7 +38,12 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
-
+    hikari:
+      connection-timeout: 900000
+      idle-timeout: 900000
+      max-lifetime: 1800000
+      maximum-pool-size: 100
+      minimum-idle: 5
   h2:
     console:
       enabled: false

@@ -12,7 +12,7 @@ public class CreateDataSetAttributesFixtures {
                 .title("제목")
                 .publisher("한국도로공사")
                 .creator("위세아이텍")
-                .contactPointName("김정연")
+                .contactPointName("김영욱")
                 .type("이미지")
                 .keyword("키워드1, 키워드2")
                 .license("PUBLIC")

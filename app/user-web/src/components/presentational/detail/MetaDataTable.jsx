@@ -1,10 +1,12 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, { useEffect } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useParams } from "react-router-dom";
+import { getMetadatas } from "../../../api/api";
 
 const TitleTableCell = (props) => {
   return (
@@ -12,16 +14,16 @@ const TitleTableCell = (props) => {
       colSpan={props.colSpan}
       rowSpan={props.rowSpan}
       sx={{
-        border: '1px solid lightgray',
-        width: '75px',
-        padding: '10px',
-        fontWeight: 'bold'
+        border: "1px solid lightgray",
+        width: "75px",
+        padding: "10px",
+        fontWeight: "bold",
       }}
     >
       {props.title}
     </TableCell>
-  )
-}
+  );
+};
 
 const ContentTableCell = (props) => {
   return (
@@ -29,179 +31,322 @@ const ContentTableCell = (props) => {
       colSpan={props.colSpan}
       rowSpan={props.rowSpan}
       sx={{
-        border: '1px solid lightgray',
-        width: '75px',
-        padding: '10px',
-        backgroundColor: 'white'
+        border: "1px solid lightgray",
+        width: "75px",
+        padding: "10px",
+        backgroundColor: "white",
       }}
     >
       {props.title}
     </TableCell>
-  )
-}
+  );
+};
 
 const CatalogTableRow = (props) => {
   return (
-    <TableRow sx={{
-      backgroundColor: '#F8F6F1'
-    }}>
+    <TableRow
+      sx={{
+        backgroundColor: "#F8F6F1",
+      }}
+    >
       {props.cells}
     </TableRow>
-  )
-}
+  );
+};
 
 const DataSetTableRow = (props) => {
   return (
-    <TableRow sx={{
-      backgroundColor: '#F0F4F7'
-    }}>
+    <TableRow
+      sx={{
+        backgroundColor: "#F0F4F7",
+      }}
+    >
       {props.cells}
     </TableRow>
-  )
-}
+  );
+};
 
 const DistributionTableRow = (props) => {
   return (
-    <TableRow sx={{
-      backgroundColor: '#ECF7EE'
-    }}>
+    <TableRow
+      sx={{
+        backgroundColor: "#ECF7EE",
+      }}
+    >
       {props.cells}
     </TableRow>
-  )
-}
+  );
+};
 
-export default function MetaDataTable() {
+export default function MetaDataTable({ data, setData }) {
+  const { id } = useParams();
+
+  useEffect(() => {
+    getMetadatas()
+      .then((it) => {
+        console.log(it);
+        const filteredData = it.filter((item) => item.dataSet.id == id);
+        setData(filteredData);
+      })
+      .catch((error) => {
+        console.error(error);
+        setData([]);
+      });
+  }, []);
+
   return (
     <TableContainer component={Paper}>
-      <Table sx={{
-        minWidth: 700
-      }} aria-label="spanning table">
+      <Table
+        sx={{
+          minWidth: 700,
+        }}
+        aria-label='spanning table'
+      >
         <TableBody>
-          <CatalogTableRow cells={
-            <>
-              <TitleTableCell title={"카테고리"} colSpan={2}/>
-              <ContentTableCell title={"대기 환경"} colSpan={8}/>
-            </>
-          }/>
+          <CatalogTableRow
+            cells={
+              <>
+                <TitleTableCell title={"카테고리"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].catalog.category : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          />
 
-          <CatalogTableRow cells={
-            <>
-              <TitleTableCell title={"주제"} colSpan={2}/>
-              <ContentTableCell title={"공기질"} colSpan={3}/>
-              <TitleTableCell title={"주제 분류"} colSpan={2}/>
-              <ContentTableCell title={"실외 대기"} colSpan={3}/>
-            </>
-          }/>
+          <CatalogTableRow
+            cells={
+              <>
+                <TitleTableCell title={"주제"} colSpan={2} />
+                <ContentTableCell
+                  title={data && data.length > 0 ? data[0].catalog.theme : ""}
+                  colSpan={3}
+                />
+                <TitleTableCell title={"주제 분류"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].catalog.themeTaxonomy : ""
+                  }
+                  colSpan={3}
+                />
+              </>
+            }
+          />
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"파일명"} colSpan={2}/>
-              <ContentTableCell title={"SURFACE_ASOS_95_MI_2022-01_2022-01_2022.csv"} colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"파일명"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].distribution.title : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"데이터 구축 기관"} rowSpan={3}/>
-              <TitleTableCell title={"제공기관"}/>
-              <ContentTableCell title={"기상청"} colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"데이터 구축 기관"} rowSpan={3} />
+                <TitleTableCell title={"제공기관"} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].dataSet.organization.publisher
+                      : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"생성자"}/>
-              <ContentTableCell title={"위세아이텍"} colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"생성자"} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].dataSet.organization.creator
+                      : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"담당자"}/>
-              <ContentTableCell title={"최태동"} colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"담당자"} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].dataSet.organization.contactPoint.name
+                      : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"매체유형"} colSpan={2}/>
-              <ContentTableCell title={"숫자"} colSpan={3}/>
-              <TitleTableCell title={"식별자"} colSpan={2}/>
-              <ContentTableCell title={"1"} colSpan={3}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"매체유형"} colSpan={2} />
+                <ContentTableCell
+                  title={data && data.length > 0 ? data[0].dataSet.type : ""}
+                  colSpan={3}
+                />
+                <TitleTableCell title={"식별자"} colSpan={2} />
+                <ContentTableCell
+                  title={data && data.length > 0 ? data[0].dataSet.id : ""}
+                  colSpan={3}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"등록일자"} colSpan={2}/>
-              <ContentTableCell title={"2022.08.15"} colSpan={3}/>
-              <TitleTableCell title={"수정일자"} colSpan={2}/>
-              <ContentTableCell title={"2022.08.15"} colSpan={3}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"등록일자"} colSpan={2} />
+                <ContentTableCell
+                  title={data && data.length > 0 ? data[0].dataSet.issued : ""}
+                  colSpan={3}
+                />
+                <TitleTableCell title={"수정일자"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].dataSet.modified : ""
+                  }
+                  colSpan={3}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"라이센스"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].dataSet.licenseInfo.license
+                      : ""
+                  }
+                  colSpan={3}
+                />
+                <TitleTableCell title={"권한"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].dataSet.licenseInfo.rights
+                      : ""
+                  }
+                  colSpan={3}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"라이센스"} colSpan={2}/>
-              <ContentTableCell title={"Public"} colSpan={3}/>
-              <TitleTableCell title={"권한"} colSpan={2}/>
-              <ContentTableCell title={"All"} colSpan={3}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"데이터셋 설명"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].dataSet.description : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"데이터셋 설명"} colSpan={2}/>
-              <ContentTableCell
-                title={"종관기상관측이란 종관규모의 날씨를 파악하기 위하여 정해진 시각에 모든 관측소에서 같은 시각에 실시하는 지상관측을 말합니다. 종관규모는 일기도에 표현되어 있는 보통의 고기압이나 저기압의 공간적 크기 및 수명을 말하며, 주로 매일의 날씨 현상을 뜻합니다."}
-                colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DataSetTableRow
+            cells={
+              <>
+                <TitleTableCell title={"키워드"} colSpan={2} />
+                <ContentTableCell
+                  title={data && data.length > 0 ? data[0].dataSet.keyword : ""}
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DataSetTableRow>
 
-          <DataSetTableRow cells={
-            <>
-              <TitleTableCell title={"키워드"} colSpan={2}/>
-              <ContentTableCell title={"기온, 습도, 기압, 지면온도, 풍향, 풍속, 일조"} colSpan={8}/>
-            </>
-          }>
-          </DataSetTableRow>
+          <DistributionTableRow
+            cells={
+              <>
+                <TitleTableCell title={"배포 파일 설명"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].distribution.description
+                      : ""
+                  }
+                  colSpan={8}
+                />
+              </>
+            }
+          ></DistributionTableRow>
 
-          <DistributionTableRow cells={
-            <>
-              <TitleTableCell title={"배포 파일 설명"} colSpan={2}/>
-              <ContentTableCell title={"기상강원지방기상청 춘천기상대에서 측정한 데이터로 철원지점 해발고도 155m 지점에서 측정된 자료"} colSpan={8}/>
-            </>
-          }>
-          </DistributionTableRow>
+          <DistributionTableRow
+            cells={
+              <>
+                <TitleTableCell title={"시간 단위"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].distribution.temporalResolution
+                      : ""
+                  }
+                  colSpan={3}
+                />
+                <TitleTableCell title={"제공 주기"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0
+                      ? data[0].distribution.accrualPeriodicty
+                      : ""
+                  }
+                  colSpan={3}
+                />
+              </>
+            }
+          ></DistributionTableRow>
 
-          <DistributionTableRow cells={
-            <>
-              <TitleTableCell title={"시간 단위"} colSpan={2}/>
-              <ContentTableCell title={"1분"} colSpan={3}/>
-              <TitleTableCell title={"제공 주기"} colSpan={2}/>
-              <ContentTableCell title={"1일"} colSpan={3}/>
-            </>
-          }>
-          </DistributionTableRow>
-
-          <DistributionTableRow cells={
-            <>
-              <TitleTableCell title={"공간 정보"} colSpan={2}/>
-              <ContentTableCell title={"위도 : 38.14787 경도 : 127.3042"} colSpan={3}/>
-              <TitleTableCell title={"시간 정보"} colSpan={2}/>
-              <ContentTableCell title={"2022.01.31~2022.01.31"} colSpan={3}/>
-            </>
-          }>
-          </DistributionTableRow>
+          <DistributionTableRow
+            cells={
+              <>
+                <TitleTableCell title={"공간 정보"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].distribution.spatial : ""
+                  }
+                  colSpan={3}
+                />
+                <TitleTableCell title={"시간 정보"} colSpan={2} />
+                <ContentTableCell
+                  title={
+                    data && data.length > 0 ? data[0].distribution.temporal : ""
+                  }
+                  colSpan={3}
+                />
+              </>
+            }
+          ></DistributionTableRow>
         </TableBody>
       </Table>
     </TableContainer>

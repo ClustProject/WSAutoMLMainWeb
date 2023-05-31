@@ -21,41 +21,35 @@ public class ContactPoints {
 
     public static ContactPoints ofWiseITech() {
         return new ContactPoints(
-                new ContactPoint("김정연", "jykim@wise.co.kr"),
-                new ContactPoint("최태동", "tdchoi@wise.co.kr")
-        );
+                new ContactPoint("김영욱", "ywkim@wise.co.kr"),
+                new ContactPoint("최태동", "tdchoi@wise.co.kr"));
     }
 
     public static ContactPoints ofKeti() {
         return new ContactPoints(
                 new ContactPoint("문재원", "jaewonoon@gmail.com"),
-                new ContactPoint("오승택", "stoh.keti@gmail.com")
-        );
+                new ContactPoint("오승택", "stoh.keti@gmail.com"));
     }
 
     public static ContactPoints ofKWeather() {
         return new ContactPoints(
-                new ContactPoint("이인혜", "sakuai0720@gmail.com")
-        );
+                new ContactPoint("이인혜", "sakuai0720@gmail.com"));
     }
 
     public static ContactPoints ofKwangWoonUniversity() {
         return new ContactPoints(
-                new ContactPoint("김대현", "swslooser@gmail.com")
-        );
+                new ContactPoint("김대현", "swslooser@gmail.com"));
     }
 
     public static ContactPoints ofKoreaUniversity() {
         return new ContactPoints(
                 new ContactPoint("이정호", "ljhz123@koreaac.kr"),
-                new ContactPoint("이지윤", "jiyoonlee@koreaac.kr")
-        );
+                new ContactPoint("이지윤", "jiyoonlee@koreaac.kr"));
     }
 
     public static ContactPoints ofDaliWorks() {
         return new ContactPoints(
-                new ContactPoint("이순호", "soonho.lee@daliworks.net")
-        );
+                new ContactPoint("이순호", "soonho.lee@daliworks.net"));
     }
 
     public ContactPoint findByName(String name) {

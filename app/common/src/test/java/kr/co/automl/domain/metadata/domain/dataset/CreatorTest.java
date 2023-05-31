@@ -23,7 +23,7 @@ class CreatorTest {
             void 찾은_연락처를_리턴한다() {
                 Creator creator = Creator.WISE_I_TECH;
 
-                ContactPoint contactPoint = creator.findContactBy("김정연");
+                ContactPoint contactPoint = creator.findContactBy("김영욱");
 
                 assertThat(contactPoint).isEqualTo(ContactPointFixtures.fixture1());
             }

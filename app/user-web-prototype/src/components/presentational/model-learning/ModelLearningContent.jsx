@@ -49,7 +49,7 @@ const PreviousStepButton = (props) => {
   const { onClick, disabled } = props;
 
   return (
-    <Button variant="outlined" disabled={disabled} onClick={onClick}>
+    <Button variant='outlined' disabled={disabled} onClick={onClick}>
       이전
     </Button>
   );
@@ -60,7 +60,7 @@ const NextStepButton = (props) => {
 
   return (
     <Button
-      variant="contained"
+      variant='contained'
       sx={{
         marginLeft: "15px",
       }}
@@ -113,7 +113,7 @@ const StepNameBox = (props) => {
           padding: "15px",
         }}
       >
-        <Typography variant="h4">
+        <Typography variant='h4'>
           {STEP_COUNT_AND_NAME_MAP[props.activeStep]}
         </Typography>
       </Box>
@@ -122,7 +122,7 @@ const StepNameBox = (props) => {
 };
 
 const ModelLearningTypography = () => {
-  return <Typography variant="h5">모델 학습</Typography>;
+  return <Typography variant='h5'>모델 학습</Typography>;
 };
 
 const ModelLearningContent = () => {
@@ -140,9 +140,8 @@ const ModelLearningContent = () => {
   const [fileChanged, setFileChanged] = useState(false);
 
   // step2
-  const [anyTargetVariableChecked, setAnyTargetVariableChecked] = useState(
-    false
-  );
+  const [anyTargetVariableChecked, setAnyTargetVariableChecked] =
+    useState(false);
 
   // step3
   const [anyTargetVariableUsed, setAnyTargetVariableUsed] = useState(false);
@@ -152,9 +151,8 @@ const ModelLearningContent = () => {
     LearnModelRequestReducer,
     INIT_LEARN_MODEL_REQUEST
   );
-  const [allLearnModelRequestFilled, setAllLearnModelRequestFilled] = useState(
-    true
-  );
+  const [allLearnModelRequestFilled, setAllLearnModelRequestFilled] =
+    useState(true);
 
   useEffect(() => {
     checkHasEmptyAndSetState(learnModelRequest);

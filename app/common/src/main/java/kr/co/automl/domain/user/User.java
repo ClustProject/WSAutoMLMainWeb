@@ -1,12 +1,6 @@
 package kr.co.automl.domain.user;
 
-import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
-import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
-import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +9,17 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Objects;
+
+import kr.co.automl.domain.user.dto.UserResponse;
+import kr.co.automl.domain.user.exceptions.AlreadyAdminRoleException;
+import kr.co.automl.domain.user.exceptions.AlreadyManagerRoleException;
+import kr.co.automl.domain.user.exceptions.AlreadyUserRoleException;
+import kr.co.automl.domain.user.exceptions.CannotChangeAdminRoleException;
+import kr.co.automl.domain.user.exceptions.CannotChangeUserRoleException;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -40,6 +44,21 @@ public class User {
         this.imageUrl = imageUrl;
         this.email = email;
         this.role = role;
+    }
+
+    /**
+     * 응답 객체를 리턴합니다. 주로 DTO에서 호출합니다.
+     * 
+     * @return 변환된 응답 객체
+     */
+    public UserResponse toResponse() {
+        return UserResponse.builder()
+                .id(this.id)
+                .name(this.name)
+                .imageUrl(this.imageUrl)
+                .email(this.email)
+                .role(this.role)
+                .build();
     }
 
     public static User ofDefaultRole(String name, String imageUrl, String email) {
@@ -78,9 +97,9 @@ public class User {
     /**
      * 정보를 업데이트합니다.
      *
-     * @param name 이름
+     * @param name     이름
      * @param imageUrl 이미지 URL
-     * @param email 이메일
+     * @param email    이메일
      *
      * @return 업데이트된 유저
      */
@@ -97,14 +116,16 @@ public class User {
      *
      * @param role 변경할 권한
      *
-     * @throws CannotChangeUserRoleException 유저 권한이 주어진경우
-     * @throws CannotChangeAdminRoleException 어드민 권한이 주어진경우
-     * @throws AlreadyAdminRoleException 이미 어드민 권한을 가진 유저일경우
+     * @throws CannotChangeUserRoleException  유저 권한이 주어진 경우
+     * @throws CannotChangeAdminRoleException 어드민 권한이 주어진 경우
+     * @throws AlreadyUserRoleException       이미 유저 권한을 가진 유저일 경우
+     * @throws AlreadyManagerRoleException    이미 매니저 권한을 가진 유저일 경우
+     * @throws AlreadyAdminRoleException      이미 어드민 권한을 가진 유저일 경우
      */
     public void changeRoleTo(Role role) {
-        if (role.isUser()) {
-            throw new CannotChangeUserRoleException();
-        }
+        // if (role.isUser()) {
+        // throw new CannotChangeUserRoleException();
+        // }
 
         if (role.isAdmin()) {
             throw new CannotChangeAdminRoleException();

@@ -45,15 +45,15 @@ class UserInfoApiTest {
         }
 
         @Override
-        public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
+        public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+                NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
             return new SessionUser("name", "imageUrl", "email", Role.MANAGER);
         }
     }
 
     @Nested
     class get_user_info_요청은 {
-        MockHttpServletRequestBuilder request
-                = get("/user/info");
+        MockHttpServletRequestBuilder request = get("/user/info");
 
         @Nested
         @WithMockUser
@@ -72,7 +72,7 @@ class UserInfoApiTest {
         class 매니저나_관리저인_유저일경우 {
 
             @Test
-            @WithMockUser(roles = {"MANAGER", "ADMIN"})
+            @WithMockUser(roles = { "MANAGER", "ADMIN" })
             void status_200을_응답하고_유저정보를_리턴한다() throws Exception {
                 mockMvc = MockMvcBuilders.standaloneSetup(new UserInfoApi())
                         .setCustomArgumentResolvers(new MockLoginUserArgumentResolver(new MockHttpSession()))
@@ -80,7 +80,7 @@ class UserInfoApiTest {
 
                 ResultActions action = mockMvc.perform(request);
 
-                UserInfo userInfo = new UserInfo("name", "imageUrl", Role.MANAGER);
+                UserInfo userInfo = new UserInfo("name", "imageUrl", "ywkim@wise.co.kr", Role.MANAGER);
                 action
                         .andExpect(status().isOk())
                         .andExpect(content().string(convert(userInfo)));

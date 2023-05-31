@@ -9,12 +9,11 @@ class OrganizationTest {
     public static final Organization ORGANIZATION1 = new Organization(
             "위세아이텍",
             Creator.WISE_I_TECH,
-            ContactPointFixtures.fixture1()
-    );
+            ContactPointFixtures.fixture1());
 
     @Test
     void of() {
-        Organization org = Organization.of("위세아이텍", "위세아이텍", "김정연");
+        Organization org = Organization.of("위세아이텍", "위세아이텍", "김영욱");
 
         assertThat(org).isEqualTo(ORGANIZATION1);
     }

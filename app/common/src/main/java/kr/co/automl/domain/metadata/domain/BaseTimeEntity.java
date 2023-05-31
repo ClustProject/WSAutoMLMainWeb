@@ -20,4 +20,12 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDate modified;
+
+    public LocalDate getIssued() {
+        return issued;
+    }
+
+    public LocalDate getModified() {
+        return modified;
+    }
 }

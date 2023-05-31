@@ -26,8 +26,7 @@ class SessionUserTest {
                         "name",
                         "imageUrl",
                         "email",
-                        Role.USER
-                ));
+                        Role.USER));
             }
         }
     }
@@ -42,8 +41,7 @@ class SessionUserTest {
             UserInfo userInfo = sessionUser.toUserInfo();
 
             assertThat(userInfo).isEqualTo(
-                    new UserInfo("name", "imageUrl", Role.USER)
-            );
+                    new UserInfo("name", "imageUrl", "email", Role.USER));
         }
     }
 }

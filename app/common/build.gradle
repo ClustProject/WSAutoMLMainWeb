@@ -46,6 +46,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '7.4.2'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
 jacoco {
     // JaCoCo 버전
     toolVersion = '0.8.7'

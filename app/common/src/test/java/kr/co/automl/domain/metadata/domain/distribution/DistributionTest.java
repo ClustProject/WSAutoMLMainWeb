@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class DistributionTest {
 
-
     @Test
     void from_생성_테스트() {
         CreateDistributionAttributes createDistributionAttributes = CreateDistributionAttributes.builder()
@@ -18,7 +17,7 @@ class DistributionTest {
                 .description("destribution description")
                 .downloadUrl("downloadUrl")
                 .temporalResolution("temporalResolution")
-                .accurualPeriodicity("일")
+                .accrualPeriodicty("일")
                 .spatial("spatial")
                 .temporal("temporal")
                 .build();
@@ -29,7 +28,7 @@ class DistributionTest {
         assertThat(distribution.getDescription()).isEqualTo("destribution description");
         assertThat(distribution.getDownloadUrl()).isEqualTo("downloadUrl");
         assertThat(distribution.getTemporalResolution()).isEqualTo("temporalResolution");
-        assertThat(distribution.getAccurualPeriodicity()).isEqualTo("일");
+        assertThat(distribution.getAccrualPeriodicty()).isEqualTo("일");
         assertThat(distribution.getSpatial()).isEqualTo("spatial");
         assertThat(distribution.getTemporal()).isEqualTo("temporal");
     }
@@ -48,7 +47,7 @@ class DistributionTest {
                     .description("destribution description")
                     .downloadUrl("downloadUrl")
                     .temporalResolution("temporalResolution")
-                    .accurualPeriodicity("일")
+                    .accrualPeriodicty("일")
                     .spatial("spatial")
                     .temporal("temporal")
                     .build());
