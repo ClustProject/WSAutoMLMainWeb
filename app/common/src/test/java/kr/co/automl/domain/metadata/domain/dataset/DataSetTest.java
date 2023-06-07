@@ -1,5 +1,12 @@
 package kr.co.automl.domain.metadata.domain.dataset;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
 import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
 import kr.co.automl.domain.metadata.dataset.TestDataSetFactory;
 import kr.co.automl.domain.metadata.distribution.TestDistributionFactory;
@@ -9,10 +16,6 @@ import kr.co.automl.domain.metadata.domain.dataset.dto.CreateDataSetAttributes;
 import kr.co.automl.domain.metadata.domain.dataset.dto.DataSetResponse;
 import kr.co.automl.domain.metadata.domain.distribution.Distribution;
 import kr.co.automl.domain.metadata.domain.distribution.dto.DistributionResponse;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class DataSetTest {
 
@@ -69,6 +72,8 @@ class DataSetTest {
             assertThat(dataSetResponse).isEqualTo(DataSetResponse.builder()
                     .id(1L)
                     .title("데이터셋 이름")
+                    .issued(LocalDate.now())
+                    .modified(LocalDate.now())
                     .organization(OrganizationTest.ORGANIZATION1)
                     .type("이미지")
                     .keyword("키워드1, 키워드2, 키워드1")

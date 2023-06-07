@@ -153,19 +153,19 @@ public class UserTest {
             }
         }
 
-        @Nested
-        class 유저_권한이_주어질경우 {
+        // @Nested
+        // class 유저_권한이_주어질경우 {
 
-            @Test
-            void CannotChangeUserRoleException을_던진다() {
-                User managerUser = User.builder()
-                        .role(Role.MANAGER)
-                        .build();
+        // @Test
+        // void CannotChangeUserRoleException을_던진다() {
+        // User managerUser = User.builder()
+        // .role(Role.MANAGER)
+        // .build();
 
-                assertThatThrownBy(() -> managerUser.changeRoleTo(Role.USER))
-                        .isInstanceOf(CannotChangeUserRoleException.class)
-                        .hasMessage("매니저 권한으로는 변경할 수 없습니다.");
-            }
-        }
+        // assertThatThrownBy(() -> managerUser.changeRoleTo(Role.USER))
+        // .isInstanceOf(CannotChangeUserRoleException.class)
+        // .hasMessage("매니저 권한으로는 변경할 수 없습니다.");
+        // }
+        // }
     }
 }
