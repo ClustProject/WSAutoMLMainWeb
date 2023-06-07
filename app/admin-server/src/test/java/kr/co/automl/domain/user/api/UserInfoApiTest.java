@@ -47,7 +47,7 @@ class UserInfoApiTest {
         @Override
         public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                 NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
-            return new SessionUser("name", "imageUrl", "email", Role.MANAGER);
+            return new SessionUser("name", "imageUrl", "ywkim@wise.co.kr", Role.MANAGER);
         }
     }
 

@@ -46,13 +46,12 @@ public class MetadataDeleteApiTest {
                 mockMvc.perform(request)
                         .andExpect(status().isForbidden())
                         .andDo(document("delete-metadata-with-no-permission-user",
-                                preprocessRequest(prettyPrint())
-                        ));
+                                preprocessRequest(prettyPrint())));
             }
         }
 
         @Nested
-        @WithMockUser(roles = {"MANAGER", "ADMIN"})
+        @WithMockUser(roles = { "MANAGER", "ADMIN" })
         class 존재하지_않는_아이디가_주어질경우 {
 
             @BeforeEach
@@ -65,13 +64,12 @@ public class MetadataDeleteApiTest {
                 mockMvc.perform(request)
                         .andExpect(status().isNotFound())
                         .andDo(document("delete-metadata-with-not-exist-id",
-                                preprocessRequest(prettyPrint())
-                        ));
+                                preprocessRequest(prettyPrint())));
             }
         }
 
         @Nested
-        @WithMockUser(roles = {"MANAGER", "ADMIN"})
+        @WithMockUser(roles = { "MANAGER", "ADMIN" })
         class 허용된_권한을_가진_유저의_요청일경우 {
 
             @BeforeEach
@@ -86,8 +84,7 @@ public class MetadataDeleteApiTest {
                 mockMvc.perform(request)
                         .andExpect(status().isNoContent())
                         .andDo(document("delete-metadata",
-                                preprocessRequest(prettyPrint())
-                        ));
+                                preprocessRequest(prettyPrint())));
             }
         }
     }

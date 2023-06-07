@@ -45,17 +45,16 @@ class MetadataReaderTest {
 
         @Test
         void 응답객체_리스트를_리턴한다() {
-            List<MetadataResponse> metadataResponses = metadataReader.readAll(Pageable.ofSize(12));
+            List<MetadataResponse> metadataResponses = metadataReader.readAll(Pageable.ofSize(18));
 
             assertThat(metadataResponses)
-                    .hasSize(12)
+                    .hasSize(18)
                     .contains(
                             MetadataResponse.builder()
                                     .catalog(catalog.toResponse())
                                     .dataSet(dataSet.toResponse())
                                     .distribution(distribution.toResponse())
-                                    .build()
-                    );
+                                    .build());
         }
 
         @Test
@@ -64,11 +63,12 @@ class MetadataReaderTest {
 
             List<MetadataResponse> metadataResponses = metadataReader.readAll(pageRequest);
 
-            assertThat(metadataResponses).hasSize(2);
+            assertThat(metadataResponses).hasSize(8);
         }
 
         /**
          * 데이터셋을 count개 만큼 저장합니다.
+         * 
          * @param count 저장할 데이터셋 개수
          */
         private void saveDataSets(int count) {
