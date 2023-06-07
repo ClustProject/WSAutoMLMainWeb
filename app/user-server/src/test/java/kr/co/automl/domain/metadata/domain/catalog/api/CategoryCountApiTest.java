@@ -1,8 +1,14 @@
 package kr.co.automl.domain.metadata.domain.catalog.api;
 
-import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
-import kr.co.automl.domain.metadata.domain.catalog.CatalogRepository;
-import kr.co.automl.domain.metadata.domain.catalog.Category;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,17 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
+import kr.co.automl.domain.metadata.domain.catalog.CatalogRepository;
+import kr.co.automl.domain.metadata.domain.catalog.Category;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -40,6 +42,7 @@ class CategoryCountApiTest {
                 final String requestUrl = "/category/count";
 
                 @Test
+                @WithMockUser(username = "testUser", roles = { "USER", "MANAGER", "ADMIN" })
                 void 카테고리별_카운트를_리턴한다() throws Exception {
                         mockMvc.perform(get(requestUrl))
                                         .andExpect(status().isOk())

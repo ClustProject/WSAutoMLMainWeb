@@ -1,21 +1,24 @@
 package kr.co.automl.infra.query;
 
-import com.querydsl.core.Tuple;
-import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
-import kr.co.automl.domain.metadata.domain.catalog.CatalogRepository;
-import kr.co.automl.domain.metadata.domain.catalog.Category;
+import static kr.co.automl.domain.metadata.domain.catalog.QCatalog.catalog;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.List;
+import com.querydsl.core.Tuple;
 
-import static kr.co.automl.domain.metadata.domain.catalog.QCatalog.catalog;
-import static org.assertj.core.api.Assertions.assertThat;
+import kr.co.automl.domain.metadata.catalog.TestCatalogFactory;
+import kr.co.automl.domain.metadata.domain.catalog.CatalogRepository;
+import kr.co.automl.domain.metadata.domain.catalog.Category;
 
 @SpringBootTest
 @Transactional
@@ -42,6 +45,7 @@ class CatalogQueryRepositoryImplTest {
             }
 
             @Test
+            @WithMockUser(username = "testUser", roles = { "USER", "ADMIN" })
             void 그룹별_카테고리_이름과_개수를_리턴한다() {
                 List<Tuple> tuples = catalogQueryRepositoryImpl.countGroupByCategory();
 
@@ -64,6 +68,7 @@ class CatalogQueryRepositoryImplTest {
             }
 
             @Test
+            @WithMockUser(username = "testUser", roles = { "USER", "ADMIN" })
             void 빈_배열을_리턴한다() {
                 List<Tuple> tuples = catalogQueryRepositoryImpl.countGroupByCategory();
                 assertThat(tuples).isEmpty();
