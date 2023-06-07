@@ -54,8 +54,7 @@ class MetadataReaderTest {
                                     .catalog(catalog.toResponse())
                                     .dataSet(dataSet.toResponse())
                                     .distribution(distribution.toResponse())
-                                    .build()
-                    );
+                                    .build());
         }
 
         @Test
@@ -69,6 +68,7 @@ class MetadataReaderTest {
 
         /**
          * 데이터셋을 count개 만큼 저장합니다.
+         * 
          * @param count 저장할 데이터셋 개수
          */
         private void saveDataSets(int count) {
