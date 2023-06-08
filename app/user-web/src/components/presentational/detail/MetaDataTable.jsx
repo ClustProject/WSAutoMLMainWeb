@@ -80,12 +80,13 @@ const DistributionTableRow = (props) => {
 
 export default function MetaDataTable({ data, setData }) {
   const { id } = useParams();
+  const numId = Number(id); // id 형변환
 
   useEffect(() => {
     getMetadatas()
       .then((it) => {
         console.log(it);
-        const filteredData = it.filter((item) => item.dataSet.id == id);
+        const filteredData = it.filter((item) => item.dataSet.id === numId);
         setData(filteredData);
       })
       .catch((error) => {

@@ -16,7 +16,6 @@ import React, { useEffect, useReducer, useState } from "react";
 import DataInputBox from "./data-input/DataInputBox";
 import DataNavigationContent from "./data-navigation/DataNavigationContent";
 import FeatureSelectionContent from "./feature-selection/FeatureSelectionContent";
-import ModelLearningResultContent from "./learning-result/ModelLearningResultContent";
 import LearnModelRequestReducer, {
   INIT_LEARN_MODEL_REQUEST,
 } from "./select-algorithm/reducers/LearnModelRequestReducer";

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import DataSetCard from "./DataSetCard";
-import { getMetadatas } from "../../../api/api";
 import { Pagination, Stack } from "@mui/material";
 /**
  * 오름차순 정렬

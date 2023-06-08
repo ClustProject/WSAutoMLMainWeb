@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../presentational/global/header/Header";
 import MainAppBar from "../presentational/global/appbar/MainAppBar";
-import { Box, Container, colors } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Footer from "../presentational/global/footer/Footer";
 import MetaDataTable from "../presentational/detail/MetaDataTable";
 import MetaDataDownloadButton from "../presentational/detail/MetaDataDownloadButton";

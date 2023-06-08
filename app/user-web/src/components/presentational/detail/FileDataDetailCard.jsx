@@ -7,13 +7,14 @@ import { getMetadatas } from "../../../api/api";
 
 function FileDataDetailCard() {
   const { id } = useParams();
+  const numId = Number(id); // id 형변환
   const [data, setData] = useState();
 
   useEffect(() => {
     getMetadatas()
       .then((it) => {
         console.log(it);
-        const filteredData = it.filter((item) => item.dataSet.id == id);
+        const filteredData = it.filter((item) => item.dataSet.id === numId);
         setData(filteredData);
       })
       .catch((error) => {

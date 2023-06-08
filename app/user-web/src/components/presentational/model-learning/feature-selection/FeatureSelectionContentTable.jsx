@@ -80,10 +80,6 @@ const FeatureSelectionContentTable = (props) => {
     setAnyTargetVariableUsed(newSelectedVar.length > 0);
   }
 
-  function anySwitchOn(copyOfData) {
-    return copyOfData.map((it) => it.use).includes(true);
-  }
-
   return (
     <TableContainer
       component={Paper}
