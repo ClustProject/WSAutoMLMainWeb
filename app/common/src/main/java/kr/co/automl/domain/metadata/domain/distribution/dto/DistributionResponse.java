@@ -7,10 +7,9 @@ public record DistributionResponse(
         String description,
         String downloadUrl,
         String temporalResolution,
-        String accurualPeriodicity,
+        String accrualPeriodicty,
         String spatial,
-        String temporal
-) {
+        String temporal) {
 
     @Builder
     public DistributionResponse {

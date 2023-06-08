@@ -56,6 +56,7 @@ public class Catalog {
 
     /**
      * 생성한 카탈로그를 리턴합니다.
+     * 
      * @param attributes 카탈로그 생성 시 필요한 요소들
      * @return 생성한 카탈로그
      */
@@ -76,6 +77,7 @@ public class Catalog {
 
     /**
      * 응답 객체를 리턴합니다. 주로 DTO에서 호출합니다.
+     * 
      * @return 변환된 응답 객체
      */
     public CatalogResponse toResponse() {

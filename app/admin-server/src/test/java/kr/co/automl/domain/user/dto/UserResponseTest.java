@@ -25,9 +25,9 @@ class UserResponseTest {
                 assertThat(userResponse).isEqualTo(new UserResponse(
                         0L,
                         "name",
+                        "imageUrl",
                         "email",
-                        Role.USER
-                ));
+                        Role.USER));
             }
         }
     }

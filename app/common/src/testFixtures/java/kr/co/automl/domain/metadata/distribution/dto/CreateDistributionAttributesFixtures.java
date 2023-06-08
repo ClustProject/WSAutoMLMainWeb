@@ -13,7 +13,7 @@ public class CreateDistributionAttributesFixtures {
                 .description("설명...")
                 .downloadUrl("https://download-url.com")
                 .temporalResolution("시간 단위")
-                .accurualPeriodicity("일")
+                .accrualPeriodicty("일")
                 .spatial("공간 정보")
                 .temporal("시간 정보")
                 .build();

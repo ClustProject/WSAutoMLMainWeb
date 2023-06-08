@@ -26,6 +26,10 @@ public enum Role {
         return this == USER;
     }
 
+    public boolean isManager() {
+        return this == MANAGER;
+    }
+
     public boolean isAdmin() {
         return this == ADMIN;
     }

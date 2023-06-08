@@ -11,8 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class ContactPointsTest {
     private static final ContactPoints CONTACT_POINTS = new ContactPoints(
             ContactPointFixtures.fixture1(),
-            ContactPointFixtures.fixture2()
-    );
+            ContactPointFixtures.fixture2());
 
     @Nested
     class ofWiseITech {
@@ -22,9 +21,8 @@ class ContactPointsTest {
             ContactPoints contactPoints = ContactPoints.ofWiseITech();
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
-                    new ContactPoint("김정연", "jykim@wise.co.kr"),
-                    new ContactPoint("최태동", "tdchoi@wise.co.kr")
-            ));
+                    new ContactPoint("김영욱", "ywkim@wise.co.kr"),
+                    new ContactPoint("최태동", "tdchoi@wise.co.kr")));
         }
     }
 
@@ -37,8 +35,7 @@ class ContactPointsTest {
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
                     new ContactPoint("문재원", "jaewonoon@gmail.com"),
-                    new ContactPoint("오승택", "stoh.keti@gmail.com")
-            ));
+                    new ContactPoint("오승택", "stoh.keti@gmail.com")));
         }
     }
 
@@ -50,8 +47,7 @@ class ContactPointsTest {
             ContactPoints contactPoints = ContactPoints.ofKWeather();
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
-                    new ContactPoint("이인혜", "sakuai0720@gmail.com")
-            ));
+                    new ContactPoint("이인혜", "sakuai0720@gmail.com")));
         }
     }
 
@@ -63,8 +59,7 @@ class ContactPointsTest {
             ContactPoints contactPoints = ContactPoints.ofKwangWoonUniversity();
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
-                    new ContactPoint("김대현", "swslooser@gmail.com")
-            ));
+                    new ContactPoint("김대현", "swslooser@gmail.com")));
         }
     }
 
@@ -77,8 +72,7 @@ class ContactPointsTest {
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
                     new ContactPoint("이정호", "ljhz123@koreaac.kr"),
-                    new ContactPoint("이지윤", "jiyoonlee@koreaac.kr")
-            ));
+                    new ContactPoint("이지윤", "jiyoonlee@koreaac.kr")));
         }
     }
 
@@ -90,8 +84,7 @@ class ContactPointsTest {
             ContactPoints contactPoints = ContactPoints.ofDaliWorks();
 
             assertThat(contactPoints).isEqualTo(new ContactPoints(
-                    new ContactPoint("이순호", "soonho.lee@daliworks.net")
-            ));
+                    new ContactPoint("이순호", "soonho.lee@daliworks.net")));
         }
     }
 
@@ -105,7 +98,7 @@ class ContactPointsTest {
             void 찾은_연락처를_리턴한다() {
                 ContactPoint contactPoint = ContactPointFixtures.fixture1();
 
-                assertThat(CONTACT_POINTS.findByName("김정연")).isEqualTo(contactPoint);
+                assertThat(CONTACT_POINTS.findByName("김영욱")).isEqualTo(contactPoint);
             }
         }
 

@@ -1,80 +1,81 @@
 import React from "react";
 
-import {Box} from "@mui/material";
+import { Box } from "@mui/material";
 import LinkBox from "./LinkBox";
 
 const linkBoxInfo = [
   {
-    "title": "Page",
-    "links": [
-      {"name": "메인페이지", "href": "/"},
+    title: "Page",
+    links: [
+      { name: "메인페이지", href: "/" },
       {
-        "name": "데이터 검색",
-        "href": "https://ws-automl.netlify.app/search"
+        name: "데이터 검색",
+        href: "https://ws-automl.netlify.app/search",
       },
-      {"name": "데이터 활용"},
+      { name: "데이터 활용" },
       {
-        "name": "- 모델 학습",
-        "href": "https://ws-automl.netlify.app/model-learning"
+        name: "- 모델 학습",
+        href: "https://ws-automl.netlify.app/model-learning",
       },
-      {"name": "- 시각화(예정)"},
-    ]
+      {
+        name: "- 모델 운영",
+        href: "https://ws-automl.netlify.app/model-operation",
+      },
+      // { name: "- 시각화(예정)" },
+    ],
   },
   {
-    "title": "Consortium",
-    "links": [
+    title: "Consortium",
+    links: [
       {
-        "name": "한국전자기술연구원",
-        "href": "https://www.keti.re.kr"
+        name: "한국전자기술연구원",
+        href: "https://www.keti.re.kr",
       },
       {
-        "name": "달리웍스㈜",
-        "href": "https://www.daliworks.net"
+        name: "달리웍스㈜",
+        href: "https://www.daliworks.net",
       },
       {
-        "name": "㈜위세아이텍",
-        "href": "http://www.wise.co.kr"
+        name: "㈜위세아이텍",
+        href: "http://www.wise.co.kr",
       },
       {
-        "name": "케이웨더㈜",
-        "href": "https://www.kweather.co.kr"
+        name: "케이웨더㈜",
+        href: "https://www.kweather.co.kr",
       },
       {
-        "name": "고려대학교",
-        "href": "https://www.korea.ac.kr"
+        name: "고려대학교",
+        href: "https://www.korea.ac.kr",
       },
       {
-        "name": "광운대학교",
-        "href": "https://www.kw.ac.kr"
-      }
-    ]
+        name: "광운대학교",
+        href: "https://www.kw.ac.kr",
+      },
+    ],
   },
   {
-    "title": "Vocabulary",
-    "links": [
+    title: "Vocabulary",
+    links: [
       {
-        "name": "용어사전",
-        "href": "/vocabulary"
+        name: "용어사전",
+        href: "/vocabulary",
       },
-    ]
-  }
-]
+    ],
+  },
+];
 
 export default function LinkBoxes() {
   return (
-    <Box sx={{
-      fontWeight: 'bold',
-      display: 'flex',
-      justifyContent: 'center',
-    }}>
-
-      {linkBoxInfo.map(it => (
-        <LinkBox
-          title={it.title}
-          links={it.links}
-        />
+    <Box
+      sx={{
+        fontWeight: "bold",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      {linkBoxInfo.map((it) => (
+        <LinkBox title={it.title} links={it.links} />
       ))}
-
     </Box>
   );
 }

@@ -38,25 +38,27 @@ public class Distribution {
     private String downloadUrl;
     private String temporalResolution;
 
-    private String accurualPeriodicity;
+    private String accrualPeriodicty;
 
     @Column(name = "spatials") // spatial은 DB 예약어
     private String spatial;
     private String temporal;
 
     @Builder
-    private Distribution(String title, String description, String downloadUrl, String temporalResolution, String accurualPeriodicity, String spatial, String temporal) {
+    private Distribution(String title, String description, String downloadUrl, String temporalResolution,
+            String accrualPeriodicty, String spatial, String temporal) {
         this.title = title;
         this.description = description;
         this.downloadUrl = downloadUrl;
         this.temporalResolution = temporalResolution;
-        this.accurualPeriodicity = accurualPeriodicity;
+        this.accrualPeriodicty = accrualPeriodicty;
         this.spatial = spatial;
         this.temporal = temporal;
     }
 
     /**
      * 생성한 배포 정보를 리턴합니다.
+     * 
      * @param attributes 배포 정보 생성에 필요한 요소들
      * @return 생성한 배봎 정보
      */
@@ -66,7 +68,7 @@ public class Distribution {
                 .description(attributes.description())
                 .downloadUrl(attributes.downloadUrl())
                 .temporalResolution(attributes.temporalResolution())
-                .accurualPeriodicity(attributes.accurualPeriodicity())
+                .accrualPeriodicty(attributes.accrualPeriodicty())
                 .spatial(attributes.spatial())
                 .temporal(attributes.temporal())
                 .build();
@@ -74,6 +76,7 @@ public class Distribution {
 
     /**
      * 응답 객체를 리턴합니다. 주로 DTO에서 호출합니다.
+     * 
      * @return 변환된 응답 객체
      */
     public DistributionResponse toResponse() {
@@ -82,7 +85,7 @@ public class Distribution {
                 .description(this.description)
                 .downloadUrl(this.downloadUrl)
                 .temporalResolution(this.temporalResolution)
-                .accurualPeriodicity(this.accurualPeriodicity)
+                .accrualPeriodicty(this.accrualPeriodicty)
                 .spatial(this.spatial)
                 .temporal(this.temporal)
                 .build();

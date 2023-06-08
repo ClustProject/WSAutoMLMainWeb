@@ -25,8 +25,8 @@ const DataNavigationContent = (props) => {
   return (
     <Box>
       <Typography
-        variant="h5"
-        align="right"
+        variant='h5'
+        align='right'
         sx={{
           marginBottom: "10px",
         }}

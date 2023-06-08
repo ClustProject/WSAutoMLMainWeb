@@ -13,7 +13,7 @@ public class TestDistributionFactory {
                 .description("destribution description")
                 .downloadUrl("downloadUrl")
                 .temporalResolution("temporalResolution")
-                .accurualPeriodicity("일")
+                .accrualPeriodicty("일")
                 .spatial("spatial")
                 .temporal("temporal")
                 .build();

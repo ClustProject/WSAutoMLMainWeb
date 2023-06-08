@@ -9,19 +9,17 @@ public record SessionUser(
         String name,
         String imageUrl,
         String email,
-        Role role
-) implements Serializable {
+        Role role) implements Serializable {
 
     public static SessionUser from(User user) {
         return new SessionUser(
                 user.getName(),
                 user.getImageUrl(),
                 user.getEmail(),
-                user.getRole()
-        );
+                user.getRole());
     }
 
     public UserInfo toUserInfo() {
-        return new UserInfo(name, imageUrl, role);
+        return new UserInfo(name, imageUrl, email, role);
     }
 }

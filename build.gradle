@@ -39,9 +39,10 @@ subprojects {
 
     sonarqube {
         properties {
-            property "sonar.projectKey", "wise-pangnem_AutoMLMainWeb"
-            property "sonar.host.url", "https://sonarcloud.io"
-            property "sonar.organization", "wise-pangnem"
+            property "sonar.projectKey", "WS-AutoML"
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.token", "sqp_9cda0c2c8f21e84f1e15d27043ae28af7ba70fe1"
+            
 
             property "sonar.sources", "src"
             property "sonar.language", "java"
