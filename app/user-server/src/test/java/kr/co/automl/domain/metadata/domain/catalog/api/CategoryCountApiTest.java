@@ -42,7 +42,7 @@ class CategoryCountApiTest {
                 final String requestUrl = "/category/count";
 
                 @Test
-                @WithMockUser(username = "testUser", roles = { "USER", "MANAGER", "ADMIN" })
+                @WithMockUser(username = "testUser", roles = { "USER", "ADMIN" })
                 void 카테고리별_카운트를_리턴한다() throws Exception {
                         mockMvc.perform(get(requestUrl))
                                         .andExpect(status().isOk())
