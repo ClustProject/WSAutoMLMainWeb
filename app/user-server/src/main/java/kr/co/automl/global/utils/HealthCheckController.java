@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthCheckController {
 
     @GetMapping("/health-check")
-    public Long healthCheck() {
-        return System.currentTimeMillis();
+    public String healthCheck() {
+        return String.valueOf(System.currentTimeMillis());
     }
 }
