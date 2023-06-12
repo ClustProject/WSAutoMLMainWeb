@@ -31,7 +31,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: prod
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl
@@ -44,6 +44,16 @@ spring:
       max-lifetime: 1800000
       maximum-pool-size: 100
       minimum-idle: 5
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            scope: profile, email
+            client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+
   h2:
     console:
       enabled: false
