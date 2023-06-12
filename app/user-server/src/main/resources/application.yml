@@ -17,6 +17,15 @@ spring:
         format_sql: true
     open-in-view: false
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            scope: profile, email
+            client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
+            client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+
 logging:
   level:
     org.hibernate.SQL: debug
@@ -44,15 +53,6 @@ spring:
       max-lifetime: 1800000
       maximum-pool-size: 100
       minimum-idle: 5
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            scope: profile, email
-            client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
-            client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
 
   h2:
     console:
