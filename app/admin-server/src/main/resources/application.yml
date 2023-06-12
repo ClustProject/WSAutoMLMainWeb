@@ -61,7 +61,7 @@ spring:
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: prod
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl
