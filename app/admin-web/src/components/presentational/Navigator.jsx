@@ -10,7 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import DnsRoundedIcon from "@mui/icons-material/DnsRounded";
 import SearchIcon from "@mui/icons-material/Search";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
-import SmartToyIcon from "@mui/icons-material/SmartToy";
+import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
+import QueryStatsIcon from "@mui/icons-material/QueryStats";
 
 const categories = [
   {
@@ -41,12 +42,20 @@ const categories = [
       {
         id: "검색",
         icon: <SearchIcon />,
-        link: "https://ws-automl.netlify.app/search",
+        link:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search",
       },
       {
         id: "모델 학습",
-        icon: <SmartToyIcon />,
-        link: "https://ws-automl.netlify.app/model-learning",
+        icon: <ModelTrainingIcon />,
+        link:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-learning",
+      },
+      {
+        id: "모델 운영",
+        icon: <QueryStatsIcon />,
+        link:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-operation",
       },
     ],
   },

@@ -7,17 +7,20 @@ const cardInfo = [
   {
     name: "검색",
     image: "/static/images/cards/search.jpg",
-    link: "https://ws-automl.netlify.app/search",
+    link:
+      "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search",
   },
   {
     name: "모델 학습",
     image: "/static/images/cards/ai.jpeg",
-    link: "https://ws-automl.netlify.app/model-learning",
+    link:
+      "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-learning",
   },
   {
     name: "모델 운영",
     image: "/static/images/cards/visualization.png",
-    link: "https://ws-automl.netlify.app/model-operation",
+    link:
+      "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-operation",
   },
   // {
   //   name: "시각화(예정)",
