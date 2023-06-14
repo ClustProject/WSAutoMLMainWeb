@@ -35,10 +35,9 @@ export default function LoginCard() {
             type='light'
             label='Google로 로그인'
             // onClick={() => (window.location.href = "/home")}
-            onClick={
-              () =>
-                (window.location.href =
-                  "http://localhost:8080/oauth2/authorization/google") // local settings
+            onClick={() =>
+              (window.location.href =
+                "http://automl-main-web-load-balancer-213875655.ap-northeast-2.elb.amazonaws.com/oauth2/authorization/google")
             }
           />
         </Box>

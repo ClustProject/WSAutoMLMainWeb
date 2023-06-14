@@ -10,18 +10,20 @@ const linkBoxInfo = [
       { name: "메인페이지", href: "/" },
       {
         name: "데이터 검색",
-        href: "https://ws-automl.netlify.app/search",
+        href:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search",
       },
       { name: "데이터 활용" },
       {
         name: "- 모델 학습",
-        href: "https://ws-automl.netlify.app/model-learning",
+        href:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-learning",
       },
       {
         name: "- 모델 운영",
-        href: "https://ws-automl.netlify.app/model-operation",
+        href:
+          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-operation",
       },
-      // { name: "- 시각화(예정)" },
     ],
   },
   {
