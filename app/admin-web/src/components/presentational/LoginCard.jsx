@@ -32,6 +32,7 @@ export default function LoginCard() {
           }}
         >
           <GoogleButton
+            id='googleLoginButton'
             type='light'
             label='Google로 로그인'
             onClick={() =>
