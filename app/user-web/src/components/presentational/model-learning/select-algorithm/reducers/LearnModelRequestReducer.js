@@ -6,7 +6,7 @@ export const INIT_LEARN_MODEL_REQUEST = {
   loss: "mean_squared_error",
   optimizer: "Adam",
   metrics: "mean_squared_error",
-  test_set: 20,
+  test_set: 0.2,
 };
 
 export const METRICS_MAPPING = {

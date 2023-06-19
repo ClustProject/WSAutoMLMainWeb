@@ -1,12 +1,11 @@
 import NoUrlMetadataInputMacro from "../abstract/NoUrlMetadataInputMacro";
-import {URL} from "../../common/constrants";
+import { metaDataURL } from "../../common/constrants";
 
 const UPLOAD_FILE_NAME = "files/VDS_23_01_01_570513.csv";
 
 class Vds23NoUrlMetadataInputMacro extends NoUrlMetadataInputMacro {
-
   async run() {
-    await this.page.goto(URL);
+    await this.page.goto(metaDataURL);
 
     await this.clickUploadButton();
     await this.clickLinkCheckBox();
@@ -23,8 +22,12 @@ class Vds23NoUrlMetadataInputMacro extends NoUrlMetadataInputMacro {
     await this.typeText("통행속도, VDS, 콘존");
     await this.selectDropDown(2);
     await this.selectDropDown(1);
-    await this.typeText("한국도로공사에서 제공한 구간(CONZON) 별 통행속도를 VDS 수집체계로부터 획득한 자료");
-    await this.typeText("집계일자(PK), 집계시분 Or 집계시 Or 제외(PK), 콘존ID(PK), 차로유형구분코드 (PK), 평균속도");
+    await this.typeText(
+      "한국도로공사에서 제공한 구간(CONZON) 별 통행속도를 VDS 수집체계로부터 획득한 자료"
+    );
+    await this.typeText(
+      "집계일자(PK), 집계시분 Or 집계시 Or 제외(PK), 콘존ID(PK), 차로유형구분코드 (PK), 평균속도"
+    );
     await this.typeText("5분");
     await this.typeText("1일");
     await this.typeText("전국");

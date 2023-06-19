@@ -764,7 +764,7 @@ export default function MetadataManagementContent() {
       url ===
       "https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36&tabNo=1"
     ) {
-      [dispatchCatalog, dispatchDataSet].forEach((it) =>
+      [dispatchCatalog, dispatchDataSet, dispatchDistribution].forEach((it) =>
         it({
           type: "data-kma-36",
         })

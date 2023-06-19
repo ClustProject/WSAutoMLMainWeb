@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
-import {BROWSER_OPTIONS, URL} from "./constrants";
-import {INPUT_ID, INPUT_PASSWORD} from "./selectors";
+import { BROWSER_OPTIONS, loginURL, homeURL, metaDataURL } from "./constrants";
+import { INPUT_ID, INPUT_PASSWORD, GOOGLE_LOGIN_BUTTON } from "./selectors";
 import puppeteer from "puppeteer-extra";
 
 export async function runMacro(macro) {
@@ -21,22 +21,32 @@ export async function runMacro(macro) {
 }
 
 export function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function googleLogin(page) {
   dotenv.config();
 
-  await page.goto(URL);
+  await page.goto(loginURL);
 
-  await page.type(INPUT_ID, process.env.GOOGLE_EMAIL)
+  await page.click(GOOGLE_LOGIN_BUTTON);
+
+  await sleep(1000);
+
+  await page.waitForSelector(INPUT_ID);
+  await page.type(INPUT_ID, process.env.GOOGLE_EMAIL);
+
   await page.keyboard.press("Enter");
 
-  await page.waitForSelector(INPUT_PASSWORD, {visible: true});
+  await page.waitForSelector(INPUT_PASSWORD, { visible: true });
 
-  await page.type(INPUT_PASSWORD, process.env.GOOGLE_PASSWORD)
+  await page.type(INPUT_PASSWORD, process.env.GOOGLE_PASSWORD);
   await page.keyboard.press("Enter");
 
   // 구글 로그인 후 URL이 리다이렉트되어 바뀌기를 기다린다.
-  await page.waitForFunction(`window.location.href == "${URL}"`)
+  await page.waitForFunction(`window.location.href == "${homeURL}"`);
+
+  await page.goto(metaDataURL);
+
+  await page.waitForFunction(`window.location.href == "${metaDataURL}"`);
 }
