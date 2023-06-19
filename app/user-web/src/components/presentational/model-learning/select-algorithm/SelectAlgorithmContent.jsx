@@ -92,9 +92,9 @@ const TestSetSlider = (props) => {
   return (
     <Slider
       defaultValue={INIT_LEARN_MODEL_REQUEST.test_set}
-      step={10}
+      step={0.1}
       min={INIT_LEARN_MODEL_REQUEST.test_set}
-      max={50}
+      max={0.5}
       getAriaValueText={(value) => `${value}%`}
       marks={TEST_DATA_SET_SLIDER_MARKS}
       valueLabelDisplay='on'
@@ -105,15 +105,15 @@ const TestSetSlider = (props) => {
 
 const TEST_DATA_SET_SLIDER_MARKS = [
   {
-    value: 20,
+    value: 0.2,
     label: "20%",
   },
   {
-    value: 30,
+    value: 0.3,
     label: "30%",
   },
   {
-    value: 50,
+    value: 0.5,
     label: "50%",
   },
 ];
