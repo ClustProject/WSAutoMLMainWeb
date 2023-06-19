@@ -34,11 +34,14 @@ export default function LoginCard() {
           <GoogleButton
             type='light'
             label='Google로 로그인'
-            // onClick={() => (window.location.href = "/home")}
             onClick={() =>
               (window.location.href =
-                "http://automl-main-web-load-balancer-213875655.ap-northeast-2.elb.amazonaws.com/oauth2/authorization/google")
+                "http://localhost:8080/oauth2/authorization/google")
             }
+            // onClick={() =>
+            //   (window.location.href =
+            //     "http://automl-main-web-load-balancer-213875655.ap-northeast-2.elb.amazonaws.com/oauth2/authorization/google")
+            // } local settings
           />
         </Box>
       </CardContent>

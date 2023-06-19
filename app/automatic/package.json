@@ -9,7 +9,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/node": "^7.18.10",
-    "@babel/preset-env": "^7.18.10"
+    "@babel/preset-env": "^7.22.5"
   },
   "scripts": {
     "automatic-etc79-no-url": "npx babel-node --presets @babel/env ./src/etc79-no-url.js",

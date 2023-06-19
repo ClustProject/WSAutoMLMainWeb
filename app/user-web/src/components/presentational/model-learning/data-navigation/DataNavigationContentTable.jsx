@@ -4,7 +4,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import SearchIcon from "@mui/icons-material/Search";
-import { Checkbox, Paper, Switch, Modal, Box } from "@mui/material";
+import {
+  Checkbox,
+  Paper,
+  Switch,
+  Modal,
+  Box,
+  Tabs,
+  Tab,
+  Typography,
+  Button,
+} from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import {
   StyledTable,
@@ -24,17 +34,52 @@ export default function DataNavigationContentTable(props) {
   const selectedData = getSelectedVarAndTarget();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState([]);
 
-  const openModal = () => {
+  const openModal = (idx) => {
     setIsOpen(true);
-    const signedUrl =
-      "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/sample.png";
-    setImageUrl(signedUrl);
+    const baseImageUrl = `https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/${selectedData.user_id} Col ${idx}`;
+    let urls = [];
+    if (data[idx].col_dtype === "Object") {
+      urls = [baseImageUrl + " pairplot.png"];
+    } else {
+      urls = ["count.png", "box.png", "density.png"].map(
+        (end) => baseImageUrl + " " + end
+      );
+    }
+    setImageUrl(urls);
   };
 
   const closeModal = () => {
     setIsOpen(false);
+  };
+
+  // 모달 내부에 탭 컴포넌트를 사용하기 위한 함수
+  const TabPanel = (props) => {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role='tabpanel'
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ pt: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  };
+
+  // 상태값을 추가하여 현재 선택된 탭을 추적
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   console.log(selectedData);
@@ -186,7 +231,7 @@ export default function DataNavigationContentTable(props) {
             {data.map((row, idx) => (
               <TableRow key={row.col_name}>
                 <StyledTableCell align='left'>
-                  <SearchIcon onClick={openModal} />
+                  <SearchIcon onClick={() => openModal(idx)} />
                 </StyledTableCell>
                 <StyledTableCell align='left'>{row.id}</StyledTableCell>
                 <StyledTableCell align='left'>{row.col_name}</StyledTableCell>
@@ -233,14 +278,41 @@ export default function DataNavigationContentTable(props) {
             left: "50%",
             transform: "translate(-50%, -50%)",
             width: "70%",
+            height: "70%",
             bgcolor: "background.paper",
-            border: "2px solid #000",
+            border: "1px solid #000",
             boxShadow: 24,
             p: 4,
+            overflow: "auto",
           }}
         >
-          {imageUrl && <img src={imageUrl} alt='S3 이미지' />}
-          <button onClick={closeModal}>확인</button>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant='fullWidth'
+            aria-label='Plot'
+          >
+            {imageUrl.map((url, index) => {
+              let label = "";
+              if (url.endsWith("pairplot.png")) {
+                label = "Pair Plot";
+              } else if (url.endsWith("count.png")) {
+                label = "Count Plot";
+              } else if (url.endsWith("box.png")) {
+                label = "Box Plot";
+              } else if (url.endsWith("density.png")) {
+                label = "Density Plot";
+              }
+
+              return <Tab label={label} />;
+            })}
+          </Tabs>
+          {imageUrl.map((url, index) => (
+            <TabPanel value={value} index={index}>
+              <img src={url} alt={`S3 이미지 ${index + 1}`} />
+            </TabPanel>
+          ))}
+          <Button onClick={closeModal}>확인</Button>
         </Box>
       </Modal>
     </>
