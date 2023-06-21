@@ -138,6 +138,7 @@ const DataNavigationContent = (props) => {
           setPayload={setPayload}
           resultId={resultId}
           setResultId={setResultId}
+          totalRow={content.total_row}
         />
       )}
       <br />

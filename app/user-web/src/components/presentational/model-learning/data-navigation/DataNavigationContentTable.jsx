@@ -4,6 +4,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
+
 import {
   Checkbox,
   Paper,
@@ -14,6 +16,7 @@ import {
   Tab,
   Typography,
   Button,
+  IconButton,
 } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import {
@@ -27,7 +30,7 @@ const SWITCH_LABEL = { inputProps: { "aria-label": "Switch" } };
 const CHECKBOX_LABEL = { inputProps: { "aria-label": "CheckBox" } };
 
 export default function DataNavigationContentTable(props) {
-  const { setAnyTargetVariableChecked } = props;
+  const { setAnyTargetVariableChecked, totalRow, downloadUrl } = props;
   const [data, setData] = useState([]);
   const [checkedIndex, setCheckedIndex] = useState(-1); // 체크된 체크박스의 인덱스
 
@@ -38,10 +41,20 @@ export default function DataNavigationContentTable(props) {
 
   const openModal = (idx) => {
     setIsOpen(true);
-    const baseImageUrl = `https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/${selectedData.user_id} Col ${idx}`;
+    // downloadUrl에서 "amazonaws.com/" 이후의 문자열을 가져옵니다.
+    let postAmazonPart = downloadUrl.split("amazonaws.com/")[1];
+
+    // 확장자를 제거합니다.
+    let fileNameWithoutExtension = postAmazonPart.slice(
+      0,
+      postAmazonPart.lastIndexOf(".")
+    );
+    console.log(fileNameWithoutExtension);
+
+    const baseImageUrl = `https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/${fileNameWithoutExtension} Col ${idx}`;
     let urls = [];
     if (data[idx].col_dtype === "Object") {
-      urls = [baseImageUrl + " pairplot.png"];
+      urls = [baseImageUrl + " scatter.png"];
     } else {
       urls = ["count.png", "box.png", "density.png"].map(
         (end) => baseImageUrl + " " + end
@@ -52,6 +65,15 @@ export default function DataNavigationContentTable(props) {
 
   const closeModal = () => {
     setIsOpen(false);
+    setValue(0);
+  };
+
+  // 각 이미지 URL과 해당 설명을 매핑하는 객체 생성
+  const imageDescriptions = {
+    "scatter.png": "수치형 변수에 대한 Scatter Plot 이미지 입니다.",
+    "count.png": "Count Plot에 대한 이미지 입니다.",
+    "box.png": "Box Plot에 대한 이미지 입니다.",
+    "density.png": "Density Plot에 대한 이미지 입니다.",
   };
 
   // 모달 내부에 탭 컴포넌트를 사용하기 위한 함수
@@ -231,7 +253,15 @@ export default function DataNavigationContentTable(props) {
             {data.map((row, idx) => (
               <TableRow key={row.col_name}>
                 <StyledTableCell align='left'>
-                  <SearchIcon onClick={() => openModal(idx)} />
+                  {!(
+                    row.col_dtype !== "Object" &&
+                    (row.min === row.max || row.null_count === totalRow)
+                  ) && (
+                    <SearchIcon
+                      onClick={() => openModal(idx)}
+                      sx={{ color: "cornflowerblue" }}
+                    />
+                  )}
                 </StyledTableCell>
                 <StyledTableCell align='left'>{row.id}</StyledTableCell>
                 <StyledTableCell align='left'>{row.col_name}</StyledTableCell>
@@ -277,25 +307,39 @@ export default function DataNavigationContentTable(props) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "70%",
-            height: "70%",
+            width: "45%",
+            height: "75%",
             bgcolor: "background.paper",
-            border: "1px solid #000",
             boxShadow: 24,
-            p: 4,
+            p: 2,
             overflow: "auto",
+            borderRadius: "10px", // 모서리를 둥글게 설정
           }}
         >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "10px",
+            }}
+          >
+            <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
+              데이터 분포
+            </Typography>
+            <IconButton onClick={closeModal}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
           <Tabs
             value={value}
             onChange={handleChange}
             variant='fullWidth'
             aria-label='Plot'
           >
-            {imageUrl.map((url, index) => {
+            {imageUrl.map((url) => {
               let label = "";
-              if (url.endsWith("pairplot.png")) {
-                label = "Pair Plot";
+              if (url.endsWith("scatter.png")) {
+                label = "Scatter Plot";
               } else if (url.endsWith("count.png")) {
                 label = "Count Plot";
               } else if (url.endsWith("box.png")) {
@@ -309,10 +353,20 @@ export default function DataNavigationContentTable(props) {
           </Tabs>
           {imageUrl.map((url, index) => (
             <TabPanel value={value} index={index}>
-              <img src={url} alt={`S3 이미지 ${index + 1}`} />
+              <Typography variant='subtitle2'>
+                {imageDescriptions[url.split(" ").pop()]}
+              </Typography>
+              <img
+                src={url}
+                alt={`S3 이미지 ${index + 1}`}
+                style={{
+                  display: "block",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              />
             </TabPanel>
           ))}
-          <Button onClick={closeModal}>확인</Button>
         </Box>
       </Modal>
     </>
