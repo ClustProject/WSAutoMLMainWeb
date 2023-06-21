@@ -42,31 +42,31 @@ const ModelOperationResultDetailTable = (props) => {
       >
         <TableRow>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               학습 알고리즘
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "75%", height: "30px" }} colSpan={3}>
+          <StyledTableCell sx={{ width: "75%", height: "45px" }} colSpan={3}>
             {data.argNm}
           </StyledTableCell>
         </TableRow>
 
         <TableRow>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               목표 변수
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {target}
           </StyledTableCell>
 
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               학습 반복 횟수
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {data.argParamJSON && data.argParamJSON.epoch
               ? data.argParamJSON.epoch
               : "epoch"}
@@ -75,21 +75,21 @@ const ModelOperationResultDetailTable = (props) => {
 
         <TableRow>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               배치사이즈
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {data.argParamJSON && data.argParamJSON.batch_size
               ? data.argParamJSON.batch_size
               : "batch_size"}
           </StyledTableCell>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               윈도우사이즈
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {data.argParamJSON && data.argParamJSON.window_size
               ? data.argParamJSON.window_size
               : "window_size"}
@@ -98,21 +98,21 @@ const ModelOperationResultDetailTable = (props) => {
 
         <TableRow>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               손실 함수
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {data.argParamJSON && data.argParamJSON.loss
               ? data.argParamJSON.loss
               : "loss"}
           </StyledTableCell>
           <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "30px" }}>
+            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
               최적화 기법
             </StyledTableHeaderCell>
           </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "30px" }}>
+          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
             {data.argParamJSON && data.argParamJSON.optimizer
               ? data.argParamJSON.optimizer
               : "optimizer"}
@@ -127,7 +127,7 @@ const ModelOperationResultDetailTable = (props) => {
           </TableHead>
           <StyledTableCell sx={{ width: "25%", height: "50px" }}>
             {data.argParamJSON && data.argParamJSON.test_set_rate
-              ? data.argParamJSON.test_set_rate
+              ? data.argParamJSON.test_set_rate * 100
               : "test_set_rate"}
             %
           </StyledTableCell>
