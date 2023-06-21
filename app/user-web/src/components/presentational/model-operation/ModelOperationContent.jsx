@@ -44,8 +44,8 @@ const StepperBox = (props) => {
   return (
     <Box
       sx={{
-        marginTop: "30px",
-        marginBottom: "30px",
+        marginTop: "10px",
+        marginBottom: "10px",
       }}
     >
       <Stepper
@@ -109,7 +109,7 @@ const ModelOperationContent = () => {
           </>
         );
       case 2:
-        return <ModelOperationResultChart />;
+        return <ModelOperationResultChart resultId={selectedRow.id} />;
       default:
         throw new Error("해당 스텝에 대한 컨텐츠를 찾을 수 없습니다.");
     }
