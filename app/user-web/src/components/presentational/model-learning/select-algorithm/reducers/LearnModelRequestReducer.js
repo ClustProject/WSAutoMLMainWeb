@@ -11,7 +11,7 @@ export const INIT_LEARN_MODEL_REQUEST = {
 
 export const METRICS_MAPPING = {
   MSE: "mean_squared_error",
-  RMSE: "root_mean_squared_error",
+  // RMSE: "root_mean_squared_error",
   MAE: "mean_absolute_error",
   MAPE: "mean_absolute_percentage_error",
   MSLE: "mean_squared_logarithmic_error",

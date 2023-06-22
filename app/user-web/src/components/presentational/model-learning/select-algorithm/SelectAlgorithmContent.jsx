@@ -355,11 +355,10 @@ const SelectAlgorithmContent = (props) => {
                 label='최적화 기법'
                 items={[
                   "Adam",
-                  "Adamw",
                   "Adadelta",
+                  // "AdamW",
                   "Adagrad",
-                  "Adamax",
-                  "Adafactor",
+                  // "Adamax",
                   "SGD",
                   "RMSprop",
                   "Nadam",
@@ -374,7 +373,8 @@ const SelectAlgorithmContent = (props) => {
               <SelectForm
                 type='metrics'
                 label='성능 평가 기준'
-                items={["MSE", "RMSE", "MAE", "MAPE", "MSLE", "CS", "LCE"]}
+                items={["MSE", "MAE", "MAPE", "MSLE", "CS", "LCE"]}
+                // items={["MSE", "MAE", "RMSE", "MAPE", "MSLE", "CS", "LCE"]}
                 onChange={(event) => handleInputChange("metrics", 5, event)}
               />
             </SpaceBetweenFlexBox>

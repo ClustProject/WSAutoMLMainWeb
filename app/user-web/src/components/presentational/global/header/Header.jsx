@@ -17,8 +17,8 @@ export default function Header() {
       await fetch("/user/logout", { method: "POST" });
 
       // Google 로그인 화면으로 리다이렉트
-      // window.location.href = "/login"; // local Settings
-      window.location.href = "/";
+      window.location.href = "/login";
+      // window.location.href = "/"; // local Settings
     };
 
     return (
