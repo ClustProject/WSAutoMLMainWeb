@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { TableHead, TableRow, Paper, TableContainer } from "@mui/material";
+import {
+  Tooltip,
+  TableHead,
+  TableRow,
+  Paper,
+  TableContainer,
+} from "@mui/material";
 import {
   StyledTable,
   StyledTableCell,
   StyledTableHeaderCell,
 } from "../StyledTableComponents";
+import InfoIcon from "@mui/icons-material/Info";
 
 const ModelOperationResultDetailTable = (props) => {
   const selectedRow = props.selectedRow;
@@ -34,117 +41,136 @@ const ModelOperationResultDetailTable = (props) => {
   }, [selectedRow]);
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{ minWidth: "500px", overflowX: "auto" }}
+    >
       <StyledTable
         aria-label='data table'
         stickyHeader
         sx={{ textAlign: "center" }}
       >
-        <TableRow>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+        <TableHead>
+          <TableRow>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               학습 알고리즘
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "75%", height: "45px" }} colSpan={3}>
-            {data.argNm}
-          </StyledTableCell>
-        </TableRow>
+            <StyledTableCell sx={{ width: "75%", height: "45px" }} colSpan={3}>
+              {data.argNm}
+            </StyledTableCell>
+          </TableRow>
 
-        <TableRow>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+          <TableRow>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               목표 변수
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {target}
-          </StyledTableCell>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {target}
+            </StyledTableCell>
 
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               학습 반복 횟수
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {data.argParamJSON && data.argParamJSON.epoch
-              ? data.argParamJSON.epoch
-              : "epoch"}
-          </StyledTableCell>
-        </TableRow>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.epoch
+                ? data.argParamJSON.epoch
+                : "epoch"}
+            </StyledTableCell>
+          </TableRow>
 
-        <TableRow>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+          <TableRow>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               배치사이즈
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {data.argParamJSON && data.argParamJSON.batch_size
-              ? data.argParamJSON.batch_size
-              : "batch_size"}
-          </StyledTableCell>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.batch_size
+                ? data.argParamJSON.batch_size
+                : "batch_size"}
+            </StyledTableCell>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               윈도우사이즈
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {data.argParamJSON && data.argParamJSON.window_size
-              ? data.argParamJSON.window_size
-              : "window_size"}
-          </StyledTableCell>
-        </TableRow>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.window_size
+                ? data.argParamJSON.window_size
+                : "window_size"}
+            </StyledTableCell>
+          </TableRow>
 
-        <TableRow>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+          <TableRow>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               손실 함수
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {data.argParamJSON && data.argParamJSON.loss
-              ? data.argParamJSON.loss
-              : "loss"}
-          </StyledTableCell>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "45px" }}>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.loss
+                ? data.argParamJSON.loss
+                : "loss"}
+            </StyledTableCell>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "45px" }}
+              colSpan={1}
+            >
               최적화 기법
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "45px" }}>
-            {data.argParamJSON && data.argParamJSON.optimizer
-              ? data.argParamJSON.optimizer
-              : "optimizer"}
-          </StyledTableCell>
-        </TableRow>
+            <StyledTableCell sx={{ width: "25%", height: "45px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.optimizer
+                ? data.argParamJSON.optimizer
+                : "optimizer"}
+            </StyledTableCell>
+          </TableRow>
 
-        <TableRow>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "50px" }}>
+          <TableRow>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "50px" }}
+              colSpan={1}
+            >
               테스트셋 비율
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "50px" }}>
-            {data.argParamJSON && data.argParamJSON.test_set_rate
-              ? data.argParamJSON.test_set_rate * 100
-              : "test_set_rate"}
-            %
-          </StyledTableCell>
-          <TableHead>
-            <StyledTableHeaderCell sx={{ width: "25%", height: "50px" }}>
-              성능지표
-              <br /> (
-              {data.argParamJSON && data.argParamJSON.metrics
-                ? data.argParamJSON.metrics
-                : "metric"}
-              )
+            <StyledTableCell sx={{ width: "25%", height: "50px" }} colSpan={1}>
+              {data.argParamJSON && data.argParamJSON.test_set_rate
+                ? data.argParamJSON.test_set_rate * 100
+                : "test_set_rate"}
+              %
+            </StyledTableCell>
+            <StyledTableHeaderCell
+              sx={{ width: "25%", height: "50px" }}
+              colSpan={1}
+            >
+              성능지표{" "}
+              <Tooltip
+                title={
+                  data.argParamJSON && data.argParamJSON.metrics
+                    ? data.argParamJSON.metrics
+                    : "metric"
+                }
+                placement='bottom'
+              >
+                <InfoIcon color='white' fontSize='1rem' />
+              </Tooltip>
             </StyledTableHeaderCell>
-          </TableHead>
-          <StyledTableCell sx={{ width: "25%", height: "50px" }}>
-            {data && data.metric ? data.metric : "metric"}
-          </StyledTableCell>
-        </TableRow>
+            <StyledTableCell sx={{ width: "25%", height: "50px" }} colSpan={1}>
+              {data && data.metric ? data.metric : "metric"}
+            </StyledTableCell>
+          </TableRow>
+        </TableHead>
       </StyledTable>
     </TableContainer>
   );

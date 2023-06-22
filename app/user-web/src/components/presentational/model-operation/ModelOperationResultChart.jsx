@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  Paper,
-  Modal,
-  Box,
-  IconButton,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Paper, Modal, Box, IconButton, Typography } from "@mui/material";
 
 const ModelOperationResultChart = (props) => {
   const { resultId } = props;
@@ -17,13 +10,11 @@ const ModelOperationResultChart = (props) => {
 
   const imageHeaders = ["예측 결과 비교", "History"];
 
-  // 모달을 열고 마우스 오버한 이미지를 설정합니다.
   const handleOpen = (url) => {
     setModalImage(url);
     setOpen(true);
   };
 
-  // 모달을 닫습니다.
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -40,11 +31,13 @@ const ModelOperationResultChart = (props) => {
       <Paper
         sx={{
           height: "330px",
+          backgroundColor: "#F4F8F9",
         }}
       >
         <Box
           sx={{
             display: "flex",
+            justifyContent: "space-between",
             flexDirection: "row",
             width: "100%",
             marginTop: "10px",
@@ -58,6 +51,9 @@ const ModelOperationResultChart = (props) => {
                     display: "flex-top",
                     flexDirection: "column",
                     height: "330px",
+                    flexGrow: 1,
+                    margin: "10px",
+                    borderRadius: "10px",
                   }}
                 >
                   <Typography
@@ -73,14 +69,13 @@ const ModelOperationResultChart = (props) => {
                     style={{
                       flex: index === 0 ? 15 : 8,
                       width: "100%",
-                      cursor: "zoom-in",
+                      maxHeight: "300px",
+                      borderRadius: "10px", // 이미지 모서리를 둥글게 설정
+                      boxShadow: "0px 10px 15px rgba(0, 0, 0, 0.1)", // 그림자 효과 추가
                     }}
-                    onMouseEnter={() => handleOpen(url)}
+                    onClick={() => handleOpen(url)}
                   />
                 </Box>
-                {index !== imageUrl.length - 1 && (
-                  <Divider orientation='vertical' flexItem />
-                )}
               </>
             ))}
         </Box>
@@ -93,7 +88,7 @@ const ModelOperationResultChart = (props) => {
           textAlign: "right",
         }}
       >
-        ※ 마우스를 올리면 이미지가 확대됩니다.
+        ※ 이미지를 클릭하면 확대됩니다.
       </Typography>
       <Modal
         open={open}
@@ -114,7 +109,6 @@ const ModelOperationResultChart = (props) => {
             overflow: "auto",
             borderRadius: "10px", // 모서리를 둥글게 설정
           }}
-          onMouseLeave={handleClose}
         >
           <Box
             sx={{
