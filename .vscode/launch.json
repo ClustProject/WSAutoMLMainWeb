@@ -16,7 +16,7 @@
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}",
-      "args": "--spring.profiles.active=prod"
+      "args": "--spring.profiles.active=local"
     },
     {
       "type": "java",
@@ -24,7 +24,7 @@
       "request": "launch",
       "mainClass": "kr.co.automl.App",
       "projectName": "admin-server",
-      "args": "--spring.profiles.active=prod"
+      "args": "--spring.profiles.active=local"
     },
     {
       "type": "java",
@@ -32,7 +32,7 @@
       "request": "launch",
       "mainClass": "kr.co.automl.App",
       "projectName": "user-server",
-      "args": "--spring.profiles.active=prod"
+      "args": "--spring.profiles.active=local"
     }
   ]
 }

@@ -21,11 +21,4 @@ public class FrontendUrlRequestHandler {
     public String returnToIndexHtml() {
         return "/index.html";
     }
-
-    @GetMapping(value = {
-            "/login"
-    })
-    public String returnToIndexHtmlForAll() {
-        return "/index.html";
-    }
 }
