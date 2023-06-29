@@ -29,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated() // 나머지 페이지는 인증된 사용자만 접근 가능
                 .and()
                 .oauth2Login()
+                .loginPage("/loginPage")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
