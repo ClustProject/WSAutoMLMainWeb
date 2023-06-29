@@ -9,23 +9,16 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class FrontendUrlRequestHandler {
-
     @GetMapping(value = {
             "/",
+            "/login",
             "/search",
             "/metadata/**",
             "/model-learning",
             "/model-operation"
     })
-    @PreAuthorize("hasAnyRole('USER', 'MANAGER', 'ADMIN')")
+    @PreAuthorize("permitAll")
     public String returnToIndexHtml() {
-        return "/index.html";
-    }
-
-    @GetMapping(value = {
-            "/login"
-    })
-    public String returnToIndexHtmlForAll() {
-        return "/index.html";
+        return "forward:/index.html";
     }
 }
