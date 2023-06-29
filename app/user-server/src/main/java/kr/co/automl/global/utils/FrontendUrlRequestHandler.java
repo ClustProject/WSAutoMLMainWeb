@@ -10,8 +10,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FrontendUrlRequestHandler {
 
-    @GetMapping(value = { "/**" }) // 모든 경로에 대한 요청을 처리 / 나머지 경로에 대한 처리는 SecurityConfig에서 처리
+    @GetMapping(value = {
+            "/",
+            "/search",
+            "/metadata/**",
+            "/model-learning",
+            "/model-operation"
+    })
+    @PreAuthorize("hasAnyRole('USER', 'MANAGER', 'ADMIN')")
     public String returnToIndexHtml() {
-        return "forward:/index.html";
+        return "/index.html";
+    }
+
+    @GetMapping(value = {
+            "/login"
+    })
+    public String returnToIndexHtmlForAll() {
+        return "/index.html";
     }
 }
