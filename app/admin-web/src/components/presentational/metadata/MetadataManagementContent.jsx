@@ -73,6 +73,7 @@ const centerStyle = {
 export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
+  const [pageSize, setPageSize] = useState(DISPLAY_COUNT);
 
   const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
   const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
@@ -81,12 +82,12 @@ export default function MetadataManagementContent() {
   const [fileUploadPercent, setFileUploadPercent] = useState(0);
 
   useEffect(() => {
-    getMetadatas(DEFAULT_PAGE_COUNT, DISPLAY_COUNT).then((it) => {
+    getMetadatas(DEFAULT_PAGE_COUNT, pageSize).then((it) => {
       setData(it);
       setPage(DEFAULT_PAGE_COUNT);
     });
     // .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
-  }, []);
+  }, [pageSize]);
 
   const [catalogState, dispatchCatalog] = useReducer(
     CatalogReducer,
@@ -121,7 +122,7 @@ export default function MetadataManagementContent() {
     });
   }
 
-  const totalDisplayedRowCount = (page + 1) * DISPLAY_COUNT;
+  const totalDisplayedRowCount = (page + 1) * pageSize;
 
   const [selectedIds, setSelectedIds] = React.useState([]);
 
@@ -153,7 +154,6 @@ export default function MetadataManagementContent() {
       >
         삭제하기
       </Button>
-      <Typography variant='h6'>메타데이터 리스트</Typography>
       <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
         <DialogTitle>URL 링크 입력</DialogTitle>
         <DialogContent>
@@ -368,32 +368,34 @@ export default function MetadataManagementContent() {
           </Box>
         </Box>
       </Modal>
-
-      <DataGrid
-        rows={parseToRows(data)}
-        rowCount={totalDisplayedRowCount + 1} // 다음 페이지로 넘어갈 수 있게 하나 더 추가
-        columns={COLUMNS}
-        page={page}
-        pageSize={DISPLAY_COUNT}
-        rowsPerPageOptions={[DISPLAY_COUNT]}
-        checkboxSelection={true}
-        disableSelectionOnClick
-        paginationMode='server' // 서버에서 페이지네이션을 처리하므로 필수 옵션
-        onPageChange={(newPage) => {
-          getMetadatas(newPage, DISPLAY_COUNT).then((it) => {
-            setData(it);
-            setPage(newPage);
-          });
-        }}
-        initialState={{
-          pagination: {
-            page: DEFAULT_PAGE_COUNT,
-          },
-        }}
-        onSelectionModelChange={(ids) => {
-          setSelectedIds(ids);
-        }}
-      />
+      <Box sx={{ height: "90%" }}>
+        <DataGrid
+          rows={parseToRows(data)}
+          rowCount={totalDisplayedRowCount + 1} // 다음 페이지로 넘어갈 수 있게 하나 더 추가
+          columns={COLUMNS}
+          page={page}
+          pageSize={pageSize}
+          rowsPerPageOptions={[5, 10, 20]}
+          checkboxSelection={true}
+          disableSelectionOnClick
+          onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+          paginationMode='server' // 서버에서 페이지네이션을 처리하므로 필수 옵션
+          onPageChange={(newPage) => {
+            getMetadatas(newPage, pageSize).then((it) => {
+              setData(it);
+              setPage(newPage);
+            });
+          }}
+          initialState={{
+            pagination: {
+              page: DEFAULT_PAGE_COUNT,
+            },
+          }}
+          onSelectionModelChange={(ids) => {
+            setSelectedIds(ids);
+          }}
+        />
+      </Box>
     </>
   );
 
