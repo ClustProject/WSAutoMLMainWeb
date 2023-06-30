@@ -2,7 +2,6 @@ package kr.co.automl.domain.metadata.domain.result.api;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,15 +22,15 @@ public class MlResultReadApi {
     private final MlResultReader mlResultReader;
 
     @GetMapping("mlResult")
-    public ListToDataResponse<MlResultResponse> getAllMlResult(Pageable pageable) {
-        List<MlResultResponse> mlResultResponses = mlResultReader.readAll(pageable);
+    public ListToDataResponse<MlResultResponse> getAllMlResult() {
+        List<MlResultResponse> mlResultResponses = mlResultReader.readAll();
 
         return new ListToDataResponse<>(mlResultResponses);
     }
 
     @GetMapping("mlResultById")
-    public ListToDataResponse<MlResultResponse> getAllMlResult(@LoginUser SessionUser sessionUser, Pageable pageable) {
-        List<MlResultResponse> mlResultResponses = mlResultReader.readAllByEmail(sessionUser.email(), pageable);
+    public ListToDataResponse<MlResultResponse> getAllMlResult(@LoginUser SessionUser sessionUser) {
+        List<MlResultResponse> mlResultResponses = mlResultReader.readAllByEmail(sessionUser.email());
 
         return new ListToDataResponse<>(mlResultResponses);
     }

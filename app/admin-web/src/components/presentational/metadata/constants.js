@@ -147,7 +147,7 @@ const LICENSE_RIGHTS_MAP = {
 const TYPES = ["비디오", "텍스트", "숫자", "이미지"];
 
 const DEFAULT_PAGE_COUNT = 0;
-const DISPLAY_COUNT = 5;
+const DISPLAY_COUNT = 10;
 
 export {
   COLUMNS,

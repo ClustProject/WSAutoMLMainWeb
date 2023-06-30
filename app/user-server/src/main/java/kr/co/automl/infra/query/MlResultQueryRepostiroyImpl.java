@@ -7,7 +7,6 @@ import static kr.co.automl.domain.user.QUser.user;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.Tuple;
@@ -25,26 +24,22 @@ public class MlResultQueryRepostiroyImpl implements MlResultQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<MlResult> findAll(Pageable pageable) {
+    public List<MlResult> findAll() {
         return queryFactory
                 .selectFrom(mlResult)
                 .join(mlResult.user, user).fetchJoin()
                 .join(mlResult.dataSet, dataSet).fetchJoin()
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch();
     }
 
     @Override
-    public List<MlResult> findAllByEmail(String email, Pageable pageable) {
+    public List<MlResult> findAllByEmail(String email) {
         return queryFactory
                 .selectFrom(mlResult)
                 .join(mlResult.user, user).fetchJoin()
                 .join(mlResult.dataSet, dataSet).fetchJoin()
                 .join(dataSet.distribution, distribution).fetchJoin()
                 .where(user.email.eq(email))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetch();
     }
 

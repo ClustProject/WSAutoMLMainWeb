@@ -21,8 +21,8 @@ public class MetadataReader {
         this.dataSetQueryRepository = dataSetQueryRepository;
     }
 
-    public List<MetadataResponse> readAll(Pageable pageable) {
-        List<DataSet> allDataSets = dataSetQueryRepository.findAll(pageable);
+    public List<MetadataResponse> readAll() {
+        List<DataSet> allDataSets = dataSetQueryRepository.findAll();
 
         return allDataSets.stream()
                 .map(MetadataResponse::from)
