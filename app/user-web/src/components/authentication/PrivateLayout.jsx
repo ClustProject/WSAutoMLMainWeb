@@ -10,7 +10,7 @@ const PrivateLayout = () => {
 
   useEffect(() => {
     if (!authenticated && !loading) {
-      navigate("/loginPage", { state: { from: location } });
+      navigate("/login", { state: { from: location } });
     }
   }, [authenticated, loading, navigate, location]);
 
