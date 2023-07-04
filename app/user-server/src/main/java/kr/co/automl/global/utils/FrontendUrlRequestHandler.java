@@ -19,6 +19,6 @@ public class FrontendUrlRequestHandler {
     })
     @PreAuthorize("permitAll")
     public String returnToIndexHtml() {
-        return "forward:/index.html";
+        return "/index.html";
     }
 }
