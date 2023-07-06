@@ -11,13 +11,17 @@ export async function runMacro(macro) {
 
   const startTime = Date.now();
 
-  macro.setPage(page);
-  await macro.run();
+  try {
+    macro.setPage(page);
+    await macro.run();
+  } catch (error) {
+    console.error("An error occurred while running the macro:", error);
+  } finally {
+    const endTime = Date.now();
+    console.log(`걸린 시간: ${endTime - startTime}ms`);
 
-  const endTime = Date.now();
-  console.log(`걸린 시간: ${endTime - startTime}ms`);
-
-  await browser.close();
+    await browser.close();
+  }
 }
 
 export function sleep(ms) {
