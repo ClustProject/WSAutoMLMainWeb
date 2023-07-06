@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FrontendUrlRequestHandler {
     @GetMapping(value = {
             "/",
-            "/login",
+            "/loginPage",
             "/search",
             "/metadata/**",
             "/model-learning",
