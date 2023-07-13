@@ -14,4 +14,9 @@ public class S3FileController {
     public void deleteFile(@PathVariable String key) {
         s3Service.deleteFile(key);
     }
+
+    @DeleteMapping("/file/prefix/{prefix}")
+    public void deleteFilesWithPrefix(@PathVariable String prefix) {
+        s3Service.deleteFilesWithPrefixInSecondBucket(prefix);
+    }
 }

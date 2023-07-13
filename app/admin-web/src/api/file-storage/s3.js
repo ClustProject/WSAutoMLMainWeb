@@ -19,3 +19,7 @@ export async function uploadFileToS3(preSignedUrl, file, setUploadPercent) {
 export async function deleteFileFromS3(key) {
   return axios.delete(`/file/${key}`);
 }
+
+export async function deleteFilesWithPrefixInSecondBucket(prefix) {
+  return axios.delete(`/file/prefix/${prefix}`);
+}
