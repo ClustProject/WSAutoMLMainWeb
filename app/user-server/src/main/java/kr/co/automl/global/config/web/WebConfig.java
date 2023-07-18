@@ -3,6 +3,7 @@ package kr.co.automl.global.config.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -19,5 +20,16 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(loginUserArgumentResolver);
+    }
+
+    /**
+     * 구글 로그인 과정에서의 CORS 문제를 해결합니다.
+     */
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com")
+                .allowedMethods("*")
+                .allowCredentials(true);
     }
 }
