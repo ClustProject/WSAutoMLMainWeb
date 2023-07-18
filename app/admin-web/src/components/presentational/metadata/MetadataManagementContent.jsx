@@ -31,7 +31,11 @@ import {
 } from "./constants";
 import { DataGrid } from "@mui/x-data-grid";
 import { getPreSignedUrl } from "../../../api/url";
-import { uploadFileToS3 } from "../../../api/file-storage/s3";
+import {
+  uploadFileToS3,
+  deleteFileFromS3,
+  deleteFilesWithPrefixInSecondBucket,
+} from "../../../api/file-storage/s3";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {
@@ -124,7 +128,10 @@ export default function MetadataManagementContent() {
 
   const totalDisplayedRowCount = (page + 1) * pageSize;
 
-  const [selectedIds, setSelectedIds] = React.useState([]);
+  const [selectedIds, setSelectedIds] = useState([]);
+  const selectedUrls = data
+    .filter((data) => selectedIds.includes(data.dataSet.id))
+    .map((data) => data.distribution.downloadUrl);
 
   return (
     <>
@@ -145,11 +152,32 @@ export default function MetadataManagementContent() {
           if (selectedIds.length === 0) {
             return;
           }
-
-          deleteMetadata(selectedIds).then(() => {
-            alert("삭제 완료");
-            window.location.reload();
-          });
+          // First delete files in the first bucket
+          Promise.all(
+            selectedUrls.map((downloadUrl) => {
+              const key = downloadUrl.split("/").pop();
+              return deleteFileFromS3(key);
+            })
+          )
+            .then(() => {
+              // After deleting files in the first bucket, delete files in the second bucket
+              return Promise.all(
+                selectedUrls.map((downloadUrl) => {
+                  const key = downloadUrl.split("/").pop();
+                  // Remove the file extension to get the prefix
+                  const prefix = key.substring(0, key.lastIndexOf("."));
+                  return deleteFilesWithPrefixInSecondBucket(prefix);
+                })
+              );
+            })
+            .then(() => deleteMetadata(selectedIds))
+            .then(() => {
+              alert("삭제가 완료되었습니다.");
+              window.location.reload();
+            })
+            .catch((err) => {
+              alert("삭제에 실패했습니다: " + err);
+            });
         }}
       >
         삭제하기

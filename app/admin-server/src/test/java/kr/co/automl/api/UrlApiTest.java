@@ -40,7 +40,7 @@ class UrlApiTest {
         }
 
         @Nested
-        @WithMockUser(roles = {"MANAGER", "ADMIN"})
+        @WithMockUser(roles = { "MANAGER", "ADMIN" })
         class 허용된_권한을가진_유저의_요청일경우 {
 
             @Test
@@ -51,8 +51,7 @@ class UrlApiTest {
                 mockMvc.perform(get(url))
                         .andExpect(status().isOk())
                         .andDo(document("get-presigned-url",
-                                preprocessResponse(prettyPrint())
-                        ));
+                                preprocessResponse(prettyPrint())));
             }
         }
     }

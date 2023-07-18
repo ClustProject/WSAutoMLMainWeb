@@ -1,24 +1,20 @@
 package kr.co.automl.global.config.s3;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class S3Config {
 
     @Value("${cloud.aws.s3.bucketName}")
     private String bucketName;
-
-    @Value("${cloud.aws.s3.secondBucketName:}")
-    private String secondBucketName;
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -32,11 +28,6 @@ public class S3Config {
     @Bean
     public String bucketName() {
         return bucketName;
-    }
-
-    @Bean
-    public String secondBucketName() {
-        return secondBucketName;
     }
 
     @Bean

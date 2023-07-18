@@ -15,6 +15,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteModelLearningResult } from "../../../api/api";
+import { deleteFileFromS3 } from "../../../api/s3";
 
 function formatDate(isoDateString) {
   const date = new Date(isoDateString);
@@ -30,6 +31,7 @@ const ModelOperationSelectGrid = (props) => {
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [toBeDeletedId, setToBeDeletedId] = useState(null);
+  const [toBeDeletedS3, setToBeDeletedS3] = useState(null);
   const navigate = useNavigate();
 
   const columns = [
@@ -76,16 +78,22 @@ const ModelOperationSelectGrid = (props) => {
         const isCompleted = params.row.state === "학습완료";
         return (
           <div>
-            <IconButton color='warning' aria-label='delete'>
+            <IconButton aria-label='delete'>
               <DeleteIcon
                 onClick={() => {
+                  if (params.row.modelUrl) {
+                    const key = params.row.modelUrl.split("/").pop();
+                    setToBeDeletedS3(key);
+                  }
                   setToBeDeletedId(params.row.id);
                   setOpenDialog(true);
                 }}
+                sx={{ color: "#8FBC8F" }}
               />
             </IconButton>
-            <IconButton color='info' aria-label='edit'>
+            <IconButton aria-label='edit'>
               <EditIcon
+                sx={{ color: "#5F9EA0" }}
                 onClick={() => {
                   navigate("/model-learning", {
                     state: {
@@ -98,7 +106,6 @@ const ModelOperationSelectGrid = (props) => {
               />
             </IconButton>
             <IconButton
-              color={isCompleted ? "success" : "disabled"}
               aria-label='download'
               onClick={
                 isCompleted
@@ -110,7 +117,9 @@ const ModelOperationSelectGrid = (props) => {
                     }
               }
             >
-              <DownloadIcon />
+              <DownloadIcon
+                sx={{ color: isCompleted ? "#6495ED" : "inherit" }}
+              />
             </IconButton>
           </div>
         );
@@ -118,11 +127,25 @@ const ModelOperationSelectGrid = (props) => {
     },
   ];
 
-  const handleDelete = () => {
-    deleteModelLearningResult(toBeDeletedId).then(() => {
+  const handleDelete = async () => {
+    try {
+      if (toBeDeletedS3) {
+        const filesToDelete = [
+          toBeDeletedS3,
+          `${toBeDeletedId} history.png`,
+          `${toBeDeletedId} prediction.png`,
+        ];
+        await deleteFileFromS3(filesToDelete);
+      }
+      await deleteModelLearningResult(toBeDeletedId);
       window.location.reload();
-    });
-    setOpenDialog(false);
+    } catch (error) {
+      alert(
+        `모델을 삭제하는데 실패하였습니다. 시스템 관리자에게 문의하시기 바랍니다. : ${error.message}`
+      );
+    } finally {
+      setOpenDialog(false);
+    }
   };
 
   useEffect(() => {
@@ -145,6 +168,7 @@ const ModelOperationSelectGrid = (props) => {
 
     setRows(parseToRows(props.data));
   }, [props.data]);
+
   useEffect(() => {
     // 선택한 행의 mlResultId의 값 전송
     if (selectedRowId) {
@@ -187,6 +211,8 @@ const ModelOperationSelectGrid = (props) => {
           columns={columns}
           onSelectionModelChange={(newSelection) => {
             setSelectedRowId(newSelection[0]);
+            const selectedRow = rows.find((row) => row.id === newSelection[0]);
+            props.onRowSelect(selectedRow);
           }}
           hideFooter
           headerHeight={50}

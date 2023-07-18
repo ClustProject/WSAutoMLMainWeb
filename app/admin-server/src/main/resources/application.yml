@@ -4,6 +4,7 @@ cloud:
       static: ap-northeast-2
     s3:
       bucketName: ${S3_BUCKET_NAME}
+      secondBucketName: ${S3_SECOND_BUCKET_NAME}
     stack:
       auto: false
     credentials:
@@ -61,6 +62,7 @@ spring:
 spring:
   config:
     activate:
+      # on-profile: local # local settings
       on-profile: prod
 
   datasource:
