@@ -78,19 +78,20 @@ export default function MetadataManagementContent() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(DEFAULT_PAGE_COUNT);
   const [pageSize, setPageSize] = useState(DISPLAY_COUNT);
-
+  const [rowCount, setRowCount] = useState(0);
   const [inputLinkDialogOpen, setInputLinkDialogOpen] = useState(false);
   const [inputDataInfoDialogOpen, setInputDataInfoDialogOpen] = useState(false);
 
   const [progressBarOpend, setProgressBarOpend] = useState(false);
   const [fileUploadPercent, setFileUploadPercent] = useState(0);
-
   useEffect(() => {
-    getMetadatas(DEFAULT_PAGE_COUNT, pageSize).then((it) => {
-      setData(it);
-      setPage(DEFAULT_PAGE_COUNT);
-    });
-    // .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
+    getMetadatas(DEFAULT_PAGE_COUNT, pageSize)
+      .then((it) => {
+        setData(it.data.content);
+        setPage(DEFAULT_PAGE_COUNT);
+        setRowCount(it.totalElements);
+      })
+      .catch(() => alert("데이터를 불러오는데에 실패하였습니다."));
   }, [pageSize]);
 
   const [catalogState, dispatchCatalog] = useReducer(
@@ -125,8 +126,6 @@ export default function MetadataManagementContent() {
       payload: event.target,
     });
   }
-
-  const totalDisplayedRowCount = (page + 1) * pageSize;
 
   const [selectedIds, setSelectedIds] = useState([]);
   const selectedUrls = data
@@ -192,10 +191,10 @@ export default function MetadataManagementContent() {
             * 메타데이터 자동 매핑이 제공되는 Url 링크는 아래와 같습니다.
           </DialogContentText>
           <DialogContentText>
-            - '고속도로 공공데이터 포털>교통'
+            - '고속도로 공공데이터 포털'{">"}'교통'
           </DialogContentText>
           <DialogContentText>
-            - '기상자료개방포털>기상관측>지상'
+            - '기상자료개방포털'{">"}'기상관측'{">"}'지상'
           </DialogContentText>
           <TextField
             autoFocus
@@ -399,7 +398,7 @@ export default function MetadataManagementContent() {
       <Box sx={{ height: "90%" }}>
         <DataGrid
           rows={parseToRows(data)}
-          rowCount={totalDisplayedRowCount + 1} // 다음 페이지로 넘어갈 수 있게 하나 더 추가
+          rowCount={rowCount}
           columns={COLUMNS}
           page={page}
           pageSize={pageSize}
@@ -410,7 +409,7 @@ export default function MetadataManagementContent() {
           paginationMode='server' // 서버에서 페이지네이션을 처리하므로 필수 옵션
           onPageChange={(newPage) => {
             getMetadatas(newPage, pageSize).then((it) => {
-              setData(it);
+              setData(it.data.content);
               setPage(newPage);
             });
           }}
