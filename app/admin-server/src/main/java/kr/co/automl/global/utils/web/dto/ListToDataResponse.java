@@ -7,12 +7,11 @@ import java.util.List;
  * (JSON을 배열로 바로 리턴하는 것보다 유연성을 늘려줍니다.)
  *
  * "data" : [
- *      { }
+ * { }
  * ]
  *
  * @param <T>
  */
 public record ListToDataResponse<T>(
-        List<T> data
-) {
+                List<T> data) {
 }

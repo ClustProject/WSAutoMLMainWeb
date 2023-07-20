@@ -1,8 +1,7 @@
 import axios from "axios";
 
-export function getMetadatas(page, size) {
-  return axios.get(`/metadata?page=${page}&size=${size}`)
-    .then(response => response.data.data)
+export function getMetadatas() {
+  return axios.get("/metadata").then((response) => response.data.data);
 }
 
 export async function createMetadata(createMetadataAttributes) {
@@ -10,9 +9,5 @@ export async function createMetadata(createMetadataAttributes) {
 }
 
 export function deleteMetadata(ids) {
-  return axios.all(
-    ids.map(id =>
-      axios.delete(`/metadata/${id}`)
-    )
-  );
+  return axios.all(ids.map((id) => axios.delete(`/metadata/${id}`)));
 }

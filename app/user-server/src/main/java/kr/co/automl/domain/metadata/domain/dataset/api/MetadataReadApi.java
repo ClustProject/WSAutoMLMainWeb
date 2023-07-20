@@ -2,7 +2,6 @@ package kr.co.automl.domain.metadata.domain.dataset.api;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
