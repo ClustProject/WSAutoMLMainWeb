@@ -24,13 +24,11 @@ public class MetadataReader {
         this.dataSetQueryRepository = dataSetQueryRepository;
     }
 
-    public Page<MetadataResponse> readAll(Pageable pageable) {
-        Page<DataSet> dataSetPage = dataSetQueryRepository.findAll(pageable);
+    public List<MetadataResponse> readAll() {
+        List<DataSet> allDataSets = dataSetQueryRepository.findAll();
 
-        List<MetadataResponse> content = dataSetPage.getContent().stream()
+        return allDataSets.stream()
                 .map(MetadataResponse::from)
                 .collect(toList());
-
-        return new PageImpl<>(content, pageable, dataSetPage.getTotalElements());
     }
 }

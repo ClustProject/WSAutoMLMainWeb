@@ -3,7 +3,6 @@ package kr.co.automl.domain.metadata.domain.dataset.service;
 import kr.co.automl.domain.metadata.domain.dataset.DataSet;
 import kr.co.automl.domain.metadata.domain.dataset.DataSetQueryRepository;
 import kr.co.automl.domain.metadata.dto.MetadataResponse;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

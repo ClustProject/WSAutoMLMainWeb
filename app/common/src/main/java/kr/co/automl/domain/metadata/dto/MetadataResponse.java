@@ -9,8 +9,7 @@ import lombok.Builder;
 public record MetadataResponse(
         CatalogResponse catalog,
         DataSetResponse dataSet,
-        DistributionResponse distribution
-) {
+        DistributionResponse distribution) {
 
     @Builder
     public MetadataResponse {

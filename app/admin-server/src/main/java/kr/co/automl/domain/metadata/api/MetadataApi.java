@@ -1,11 +1,10 @@
 package kr.co.automl.domain.metadata.api;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,8 +46,8 @@ public class MetadataApi {
     }
 
     @GetMapping
-    public ListToDataResponse<MetadataResponse> getAllMetadata(Pageable pageable) {
-        Page<MetadataResponse> metadataResponses = metadataService.readAll(pageable);
-        return new ListToDataResponse<>(metadataResponses, metadataResponses.getTotalElements());
+    public ListToDataResponse<MetadataResponse> getAllMetadata() {
+        List<MetadataResponse> metadataResponses = metadataService.readAll();
+        return new ListToDataResponse<>(metadataResponses);
     }
 }

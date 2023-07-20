@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,13 +33,12 @@ class MetadataSaverTest {
                     .createDataSetAttributes(CreateDataSetAttributesFixtures.fixture1())
                     .createDistributionAttributes(CreateDistributionAttributesFixtures.fixture1())
                     .build();
-            Pageable pageable = PageRequest.of(0, 10);
 
-            assertThat(dataSetRepository.findAll(pageable)).isEmpty();
+            assertThat(dataSetRepository.findAll()).isEmpty();
 
             metadataSaver.save(attributes);
 
-            assertThat(dataSetRepository.findAll(pageable)).hasSize(1);
+            assertThat(dataSetRepository.findAll()).hasSize(1);
         }
     }
 }
