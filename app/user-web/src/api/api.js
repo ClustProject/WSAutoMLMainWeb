@@ -24,7 +24,9 @@ function getModelLearningResult() {
 
 // 사용자 세션 정보
 function getUserInfo() {
-  return axios.get("/user/info").then((response) => response.data);
+  return axios
+    .get("/user/info", { withCredentials: true })
+    .then((response) => response.data);
 }
 
 // 모델운영페이지 선택한 mlResult삭제
