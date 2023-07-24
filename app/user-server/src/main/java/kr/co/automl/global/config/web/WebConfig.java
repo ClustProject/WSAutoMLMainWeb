@@ -25,11 +25,12 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * 구글 로그인 과정에서의 CORS 문제를 해결합니다.
      */
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com")
-                .allowedMethods("*")
-                .allowCredentials(true);
+        registry.addMapping("/**") // 모든 요청 경로에 대해
+                .allowedOriginPatterns("http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com")
+                .allowedMethods("*") // 모든 HTTP 메소드
+                .allowedHeaders("Authorization", "Content-Type"); // 허용할 헤더
     }
 }
