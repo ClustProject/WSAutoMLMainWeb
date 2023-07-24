@@ -35,13 +35,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().accessDeniedPage("/loginPage") // 권한이 없는 사용자가 접근을 시도했을 때 리다이렉트될 페이지
                 .and()
                 .oauth2Login()
-                .loginPage("/loginPage")
+                // .loginPage("/loginPage")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .failureHandler((request, response, exception) -> {
-                    response.sendRedirect("/loginPage");
-                }) // 로그인 실패 시 리다이렉트될 페이지
                 .defaultSuccessUrl("/");
         // .defaultSuccessUrl("http://localhost:3000"); // local settings
     }
