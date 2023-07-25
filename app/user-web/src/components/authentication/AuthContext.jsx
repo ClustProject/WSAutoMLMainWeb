@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <CircularProgress />; // 또는 다른 로딩 인디케이터
+    return <CircularProgress />;
   }
 
   return (
