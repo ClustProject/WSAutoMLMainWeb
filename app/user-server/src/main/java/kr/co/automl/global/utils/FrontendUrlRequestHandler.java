@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class FrontendUrlRequestHandler {
     @GetMapping(value = {
-            "/",
+            "/**",
             "/loginPage",
             "/search",
             "/metadata/**",
