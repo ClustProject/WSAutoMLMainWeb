@@ -29,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/health-check").permitAll() // health check 302 error 제거
                 .antMatchers("/loginPage").permitAll() // 로그인 페이지는 모든 사용자가 접근 가능
                 .antMatchers("/login/oauth2/code/google").permitAll()
-                .antMatchers("/**").access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
+                .antMatchers("/**").permitAll() // 임시코드(에러 테스트)
+                // .antMatchers("/**").access("hasRole('USER') or hasRole('MANAGER') or
+                // hasRole('ADMIN')")
                 .anyRequest().authenticated() // 나머지 페이지는 인증된 사용자만 접근 가능
                 .and()
                 .exceptionHandling().accessDeniedPage("/loginPage") // 권한이 없는 사용자가 접근을 시도했을 때 리다이렉트될 페이지
