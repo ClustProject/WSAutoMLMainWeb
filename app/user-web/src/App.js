@@ -9,7 +9,7 @@ import ModelOperationPage from "./pages/model-operation/ModelOperationPage";
 import NotFound from "./error/NotFound";
 import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./components/authentication/AuthContext";
-import PrivateLayout from "./components/authentication/PrivateLayout";
+import PrivateRoute from "./components/authentication/PrivateRoute";
 
 function App() {
   return (
@@ -17,13 +17,46 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/loginPage' element={<LoginPage />} />
-          <Route path='/' element={<PrivateLayout />}>
-            <Route index element={<MainPage />} />
-            <Route path='/search' element={<SearchPage />} />
-            <Route path='/metadata/:id' element={<MetadataDetailPage />} />
-            <Route path='/model-learning' element={<ModelLearningPage />} />
-            <Route path='/model-operation' element={<ModelOperationPage />} />
-          </Route>
+          <Route
+            index
+            element={
+              <PrivateRoute>
+                <MainPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/search'
+            element={
+              <PrivateRoute>
+                <SearchPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/metadata/:id'
+            element={
+              <PrivateRoute>
+                <MetadataDetailPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/model-learning'
+            element={
+              <PrivateRoute>
+                <ModelLearningPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/model-operation'
+            element={
+              <PrivateRoute>
+                <ModelOperationPage />
+              </PrivateRoute>
+            }
+          />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
