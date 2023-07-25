@@ -1,14 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 const AuthContext = createContext();
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
 export const AuthProvider = ({ children }) => {
-  const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -16,31 +12,21 @@ export const AuthProvider = ({ children }) => {
     axios
       .get("/user/info")
       .then((response) => {
-        // 유효한 권한인지 확인
-        if (["USER", "MANAGER", "ADMIN"].includes(response.data.role)) {
-          setAuthenticated(true);
-          setUser(response.data);
-        } else {
-          setAuthenticated(false);
-          setUser(null);
-        }
+        setUser(response.data);
+        setLoading(false);
       })
-      .catch((error) => {
-        setAuthenticated(false);
-        setUser(null);
-      })
-      .finally(() => {
+      .catch(() => {
         setLoading(false);
       });
   }, []);
 
-  const value = {
-    authenticated,
-    user,
-    loading,
-  };
+  if (loading) {
+    return <CircularProgress />; // 또는 다른 로딩 인디케이터
+  }
 
-  console.log(value);
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  );
 };
+
+export const useAuth = () => useContext(AuthContext);
