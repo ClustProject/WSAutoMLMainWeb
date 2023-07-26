@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
@@ -25,7 +26,6 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * 구글 로그인 과정에서의 CORS 문제를 해결합니다.
      */
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // 모든 요청 경로에 대해
@@ -33,5 +33,11 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*") // 모든 HTTP 메소드
                 .allowedHeaders("Authorization", "Content-Type") // 허용할 헤더
                 .allowCredentials(true);
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
     }
 }
