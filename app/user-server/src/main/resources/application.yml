@@ -38,6 +38,9 @@ spring:
             scope: profile, email
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+  web:
+    resources:
+      static-locations: classpath:/static/, classpath:/public/, classpath:/resources/, classpath:/META-INF/resources/, file:/opt/files/
 
 logging:
   level:
@@ -53,8 +56,8 @@ spring:
 spring:
   config:
     activate:
-      # on-profile: local # local settings
-      on-profile: prod
+      on-profile: local # local settings
+      # on-profile: prod
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl
