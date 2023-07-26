@@ -27,7 +27,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/health-check").permitAll() // health check 302 error 제거
-                .antMatchers("/", "/loginPage", "/css/**", "/js/**", "/images/**").permitAll() // 로그인 페이지는 모든 사용자가 접근 가능
                 .antMatchers("/login/oauth2/code/google").permitAll()
                 .antMatchers("/**").access("hasRole('USER') or hasRole('MANAGER') or hasRole('ADMIN')")
                 .anyRequest().authenticated() // 나머지 페이지는 인증된 사용자만 접근 가능
