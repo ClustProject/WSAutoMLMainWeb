@@ -25,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .and()
+                .exceptionHandling().accessDeniedPage("/") // 권한이 없는 사용자가 접근을 시도했을 때 리다이렉트될 페이지
+                .and()
                 .oauth2Login()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
