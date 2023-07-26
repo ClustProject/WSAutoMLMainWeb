@@ -38,9 +38,6 @@ spring:
             scope: profile, email
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
-  web:
-    resources:
-      static-locations: classpath:/static/, classpath:/public/, classpath:/resources/, classpath:/META-INF/resources/, file:/opt/files/
 
 logging:
   level:
