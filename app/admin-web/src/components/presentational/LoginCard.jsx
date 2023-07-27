@@ -9,7 +9,7 @@ export default function LoginCard() {
   return (
     <Card
       sx={{
-        width: 350,
+        width: 450,
       }}
     >
       <CardContent>
@@ -21,8 +21,8 @@ export default function LoginCard() {
             textAlign: "center",
           }}
         >
-          관리자 전용 페이지로 허가 받은 <br />
-          사용자만 접속이 가능합니다.
+          WS-AutoML 관리자 전용 페이지로 <br />
+          허가 받은 사용자만 접속이 가능합니다.
         </Typography>
         <Box
           sx={{

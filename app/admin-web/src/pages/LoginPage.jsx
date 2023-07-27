@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
+import "./LoginPage.css";
 
-import LoginContainer from '../components/containers/LoginContainer'
+import LoginContainer from "../components/containers/LoginContainer";
 
 const TITLE = "WS-AutoML 관리자 페이지 | 로그인";
 
 export default function LoginPage() {
-
   useEffect(() => {
-    document.title = TITLE
+    document.title = TITLE;
   }, []);
 
   return (
-    <>
-      <LoginContainer/>
-    </>
+    <div className='login-page-background'>
+      <LoginContainer />
+    </div>
   );
 }
