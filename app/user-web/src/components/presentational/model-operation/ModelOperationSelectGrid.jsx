@@ -11,11 +11,13 @@ import {
   Button,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import DownloadIcon from "@mui/icons-material/Download";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import DownloadIcon from "@mui/icons-material/DownloadRounded";
+import EditIcon from "@mui/icons-material/EditRounded";
+import DeleteIcon from "@mui/icons-material/DeleteRounded";
+import EjectIcon from "@mui/icons-material/EjectRounded";
 import { deleteModelLearningResult } from "../../../api/api";
 import { deleteFileFromS3 } from "../../../api/s3";
+import ModelTimeSeriesProcesser from "./ModelTimeSeriesProcesser";
 
 function formatDate(isoDateString) {
   const date = new Date(isoDateString);
@@ -30,15 +32,18 @@ const ModelOperationSelectGrid = (props) => {
   const [rows, setRows] = useState([]);
   const [selectedRowId, setSelectedRowId] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [selectedRowData, setSelectedRowData] = useState(null);
+  const [openTimeSeriesModal, setOpenTimeSeriesModal] = useState(false);
   const [toBeDeletedId, setToBeDeletedId] = useState(null);
   const [toBeDeletedS3, setToBeDeletedS3] = useState(null);
+
   const navigate = useNavigate();
 
   const columns = [
     {
       field: "modelNm",
       headerName: "모델명",
-      flex: 1,
+      flex: 0.9,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -46,7 +51,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "date",
       headerName: "학습날짜",
-      flex: 1,
+      flex: 0.9,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -70,7 +75,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "function",
       headerName: "기능",
-      flex: 1,
+      flex: 1.2,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -120,6 +125,29 @@ const ModelOperationSelectGrid = (props) => {
               <DownloadIcon
                 sx={{ color: isCompleted ? "#6495ED" : "inherit" }}
               />
+            </IconButton>
+            <IconButton
+              aria-label='utilization'
+              onClick={
+                isCompleted
+                  ? () => {
+                      setSelectedRowData({
+                        argParamJSON: JSON.parse(params.row.argParam),
+                        varNmJSON: JSON.parse(params.row.varNm),
+                        varTgYnJSON: JSON.parse(params.row.varTgYn),
+                        varUseYnJSON: JSON.parse(params.row.varUseYn),
+                        ...params.row,
+                      });
+                      setOpenTimeSeriesModal(true);
+                    }
+                  : () => {
+                      alert(
+                        "모델 학습이 완료된 모델만 모델 활용이 가능합니다.."
+                      );
+                    }
+              }
+            >
+              <EjectIcon sx={{ color: isCompleted ? "#4169E1" : "inherit" }} />
             </IconButton>
           </div>
         );
@@ -238,6 +266,11 @@ const ModelOperationSelectGrid = (props) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <ModelTimeSeriesProcesser
+        open={openTimeSeriesModal}
+        onClose={() => setOpenTimeSeriesModal(false)}
+        selectedRowData={selectedRowData}
+      />
     </>
   );
 };
