@@ -24,6 +24,7 @@ import {
   StyledTableHeaderCell,
 } from "../../StyledTableComponents";
 import { useAuth } from "../../../authentication/AuthContext";
+import DataDistributionChartBox from "./DataDistributionChartBox";
 
 const SWITCH_LABEL = { inputProps: { "aria-label": "Switch" } };
 const CHECKBOX_LABEL = { inputProps: { "aria-label": "CheckBox" } };
@@ -65,14 +66,6 @@ export default function DataNavigationContentTable(props) {
   const closeModal = () => {
     setIsOpen(false);
     setValue(0);
-  };
-
-  // 각 이미지 URL과 해당 설명을 매핑하는 객체 생성
-  const imageDescriptions = {
-    "scatter.png": "수치형 변수에 대한 Scatter Plot 이미지 입니다.",
-    "count.png": "Count Plot에 대한 이미지 입니다.",
-    "box.png": "Box Plot에 대한 이미지 입니다.",
-    "density.png": "Density Plot에 대한 이미지 입니다.",
   };
 
   // 모달 내부에 탭 컴포넌트를 사용하기 위한 함수
@@ -294,80 +287,13 @@ export default function DataNavigationContentTable(props) {
           </TableBody>
         </StyledTable>
       </TableContainer>
-      <Modal
-        open={isOpen}
-        onClose={closeModal}
-        aria-labelledby='modal-title'
-        aria-describedby='modal-description'
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "45%",
-            height: "75%",
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 2,
-            overflow: "auto",
-            borderRadius: "10px", // 모서리를 둥글게 설정
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "10px",
-            }}
-          >
-            <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
-              데이터 분포
-            </Typography>
-            <IconButton onClick={closeModal}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant='fullWidth'
-            aria-label='Plot'
-          >
-            {imageUrl.map((url) => {
-              let label = "";
-              if (url.endsWith("scatter.png")) {
-                label = "Scatter Plot";
-              } else if (url.endsWith("count.png")) {
-                label = "Count Plot";
-              } else if (url.endsWith("box.png")) {
-                label = "Box Plot";
-              } else if (url.endsWith("density.png")) {
-                label = "Density Plot";
-              }
-
-              return <Tab label={label} />;
-            })}
-          </Tabs>
-          {imageUrl.map((url, index) => (
-            <TabPanel value={value} index={index}>
-              <Typography variant='subtitle2'>
-                {imageDescriptions[url.split(" ").pop()]}
-              </Typography>
-              <img
-                src={url}
-                alt={`S3 이미지 ${index + 1}`}
-                style={{
-                  display: "block",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                }}
-              />
-            </TabPanel>
-          ))}
-        </Box>
-      </Modal>
+      <DataDistributionChartBox
+        isOpen={isOpen}
+        closeModal={closeModal}
+        imageUrl={imageUrl}
+        value={value}
+        handleChange={handleChange}
+      />
     </>
   );
 }

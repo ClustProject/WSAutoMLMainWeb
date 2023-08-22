@@ -36,11 +36,18 @@ const ModelPreviewBox = (props) => {
           .filter(([, value]) => value === "Y")
           .map(([key]) => selectedRowData.varNmJSON[key]);
 
-        setTargetColumns(
-          Object.entries(selectedRowData.varTgYnJSON)
-            .filter(([, value]) => value === "Y")
-            .map(([key]) => selectedRowData.varNmJSON[key])
-        );
+        const calculatedTargetColumns = Object.entries(
+          selectedRowData.varTgYnJSON
+        )
+          .filter(([, value]) => value === "Y")
+          .map(([key]) => selectedRowData.varNmJSON[key]);
+
+        setTargetColumns(calculatedTargetColumns);
+
+        const reorderedUseColumns = [
+          ...calculatedTargetColumns,
+          ...useColumns.filter((col) => !calculatedTargetColumns.includes(col)),
+        ];
 
         const reader = new FileReader();
         reader.onload = function(event) {
@@ -51,7 +58,7 @@ const ModelPreviewBox = (props) => {
             complete: (result) => {
               const filteredData = result.data.map((row) =>
                 Object.fromEntries(
-                  useColumns.map((column) => [column, row[column]])
+                  reorderedUseColumns.map((column) => [column, row[column]])
                 )
               );
               setData(filteredData);
@@ -74,8 +81,6 @@ const ModelPreviewBox = (props) => {
     <>
       <TableContainer
         sx={{
-          width: "400px",
-          height: "300px",
           border: "1px solid lightgray",
           overflow: "scroll",
           position: "relative",
@@ -114,7 +119,7 @@ const ModelPreviewBox = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.slice(0, 20).map((row, rowIndex) => (
+              {data.slice(0, 5).map((row, rowIndex) => (
                 <TableRow key={rowIndex}>
                   {Object.values(row).map((value, valueIndex) => (
                     <StyledTableCell key={valueIndex}>{value}</StyledTableCell>

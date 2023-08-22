@@ -21,7 +21,8 @@ import LearnModelRequestReducer, {
 } from "./select-algorithm/reducers/LearnModelRequestReducer";
 import SelectAlgorithmContent from "./select-algorithm/SelectAlgorithmContent";
 import InfoIcon from "@mui/icons-material/Info";
-import SetModelName from "./SetModelName";
+import SetModelName from "./select-algorithm/SetModelName";
+import ModelLearningStepperBox from "./ModelLearningStepperBox";
 
 export const CONTENT_NAME_HEIGHT = "50px";
 export const CONTENT_BACKGROUND_COLOR = "#F4F8F9";
@@ -120,28 +121,6 @@ const NextStepButton = (props) => {
         payload={payload}
       />
     </>
-  );
-};
-
-const StepperBox = (props) => {
-  return (
-    <Box
-      sx={{
-        marginTop: "25px",
-      }}
-    >
-      <Stepper
-        activeStep={props.activeStep - 1} // 0부터 시작
-        // nonLinear
-        alternativeLabel
-      >
-        {Object.values(STEP_COUNT_AND_NAME_MAP).map((it) => (
-          <Step key={it}>
-            <StepLabel>{it}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-    </Box>
   );
 };
 
@@ -344,7 +323,10 @@ const ModelLearningContent = () => {
       />
       <Box sx={{ width: "100%", marginTop: "1rem", marginBottom: "1rem" }}>
         <Paper elevation={3} sx={{ p: "1rem", height: 100 }}>
-          <StepperBox activeStep={activeStep} />
+          <ModelLearningStepperBox
+            activeStep={activeStep}
+            steps={STEP_COUNT_AND_NAME_MAP}
+          />
         </Paper>
       </Box>
       <StepNameBox activeStep={activeStep} />
