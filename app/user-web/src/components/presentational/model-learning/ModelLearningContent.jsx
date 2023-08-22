@@ -1,16 +1,7 @@
-import {
-  Divider,
-  StepLabel,
-  Tooltip,
-  Typography,
-  IconButton,
-  Paper,
-} from "@mui/material";
+import { Divider, Tooltip, Typography, IconButton, Paper } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Step from "@mui/material/Step";
-import Stepper from "@mui/material/Stepper";
 import { styled } from "@mui/system";
 import React, { useEffect, useReducer, useState } from "react";
 import DataInputBox from "./data-input/DataInputBox";

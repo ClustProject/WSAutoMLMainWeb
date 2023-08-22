@@ -4,19 +4,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
 
-import {
-  Checkbox,
-  Paper,
-  Switch,
-  Modal,
-  Box,
-  Tabs,
-  Tab,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Checkbox, Paper, Switch } from "@mui/material";
 import TableBody from "@mui/material/TableBody";
 import {
   StyledTable,
@@ -66,27 +55,6 @@ export default function DataNavigationContentTable(props) {
   const closeModal = () => {
     setIsOpen(false);
     setValue(0);
-  };
-
-  // 모달 내부에 탭 컴포넌트를 사용하기 위한 함수
-  const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
-
-    return (
-      <div
-        role='tabpanel'
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ pt: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
   };
 
   // 상태값을 추가하여 현재 선택된 탭을 추적
