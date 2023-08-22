@@ -10,6 +10,10 @@ ECS
 
 - [Stickey Session](ecs/stickey-session.md)
 
+SSL
+
+- [HTTPS Activation](ssl/https_activation.md)
+
 ### 노트
 
-- [2022.08.07 장애 기록 및 회고](2022_08_07.md) 
+- [2022.08.07 장애 기록 및 회고](2022_08_07.md)
