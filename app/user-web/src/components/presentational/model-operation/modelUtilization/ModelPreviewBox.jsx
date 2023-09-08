@@ -5,7 +5,7 @@ import {
   StyledTable,
   StyledTableCell,
   StyledTableHeaderCell,
-} from "../StyledTableComponents";
+} from "../../StyledTableComponents";
 import {
   TableContainer,
   TableHead,

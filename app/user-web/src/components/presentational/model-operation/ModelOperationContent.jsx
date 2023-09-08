@@ -88,13 +88,32 @@ const ModelOperationContent = () => {
   useEffect(() => {
     getModelLearningResult()
       .then((it) => {
-        console.log(it);
-        setData(it);
+        if (it) {
+          // 데이터가 변경되었을 경우만 setData 호출
+          setData(it);
+        }
       })
       .catch((error) => {
-        console.error(error);
-        setData([]);
+        if (error.response && error.response.status !== 304) {
+          console.error(error);
+        }
       });
+
+    const interval = setInterval(() => {
+      getModelLearningResult()
+        .then((it) => {
+          if (it) {
+            setData(it);
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status !== 304) {
+            console.error(error);
+          }
+        });
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [user]);
 
   // step1

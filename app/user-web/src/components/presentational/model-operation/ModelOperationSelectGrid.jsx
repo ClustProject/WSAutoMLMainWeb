@@ -17,7 +17,7 @@ import DeleteIcon from "@mui/icons-material/DeleteRounded";
 import EjectIcon from "@mui/icons-material/EjectRounded";
 import { deleteModelLearningResult } from "../../../api/api";
 import { deleteFileFromS3 } from "../../../api/s3";
-import ModelTimeSeriesProcesser from "./ModelTimeSeriesProcesser";
+import ModelTimeSeriesProcesser from "./modelUtilization/ModelTimeSeriesProcesser";
 
 function formatDate(isoDateString) {
   const date = new Date(isoDateString);
@@ -215,11 +215,6 @@ const ModelOperationSelectGrid = (props) => {
       setSelectedRowId(firstRowId);
     }
   }, [rows]);
-
-  // rows가 비어있는 경우를 처리
-  // if (!rows || rows.length === 0) {
-  //   return <CircularProgress />;
-  // }
 
   return (
     <>
