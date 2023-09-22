@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Box, Typography } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 const UploadFile = () => {
   const [fileName, setFileName] = useState("");
@@ -22,8 +23,12 @@ const UploadFile = () => {
   };
 
   return (
-    <Box display='flex' alignItems='center'>
-      <Button variant='contained' component='label'>
+    <Box display='flex' alignItems='center' sx={{ marginBlock: "10px" }}>
+      <Button
+        variant='contained'
+        component='label'
+        startIcon={<CloudUploadIcon />}
+      >
         파일 업로드
         <input type='file' hidden onChange={handleUpload} accept='.csv' />
       </Button>

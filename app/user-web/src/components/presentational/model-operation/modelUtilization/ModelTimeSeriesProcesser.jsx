@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ModelPreviewBox from "./ModelPreviewBox";
-
+import CloudSyncIcon from "@mui/icons-material/CloudSync";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import TimeSeriesProcesserImage1 from "./TimeSeriesProcesser1.png";
@@ -31,8 +31,8 @@ const ImageSwiper = () => {
     >
       <Box
         sx={{
-          marginRight: "15px",
-          marginLeft: "15px",
+          marginRight: "5px",
+          marginLeft: "5px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -45,13 +45,17 @@ const ImageSwiper = () => {
         <img
           src={TimeSeriesProcesserImage1}
           alt='Time Series Processor 1'
-          style={{ height: "300px", width: "900px" }}
+          style={{
+            height: "300px",
+            width: "99%",
+            border: "1px solid gainsboro",
+          }}
         />
       </Box>
       <Box
         sx={{
-          marginRight: "15px",
-          marginLeft: "15px",
+          marginRight: "5px",
+          marginLeft: "5px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -64,7 +68,11 @@ const ImageSwiper = () => {
         <img
           src={TimeSeriesProcesserImage2}
           alt='Time Series Processor 2'
-          style={{ height: "300px", width: "900px" }}
+          style={{
+            height: "300px",
+            width: "99%",
+            border: "1px solid gainsboro",
+          }}
         />
       </Box>
     </AliceCarousel>
@@ -76,6 +84,7 @@ const ModelTimeSeriesProcesser = (props) => {
   const [openDataInterpolation, setOpenDataInterpolation] = useState(false);
   const [openDataPrediction, setOpenDataPrediction] = useState(false);
   const [predictionProgress, setPredictionProgress] = useState(0); // 예측 진행률 상태 추가
+  const [useImputedData, setUseImputedData] = useState(false);
 
   const startPrediction = () => {
     setPredictionProgress(0);
@@ -120,13 +129,16 @@ const ModelTimeSeriesProcesser = (props) => {
             <Box
               display='flex'
               flexDirection='column'
-              gap={1}
               pr={2}
               sx={{ width: "30%" }}
             >
               {selectedRowData ? (
-                <Chip label={`모델명: ${selectedRowData.modelNm}`} />
+                <Chip
+                  label={`모델명: ${selectedRowData.modelNm}`}
+                  sx={{ marginBottom: "30px" }}
+                />
               ) : null}
+
               <ModelPreviewBox
                 selectedRowData={selectedRowData ? selectedRowData : null}
               />
@@ -134,6 +146,7 @@ const ModelTimeSeriesProcesser = (props) => {
               <Box variant='outlined'>
                 <Button
                   variant='outlined'
+                  startIcon={<CloudSyncIcon />}
                   onClick={() => setOpenDataInterpolation(true)}
                 >
                   데이터 보간
@@ -152,7 +165,7 @@ const ModelTimeSeriesProcesser = (props) => {
               <Box
                 display='flex'
                 flexDirection='row'
-                gap={1}
+                gap={2}
                 pl={2}
                 alignItems='center'
               >
@@ -160,6 +173,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   variant='outlined'
                   onClick={() => {
                     startPrediction();
+                    setUseImputedData(false);
                   }}
                 >
                   기존데이터로 예측 시작
@@ -169,6 +183,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   variant='outlined'
                   onClick={() => {
                     setOpenDataPrediction(true);
+                    setUseImputedData(false);
                   }}
                 >
                   기존데이터 예측 결과
@@ -184,7 +199,7 @@ const ModelTimeSeriesProcesser = (props) => {
               <Box
                 display='flex'
                 flexDirection='row'
-                gap={1}
+                gap={2}
                 pl={2}
                 alignItems='center'
               >
@@ -192,6 +207,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   variant='outlined'
                   onClick={() => {
                     startPrediction();
+                    setUseImputedData(true);
                   }}
                 >
                   보간데이터로 예측 시작
@@ -201,6 +217,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   variant='outlined'
                   onClick={() => {
                     setOpenDataPrediction(true);
+                    setUseImputedData(true);
                   }}
                 >
                   보간데이터 예측 결과
@@ -224,6 +241,7 @@ const ModelTimeSeriesProcesser = (props) => {
       <ModelDataPredictionBox
         open={openDataPrediction}
         onClose={() => setOpenDataPrediction(false)}
+        useImputedData={useImputedData}
       />
     </>
   );

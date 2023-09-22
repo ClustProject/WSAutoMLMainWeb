@@ -13,7 +13,7 @@ import { styled } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import ModelOperationResultBox from "./ModelOperationResultBox";
 import ModelOperationSelectGrid from "./ModelOperationSelectGrid";
-import ModelOperationResultChart from "./ModelOperationResultChart";
+import ModelOperationResultChart from "./modelChart/ModelOperationResultChart";
 import ModelOperationDashboard from "./ModelOperationDashboard";
 import { getModelLearningResult } from "../../../api/api";
 import { useAuth } from "../../authentication/AuthContext";

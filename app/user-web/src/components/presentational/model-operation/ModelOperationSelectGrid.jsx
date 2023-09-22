@@ -75,7 +75,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "function",
       headerName: "기능",
-      flex: 1.2,
+      flex: 2,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",

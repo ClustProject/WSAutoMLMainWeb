@@ -47,6 +47,45 @@ function deleteModelLearningResult(id) {
   return axios.delete(`/mlResult/${id}`).then((response) => response.data);
 }
 
+// 콘존 데이터 구간명 리스트
+function getConzonRowNames() {
+  return axios
+    .get("/conzon/row/id/distinct")
+    .then((response) => response.data.data);
+}
+
+// 콘존 데이터 구간별 날짜 리스트
+function getConzonRowDatesById() {
+  return axios
+    .get("/conzon/row/date/distinct")
+    .then((response) => response.data.data);
+}
+
+function getConzonRowData(conzonId, conzonDate) {
+  return axios
+    .get(`/conzon/row/${conzonId}/${conzonDate}`)
+    .then((response) => response.data.data);
+}
+
+function getConzonImputatedNames() {
+  return axios
+    .get("/conzon/imputated/id/distinct")
+    .then((response) => response.data.data);
+}
+
+// 콘존 데이터 구간별 날짜 리스트
+function getConzonImputatedDatesById() {
+  return axios
+    .get("/conzon/imputated/date/distinct")
+    .then((response) => response.data.data);
+}
+
+function getConzonImputatedData(conzonId, conzonDate) {
+  return axios
+    .get(`/conzon/imputated/${conzonId}/${conzonDate}`)
+    .then((response) => response.data.data);
+}
+
 export {
   getMetadatas,
   getFeatureSelectionContent,
@@ -54,4 +93,10 @@ export {
   getModelLearningResult,
   getUserInfo,
   deleteModelLearningResult,
+  getConzonRowNames,
+  getConzonRowDatesById,
+  getConzonRowData,
+  getConzonImputatedNames,
+  getConzonImputatedDatesById,
+  getConzonImputatedData,
 };

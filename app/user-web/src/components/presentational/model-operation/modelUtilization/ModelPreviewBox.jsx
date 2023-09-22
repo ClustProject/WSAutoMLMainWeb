@@ -119,7 +119,7 @@ const ModelPreviewBox = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.slice(0, 5).map((row, rowIndex) => (
+              {data.slice(0, 6).map((row, rowIndex) => (
                 <TableRow key={rowIndex}>
                   {Object.values(row).map((value, valueIndex) => (
                     <StyledTableCell key={valueIndex}>{value}</StyledTableCell>
