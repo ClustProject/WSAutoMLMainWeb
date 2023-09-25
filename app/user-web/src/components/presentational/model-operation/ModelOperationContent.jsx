@@ -13,7 +13,7 @@ import { styled } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import ModelOperationResultBox from "./ModelOperationResultBox";
 import ModelOperationSelectGrid from "./ModelOperationSelectGrid";
-import ModelOperationResultChart from "./ModelOperationResultChart";
+import ModelOperationResultChart from "./modelChart/ModelOperationResultChart";
 import ModelOperationDashboard from "./ModelOperationDashboard";
 import { getModelLearningResult } from "../../../api/api";
 import { useAuth } from "../../authentication/AuthContext";
@@ -88,13 +88,32 @@ const ModelOperationContent = () => {
   useEffect(() => {
     getModelLearningResult()
       .then((it) => {
-        console.log(it);
-        setData(it);
+        if (it) {
+          // 데이터가 변경되었을 경우만 setData 호출
+          setData(it);
+        }
       })
       .catch((error) => {
-        console.error(error);
-        setData([]);
+        if (error.response && error.response.status !== 304) {
+          console.error(error);
+        }
       });
+
+    const interval = setInterval(() => {
+      getModelLearningResult()
+        .then((it) => {
+          if (it) {
+            setData(it);
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status !== 304) {
+            console.error(error);
+          }
+        });
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, [user]);
 
   // step1

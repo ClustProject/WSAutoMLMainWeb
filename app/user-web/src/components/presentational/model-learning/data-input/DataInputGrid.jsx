@@ -117,7 +117,11 @@ const DataInputGrid = (props) => {
 
   // rows가 비어있는 경우를 처리
   if (!rows || rows.length === 0) {
-    return <CircularProgress />;
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (

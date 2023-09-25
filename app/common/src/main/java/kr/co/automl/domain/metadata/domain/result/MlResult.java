@@ -66,6 +66,12 @@ public class MlResult {
     @Column(name = "model_url")
     private String modelUrl;
 
+    @Column(name = "pred_row_state")
+    private String predRowState;
+
+    @Column(name = "pred_imp_state")
+    private String predImpState;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -77,7 +83,8 @@ public class MlResult {
     @Builder
     private MlResult(Long id, String varNm, String varTgYn, String varUseYn, String argNm, String argParam,
             String modelNm, String metric,
-            LocalDateTime date, String state, String modelUrl, User user, DataSet dataSet) {
+            LocalDateTime date, String state, String modelUrl, String predRowState, String predImpState, User user,
+            DataSet dataSet) {
         this.id = id;
         this.varNm = varNm;
         this.varTgYn = varTgYn;
@@ -89,6 +96,8 @@ public class MlResult {
         this.date = date;
         this.state = state;
         this.modelUrl = modelUrl;
+        this.predRowState = predRowState;
+        this.predImpState = predImpState;
         this.user = user;
         this.dataSet = dataSet;
     }
@@ -111,6 +120,8 @@ public class MlResult {
                 .date(this.date)
                 .state(this.state)
                 .modelUrl(this.modelUrl)
+                .predRowState(this.predRowState)
+                .predImpState(this.predImpState)
                 .build();
     }
 

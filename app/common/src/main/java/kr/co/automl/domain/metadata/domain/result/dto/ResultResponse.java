@@ -5,7 +5,8 @@ import java.time.LocalDateTime;
 import lombok.Builder;
 
 public record ResultResponse(long id, String varNm, String varTgYn, String varUseYn, String argNm, String argParam,
-        String modelNm, String metric, LocalDateTime date, String state, String modelUrl) {
+        String modelNm, String metric, LocalDateTime date, String state, String modelUrl, String predRowState,
+        String predImpState) {
     @Builder
     public ResultResponse {
 
