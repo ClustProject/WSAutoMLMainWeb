@@ -43,7 +43,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "modelNm",
       headerName: "모델명",
-      flex: 0.9,
+      flex: 1,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -51,7 +51,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "date",
       headerName: "학습날짜",
-      flex: 0.9,
+      flex: 1,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -75,7 +75,7 @@ const ModelOperationSelectGrid = (props) => {
     {
       field: "function",
       headerName: "기능",
-      flex: 2,
+      flex: 1.5,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -223,6 +223,8 @@ const ModelOperationSelectGrid = (props) => {
           height: 500,
           width: "44%",
           marginRight: "1%",
+          overflowX: "auto",
+          borderRadius: "4px",
           "& .super-app-theme--header": {
             backgroundColor: "#7986CB",
             color: "#FFFFFF",
@@ -240,6 +242,7 @@ const ModelOperationSelectGrid = (props) => {
           hideFooter
           headerHeight={50}
           autoHeight={false}
+          sx={{ minWidth: "600px" }}
         />
       </Box>
       <Dialog
