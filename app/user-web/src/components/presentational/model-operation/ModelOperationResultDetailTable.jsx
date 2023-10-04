@@ -18,8 +18,6 @@ const ModelOperationResultDetailTable = (props) => {
   const [target, setTarget] = useState(null);
   const [data, setData] = useState([]);
 
-  console.log(data);
-
   useEffect(() => {
     if (selectedRow != null) {
       const parsedData = {

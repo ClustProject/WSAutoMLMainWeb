@@ -35,10 +35,10 @@ const DataNavigationContent = (props) => {
       url: downloadUrl,
       user_id: user.id,
     };
-    console.log("Sending data:", data);
+    // console.log("Sending data:", data);
 
     if (!resultId) {
-      console.log("data_info");
+      // console.log("data_info");
 
       fetch("http://52.79.123.200:8797/v1/data_info", {
         method: "POST",
@@ -49,13 +49,13 @@ const DataNavigationContent = (props) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Received data:", data);
+          // console.log("Received data:", data);
           setContent(data);
           setResultId(data.result_id);
         })
         .catch((error) => console.error("Error occurred:", error));
     } else {
-      console.log("data_edit");
+      // console.log("data_edit");
 
       fetch("http://52.79.123.200:8797/v1/data_edit", {
         method: "POST",
@@ -66,7 +66,7 @@ const DataNavigationContent = (props) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Received data:", data);
+          // console.log("Received data:", data);
           setContent(data);
         })
         .catch((error) => console.error("Error occurred:", error));
@@ -82,7 +82,7 @@ const DataNavigationContent = (props) => {
       url: downloadUrl,
     };
 
-    console.log("Sending data:", data);
+    // console.log("Sending data:", data);
     setIsOpen(true);
 
     fetch("http://52.79.123.200:8797/v1/heatmap", {
@@ -94,7 +94,7 @@ const DataNavigationContent = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         setHeatMapData(data);
       })
       .catch((error) => console.error("Error occurred:", error));

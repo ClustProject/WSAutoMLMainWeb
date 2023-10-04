@@ -26,8 +26,6 @@ const SpaceBetweenFlexBox = styled(Box)({
 const ModelDataInterpolationBox = (props) => {
   const { open, onClose, selectedRowData } = props;
 
-  console.log(selectedRowData);
-
   return (
     <>
       <Dialog open={open} onClose={onClose} fullWidth maxWidth='sm'>

@@ -10,7 +10,7 @@ const FeatureSelectionContent = (props) => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log("sending data:", payload);
+    // console.log("sending data:", payload);
 
     fetch("http://52.79.123.200:8797/v1/feature_importance", {
       method: "POST",
@@ -21,7 +21,7 @@ const FeatureSelectionContent = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         setData(data);
       })
       .catch((error) => console.error("Error occurred:", error));

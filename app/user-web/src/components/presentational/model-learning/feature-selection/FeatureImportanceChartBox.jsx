@@ -3,7 +3,6 @@ import { Column } from "@ant-design/plots";
 
 const FeatureImportanceChartBox = (props) => {
   const rawData = props;
-  console.log(rawData);
   const data = Object.entries(rawData.data.data[0]).map(([key, value]) => ({
     variable_name: key,
     importance: value,

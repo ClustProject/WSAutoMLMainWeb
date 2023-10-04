@@ -38,7 +38,7 @@ export default function DataNavigationContentTable(props) {
       0,
       postAmazonPart.lastIndexOf(".")
     );
-    console.log(fileNameWithoutExtension);
+    // console.log(fileNameWithoutExtension);
 
     const baseImageUrl = `https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/${fileNameWithoutExtension} Col ${idx}`;
     let urls = [];
@@ -64,7 +64,6 @@ export default function DataNavigationContentTable(props) {
     setValue(newValue);
   };
 
-  console.log(selectedData);
   useEffect(() => {
     props.setPayload(selectedData);
   }, [data]);
@@ -135,7 +134,6 @@ export default function DataNavigationContentTable(props) {
       }
     };
   }
-  console.log(data);
 
   function handleNextButton(copyOfData) {
     if (anyTargetVariableChecked(copyOfData)) {
