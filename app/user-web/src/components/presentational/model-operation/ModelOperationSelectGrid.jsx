@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import DownloadIcon from "@mui/icons-material/DownloadRounded";
 import EditIcon from "@mui/icons-material/EditRounded";
 import DeleteIcon from "@mui/icons-material/DeleteRounded";
-import EjectIcon from "@mui/icons-material/EjectRounded";
+import PlayCircleOutLineIcon from "@mui/icons-material/PlayCircleOutline";
 import { deleteModelLearningResult } from "../../../api/api";
 import { deleteFileFromS3 } from "../../../api/s3";
 import ModelTimeSeriesProcesser from "./modelUtilization/ModelTimeSeriesProcesser";
@@ -73,9 +73,9 @@ const ModelOperationSelectGrid = (props) => {
       align: "center",
     },
     {
-      field: "function",
-      headerName: "기능",
-      flex: 1.5,
+      field: "manage",
+      headerName: "모델 관리",
+      flex: 1,
       headerClassName: "super-app-theme--header",
       headerAlign: "center",
       align: "center",
@@ -126,6 +126,21 @@ const ModelOperationSelectGrid = (props) => {
                 sx={{ color: isCompleted ? "#6495ED" : "inherit" }}
               />
             </IconButton>
+          </div>
+        );
+      },
+    },
+    {
+      field: "utilization",
+      headerName: "모델 활용",
+      flex: 0.7,
+      headerClassName: "super-app-theme--header",
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => {
+        const isCompleted = params.row.state === "학습완료";
+        return (
+          <div>
             <IconButton
               aria-label='utilization'
               onClick={
@@ -147,7 +162,9 @@ const ModelOperationSelectGrid = (props) => {
                     }
               }
             >
-              <EjectIcon sx={{ color: isCompleted ? "#4169E1" : "inherit" }} />
+              <PlayCircleOutLineIcon
+                sx={{ color: isCompleted ? "#4169E1" : "inherit" }}
+              />
             </IconButton>
           </div>
         );
@@ -201,7 +218,7 @@ const ModelOperationSelectGrid = (props) => {
     // 선택한 행의 mlResultId의 값 전송
     if (selectedRowId) {
       const selectedRow = rows.find((row) => row.id === selectedRowId);
-      console.log(selectedRow);
+
       props.onRowSelect(selectedRow);
     }
   }, [selectedRowId]);
@@ -229,6 +246,8 @@ const ModelOperationSelectGrid = (props) => {
             backgroundColor: "#7986CB",
             color: "#FFFFFF",
           },
+          boxShadow:
+            "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
         }}
       >
         <DataGrid
@@ -242,7 +261,7 @@ const ModelOperationSelectGrid = (props) => {
           hideFooter
           headerHeight={50}
           autoHeight={false}
-          sx={{ minWidth: "600px" }}
+          sx={{ minWidth: "650px" }}
         />
       </Box>
       <Dialog

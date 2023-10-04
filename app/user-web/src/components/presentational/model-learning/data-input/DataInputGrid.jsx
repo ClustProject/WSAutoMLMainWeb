@@ -51,7 +51,6 @@ const DataInputGrid = (props) => {
   useEffect(() => {
     getMetadatas()
       .then((it) => {
-        console.log(it);
         setData(it);
       })
       .catch((error) => {
@@ -111,7 +110,6 @@ const DataInputGrid = (props) => {
   useEffect(() => {
     // rows가 업데이트되면 DataGrid를 다시 렌더링합니다.
     if (rows.length > 0) {
-      console.log(rows);
     }
   }, [rows]);
 

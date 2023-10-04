@@ -13,7 +13,6 @@ function FileDataDetailCard() {
   useEffect(() => {
     getMetadatas()
       .then((it) => {
-        console.log(it);
         const filteredData = it.filter((item) => item.dataSet.id === numId);
         setData(filteredData);
       })

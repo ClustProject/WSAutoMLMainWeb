@@ -2,15 +2,7 @@ import React from "react";
 import { Heatmap } from "@ant-design/plots";
 
 const DataNavigationHeatMapChartBox = (props) => {
-  // const json = require("./data-heatmap-chart2.json");
-
-  // console.log(JSON.stringify(json));
-
-  // const data = [];
-
   const json = props.heatMapData;
-
-  console.log(JSON.stringify(json));
 
   const data = [];
 

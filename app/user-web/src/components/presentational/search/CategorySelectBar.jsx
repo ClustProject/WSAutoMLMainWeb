@@ -134,9 +134,6 @@ export default function CategorySelectBar(props) {
       });
   }, [dateRange, searchKeyword]);
 
-  console.log(data);
-  console.log(dateRange);
-
   return (
     <>
       <Box

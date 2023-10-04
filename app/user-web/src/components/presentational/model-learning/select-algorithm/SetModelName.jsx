@@ -37,7 +37,7 @@ function SetModelName(props) {
 
     delete data["selected_var"];
 
-    console.log("Sending data:", data);
+    // console.log("Sending data:", data);
 
     fetch("http://52.79.123.200:8797/v1/ml", {
       method: "POST",
@@ -48,7 +48,7 @@ function SetModelName(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
       })
       .catch((error) => console.error("Error occurred:", error));
   }

@@ -169,8 +169,6 @@ const ModelLearningContent = () => {
   const [activeStep, setActiveStep] = useState(defaultActiveStep);
   const [payload, setPayload] = useState(null);
 
-  console.log("payload: ", payload);
-
   function decreaseStep() {
     setActiveStep(activeStep - 1);
   }

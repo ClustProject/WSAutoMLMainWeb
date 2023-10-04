@@ -24,9 +24,8 @@ const SpaceBetweenFlexBox = styled(Box)({
 });
 
 const ModelDataInterpolationBox = (props) => {
-  const { open, onClose, selectedRowData } = props;
-
-  console.log(selectedRowData);
+  const { open, onClose } = props;
+  // const { open, onClose, selectedRowData } = props;
 
   return (
     <>

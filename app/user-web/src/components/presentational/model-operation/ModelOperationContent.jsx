@@ -118,7 +118,7 @@ const ModelOperationContent = () => {
 
   // step1
   const [selectedRow, setSelectedRow] = useState(null);
-  console.log(selectedRow);
+
   const onRowSelect = (row) => {
     setSelectedRow(row);
   };

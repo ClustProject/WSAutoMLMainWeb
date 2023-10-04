@@ -65,7 +65,6 @@ const FeatureSelectionContentTable = (props) => {
       updateSelectedVariables(copyOfData);
     };
   }
-  console.log(data);
 
   function updateSelectedVariables(copyOfData) {
     const newSelectedVar = copyOfData
