@@ -13,7 +13,13 @@ import {
 const SWITCH_LABEL = { inputProps: { "aria-label": "Switch" } };
 
 const FeatureSelectionContentTable = (props) => {
-  const { setAnyTargetVariableUsed, json, payload, setPayload } = props;
+  const {
+    setAnyTargetVariableUsed,
+    json,
+    payload,
+    setPayload,
+    setSelectedFeatures,
+  } = props;
 
   const [data, setData] = useState([]);
 
@@ -75,7 +81,7 @@ const FeatureSelectionContentTable = (props) => {
       ...payload,
       feature: newSelectedVar,
     });
-
+    setSelectedFeatures(newSelectedVar);
     setAnyTargetVariableUsed(newSelectedVar.length > 0);
   }
 

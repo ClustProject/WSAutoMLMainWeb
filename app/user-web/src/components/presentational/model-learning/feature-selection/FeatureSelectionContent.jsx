@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const FeatureSelectionContent = (props) => {
   const { payload, setPayload, setAnyTargetVariableUsed } = props;
   const [data, setData] = useState(null);
-
+  const [selectedFeatures, setSelectedFeatures] = useState([]);
   useEffect(() => {
     // console.log("sending data:", payload);
 
@@ -54,12 +54,16 @@ const FeatureSelectionContent = (props) => {
         {data ? data.scale_type : null} scale )
       </Typography>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <FeatureImportanceChartBox data={data} />
+        <FeatureImportanceChartBox
+          data={data}
+          selectedFeatures={selectedFeatures}
+        />
         <FeatureSelectionContentTable
           json={data}
           setAnyTargetVariableUsed={setAnyTargetVariableUsed}
           payload={payload}
           setPayload={setPayload}
+          setSelectedFeatures={setSelectedFeatures}
         />
       </div>
     </Box>
