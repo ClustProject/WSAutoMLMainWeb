@@ -12,6 +12,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.148",
     "@mui/material": "^5.8.7",
     "@mui/styled-engine": "^5.8.7",
     "@mui/x-data-grid": "^5.12.3",

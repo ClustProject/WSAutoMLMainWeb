@@ -26,7 +26,7 @@ function SetModelName(props) {
     setAlertOpen(false);
     getNavigationContent();
     onClose();
-    // window.location.href = "/model-operation";
+    window.location.href = "/model-operation";
   };
 
   function getNavigationContent() {

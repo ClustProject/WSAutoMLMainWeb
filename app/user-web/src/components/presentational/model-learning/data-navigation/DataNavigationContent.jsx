@@ -6,7 +6,9 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  IconButton,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import CircularProgress from "@mui/material/CircularProgress";
 import DataNavigationContentTable from "./DataNavigationContentTable";
 import DataNavigationHeatMapChartBox from "./DataNavigationHeatMapChartBox";
@@ -143,7 +145,7 @@ const DataNavigationContent = (props) => {
       )}
       <br />
       <Button variant='contained' onClick={handleHeatmapClick}>
-        Heatmap 보기
+        변수간 상관관계 분석
       </Button>
       <Dialog
         open={isOpen}
@@ -151,7 +153,18 @@ const DataNavigationContent = (props) => {
         maxWidth='md'
         fullWidth={true}
       >
-        <DialogTitle></DialogTitle>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "10px",
+          }}
+        >
+          <DialogTitle sx={{ flexGrow: 1 }}>변수간 상관관계</DialogTitle>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
         <DialogContent
           sx={{
             textAlign: "center",
