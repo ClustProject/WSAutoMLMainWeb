@@ -3,9 +3,9 @@ import React from "react";
 import { useAuth } from "./AuthContext";
 import Forbidden from "../../error/Forbidden";
 
-function PrivateRoute({ children }) {
+function AdminRoute({ children }) {
   const { user } = useAuth();
-  return user ? children : <Forbidden />;
+  return user.role === "ADMIN" ? children : <Forbidden />;
 }
 
-export default PrivateRoute;
+export default AdminRoute;

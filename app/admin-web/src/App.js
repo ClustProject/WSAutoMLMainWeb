@@ -9,47 +9,31 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import { AuthProvider } from "./components/authentication/AuthContext";
 import PrivateRoute from "./components/authentication/PrivateRoute";
+import AdminRoute from "./components/authentication/AdminRoute";
 
 function PageTemplate() {
   return (
-    <PaperBase>
-      <Routes>
-        {/* PaperBase에서 props.children으로 들어간다. */}
-        <Route
-          path='/Home'
-          element={
-            <PrivateRoute>
-              <HomePage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/metadata/*'
-          element={
-            <PrivateRoute>
-              <MetaDataPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/user/*'
-          element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path='/user-management/*'
-          element={
-            <PrivateRoute>
-              <UserPage />
-            </PrivateRoute>
-          }
-        />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-    </PaperBase>
+    <PrivateRoute>
+      <PaperBase>
+        <Routes>
+          {/* PaperBase에서 props.children으로 들어간다. */}
+          <Route path='/Home' element={<HomePage />} />
+          <Route path='/metadata/*' element={<MetaDataPage />} />
+          <Route path='/user/*' element={<UserPage />} />
+
+          <Route
+            path='/user-management/*'
+            element={
+              <AdminRoute>
+                <UserPage />
+              </AdminRoute>
+            }
+          />
+
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </PaperBase>
+    </PrivateRoute>
   );
 }
 

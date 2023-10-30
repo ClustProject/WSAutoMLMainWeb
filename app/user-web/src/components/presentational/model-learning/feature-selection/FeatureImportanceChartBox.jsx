@@ -2,11 +2,16 @@ import React from "react";
 import { Column } from "@ant-design/plots";
 
 const FeatureImportanceChartBox = (props) => {
-  const rawData = props;
-  const data = Object.entries(rawData.data.data[0]).map(([key, value]) => ({
-    variable_name: key,
-    importance: value,
-  }));
+  const rawData = props.data;
+  const selectedFeatures = props.selectedFeatures;
+
+  const data = Object.entries(rawData.data[0])
+    .filter(([key, _]) => selectedFeatures.includes(key))
+    .map(([key, value]) => ({
+      variable_name: key,
+      importance: value,
+    }));
+
   data.sort((a, b) => b.importance - a.importance);
 
   const config = {

@@ -157,7 +157,7 @@ const ModelOperationSelectGrid = (props) => {
                     }
                   : () => {
                       alert(
-                        "모델 학습이 완료된 모델만 모델 활용이 가능합니다.."
+                        "모델 학습이 완료된 모델만 모델 활용이 가능합니다."
                       );
                     }
               }
