@@ -2,7 +2,7 @@ name: build
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   gradle:
@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # 분석의 더 나은 관련성을 위해 얕은 클론을 비활성화해야합니다.
+          fetch-depth: 0 # 분석의 더 나은 관련성을 위해 얕은 클론을 비활성화해야합니다.
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'corretto'
+          java-version: "17"
+          distribution: "corretto"
           cache: gradle
 
       - name: Cache SonarCloud packages
@@ -51,4 +51,4 @@ jobs:
           ./gradlew test
 
       - name: Gradle 빌드
-        run: ./gradlew build --exclude-task test --scan --no-daemon
+        run: ./gradlew build --exclude-task test --scan --no-daemon --parallel
