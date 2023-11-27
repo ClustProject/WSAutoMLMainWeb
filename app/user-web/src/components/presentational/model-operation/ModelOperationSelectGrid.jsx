@@ -9,6 +9,7 @@ import {
   DialogContentText,
   DialogTitle,
   Button,
+  Divider,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DownloadIcon from "@mui/icons-material/DownloadRounded";
@@ -271,6 +272,7 @@ const ModelOperationSelectGrid = (props) => {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title'>{"삭제 확인"}</DialogTitle>
+        <Divider />
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
             선택한 항목을 정말로 삭제하시겠습니까?

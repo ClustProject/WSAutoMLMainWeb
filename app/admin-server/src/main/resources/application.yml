@@ -12,6 +12,22 @@ cloud:
       accessKey: ${AWS_ACCESS_KEY}
       secretKey: ${AWS_SECRET_KEY}
 
+# Swagger springdoc-ui Configuration
+springdoc:
+  packages-to-scan: kr.co.automl
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: demo-ui.html # Swagger UI 경로 => localhost:8000/demo-ui.html
+    tags-sorter: alpha # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
+    operations-sorter: alpha # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
+  api-docs:
+    path: /api-docs/json
+    groups:
+      enabled: true
+  cache:
+    disabled: true
+
 spring:
   h2:
     console:
@@ -62,8 +78,8 @@ spring:
 spring:
   config:
     activate:
-      # on-profile: local # local settings
-      on-profile: prod
+      on-profile: local # local settings
+      # on-profile: prod
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl

@@ -9,6 +9,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   FormControl,
   InputLabel,
   MenuItem,
@@ -106,6 +107,7 @@ export default function UserRoleManagementContent() {
 
       <Dialog disableEscapeKeyDown open={dialogOpen} onClose={closeDialog}>
         <DialogTitle>변경할 권한 선택</DialogTitle>
+        <Divider />
         <DialogContent>
           <Box component='form' sx={{ display: "flex", flexWrap: "wrap" }}>
             <FormControl sx={{ m: 1, minWidth: 200 }}>

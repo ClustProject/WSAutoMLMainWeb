@@ -23,26 +23,27 @@ WS-AutoML은 클라우드 기반의 시계열 데이터 활용을 위한 오픈 
 
 - **관리자**
 
-  1. 메타데이터 관리
+  **1) 메타데이터 관리**
 
   - 메타데이터 리스트
     ![admin-service-metadata-management.png](images/admin-service-metadata-management.png)
   - 메타데이터 업로드
     ![admin-service-metadata-upload.png](images/admin-service-metadata-upload.png)
 
-  2. 사용자 권한 관리
-     ![admin-service-user-management.png](images/admin-service-user-management.png)
+  **2) 사용자 권한 관리**
+  ![admin-service-user-management.png](images/admin-service-user-management.png)
 
 - **사용자**
 
-  1. 메타데이터 검색 및 조회
-     ![user-service-search.png](images/user-service-search.png)
+  **1) 메타데이터 검색 및 조회**
 
-     ![user-service-search-detail.png](images/user-service-search-detail.png)
+  - 메타데이터 검색
+    ![user-service-search.png](images/user-service-search.png)
 
-  - 조회한 데이터 미리보기 및 파일 다운로드 가능
+  - 메타데이터 조회 및 파일 미리보기·다운로드
+    ![user-service-search-detail.png](images/user-service-search-detail.png)
 
-  2. 사용자별 모델 운용(모델 학습, 모델 활용)
+  **2) 사용자별 모델 운용(모델 학습, 모델 활용)**
 
   - 모델 학습
 

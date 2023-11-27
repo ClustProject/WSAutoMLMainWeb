@@ -1,5 +1,13 @@
 import React from "react";
-import { Modal, Box, Tabs, Tab, Typography, IconButton } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Tabs,
+  Tab,
+  Typography,
+  IconButton,
+  Divider,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 function DataDistributionChartBox({
@@ -71,6 +79,7 @@ function DataDistributionChartBox({
             <CloseIcon />
           </IconButton>
         </Box>
+        <Divider />
         <Tabs
           value={value}
           onChange={handleChange}

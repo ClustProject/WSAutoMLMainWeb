@@ -181,9 +181,8 @@ const ModelLearningContent = () => {
   const [selectedRow, setSelectedRow] = useState(false);
 
   // step2
-  const [anyTargetVariableChecked, setAnyTargetVariableChecked] = useState(
-    false
-  );
+  const [anyTargetVariableChecked, setAnyTargetVariableChecked] =
+    useState(false);
 
   // step3
   const [anyTargetVariableUsed, setAnyTargetVariableUsed] = useState(false);
@@ -193,9 +192,8 @@ const ModelLearningContent = () => {
     LearnModelRequestReducer,
     INIT_LEARN_MODEL_REQUEST
   );
-  const [allLearnModelRequestFilled, setAllLearnModelRequestFilled] = useState(
-    true
-  );
+  const [allLearnModelRequestFilled, setAllLearnModelRequestFilled] =
+    useState(true);
 
   useEffect(() => {
     setDownloadUrl(downloadUrl);

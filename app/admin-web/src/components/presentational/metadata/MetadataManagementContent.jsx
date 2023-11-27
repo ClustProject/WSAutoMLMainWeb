@@ -13,6 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   FormControlLabel,
   FormGroup,
   Modal,
@@ -181,6 +182,7 @@ export default function MetadataManagementContent() {
       </Button>
       <Dialog open={inputLinkDialogOpen} onClose={closeInputLinkDialog}>
         <DialogTitle>URL 링크 입력</DialogTitle>
+        <Divider />
         <DialogContent>
           <Typography variant='body1'>
             메타데이터 매핑을 위해 데이터를 받아온 URL을 입력해주세요.
@@ -221,6 +223,7 @@ export default function MetadataManagementContent() {
       </Dialog>
       <Dialog open={inputDataInfoDialogOpen} onClose={closeDataInfoDialog}>
         <DialogTitle>데이터 정보 입력</DialogTitle>
+        <Divider />
         <DialogContent>
           <DataInfoContentText name='카탈로그' />
           <DataSetSelect

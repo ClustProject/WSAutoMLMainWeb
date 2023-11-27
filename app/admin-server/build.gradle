@@ -30,6 +30,7 @@ configurations {
 }
 
 dependencies {
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

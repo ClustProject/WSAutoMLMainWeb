@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogContent,
   IconButton,
+  Divider,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -165,6 +166,7 @@ const DataNavigationContent = (props) => {
             <CloseIcon />
           </IconButton>
         </Box>
+        <Divider />
         <DialogContent
           sx={{
             textAlign: "center",
