@@ -1,120 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { styled } from "@mui/system";
 import {
   Box,
   Dialog,
   DialogTitle,
   DialogContent,
-  Button,
   Typography,
   Chip,
-  IconButton,
   Divider,
   Select,
   FormControl,
   InputLabel,
   MenuItem,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import CloseIcon from "@mui/icons-material/Close";
 import ModelPreviewBox from "./ModelPreviewBox";
-// import CloudSyncIcon from "@mui/icons-material/CloudSync";
-// import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
-// import TimeSeriesProcesserImage1 from "./TimeSeriesProcesser1.png";
-// import TimeSeriesProcesserImage2 from "./TimeSeriesProcesser2.png";
-import ModelDataInterpolationBox from "./ModelDataInterpolationBox";
 import ModelDataPredictionBox from "./ModelDataPredictionBox";
-// import LinearProgress from "@mui/material/LinearProgress";
 import UploadFile from "./UploadFile";
+import InfoIcon from "@mui/icons-material/Info";
 
-const ImageSwiper = () => {
-  return (
-    // <AliceCarousel
-    //   dotsDisabled={false}
-    //   disableDotsControls={true}
-    //   disableSlideInfo={false}
-    // >
-    <Box
-      sx={{
-        marginRight: "5px",
-        marginLeft: "5px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Chip label={"Row Graph"} sx={{ marginBottom: "30px", width: "100%" }} />
-      {/* <img
-        src={TimeSeriesProcesserImage1}
-        alt='Time Series Processor 1'
-        style={{
-          height: "300px",
-          width: "99%",
-          border: "1px solid gainsboro",
-        }}
-      /> */}
-      <Box
-        sx={{
-          height: "300px",
-          width: "99%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "1px solid gainsboro",
-        }}
-      >
-        <Typography color='inherit' variant='h6'>
-          TBD
-        </Typography>
-      </Box>
-    </Box>
-    // <Box
-    //   sx={{
-    //     marginRight: "5px",
-    //     marginLeft: "5px",
-    //     display: "flex",
-    //     flexDirection: "column",
-    //     alignItems: "center",
-    //   }}
-    // >
-    //   <Chip
-    //     label={"Predict Graph"}
-    //     sx={{ marginBottom: "30px", width: "100%" }}
-    //   />
-    //   <img
-    //     src={TimeSeriesProcesserImage2}
-    //     alt='Time Series Processor 2'
-    //     style={{
-    //       height: "300px",
-    //       width: "99%",
-    //       border: "1px solid gainsboro",
-    //     }}
-    //   />
-    // </Box>
-    // </AliceCarousel>
-  );
-};
+const SpaceBetweenFlexBox = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBlock: "10px",
+});
 
 const ModelTimeSeriesProcesser = (props) => {
   const { open, onClose, selectedRowData } = props;
-  const [openDataInterpolation, setOpenDataInterpolation] = useState(false);
-  const [openDataPrediction, setOpenDataPrediction] = useState(false);
-  const [useImputedData, setUseImputedData] = useState(false);
-
+  const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [selectData, setSelectData] = useState("");
+  const [payload, setPayload] = useState([]);
+  const [predictData, setPredictData] = useState("");
+
+  console.log(payload);
+
+  useEffect(() => {
+    if (
+      selectedRowData &&
+      selectedRowData.varUseYnJSON &&
+      selectedRowData.varNmJSON &&
+      selectedRowData.varTgYnJSON
+    ) {
+      const feature = [];
+      let target = "";
+
+      Object.keys(selectedRowData.varUseYnJSON).forEach((index) => {
+        if (selectedRowData.varUseYnJSON[index] === "Y") {
+          feature.push(selectedRowData.varNmJSON[index]);
+        }
+        if (selectedRowData.varTgYnJSON[index] === "Y") {
+          target = selectedRowData.varNmJSON[index];
+        }
+      });
+
+      // URL에서 파일 이름 추출
+      const modelUrl = selectedRowData.modelUrl;
+      const modelFileName = modelUrl.split("/").pop();
+
+      // selectedRowData에 feature와 target 추가
+      setPayload({
+        // data_url: uploadedFileUrl,
+        // road_url:
+        //   "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/road_data.csv",
+        // model_name: "data10_LSTM_144_288_30.h5",
+        // feature: ["집계시분", "콘존ID", "차로유형구분코드"],
+        // target: "평균속도",
+        // window_size: 144,
+        data_url: uploadedFileUrl,
+        road_url:
+          "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/road_data.csv",
+        model_name: modelFileName,
+        feature,
+        target,
+        window_size: selectedRowData.argParamJSON.window_size,
+      });
+    }
+  }, [selectedRowData, uploadedFileUrl]);
 
   const handleChange = (event) => {
     setSelectData(event.target.value);
   };
 
   const [isLoading, setIsLoading] = useState(false); // 버튼의 로딩 상태를 위한 state 추가
-  const [
-    predictionResultButtonDisabled,
-    setPredictionResultButtonDisabled,
-  ] = useState(true); // 예측 결과 버튼 활성화 상태를 위한 state 추가
+  const [predictionResultButtonDisabled, setPredictionResultButtonDisabled] =
+    useState(true); // 예측 결과 버튼 활성화 상태를 위한 state 추가
 
   const startPrediction = () => {
     setIsLoading(true); // 로딩 시작
+    console.log("Sending data:", payload);
+    fetch("http://52.79.123.200:8797/v1/data_predict", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Received data:", data);
+        setPredictData(data);
+      })
+      .catch((error) => console.error("Error occurred:", error));
 
     setTimeout(() => {
       setIsLoading(false); // 5초 후 로딩 상태 종료
@@ -131,7 +122,22 @@ const ModelTimeSeriesProcesser = (props) => {
             justifyContent='space-between'
             alignItems='center'
           >
-            <Typography variant='h4'>Time Series Processer</Typography>
+            {selectedRowData ? (
+              <Typography variant='h4'>
+                모델명{" "}
+                <Chip
+                  label={selectedRowData.modelNm}
+                  sx={{
+                    height: "40px",
+                    verticalAlign: "unset",
+                    fontSize: "2.125rem",
+                    backgroundColor: "#9fa8da",
+                    color: "#fff",
+                  }}
+                />
+              </Typography>
+            ) : null}
+
             <IconButton
               edge='end'
               color='inherit'
@@ -155,26 +161,59 @@ const ModelTimeSeriesProcesser = (props) => {
               pr={2}
               sx={{ width: "30%" }}
             >
-              {selectedRowData ? (
-                <Chip
-                  label={`모델명: ${selectedRowData.modelNm}`}
-                  sx={{ marginBottom: "30px" }}
-                />
-              ) : null}
+              <Chip
+                label={
+                  <Box display='flex' alignItems='center' gap='5px'>
+                    모델 활용에 필요한 업로드 파일 형식
+                    <Tooltip
+                      title='업로드 파일의 컬럼 및 데이터 예시를 나타냅니다. 파란색으로 표시된 컬럼은 목표변수를 의미합니다.'
+                      placement='bottom'
+                    >
+                      <InfoIcon color='primary' />
+                    </Tooltip>
+                  </Box>
+                }
+                sx={{
+                  fontSize: "15px",
+                  marginBottom: "10px",
+                  width: "100%",
+                }}
+              />
 
               <ModelPreviewBox
                 selectedRowData={selectedRowData ? selectedRowData : null}
               />
-              <UploadFile />
-              {/* <Box variant='outlined'>
-                <Button
+              <UploadFile setUploadedFileUrl={setUploadedFileUrl} />
+              <SpaceBetweenFlexBox>
+                <FormControl variant='standard' sx={{ m: 1, width: "300px" }}>
+                  <InputLabel id='demo-simple-select-label'>
+                    수행 작업 선택
+                  </InputLabel>
+                  <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={selectData}
+                    label='Data'
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"data_interpolation"}>
+                      데이터 보간
+                    </MenuItem>
+                    <MenuItem value={"data_prediction"}>데이터 예측</MenuItem>
+                  </Select>
+                </FormControl>
+                <LoadingButton
+                  loading={isLoading} // 로딩 상태에 따라 버튼의 로딩 표시 조절
                   variant='outlined'
-                  startIcon={<CloudSyncIcon />}
-                  onClick={() => setOpenDataInterpolation(true)}
+                  loadingPosition='end'
+                  onClick={() => {
+                    startPrediction();
+                  }}
+                  sx={{ width: "150px" }}
                 >
-                  데이터 보간
-                </Button>
-              </Box> */}
+                  {isLoading ? "작업 진행 중" : "작업 시작"}
+                </LoadingButton>
+              </SpaceBetweenFlexBox>
             </Box>
             <Divider orientation='vertical' flexItem />
             <Box
@@ -184,75 +223,36 @@ const ModelTimeSeriesProcesser = (props) => {
               pl={2}
               sx={{ width: "65%" }}
             >
-              <ImageSwiper />
-              {/* <Box
-                display='flex'
-                flexDirection='row'
-                gap={2}
-                pl={2}
-                alignItems='center'
-              >
-                <Button
-                  variant='outlined'
-                  onClick={() => {
-                    startPrediction();
-                    setUseImputedData(false);
-                  }}
-                >
-                  기존데이터로 예측 시작
-                </Button>
-
-                <Button
-                  variant='outlined'
-                  onClick={() => {
-                    setOpenDataPrediction(true);
-                    setUseImputedData(false);
-                  }}
-                >
-                  기존데이터 예측 결과
-                </Button>
-                {predictionProgress > 0 && predictionProgress < 100 ? (
-                  <LinearProgress
-                    variant='determinate'
-                    value={predictionProgress}
-                    sx={{ flexGrow: 1 }}
-                  />
-                ) : null}
-              </Box>
               <Box
-                display='flex'
-                flexDirection='row'
-                gap={2}
-                pl={2}
-                alignItems='center'
+                sx={{
+                  marginRight: "5px",
+                  marginLeft: "5px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
               >
-                <Button
-                  variant='outlined'
-                  onClick={() => {
-                    startPrediction();
-                    setUseImputedData(true);
+                <Chip
+                  label={"구간별 결측치 보간"}
+                  sx={{
+                    fontSize: "15px",
+                    marginBottom: "10px",
+                    width: "100%",
+                  }}
+                />
+                <Box
+                  sx={{
+                    height: "460px",
+                    width: "99%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "1px solid gainsboro",
                   }}
                 >
-                  보간데이터로 예측 시작
-                </Button>
-
-                <Button
-                  variant='outlined'
-                  onClick={() => {
-                    setOpenDataPrediction(true);
-                    setUseImputedData(true);
-                  }}
-                >
-                  보간데이터 예측 결과
-                </Button>
-                {predictionProgress > 0 && predictionProgress < 100 ? (
-                  <LinearProgress
-                    variant='determinate'
-                    value={predictionProgress}
-                    sx={{ flexGrow: 1 }}
-                  />
-                ) : null}
-              </Box> */}
+                  <ModelDataPredictionBox />
+                </Box>
+              </Box>
 
               <Box
                 display='flex'
@@ -261,61 +261,11 @@ const ModelTimeSeriesProcesser = (props) => {
                 pl={2}
                 alignItems='center'
                 justifyContent='flex-end'
-              >
-                <FormControl variant='standard' sx={{ m: 1, width: "300px" }}>
-                  <InputLabel id='demo-simple-select-label'>
-                    예측할 데이터 선택
-                  </InputLabel>
-                  <Select
-                    labelId='demo-simple-select-label'
-                    id='demo-simple-select'
-                    value={selectData}
-                    label='Data'
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={"Raw Data"}>원시 데이터</MenuItem>
-                    <MenuItem value={"Interpolated Data"}>보간 데이터</MenuItem>
-                  </Select>
-                </FormControl>
-                <LoadingButton
-                  loading={isLoading} // 로딩 상태에 따라 버튼의 로딩 표시 조절
-                  variant='outlined'
-                  loadingPosition='end'
-                  onClick={() => {
-                    startPrediction();
-                    setUseImputedData(false);
-                  }}
-                  sx={{ width: "150px" }}
-                >
-                  {isLoading ? "모델 예측 중" : "모델 예측 시작"}
-                </LoadingButton>
-
-                <Button
-                  variant='contained'
-                  justifyContent='flex-end'
-                  onClick={() => {
-                    setOpenDataPrediction(true);
-                    setUseImputedData(false);
-                  }}
-                  disabled={predictionResultButtonDisabled} // 예측 결과 버튼의 활성화 상태 조절
-                  sx={{ width: "150px" }}
-                >
-                  모델 예측 결과
-                </Button>
-              </Box>
+              ></Box>
             </Box>
           </Box>
         </DialogContent>
       </Dialog>
-      <ModelDataInterpolationBox
-        open={openDataInterpolation}
-        onClose={() => setOpenDataInterpolation(false)}
-      />
-      <ModelDataPredictionBox
-        open={openDataPrediction}
-        onClose={() => setOpenDataPrediction(false)}
-        useImputedData={useImputedData}
-      />
     </>
   );
 };

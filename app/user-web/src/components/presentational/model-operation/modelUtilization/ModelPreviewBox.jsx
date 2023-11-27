@@ -50,9 +50,10 @@ const ModelPreviewBox = (props) => {
         ];
 
         const reader = new FileReader();
-        reader.onload = function(event) {
-          const detectedEncoding = jschardet.detect(event.target.result)
-            .encoding;
+        reader.onload = function (event) {
+          const detectedEncoding = jschardet.detect(
+            event.target.result
+          ).encoding;
 
           Papa.parse(file, {
             complete: (result) => {

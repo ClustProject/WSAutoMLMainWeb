@@ -2,19 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { styled } from "@mui/system";
 import {
   Box,
-  Dialog,
-  DialogTitle,
-  DialogContent,
   Typography,
-  IconButton,
-  Divider,
   TextField,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import ConzonAreaChartComponent from "../modelChart/ConzonAreaChartComponent";
 import ConzonGuageComponent from "../modelChart/ConzonGuageComponent";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -25,37 +20,23 @@ import {
   getConzonRowNames,
   getConzonRowDatesById,
   getConzonRowData,
-  getConzonImputatedNames,
-  getConzonImputatedDatesById,
-  getConzonImputatedData,
 } from "../../../../api/api";
-
-const ContentWrappingBox = styled(Box)({
-  display: "flex",
-  justifyContent: "space-evenly",
-  alignItems: "center",
-});
 
 const SpaceBetweenFlexBox = styled(Box)({
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "20px",
-  "& > :first-child": {
-    marginRight: "20px",
-  },
+  margin: "10px",
 });
 
-const SelectConzon = ({ onChange, useImputedData }) => {
+const SelectConzon = ({ onChange }) => {
   const [conzons, setConzons] = useState([]);
   const [selectedConzon, setSelectedConzon] = useState("");
 
   useEffect(() => {
     const fetchConzonNames = async () => {
       try {
-        const fetchedConzons = useImputedData
-          ? await getConzonImputatedNames()
-          : await getConzonRowNames();
+        const fetchedConzons = await getConzonRowNames();
 
         setConzons(fetchedConzons);
         if (fetchedConzons.length > 0) {
@@ -71,7 +52,7 @@ const SelectConzon = ({ onChange, useImputedData }) => {
     };
 
     fetchConzonNames();
-  }, [onChange, useImputedData]);
+  }, [onChange]);
 
   return (
     <FormControl variant='outlined' sx={{ width: "300px" }}>
@@ -97,15 +78,13 @@ const SelectConzon = ({ onChange, useImputedData }) => {
   );
 };
 
-const SelectDate = ({ value, onChange, useImputedData }) => {
+const SelectDate = ({ value, onChange }) => {
   const [allowedDates, setAllowedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   useEffect(() => {
     const fetchDates = async () => {
       try {
-        const fetchedDates = useImputedData
-          ? await getConzonImputatedDatesById()
-          : await getConzonRowDatesById();
+        const fetchedDates = await getConzonRowDatesById();
         const formattedDates = fetchedDates.map((item) => item.conzonDate);
         setAllowedDates(formattedDates);
 
@@ -122,8 +101,8 @@ const SelectDate = ({ value, onChange, useImputedData }) => {
     };
 
     fetchDates();
-  }, [onChange, useImputedData]);
-
+  }, [onChange]);
+  console.log(selectedDate);
   const shouldDisableDate = (date) => {
     return !allowedDates.includes(dayjs(date).format("YYYY-MM-DD"));
   };
@@ -198,7 +177,6 @@ const SpeedInfo = () => {
 };
 
 const ModelDataPredictionBox = (props) => {
-  const { open, onClose, useImputedData } = props;
   // const { open, onClose, selectedRowData } = props;
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentSpeed, setCurrentSpeed] = useState(0);
@@ -218,15 +196,10 @@ const ModelDataPredictionBox = (props) => {
     const fetchConzonData = async () => {
       if (selectedConzon && selectedDate) {
         try {
-          const data = useImputedData
-            ? await getConzonImputatedData(
-                selectedConzon,
-                dayjs(selectedDate).format("YYYY-MM-DD")
-              )
-            : await getConzonRowData(
-                selectedConzon,
-                dayjs(selectedDate).format("YYYY-MM-DD")
-              );
+          const data = await getConzonRowData(
+            selectedConzon,
+            dayjs(selectedDate).format("YYYY-MM-DD")
+          );
           setConzonData(JSON.parse(data[0].conzonData));
         } catch (error) {
           console.error("Failed to fetch conzon data", error);
@@ -238,7 +211,7 @@ const ModelDataPredictionBox = (props) => {
   }, [selectedConzon, selectedDate]);
   return (
     <>
-      <Dialog open={open} onClose={onClose} fullWidth maxWidth='lg'>
+      {/* <Dialog open={open} onClose={onClose} fullWidth maxWidth='lg'>
         <DialogTitle>
           <Box
             display='flex'
@@ -258,46 +231,42 @@ const ModelDataPredictionBox = (props) => {
         </DialogTitle>
         <Divider />
         <DialogContent>
-          <ContentWrappingBox>
-            <Box
-              sx={{
-                overflow: "auto",
-                height: "100%",
-                padding: "25px",
-                width: "100%",
-              }}
-            >
-              <SpaceBetweenFlexBox>
-                <SelectConzon
-                  onChange={setSelectedConzon}
-                  useImputedData={useImputedData}
-                />
-                <SelectDate
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  useImputedData={useImputedData}
-                />
-              </SpaceBetweenFlexBox>
+          <ContentWrappingBox> */}
+      <Box
+        sx={{
+          overflow: "auto",
+          height: "100%",
+          margin: "25px",
+          width: "100%",
+        }}
+      >
+        <SpaceBetweenFlexBox>
+          <SelectConzon onChange={setSelectedConzon} />
+          <SelectDate value={selectedDate} onChange={handleDateChange} />
+          <Button variant='outlined' sx={{ height: "56px" }} disabled>
+            데이터 다운로드
+          </Button>
+        </SpaceBetweenFlexBox>
 
-              <SpaceBetweenFlexBox>
-                <Box sx={{ width: "75%" }}>
-                  <ConzonAreaChartComponent
-                    selectedDate={selectedDate}
-                    conzonData={conzonData}
-                    onTooltipChange={handleTooltipChange}
-                  />
-                </Box>
-                <Box sx={{ width: "25%" }}>
-                  <Box sx={{ height: "270px" }}>
-                    <ConzonGuageComponent speed={currentSpeed} />
-                  </Box>
-                  <SpeedInfo />
-                </Box>
-              </SpaceBetweenFlexBox>
+        <SpaceBetweenFlexBox>
+          <Box sx={{ width: "75%", height: "370px" }}>
+            <ConzonAreaChartComponent
+              selectedDate={selectedDate}
+              conzonData={conzonData}
+              onTooltipChange={handleTooltipChange}
+            />
+          </Box>
+          <Box sx={{ width: "25%" }}>
+            <Box sx={{ height: "240px" }}>
+              <ConzonGuageComponent speed={currentSpeed} />
             </Box>
-          </ContentWrappingBox>
+            <SpeedInfo />
+          </Box>
+        </SpaceBetweenFlexBox>
+      </Box>
+      {/* </ContentWrappingBox>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };
