@@ -35,7 +35,7 @@ const ModelTimeSeriesProcesser = (props) => {
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [selectData, setSelectData] = useState("");
   const [payload, setPayload] = useState([]);
-  const [predictData, setPredictData] = useState("");
+  // const [predictData, setPredictData] = useState("");
 
   console.log(payload);
 
@@ -87,8 +87,8 @@ const ModelTimeSeriesProcesser = (props) => {
   };
 
   const [isLoading, setIsLoading] = useState(false); // 버튼의 로딩 상태를 위한 state 추가
-  const [predictionResultButtonDisabled, setPredictionResultButtonDisabled] =
-    useState(true); // 예측 결과 버튼 활성화 상태를 위한 state 추가
+  // const [predictionResultButtonDisabled, setPredictionResultButtonDisabled] =
+  useState(true); // 예측 결과 버튼 활성화 상태를 위한 state 추가
 
   const startPrediction = () => {
     setIsLoading(true); // 로딩 시작
@@ -103,13 +103,13 @@ const ModelTimeSeriesProcesser = (props) => {
       .then((response) => response.json())
       .then((data) => {
         console.log("Received data:", data);
-        setPredictData(data);
+        // setPredictData(data);
       })
       .catch((error) => console.error("Error occurred:", error));
 
     setTimeout(() => {
       setIsLoading(false); // 5초 후 로딩 상태 종료
-      setPredictionResultButtonDisabled(false); // 예측 결과 버튼 활성화
+      // setPredictionResultButtonDisabled(false); // 예측 결과 버튼 활성화
     }, 5000);
   };
 
