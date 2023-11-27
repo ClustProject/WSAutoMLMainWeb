@@ -7,18 +7,6 @@ function getMetadatas() {
   return axios.get("/metadata").then((response) => response.data.data);
 }
 
-function getFeatureSelectionContent() {
-  return axios
-    .get("/data/feature-selection.json")
-    .then((response) => response.data);
-}
-
-function getNavigationContent() {
-  return axios
-    .get("/data/data-navigation-content.json")
-    .then((response) => response.data);
-}
-
 // 사용자별 모델학습결과 리스트
 function getModelLearningResult() {
   const headers = {};
@@ -88,8 +76,6 @@ function getConzonImputatedData(conzonId, conzonDate) {
 
 export {
   getMetadatas,
-  getFeatureSelectionContent,
-  getNavigationContent,
   getModelLearningResult,
   getUserInfo,
   deleteModelLearningResult,
