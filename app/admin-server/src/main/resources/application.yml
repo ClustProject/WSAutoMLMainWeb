@@ -78,8 +78,8 @@ spring:
 spring:
   config:
     activate:
-      on-profile: local # local settings
-      # on-profile: prod
+      # on-profile: local # local settings
+      on-profile: prod
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl
