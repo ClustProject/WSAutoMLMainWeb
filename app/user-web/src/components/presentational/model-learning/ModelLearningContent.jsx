@@ -19,7 +19,7 @@ export const CONTENT_NAME_HEIGHT = "50px";
 export const CONTENT_BACKGROUND_COLOR = "#F4F8F9";
 
 const STEP_COUNT_AND_NAME_MAP = {
-  1: "메타데이터 선택",
+  1: "데이터 선택",
   2: "데이터 탐색",
   3: "특징 선택",
   4: "알고리즘 선택",

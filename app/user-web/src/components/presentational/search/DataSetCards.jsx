@@ -90,6 +90,7 @@ export default function DataSetCards({
     );
     setFilteredData(filteredData);
     setCountDataSet(filteredData.length);
+    setPage(1);
   }, [searchKeyword, filters, filteredMetadata]); // add filteredMetadata to dependency array
 
   useEffect(() => {

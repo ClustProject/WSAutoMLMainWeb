@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { styled } from "@mui/system";
+import { useAuth } from "../../../authentication/AuthContext";
 import {
   Box,
   Dialog,
@@ -35,9 +36,20 @@ const ModelTimeSeriesProcesser = (props) => {
   const [uploadedFileUrl, setUploadedFileUrl] = useState(null);
   const [selectData, setSelectData] = useState("");
   const [payload, setPayload] = useState([]);
+  const { user } = useAuth();
+
   // const [predictData, setPredictData] = useState("");
 
-  console.log(payload);
+  // console.log(payload);
+
+  // 모달이 열릴 때 마다 초기화
+  useEffect(() => {
+    if (open) {
+      setUploadedFileUrl(null);
+      setSelectData("");
+      setPayload([]);
+    }
+  }, [open]);
 
   useEffect(() => {
     if (
@@ -49,12 +61,20 @@ const ModelTimeSeriesProcesser = (props) => {
       const feature = [];
       let target = "";
 
-      Object.keys(selectedRowData.varUseYnJSON).forEach((index) => {
-        if (selectedRowData.varUseYnJSON[index] === "Y") {
-          feature.push(selectedRowData.varNmJSON[index]);
-        }
+      // target 찾기
+      Object.keys(selectedRowData.varTgYnJSON).forEach((index) => {
         if (selectedRowData.varTgYnJSON[index] === "Y") {
           target = selectedRowData.varNmJSON[index];
+        }
+      });
+
+      // feature 배열 채우기 (target 제외)
+      Object.keys(selectedRowData.varUseYnJSON).forEach((index) => {
+        if (
+          selectedRowData.varUseYnJSON[index] === "Y" &&
+          selectedRowData.varNmJSON[index] !== target
+        ) {
+          feature.push(selectedRowData.varNmJSON[index]);
         }
       });
 
@@ -71,6 +91,7 @@ const ModelTimeSeriesProcesser = (props) => {
         // feature: ["집계시분", "콘존ID", "차로유형구분코드"],
         // target: "평균속도",
         // window_size: 144,
+        user_id: user.id,
         data_url: uploadedFileUrl,
         road_url:
           "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/road_data.csv",
@@ -93,7 +114,10 @@ const ModelTimeSeriesProcesser = (props) => {
   const startPrediction = () => {
     setIsLoading(true); // 로딩 시작
     console.log("Sending data:", payload);
-    fetch("http://52.79.123.200:8797/v1/data_predict", {
+
+    const url = `http://52.79.123.200:8797/v1/${selectData}`;
+
+    fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -196,10 +220,8 @@ const ModelTimeSeriesProcesser = (props) => {
                     label='Data'
                     onChange={handleChange}
                   >
-                    <MenuItem value={"data_interpolation"}>
-                      데이터 보간
-                    </MenuItem>
-                    <MenuItem value={"data_prediction"}>데이터 예측</MenuItem>
+                    <MenuItem value={"data_interpolate"}>데이터 보간</MenuItem>
+                    <MenuItem value={"data_predict"}>데이터 예측</MenuItem>
                   </Select>
                 </FormControl>
                 <LoadingButton
@@ -209,6 +231,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   onClick={() => {
                     startPrediction();
                   }}
+                  disabled={!selectData} // 버튼 비활성화 조건 추가
                   sx={{ width: "150px" }}
                 >
                   {isLoading ? "작업 진행 중" : "작업 시작"}

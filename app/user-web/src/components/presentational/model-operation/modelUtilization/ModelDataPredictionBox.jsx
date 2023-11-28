@@ -102,7 +102,7 @@ const SelectDate = ({ value, onChange }) => {
 
     fetchDates();
   }, [onChange]);
-  console.log(selectedDate);
+  // console.log(selectedDate);
   const shouldDisableDate = (date) => {
     return !allowedDates.includes(dayjs(date).format("YYYY-MM-DD"));
   };
