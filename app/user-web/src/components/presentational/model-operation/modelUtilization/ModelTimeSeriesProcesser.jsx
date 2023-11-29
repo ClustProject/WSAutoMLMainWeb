@@ -37,7 +37,7 @@ const ModelTimeSeriesProcesser = (props) => {
   const [selectData, setSelectData] = useState("");
   const [payload, setPayload] = useState([]);
   const { user } = useAuth();
-
+  const [isStarted, setIsStarted] = useState(false);
   // const [predictData, setPredictData] = useState("");
 
   // console.log(payload);
@@ -133,6 +133,7 @@ const ModelTimeSeriesProcesser = (props) => {
 
     setTimeout(() => {
       setIsLoading(false); // 5초 후 로딩 상태 종료
+      setIsStarted(true);
       // setPredictionResultButtonDisabled(false); // 예측 결과 버튼 활성화
     }, 5000);
   };
@@ -191,7 +192,7 @@ const ModelTimeSeriesProcesser = (props) => {
                     모델 활용에 필요한 업로드 파일 형식
                     <Tooltip
                       title='업로드 파일의 컬럼 및 데이터 예시를 나타냅니다. 파란색으로 표시된 컬럼은 목표변수를 의미합니다.'
-                      placement='bottom'
+                      placement='right'
                     >
                       <InfoIcon color='primary' />
                     </Tooltip>
@@ -231,7 +232,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   onClick={() => {
                     startPrediction();
                   }}
-                  disabled={!selectData} // 버튼 비활성화 조건 추가
+                  disabled={!selectData || !uploadedFileUrl} // 버튼 비활성화 조건 추가
                   sx={{ width: "150px" }}
                 >
                   {isLoading ? "작업 진행 중" : "작업 시작"}
@@ -256,7 +257,17 @@ const ModelTimeSeriesProcesser = (props) => {
                 }}
               >
                 <Chip
-                  label={"구간별 결측치 보간"}
+                  label={
+                    <Box display='flex' alignItems='center' gap='5px'>
+                      구간별 결측치 보간
+                      <Tooltip
+                        title='작업이 수행되는 동안 실시간으로 데이터를 가져옵니다.'
+                        placement='right'
+                      >
+                        <InfoIcon color='primary' />
+                      </Tooltip>
+                    </Box>
+                  }
                   sx={{
                     fontSize: "15px",
                     marginBottom: "10px",
@@ -273,7 +284,13 @@ const ModelTimeSeriesProcesser = (props) => {
                     border: "1px solid gainsboro",
                   }}
                 >
-                  <ModelDataPredictionBox />
+                  {isStarted ? (
+                    <ModelDataPredictionBox />
+                  ) : (
+                    <Typography variant='h6'>
+                      작업이 진행되면 이곳에 데이터가 표시됩니다.
+                    </Typography>
+                  )}
                 </Box>
               </Box>
 

@@ -33,26 +33,34 @@ const SelectConzon = ({ onChange }) => {
   const [conzons, setConzons] = useState([]);
   const [selectedConzon, setSelectedConzon] = useState("");
 
-  useEffect(() => {
-    const fetchConzonNames = async () => {
-      try {
-        const fetchedConzons = await getConzonRowNames();
+  const fetchConzonNames = async () => {
+    try {
+      const fetchedConzons = await getConzonRowNames();
+      setConzons(fetchedConzons);
 
-        setConzons(fetchedConzons);
-        if (fetchedConzons.length > 0) {
-          const firstConzonId = fetchedConzons[0].conzonId;
-          setSelectedConzon(firstConzonId);
-          if (onChange) {
-            onChange(firstConzonId);
-          }
+      // 현재 선택된 값이 새로운 리스트에 있는지 확인
+      if (
+        !fetchedConzons.some((conzon) => conzon.conzonId === selectedConzon)
+      ) {
+        // 새로운 리스트에 현재 선택된 값이 없다면, 첫 번째 값을 선택
+        const firstConzonId =
+          fetchedConzons.length > 0 ? fetchedConzons[0].conzonId : "";
+        setSelectedConzon(firstConzonId);
+        if (onChange) {
+          onChange(firstConzonId);
         }
-      } catch (error) {
-        console.error("Failed to fetch conzons", error);
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch conzons", error);
+    }
+  };
 
+  useEffect(() => {
     fetchConzonNames();
-  }, [onChange]);
+    const intervalId = setInterval(fetchConzonNames, 15000);
+
+    return () => clearInterval(intervalId);
+  }, [selectedConzon, onChange]);
 
   return (
     <FormControl variant='outlined' sx={{ width: "300px" }}>
@@ -81,27 +89,34 @@ const SelectConzon = ({ onChange }) => {
 const SelectDate = ({ value, onChange }) => {
   const [allowedDates, setAllowedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
-  useEffect(() => {
-    const fetchDates = async () => {
-      try {
-        const fetchedDates = await getConzonRowDatesById();
-        const formattedDates = fetchedDates.map((item) => item.conzonDate);
-        setAllowedDates(formattedDates);
+  const fetchDates = async () => {
+    try {
+      const fetchedDates = await getConzonRowDatesById();
+      const formattedDates = fetchedDates.map((item) => item.conzonDate);
+      setAllowedDates(formattedDates);
 
-        // 첫 번째 값을 selectedDate로 설정
+      // 현재 선택된 날짜가 새로운 리스트에 있는지 확인
+      if (!formattedDates.includes(dayjs(selectedDate).format("YYYY-MM-DD"))) {
+        // 새로운 리스트에 현재 선택된 날짜가 없다면, 첫 번째 값을 선택
         if (formattedDates.length > 0) {
-          setSelectedDate(dayjs(formattedDates[0]));
+          const newSelectedDate = dayjs(formattedDates[0]);
+          setSelectedDate(newSelectedDate);
           if (onChange) {
-            onChange(dayjs(formattedDates[0]));
+            onChange(newSelectedDate);
           }
         }
-      } catch (error) {
-        console.error("Failed to fetch dates", error);
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch dates", error);
+    }
+  };
 
+  useEffect(() => {
     fetchDates();
-  }, [onChange]);
+    const intervalId = setInterval(fetchDates, 15000);
+
+    return () => clearInterval(intervalId);
+  }, [selectedDate, onChange]);
   // console.log(selectedDate);
   const shouldDisableDate = (date) => {
     return !allowedDates.includes(dayjs(date).format("YYYY-MM-DD"));
@@ -188,7 +203,9 @@ const ModelDataPredictionBox = (props) => {
   }, []); // dependencies 배열이 비어있으므로 컴포넌트가 마운트될 때만 함수가 생성됩니다.
 
   const handleTooltipChange = useCallback((speed) => {
-    setCurrentSpeed(speed);
+    // 소수점 둘째 자리까지만 나타내기
+    const formattedSpeed = parseFloat(speed).toFixed(2);
+    setCurrentSpeed(formattedSpeed);
   }, []); // dependencies 배열이 비어있으므로 컴포넌트가 마운트될 때만 함수가 생성됩니다.
 
   useEffect(() => {
