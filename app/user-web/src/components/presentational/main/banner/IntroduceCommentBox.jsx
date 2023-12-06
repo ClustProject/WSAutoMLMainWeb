@@ -10,7 +10,7 @@ export default function IntroduceCommentBox() {
         color: "white",
       }}
     >
-      <Typography variant='h4'>Welcome to WS-AutoML.co.kr</Typography>
+      <Typography variant='h4'>Welcome to WS-AutoML</Typography>
       <Divider
         sx={{
           my: "10px",
