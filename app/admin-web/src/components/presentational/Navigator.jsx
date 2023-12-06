@@ -36,26 +36,22 @@ const categories = [
   },
   {
     id: "WS-AutoML",
-    link:
-      "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com",
+    link: "https://wsautoml.com",
     children: [
       {
         id: "검색",
         icon: <SearchIcon />,
-        link:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search",
+        link: "https://wsautoml.com/search",
       },
       {
         id: "모델 학습",
         icon: <ModelTrainingIcon />,
-        link:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-learning",
+        link: "https://wsautoml.com/model-learning",
       },
       {
         id: "모델 운영",
         icon: <QueryStatsIcon />,
-        link:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-operation",
+        link: "https://wsautoml.com/model-operation",
       },
     ],
   },

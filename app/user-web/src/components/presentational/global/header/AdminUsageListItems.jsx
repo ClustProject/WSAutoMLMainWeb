@@ -12,9 +12,7 @@ export default function AdminUsageListItems() {
           textAlign: "right",
         }}
       >
-        <Link href='http://automl-main-web-load-balancer-213875655.ap-northeast-2.elb.amazonaws.com/home'>
-          관리자 페이지
-        </Link>
+        <Link href='https://admin.wsautoml.com/home'>관리자 페이지</Link>
       </Typography>
     </>
   );

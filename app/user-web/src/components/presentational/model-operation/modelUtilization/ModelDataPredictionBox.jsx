@@ -8,7 +8,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  Button,
 } from "@mui/material";
 import ConzonAreaChartComponent from "../modelChart/ConzonAreaChartComponent";
 import ConzonGuageComponent from "../modelChart/ConzonGuageComponent";
@@ -21,6 +20,7 @@ import {
   getConzonRowDatesById,
   getConzonRowData,
 } from "../../../../api/api";
+import ModelUtilizationDataDownloadBox from "./ModelUtilizationDataDownloadBox";
 
 const SpaceBetweenFlexBox = styled(Box)({
   display: "flex",
@@ -228,27 +228,6 @@ const ModelDataPredictionBox = (props) => {
   }, [selectedConzon, selectedDate]);
   return (
     <>
-      {/* <Dialog open={open} onClose={onClose} fullWidth maxWidth='lg'>
-        <DialogTitle>
-          <Box
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-          >
-            <Typography variant='h5'>예측 데이터 분석</Typography>
-            <IconButton
-              edge='end'
-              color='inherit'
-              onClick={onClose}
-              aria-label='close'
-            >
-              <CloseIcon />
-            </IconButton>
-          </Box>
-        </DialogTitle>
-        <Divider />
-        <DialogContent>
-          <ContentWrappingBox> */}
       <Box
         sx={{
           overflow: "auto",
@@ -260,9 +239,7 @@ const ModelDataPredictionBox = (props) => {
         <SpaceBetweenFlexBox>
           <SelectConzon onChange={setSelectedConzon} />
           <SelectDate value={selectedDate} onChange={handleDateChange} />
-          <Button variant='outlined' sx={{ height: "56px" }} disabled>
-            데이터 다운로드
-          </Button>
+          <ModelUtilizationDataDownloadBox />
         </SpaceBetweenFlexBox>
 
         <SpaceBetweenFlexBox>
@@ -281,9 +258,6 @@ const ModelDataPredictionBox = (props) => {
           </Box>
         </SpaceBetweenFlexBox>
       </Box>
-      {/* </ContentWrappingBox>
-        </DialogContent>
-      </Dialog> */}
     </>
   );
 };

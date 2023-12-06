@@ -58,6 +58,7 @@ spring:
             scope: profile, email
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
+            redirectUri: "http://admin.wsautoml.com/login/oauth2/code/google"
 
   session:
     store-type: jdbc

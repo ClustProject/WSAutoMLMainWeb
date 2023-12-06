@@ -10,19 +10,16 @@ const linkBoxInfo = [
       { name: "메인페이지", href: "/" },
       {
         name: "데이터 검색",
-        href:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/search",
+        href: "https://wsautoml.com/search",
       },
       { name: "데이터 활용" },
       {
         name: "- 모델 학습",
-        href:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-learning",
+        href: "https://wsautoml.com/model-learning",
       },
       {
         name: "- 모델 운영",
-        href:
-          "http://automl-user-load-balancer-366843044.ap-northeast-2.elb.amazonaws.com/model-operation",
+        href: "https://wsautoml.com/model-operation",
       },
     ],
   },
