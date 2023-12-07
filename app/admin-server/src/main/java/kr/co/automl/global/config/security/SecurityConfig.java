@@ -19,6 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .headers()
+                .cacheControl()
+                .and()
+                .frameOptions()
+                .and()
+                .contentTypeOptions()
+                .and()
+                .httpStrictTransportSecurity()
+                .maxAgeInSeconds(31536000)
+                .includeSubDomains(true);
+        http
                 .csrf().ignoringAntMatchers("/h2-console/**").disable()
                 .headers().frameOptions().disable()
                 .and()
@@ -31,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                // .defaultSuccessUrl("http://localhost:3000/home"); // local settings
-                .defaultSuccessUrl("/home");
+                .defaultSuccessUrl("http://localhost:3000/home"); // local settings
+        // .defaultSuccessUrl("/home");
     }
 }
