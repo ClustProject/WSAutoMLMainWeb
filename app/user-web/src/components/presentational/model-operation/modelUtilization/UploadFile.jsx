@@ -29,6 +29,11 @@ const UploadFile = (props) => {
     setProgressBarOpend(false);
   };
 
+  const extractFilenameFromUrl = (url) => {
+    const urlParts = url.split("?");
+    return urlParts[0]; // '?' 이전의 부분을 반환
+  };
+
   const handleUpload = async (event) => {
     if (event.target.files && event.target.files.length > 0) {
       const uploadedFile = event.target.files[0];
@@ -43,14 +48,14 @@ const UploadFile = (props) => {
         const { uploadUrl, downloadUrl } = await getPreSignedUrl(
           uploadedFile.name
         );
-
         setFileName(uploadedFile.name);
         displayProgressBar();
 
         await uploadFileToS3(uploadUrl, uploadedFile, setFileUploadPercent);
+        const cleanUrl = extractFilenameFromUrl(downloadUrl);
 
         closeProgressBar();
-        setUploadedFileUrl(downloadUrl);
+        setUploadedFileUrl(cleanUrl);
       } catch (err) {
         if (err.response.data.errors) {
           alert(err.response.data.errors[0].defaultMessage);
