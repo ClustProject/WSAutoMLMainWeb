@@ -19,6 +19,9 @@ import {
   getConzonRowNames,
   getConzonRowDatesById,
   getConzonRowData,
+  getConzonImputatedNames,
+  getConzonImputatedDatesById,
+  getConzonImputatedData,
 } from "../../../../api/api";
 import ModelUtilizationDataDownloadBox from "./ModelUtilizationDataDownloadBox";
 
@@ -29,14 +32,19 @@ const SpaceBetweenFlexBox = styled(Box)({
   margin: "10px",
 });
 
-const SelectConzon = ({ onChange }) => {
+const SelectConzon = ({ selectData, onChange }) => {
   const [conzons, setConzons] = useState([]);
   const [selectedConzon, setSelectedConzon] = useState("");
 
   const fetchConzonNames = async () => {
     try {
-      const fetchedConzons = await getConzonRowNames();
-      setConzons(fetchedConzons);
+      let fetchedConzons;
+      if (selectData === "data_predict") {
+        fetchedConzons = await getConzonRowNames();
+      } else if (selectData === "data_interpolate") {
+        fetchedConzons = await getConzonImputatedNames();
+      }
+      setConzons(fetchedConzons || []);
 
       // 현재 선택된 값이 새로운 리스트에 있는지 확인
       if (
@@ -86,12 +94,17 @@ const SelectConzon = ({ onChange }) => {
   );
 };
 
-const SelectDate = ({ value, onChange }) => {
+const SelectDate = ({ selectData, value, onChange }) => {
   const [allowedDates, setAllowedDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const fetchDates = async () => {
     try {
-      const fetchedDates = await getConzonRowDatesById();
+      let fetchedDates;
+      if (selectData === "data_predict") {
+        fetchedDates = await getConzonRowDatesById();
+      } else if (selectData === "data_interpolate") {
+        fetchedDates = await getConzonImputatedDatesById();
+      }
       const formattedDates = fetchedDates.map((item) => item.conzonDate);
       setAllowedDates(formattedDates);
 
@@ -193,11 +206,12 @@ const SpeedInfo = () => {
 
 const ModelDataPredictionBox = (props) => {
   // const { open, onClose, selectedRowData } = props;
+  const { selectData } = props;
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const [selectedConzon, setSelectedConzon] = useState("");
   const [conzonData, setConzonData] = useState(null);
-
+  console.log(selectData);
   const handleDateChange = useCallback((newValue) => {
     setSelectedDate(dayjs(newValue));
   }, []); // dependencies 배열이 비어있으므로 컴포넌트가 마운트될 때만 함수가 생성됩니다.
@@ -209,23 +223,30 @@ const ModelDataPredictionBox = (props) => {
   }, []); // dependencies 배열이 비어있으므로 컴포넌트가 마운트될 때만 함수가 생성됩니다.
 
   useEffect(() => {
-    // selectedConzon과 selectedDate가 변경될 때마다 데이터를 가져옵니다.
-    const fetchConzonData = async () => {
+    const fetchData = async () => {
       if (selectedConzon && selectedDate) {
         try {
-          const data = await getConzonRowData(
-            selectedConzon,
-            dayjs(selectedDate).format("YYYY-MM-DD")
-          );
-          setConzonData(JSON.parse(data[0].conzonData));
+          let data;
+          if (selectData === "data_predict") {
+            data = await getConzonRowData(
+              selectedConzon,
+              dayjs(selectedDate).format("YYYY-MM-DD")
+            );
+          } else if (selectData === "data_interpolate") {
+            data = await getConzonImputatedData(
+              selectedConzon,
+              dayjs(selectedDate).format("YYYY-MM-DD")
+            );
+          }
+          setConzonData(data ? JSON.parse(data[0].conzonData) : null);
         } catch (error) {
           console.error("Failed to fetch conzon data", error);
         }
       }
     };
 
-    fetchConzonData();
-  }, [selectedConzon, selectedDate]);
+    fetchData();
+  }, [selectedConzon, selectedDate, selectData]);
   return (
     <>
       <Box
@@ -237,8 +258,12 @@ const ModelDataPredictionBox = (props) => {
         }}
       >
         <SpaceBetweenFlexBox>
-          <SelectConzon onChange={setSelectedConzon} />
-          <SelectDate value={selectedDate} onChange={handleDateChange} />
+          <SelectConzon onChange={setSelectedConzon} selectData={selectData} />
+          <SelectDate
+            value={selectedDate}
+            onChange={handleDateChange}
+            selectData={selectData}
+          />
           <ModelUtilizationDataDownloadBox />
         </SpaceBetweenFlexBox>
 
