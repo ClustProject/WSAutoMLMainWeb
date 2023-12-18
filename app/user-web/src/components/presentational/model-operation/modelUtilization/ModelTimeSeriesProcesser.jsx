@@ -48,6 +48,7 @@ const ModelTimeSeriesProcesser = (props) => {
       setUploadedFileUrl(null);
       setSelectData("");
       setPayload([]);
+      setIsStarted(false);
     }
   }, [open]);
 
@@ -285,7 +286,7 @@ const ModelTimeSeriesProcesser = (props) => {
                   }}
                 >
                   {isStarted ? (
-                    <ModelDataPredictionBox />
+                    <ModelDataPredictionBox selectData={selectData} />
                   ) : (
                     <Typography variant='h6'>
                       작업이 진행되면 이곳에 데이터가 표시됩니다.
