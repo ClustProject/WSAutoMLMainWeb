@@ -25,7 +25,7 @@ export default function IntroduceCommentBox() {
         통합 데이터 관리 플랫폼으로서 공공기관과 CLUST Consortium에서
       </Typography>
       <Typography variant='h5'>
-        구축된 데이터를 활용한 분석 서비스를 제공한다.
+        구축된 데이터를 활용한 분석 서비스를 제공합니다.
         {/* 구축된 데이터를 활용한 분석 및 시각화 서비스를 제공한다. */}
       </Typography>
     </Box>
