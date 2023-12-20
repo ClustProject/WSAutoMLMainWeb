@@ -206,12 +206,12 @@ const SpeedInfo = () => {
 
 const ModelDataPredictionBox = (props) => {
   // const { open, onClose, selectedRowData } = props;
-  const { selectData } = props;
+  const { selectData, work } = props;
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentSpeed, setCurrentSpeed] = useState(0);
   const [selectedConzon, setSelectedConzon] = useState("");
   const [conzonData, setConzonData] = useState(null);
-  console.log(selectData);
+
   const handleDateChange = useCallback((newValue) => {
     setSelectedDate(dayjs(newValue));
   }, []); // dependencies 배열이 비어있으므로 컴포넌트가 마운트될 때만 함수가 생성됩니다.
@@ -264,7 +264,7 @@ const ModelDataPredictionBox = (props) => {
             onChange={handleDateChange}
             selectData={selectData}
           />
-          <ModelUtilizationDataDownloadBox />
+          <ModelUtilizationDataDownloadBox work={work} />
         </SpaceBetweenFlexBox>
 
         <SpaceBetweenFlexBox>

@@ -37,7 +37,9 @@ const ModelTimeSeriesProcesser = (props) => {
   const [selectData, setSelectData] = useState("");
   const [payload, setPayload] = useState([]);
   const { user } = useAuth();
-  const [isStarted, setIsStarted] = useState(false);
+  const [isStarted, setIsStarted] = useState(false); // 모델 활용 진행 상태를 위한 state 추가
+  const [isLoading, setIsLoading] = useState(false); // 버튼의 로딩 상태를 위한 state 추가
+  const [work, setWork] = useState(""); // 수행할 작업
   // const [predictData, setPredictData] = useState("");
 
   // console.log(payload);
@@ -108,13 +110,10 @@ const ModelTimeSeriesProcesser = (props) => {
     setSelectData(event.target.value);
   };
 
-  const [isLoading, setIsLoading] = useState(false); // 버튼의 로딩 상태를 위한 state 추가
-  // const [predictionResultButtonDisabled, setPredictionResultButtonDisabled] =
-  useState(true); // 예측 결과 버튼 활성화 상태를 위한 state 추가
-
   const startPrediction = () => {
+    setIsStarted(false);
     setIsLoading(true); // 로딩 시작
-    console.log("Sending data:", payload);
+    // console.log("Sending data:", payload);
 
     const url = `http://52.79.123.200:8797/v1/${selectData}`;
 
@@ -127,7 +126,7 @@ const ModelTimeSeriesProcesser = (props) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Received data:", data);
+        // console.log("Received data:", data);
         // setPredictData(data);
       })
       .catch((error) => console.error("Error occurred:", error));
@@ -232,6 +231,11 @@ const ModelTimeSeriesProcesser = (props) => {
                   loadingPosition='end'
                   onClick={() => {
                     startPrediction();
+                    if (selectData === "data_predict") {
+                      setWork("predict");
+                    } else if (selectData === "data_interpolate") {
+                      setWork("interpolate");
+                    }
                   }}
                   disabled={!selectData || !uploadedFileUrl} // 버튼 비활성화 조건 추가
                   sx={{ width: "150px" }}
@@ -286,7 +290,10 @@ const ModelTimeSeriesProcesser = (props) => {
                   }}
                 >
                   {isStarted ? (
-                    <ModelDataPredictionBox selectData={selectData} />
+                    <ModelDataPredictionBox
+                      selectData={selectData}
+                      work={work}
+                    />
                   ) : (
                     <Typography variant='h6'>
                       작업이 진행되면 이곳에 데이터가 표시됩니다.
