@@ -25,7 +25,6 @@ const ModelUtilizationDataDownloadBox = (props) => {
   const { work } = props;
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -33,7 +32,6 @@ const ModelUtilizationDataDownloadBox = (props) => {
       try {
         // 데이터를 불러오고 상태를 업데이트합니다.
         const operationStatus = await getModelOperationStatus();
-        setStatus(operationStatus);
 
         const parsedPredRowState = operationStatus.predRowState
           ? JSON.parse(operationStatus.predRowState)
