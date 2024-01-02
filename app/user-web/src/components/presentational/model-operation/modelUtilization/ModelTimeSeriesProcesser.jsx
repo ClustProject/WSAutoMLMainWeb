@@ -40,9 +40,6 @@ const ModelTimeSeriesProcesser = (props) => {
   const [isStarted, setIsStarted] = useState(false); // 모델 활용 진행 상태를 위한 state 추가
   const [isLoading, setIsLoading] = useState(false); // 버튼의 로딩 상태를 위한 state 추가
   const [work, setWork] = useState(""); // 수행할 작업
-  // const [predictData, setPredictData] = useState("");
-
-  // console.log(payload);
 
   // 모달이 열릴 때 마다 초기화
   useEffect(() => {
@@ -95,6 +92,7 @@ const ModelTimeSeriesProcesser = (props) => {
         // target: "평균속도",
         // window_size: 144,
         user_id: user.id,
+        ml_result_id: selectedRowData.id,
         data_url: uploadedFileUrl,
         road_url:
           "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/road_data.csv",
@@ -135,7 +133,7 @@ const ModelTimeSeriesProcesser = (props) => {
       setIsLoading(false); // 5초 후 로딩 상태 종료
       setIsStarted(true);
       // setPredictionResultButtonDisabled(false); // 예측 결과 버튼 활성화
-    }, 5000);
+    }, 1000);
   };
 
   return (
@@ -291,6 +289,7 @@ const ModelTimeSeriesProcesser = (props) => {
                 >
                   {isStarted ? (
                     <ModelDataPredictionBox
+                      selectedRowData={selectedRowData}
                       selectData={selectData}
                       work={work}
                     />

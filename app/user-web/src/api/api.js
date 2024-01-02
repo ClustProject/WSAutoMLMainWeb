@@ -23,6 +23,12 @@ function getModelLearningResult() {
   });
 }
 
+function getModelOperationStatus() {
+  return axios
+    .get("/mlResultById")
+    .then((response) => response.data.data[0].result);
+}
+
 // 사용자 세션 정보
 function getUserInfo() {
   return axios
@@ -78,6 +84,7 @@ export {
   getMetadatas,
   getModelLearningResult,
   getUserInfo,
+  getModelOperationStatus,
   deleteModelLearningResult,
   getConzonRowNames,
   getConzonRowDatesById,
