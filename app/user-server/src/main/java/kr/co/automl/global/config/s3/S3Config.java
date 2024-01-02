@@ -16,6 +16,9 @@ public class S3Config {
     @Value("${cloud.aws.s3.bucketName}")
     private String bucketName;
 
+    @Value("${cloud.aws.s3.secondBucketName:}")
+    private String secondBucketName;
+
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
 
@@ -28,6 +31,11 @@ public class S3Config {
     @Bean
     public String bucketName() {
         return bucketName;
+    }
+
+    @Bean
+    public String secondBucketName() {
+        return secondBucketName;
     }
 
     @Bean
