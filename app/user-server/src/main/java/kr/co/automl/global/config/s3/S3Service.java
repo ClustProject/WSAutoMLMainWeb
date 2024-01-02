@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 public class S3Service {
 
     private final AmazonS3Client amazonS3Client;
-    private final String bucketName;
+    private final String secondBucketName;
 
     public void deleteFile(String key) {
         try {
-            amazonS3Client.deleteObject(bucketName, key);
+            amazonS3Client.deleteObject(secondBucketName, key);
         } catch (AmazonServiceException e) {
             // The call was transmitted successfully, but Amazon S3 couldn't process
             // it and returned an error response.

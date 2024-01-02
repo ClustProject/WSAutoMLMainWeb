@@ -56,5 +56,5 @@ jobs:
           aws ecs update-service \
           --cluster automl-cluster-user \
           --service automl-service-user \
-          --task-definition automl-main-web-user-task-defination:6 \
+          --task-definition automl-main-web-user-task-defination:7 \
           --force-new-deployment
