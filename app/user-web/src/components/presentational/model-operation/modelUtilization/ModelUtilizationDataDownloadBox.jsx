@@ -3,7 +3,7 @@ import { useAuth } from "../../../authentication/AuthContext";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { getModelOperationStatus } from "../../../../api/api";
 
-const URL = "https://automl-file-storage-test.s3.ap-northeast-2.amazonaws.com/";
+const URL = "https://automl-file-storage.s3.ap-northeast-2.amazonaws.com/";
 
 // LoadingButton 컴포넌트를 memo로 감싸서 성능 최적화
 const MemoizedLoadingButton = memo(({ onClick, isLoading, buttonText }) => {
