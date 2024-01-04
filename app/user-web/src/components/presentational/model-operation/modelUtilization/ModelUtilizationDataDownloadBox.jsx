@@ -27,7 +27,6 @@ const ModelUtilizationDataDownloadBox = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
     const updateStatus = async () => {
       try {
         // 데이터를 불러오고 상태를 업데이트합니다.
@@ -44,13 +43,13 @@ const ModelUtilizationDataDownloadBox = (props) => {
           setIsLoading(false);
         } else if (work === "interpolate" && parsedPredImpState) {
           setIsLoading(false);
+        } else {
+          setIsLoading(true);
         }
       } catch (error) {
         console.error("Error parsing status:", error);
       }
     };
-
-    setIsLoading(true);
 
     // 상태 업데이트 함수를 호출합니다.
     updateStatus();

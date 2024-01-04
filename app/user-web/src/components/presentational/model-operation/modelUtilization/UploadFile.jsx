@@ -3,6 +3,7 @@ import {
   Button,
   Box,
   Typography,
+  Tooltip,
   Modal,
   CircularProgress,
 } from "@mui/material";
@@ -74,20 +75,31 @@ const UploadFile = (props) => {
 
   return (
     <Box display='flex' alignItems='center' sx={{ marginBlock: "10px" }}>
-      <Button
-        variant='contained'
-        component='label'
-        startIcon={<CloudUploadIcon />}
+      <Tooltip
+        title={
+          <>
+            수행 작업 가능 데이터 조건
+            <br /> - 데이터 보간: 최대 1일치 데이터
+            <br /> - 데이터 예측: Window_Size의 2배 이상 길이의 데이터
+          </>
+        }
+        placement='right'
       >
-        파일 업로드
-        <input
-          id='file'
-          type='file'
-          hidden
-          onChange={handleUpload}
-          accept='.csv'
-        />
-      </Button>
+        <Button
+          variant='contained'
+          component='label'
+          startIcon={<CloudUploadIcon />}
+        >
+          파일 업로드
+          <input
+            id='file'
+            type='file'
+            hidden
+            onChange={handleUpload}
+            accept='.csv'
+          />
+        </Button>
+      </Tooltip>
       {fileName && (
         <Box ml={2}>
           <Typography variant='body1'>{fileName}</Typography>
