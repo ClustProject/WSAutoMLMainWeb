@@ -125,14 +125,12 @@ const ModelTimeSeriesProcesser = (props) => {
       .then((response) => response.json())
       .then((data) => {
         // console.log("Received data:", data);
-        // setPredictData(data);
       })
       .catch((error) => console.error("Error occurred:", error));
 
     setTimeout(() => {
       setIsLoading(false); // 5초 후 로딩 상태 종료
       setIsStarted(true);
-      // setPredictionResultButtonDisabled(false); // 예측 결과 버튼 활성화
     }, 1000);
   };
 
@@ -207,6 +205,7 @@ const ModelTimeSeriesProcesser = (props) => {
                 selectedRowData={selectedRowData ? selectedRowData : null}
               />
               <UploadFile setUploadedFileUrl={setUploadedFileUrl} />
+
               <SpaceBetweenFlexBox>
                 <FormControl variant='standard' sx={{ m: 1, width: "300px" }}>
                   <InputLabel id='demo-simple-select-label'>
