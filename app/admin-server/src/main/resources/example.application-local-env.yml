@@ -15,3 +15,25 @@ spring:
             scope: profile, email
             client-id: # 여기에 입력
             client-secret: # 여기에 입력
+
+cloud:
+  aws:
+    credentials:
+      accessKey: # 여기에 입력
+      secretKey: # 여기에 입력
+    s3:
+      bucketName: # 여기에 입력
+      secondBucketName: # 여기에 입력
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            scope: profile, email
+            client-id: # 여기에 입력
+            client-secret: # 여기에 입력
+  datasource:
+    url: # 여기에 입력
+    username: # 여기에 입력
+    password: # 여기에 입력

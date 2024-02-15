@@ -58,7 +58,7 @@ spring:
             scope: profile, email
             client-id: ${GOOGLE_OAUTH2_CLIENT_ID}
             client-secret: ${GOOGLE_OAUTH2_CLIENT_SECRET}
-            redirect-uri: "https://admin.wsautoml.com/login/oauth2/code/google"
+            redirect-uri: "https://admin.wsautoml.com/login/oauth2/code/google" # prod settings // local settings에서는 주석 처리 할 것
 
   session:
     store-type: jdbc
@@ -80,7 +80,7 @@ spring:
   config:
     activate:
       # on-profile: local # local settings
-      on-profile: prod
+      on-profile: prod # prod settings
 
   datasource:
     url: jdbc:mariadb://${DATABASE_URL}:3306/automl

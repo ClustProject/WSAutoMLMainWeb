@@ -41,7 +41,7 @@ export default function LoginCard() {
             // } // local settings
             onClick={() =>
               (window.location.href = "/oauth2/authorization/google")
-            }
+            } // prod settings
           />
         </Box>
       </CardContent>
