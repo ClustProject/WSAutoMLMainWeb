@@ -43,6 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userService(customOAuth2UserService)
                 .and()
                 // .defaultSuccessUrl("http://localhost:3000/home"); // local settings
-                .defaultSuccessUrl("/home");
+                .defaultSuccessUrl("/home"); // prod settings
     }
 }
