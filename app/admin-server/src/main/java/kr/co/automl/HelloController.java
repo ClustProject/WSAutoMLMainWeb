@@ -12,6 +12,6 @@ public class HelloController {
 
     @GetMapping
     public String hello() {
-        return "Hello, WS-AutoML!";
+        return "Hello, World!";
     }
 }
