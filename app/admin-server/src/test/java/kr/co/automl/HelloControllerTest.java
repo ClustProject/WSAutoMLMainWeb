@@ -15,30 +15,23 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(
-        controllers = HelloController.class,
-        excludeFilters = {
-                @ComponentScan.Filter(
-                        type = FilterType.ASSIGNABLE_TYPE,
-                        classes = SecurityConfig.class
-                )
-        }
-)
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+})
 @AutoConfigureMockMvc
 class HelloControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @Test
-    @WithMockUser
-    void hello() throws Exception {
-        ResultActions action = mockMvc.perform(
-                get("/hello")
-        );
+        @Test
+        @WithMockUser
+        void hello() throws Exception {
+                ResultActions action = mockMvc.perform(
+                                get("/hello"));
 
-        action
-                .andExpect(status().isOk())
-                .andExpect(content().string("Hello, World!"));
-    }
+                action
+                                .andExpect(status().isOk())
+                                .andExpect(content().string("Hello, World!"));
+        }
 }
