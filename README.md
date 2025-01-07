@@ -80,10 +80,20 @@ WS-AutoML은 클라우드 기반의 시계열 데이터 활용을 위한 오픈 
 
 인프라
 
-- Amazon RDS
+- Amazon RDS(MariaDB)
 - Amazon S3
 - Docker, AWS ECS(EC2)
 - GitHub Actions
+
+분석
+
+- Python
+- SQL
+
+데이터
+
+- 고속도로 한국도로교통공사
+- 케이웨더
 
 ### 기타
 
